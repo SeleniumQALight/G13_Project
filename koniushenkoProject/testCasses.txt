@@ -1,0 +1,10 @@
+#001 Valid login
+login=qaauto
+pass=123456qwerty
+Pre-condition:
+
+Steps:
+1. Open login page
+2.
+3.
+
