@@ -9,10 +9,9 @@
 
   <name>G13TAF</name>
   <url>http://maven.apache.org</url>
-  <modules>
+    <modules>
     <module>radulenkoProj</module>
       <module>boichukTAF</module>
-    <modules>
         <module>ostapenkoProject</module>
         <module>radulenkoProj</module>
         <module>solodProj</module>
@@ -21,7 +20,6 @@
     <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
 
   <dependencies>
     <dependency>
