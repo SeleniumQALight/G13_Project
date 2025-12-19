@@ -13,10 +13,8 @@
         <module>ostapenkoProject</module>
         <module>radulenkoProj</module>
         <module>solodProj</module>
-  </modules>
-    <modules>
         <module>zaitsevProj</module>
-    </modules>
+  </modules>
 
     <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
