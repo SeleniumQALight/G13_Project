@@ -12,9 +12,8 @@
     <modules>
         <module>ostapenkoProject</module>
         <module>radulenkoProj</module>
-  <modules>
-    <module>radulenkoProj</module>
-      <module>solodProj</module>
+        <module>solodProj</module>
+    <module>ostapenkoProject</module>
   </modules>
 
     <properties>
