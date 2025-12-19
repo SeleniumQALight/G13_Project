@@ -10,7 +10,6 @@
   <name>G13TAF</name>
   <url>http://maven.apache.org</url>
     <modules>
-    <module>radulenkoProj</module>
       <module>boichukTAF</module>
         <module>ostapenkoProject</module>
         <module>radulenkoProj</module>
