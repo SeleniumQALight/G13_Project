@@ -14,8 +14,9 @@
         <module>ostapenkoProject</module>
         <module>radulenkoProj</module>
         <module>solodProj</module>
-      <module>avramovaProj</module>
-    </modules>
+        <module>zaitsevProj</module>
+        <module>avramovaProj</module>
+  </modules>
 
     <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
