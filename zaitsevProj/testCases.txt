@@ -22,7 +22,6 @@ PostConditions:
 #002 Create and log in with a new User
 
 Preconditions:
-1. Open the Login Page - https://aqa-complexapp.onrender.com/
 
 Steps:
 1. Open the login page
