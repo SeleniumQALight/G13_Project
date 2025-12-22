@@ -1,0 +1,57 @@
+TC-01
+
+#Fild Username(type-id)
+By.id("username-register")
+#Fild Email(type-id)
+By.id("email-register")
+#Fild Password(type-id)
+By.id("password-register")
+#Button Sign up(type-xpath)
+By.xpath("//button[text()='Sign up for OurApp']"));
+#Message in the feed(type-xpath/Assertion)
+By.xpath("//strong[text()='dzh2399']"));
+
+TC-02
+
+#Fild Username(type-id)
+By.id("username8")
+#Fild Password(type-name)
+By.name("password")
+#Button Sign in(type-xpath)
+By.xpath("//button[text()='Sign In']")
+#Icon profile Username(type-xpath)
+By.xpath("//img[@alt='My profile']")
+#Button Create Post(type-xpath)
+By.xpath("//a[text()='Create Post']")
+#Button Sign up(type-xpath)
+By.xpath("//button[text()='Sign Out']")
+#Greeting(type-xpath/Assertion)
+By.xpath("         ")
+TC-03
+
+#Fild Username(type-id)
+By.id("username8")
+#Fild Password(type-name)
+By.name("password")
+#Button Sign in(type-xpath)
+By.xpath("//button[text()='Sign In']")
+#Error message(type-xpath)
+
+#Button Sign up(type-xpath/Assertion)
+By.xpath("//button[text()='Sign Out']")
+TC-04
+
+#Button Create Post(type-xpath)
+#Field Title(type-id)
+#Field Body Content(type-id)
+#Drop-down list(type-name)
+#Button Save New Post(type-xpath)
+#Successful message (type-xpath/Assertion)
+
+TC-05
+
+#Icon delete(type-xpath)
+#Successful message(type-xpath)
+#My Profile(type-xpath/Assertion)
+
+
