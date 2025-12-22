@@ -1,8 +1,0 @@
-#LoginPage
-
-input.login=".//input[@id='login']"
-input.password=""
-
-
-#HomePage
-button.SignOut = ""

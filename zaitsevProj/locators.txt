@@ -1,9 +1,0 @@
-#Login Page
-
-input.login = ""
-input.password =
-
-
-#HomePage
-
-button.SignOut = ""
