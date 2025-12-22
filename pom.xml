@@ -16,7 +16,8 @@
         <module>solodProj</module>
         <module>zaitsevProj</module>
         <module>avramovaProj</module>
-  </modules>
+        <module>frankovaProj</module>
+    </modules>
 
     <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
