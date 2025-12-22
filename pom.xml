@@ -9,17 +9,14 @@
 
   <name>G13TAF</name>
   <url>http://maven.apache.org</url>
-    <modules>
-      <module>boichukTAF</module>
-        <module>ostapenkoProject</module>
-        <module>radulenkoProj</module>
-        <module>solodProj</module>
-        <module>zaitsevProj</module>
-        <module>avramovaProj</module>
-  </modules>
   <modules>
-    <module>dzhoboldaTProject</module>
-  </modules>
+    <module>boichukTAF</module>
+    <module>ostapenkoProject</module>
+    <module>radulenkoProj</module>
+    <module>solodProj</module>
+    <module>zaitsevProj</module>
+    <module>avramovaProj</module>
+    <module>dzhoboldaTProject</module> </modules>
 
     <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
