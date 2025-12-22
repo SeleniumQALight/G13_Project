@@ -1,0 +1,6 @@
+#Login page
+например
+input.login = ".//input[@id='Login']"
+
+#Home page
+button.SignOut=
