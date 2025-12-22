@@ -1,0 +1,19 @@
+#001 Valid Login
+
+login = qaauto
+password = 123456qwerty
+
+Preconditions:
+1.
+
+Steps:
+1. Open the login page
+2. Enter <login> in to input on Login page
+3. Enter <password> in to input Paswword on Login page
+4. Click on the button Login on Login page
+
+Expected result:
+1. I see Sign out on Home page
+2. I don`t see Sign In button on Login page
+
+PostConditions:
