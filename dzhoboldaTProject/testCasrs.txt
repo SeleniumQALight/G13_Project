@@ -1,0 +1,20 @@
+#001 Valid Login
+
+login = qaauto
+password = 1234456qwerty
+
+Pre-condition:
+1.
+
+Steps:
+1. Open login page https://
+2. Enter <login> in to input Login on Login page
+3. Enter <password> into input Password on Login Page
+4. Click on button Login on Login Page
+
+Expected result:
+1. I see Sing out
+2. I don´t see Sing In button on Login Page
+
+PostCondition:
+
