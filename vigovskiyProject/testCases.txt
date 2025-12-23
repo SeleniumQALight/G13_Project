@@ -1,0 +1,21 @@
+пример
+#001
+login=qaauto
+password=123456qwerty
+
+Pre-condition:
+1
+
+Steps:
+1.Open login page
+2.Enter login in to Login on Login page
+3.Enter password in to input Password on Login page
+4.Click on Login button Login page
+
+Expected result:
+1.I see Sign out button on Home page
+
+Post condition:
+
+
+#002
