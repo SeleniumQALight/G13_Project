@@ -1,0 +1,3 @@
+#LoginPage
+
+input.login= ".//input"
