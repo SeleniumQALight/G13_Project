@@ -1,0 +1,19 @@
+#001 Valid Login
+
+login=qaauto
+password=123456qwerty
+
+Pre-condition:
+1.
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com
+2. Enter <login> into input Login on Login page
+3. Enter <password> into input Password on Login page
+4. Click on button Login on Login page
+
+Expected results:
+1. I see Sign out button on Home page
+2. I don't see Sign in button on Login page
+
+PostCondition:

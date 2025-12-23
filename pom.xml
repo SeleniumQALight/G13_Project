@@ -7,9 +7,10 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>G13TAF</name>
-    <url>http://maven.apache.org</url>
-    <modules>
+  <name>G13TAF</name>
+  <url>http://maven.apache.org</url>
+  <modules>
+    <module>dzhoboldaTProject</module>
         <module>vigovskiyProject</module>
         <module>boichukTAF</module>
         <module>ostapenkoProject</module>
@@ -17,11 +18,9 @@
         <module>solodProj</module>
         <module>zaitsevProj</module>
         <module>avramovaProj</module>
-    </modules>
-  </modules>
-    <modules>
-        <module>koniushenkoProject</module>
-    </modules>
+        <module>frankovaProj</module>
+        <module>stafiichukProj</module>
+        </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
