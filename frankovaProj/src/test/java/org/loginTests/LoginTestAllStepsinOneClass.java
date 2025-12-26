@@ -18,6 +18,7 @@ public class LoginTestAllStepsinOneClass {
     private WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
 
+
     @Before
     public void setup() {
         WebDriverManager.chromedriver().setup();
@@ -59,12 +60,69 @@ public class LoginTestAllStepsinOneClass {
     }
 
     private boolean isButtonSignOutVisible() {
-        try{
-        boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-            logger.info("Element state: " + state);
-        return state;
-    } catch (Exception e){
-            logger.info("Element is not found");
+        try {
+            boolean state = webDriver.findElement(
+                    By.xpath("//button[text()='Sign Out']")).isDisplayed();
+            logger.info("Sign Out Element state: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Sign Out Element is not found");
+            return false;
+        }
+    }
+
+    @Test
+    public void invalidLogin() {
+        webDriver.get("https://aqa-complexapp.onrender.com");
+        logger.info("Site was opened");
+
+        WebElement inputLogin = webDriver.findElement(
+                By.xpath("//input[@placeholder='Username']"));
+        inputLogin.clear();
+        inputLogin.sendKeys("invalid_login");
+        logger.info("invalid_login was entered in input UserName");
+
+        WebElement inputPassword = webDriver.findElement(
+                By.xpath("//input[@placeholder='Password']"));
+        inputPassword.clear();
+        inputPassword.sendKeys("invalid_password");
+        logger.info("invalid_password was enetered in input Password");
+
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Sign In button was clicked");
+
+        Assert.assertFalse("User is not Logged in: button SignOut is not visible",
+                isButtonSignOutVisible());
+
+        Assert.assertTrue("User is Logged in: button Sign In is not visible",
+                isButtonSignInVisible());
+
+        Assert.assertTrue("User is Logged in: error message about invalid login/password is not visible",
+                isErrorMessageInvalidCredVisible());
+    }
+
+
+    private boolean isButtonSignInVisible() {
+       try {
+           boolean state = webDriver.findElement(
+                   By.xpath("//button[text()='Sign In']")).isDisplayed();
+           logger.info("Sign In Element state: " + state);
+           return state;
+       } catch (Exception e) {
+          logger.info("Sign In Element is not found");
+           return false;
+       }
+    }
+
+
+    private boolean isErrorMessageInvalidCredVisible() {
+        try {
+            boolean state = webDriver.findElement(
+                    By.xpath("//div[text()='Invalid username/password.']")).isDisplayed();
+            logger.info("ErrorMessage Element state: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("ErrorMessage Element is not found");
             return false;
         }
     }
