@@ -56,6 +56,29 @@ public class LoginTestAllStepsInOneClass {
                 , isButtonSignOutVisible());
 
     }
+    @Test
+    public void invalidLogin(){
+        webDriver.get("https://aqa-complexapp.onrender.com");
+        logger.info("Site was opened");
+        WebElement inputLogin = webDriver.findElement(
+                By.xpath("//input[@placeholder='Username']"));
+        inputLogin.clear();
+        inputLogin.sendKeys("qaauto111");
+        logger.info("qaauto111 was entered in input Username");
+
+        WebElement inputPassword = webDriver.findElement(
+                By.xpath("//input[@placeholder='Password']"));
+        inputPassword.clear();
+        inputPassword.sendKeys("123456qwerty111");
+        logger.info("123456qwerty111 was entered in input Password");
+
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Button SignIn was clicked");
+        Assert.assertFalse("User is LoggedIn: button SignOut is visible"
+                , isButtonSignOutVisible());
+
+
+    }
 
     private boolean isButtonSignOutVisible() {
         try {
