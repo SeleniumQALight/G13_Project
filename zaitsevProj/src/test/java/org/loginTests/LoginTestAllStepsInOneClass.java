@@ -57,6 +57,52 @@ public class LoginTestAllStepsInOneClass {
 
     }
 
+    @Test
+    public void invalidLogin(){
+        webDriver.get("https://aqa-complexapp.onrender.com");
+        logger.info("Site was opened");
+
+        WebElement inputLogin = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+        inputLogin.clear();
+        inputLogin.sendKeys("qauto12");
+        logger.info("qauto12 was entered in input Username");
+
+        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
+        inputPassword.clear();
+        inputPassword.sendKeys("123456qwertyu");
+        logger.info("123456qwertyu was entered in input Password");
+
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Button SignIn was clicked");
+
+        Assert.assertTrue("User is loggedIn: button SignIN is not visible", isButtonSignInVisible());
+        Assert.assertFalse("User is loggedIn: button SignOut is visible", isButtonSignOutVisible());
+        Assert.assertTrue("User is loggedIn: text \"Invalid username/password.\" is not visible",
+                isInvalidCredTextVisible());
+    }
+
+    private boolean isInvalidCredTextVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//div[text() = 'Invalid username/password.']")).isDisplayed();
+            logger.info("Element state: + " + state);
+            return state;
+        }catch (Exception e){
+            logger.info("Element is not found");
+            return false;
+        }
+    }
+
+    private boolean isButtonSignInVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
+            logger.info("Element state: + " + state);
+            return state;
+        }catch (Exception e){
+            logger.info("Element is not found");
+            return false;
+        }
+    }
+
     private boolean isButtonSignOutVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
