@@ -1,6 +1,30 @@
 #Login page
-например
-input.login = ".//input[@id='Login']"
+
+
+
+
+Input UserName = "//input[@id='username4']"
+Input Password = "//input[@placeholder='Password']"
+Sign In button = "//button[@class='btn btn-primary btn-sm']"
+
+UserName input = "//input[@id='username-register']"
+Email input = "//input[@id='email-register']"
+Password input = "//input[@id='password-register']"
+Sign up for Our App = "//button[@type='submit']"
+
+
 
 #Home page
-button.SignOut=
+
+Sign Out button = "//button[@class='btn btn-sm btn-secondary']"
+Create Post button = "//a[@class='btn btn-sm btn-success mr-2']"
+For #003 Registration test case /"Username devaqa"  is displayed in the header." → //strong[text()='<username>']
+
+Title input (create post form) → "//input[@name='title']"
+Body content (create post form) → "//textarea[@id='post-body']"
+Save New Post button (create post form) → "//button[@class='btn btn-primary']"
+"New post successfully created." message after create post → //div[text()='New post successfully created.']
+"Edit post" button → //a[@href='/post/694e8d263ab62000478719d3/edit']
+"Delete post" button → //button[@class='delete-post-button text-danger']
+"Save updates" button → //button[text()='Save Updates']
+"Post successfully deleted." message after delete post → //div[text()='Post successfully deleted.']

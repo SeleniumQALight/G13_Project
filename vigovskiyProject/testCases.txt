@@ -1,21 +1,122 @@
-пример
-#001
+Test Cases https://aqa-complexapp.onrender.com/
+
+#001 Valid Login
 login=qaauto
 password=123456qwerty
 
 Pre-condition:
-1
+1.User is not logged
+2.User has a valid account with login "qaauto" & password "123456qwerty"
 
 Steps:
 1.Open login page
-2.Enter login in to Login on Login page
-3.Enter password in to input Password on Login page
-4.Click on Login button Login page
+2.Enter login "qaauto" into "Username" field on Login page
+3.Enter password "123456qwerty" into "Password" field on Login page
+4.Click on "Sign in" button Login page
 
 Expected result:
-1.I see Sign out button on Home page
+1.I see "Sign out" button on Home page
 
 Post condition:
+1.Click on "Sign Out" button to return to Login page
+
+#002 Invalid Login
+login=qaautofffff
+password=123456qwertyfffff
+
+Pre-condition:
+1.User is not logged
+2.User doesn't have valid account with login "qaautofffff" & password "123456qwertyfffff"
+
+Steps:
+1.Open login page
+2.Enter login "qaautofffff" into "Username" field on Login page
+3.Enter password "123456qwertyfffff" into "Password" field on Login page
+4.Click on "Sign in" button Login page
+
+Expected result:
+1.I don't see "Sign out" button on Home page
+
+#003 Registration
+Username = "devaqa"
+Email = "prodatlastesting5050@gmail.com"
+Password = 12345678devaqa
+
+Pre-condition:
+1.User doesn't have account on https://aqa-complexapp.onrender.com/
+2.https://aqa-complexapp.onrender.com/ is not opened.
+
+Steps:
+1. Open page https://aqa-complexapp.onrender.com
+2. Enter Username  into "Username" field in Sign Up form.
+3. Enter Email into "Email" field in Sign Up form.
+4. Enter Password into "Password" field in Sign Up form.
+5. Click on "Sign up for OurApp" button.
+
+Expected results:
+1. Redirect to Home Page.
+2. Username devaqa"  is displayed in the header.
+3. Button "Sign Out" is displayed in the header.
+4. Button "Create Post"  is displayed in the header.
+
+#004 Sign Out option validation
+
+Pre-condition:
+1. User is logged.
+2. User is on the Home Page.
+3. Button "Sign Out" is visible.
+
+Steps:
+1. Click on button "Sign Out" button.
+
+Expected results:
+1. Redirect to Home Page.
+2. Button "Sign in" is displayed in the header.
+
+#005 Create Post
+
+Pre-condition:
+1. User is authorized.
+2. Home Page displayed.
+
+title "devaqa"
+body "dinamo chempion"
+
+Steps:
+1. Click on  button "Create Post" in the header.
+2. Enter "devaqa" into "Title" field on Create Post page.
+3. Enter "dinamo chempion" into textarea "Body Content" on Create Post page.
+4. Click on button "Save New Post".
+
+Expected Result:
+1."New post successfully created" message displayed.
+2."Edit post" button displayed.
+3."Delete post button displayed.
 
 
-#002
+#006 Delete Post
+
+Pre-condition:
+1. User is authorized.
+2. Home Page displayed.
+
+title "dk"
+body "dinamo kiev chempion"
+
+Steps:
+1. Click on  button "Create Post" (icon with a plus/pencil) in the header.
+2. Enter "dk" into "Title" field on Create Post page.
+3. Enter "dinamo kiev chempion" into textarea "Body Content" on Create Post page.
+4. Click on button "Save New Post".
+5. Click on "Delete button"
+
+Expected Result:
+1. "Post successfully deleted" message displayed.
+
+
+
+
+
+
+
+
