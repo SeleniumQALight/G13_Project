@@ -17,5 +17,93 @@ Expected results:
 
 Post-Condition:
 
-#002
+HW
+#002 Invalid login
+
+Test Data:
+wrongLogin='test'
+wrongPassword='test123'
+
+Pre-Condition:
+https://aqa-complexapp.onrender.com/ page is open
+
+Steps:
+1. Enter <wrongLogin> into input 'Login' on Login Page
+2. Enter <wrongPassword> into input 'Password' on Login Page
+3. Click on button Sign In on Login Page
+
+Expected Result:
+1. I see 'Invalid username/password.' message on Login Page
+
+#003 Valid Registration
+
+Test Data:
+signUpUsername = 'stftest'
+signUpEmailAddress = 'stftest@gmail.com'
+signUpPassword = 'Qwerty123456!'
+
+Pre-Condition:
+https://aqa-complexapp.onrender.com/ page is open
+
+Steps:
+1. Enter <signUpUsername> into input 'Username' (id=username-register) on Login Page
+2. Enter <signUpEmailAddress> into input 'Email' (id="email-register") on Login Page
+3. Enter <signUpPassword> into input 'Password' (id="password-register") on Login Page
+4. Click on button 'Sign up for OurApp' on Login Page
+
+Expected Result:
+1. I see 'Sign out' on Home Page
+2. I see 'Hello ' text on Home Page
+
+Post-Condition:
+1. Remove user 'teststf'
+
+#004 Creating new post
+
+Pre-Condition:
+https://aqa-complexapp.onrender.com/ page is open
+User is logged in via 'stftest' and 'Qwerty123456!' data
+
+Steps:
+1. Click on 'Create Post' button in header
+2. Enter 'teststf' into 'Title' input on /create-post page
+3. Enter 'abracadabra' into 'Body Content' input on /create-post page
+4. Click on 'Save New Post' button
+
+Expected Result:
+1. I see 'New post successfully created.' text on Success Page
+
+#005 Search by title
+
+Pre-Condition:
+https://aqa-complexapp.onrender.com/ page is open
+User is logged in via 'stftest' and 'Qwerty123456!' data
+
+Steps:
+1. Click on 'Search' icon in Header
+2. Enter 'teststf' in 'Search' input
+3. Click on the first result - 'teststf' post
+
+Expected Result:
+1. Post was found and opened.
+
+#006 There is a post on Profile Page
+User is logged in via 'stftest' and 'Qwerty123456!' data
+https://aqa-complexapp.onrender.com/ page is open
+
+Steps:
+1. Click on 'My Profile' icon in Header
+
+Expected Result:
+1. 'My Profile' page is open
+2. I see the post 'teststf' in the list of posts
+
+
+
+
+
+
+
+
+
 
