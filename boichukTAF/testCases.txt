@@ -1,0 +1,97 @@
+#001 Valid login with default user
+
+login=qaauto
+password=123456qwerty
+
+Pre-condition:
+Successful login by default user
+
+Steps:
+1 Open login page - https://aqa-complexapp.onrender.com
+2 Enter <Login> in to input Login on Login Page
+3 Enter <Password> in to input Password on Login Page
+4 Click on button Login on Login Page
+
+Expected results:
+1 I see Sign Out button on Home Page
+2 I don't see Sign In button on Login Page
+
+#002 Valid login with new user
+
+Pre-condition:
+Successful login by NEW user
+
+Steps:
+1 Open login page - https://aqa-complexapp.onrender.com
+2 Enter your username in the Username field(leradalya)
+3 Enter the user's email in the field - Email(lera@dalya.com)
+4 Enter the user password in the Password field(Leradalya1984)
+5 Click on button Login on Login Page
+
+Expected results:
+1 On the page after successful user registration I see a text with a greeting(Hello "name", your feed is empty)
+2 Next to the SignOut button on the Home Page, I see the name I registered under
+
+#003 Checking the valid creation of a new post (create button)
+
+Pre-condition:
+Log in with the new user you created and go to the new post creation page
+
+Steps:
+1 Open login page - https://aqa-complexapp.onrender.com
+2 Enter your username in the Username field(leradalya)
+3 Enter the user password in the Password field(Leradalya1984)
+4 Click on button Login on Login Page
+5 Click the Create Post button at the top
+6 Enter the name of the new post in the "Title" field
+7 Enter the message text in the "Body Content" field in the new post
+8 Check the box in the pop-up to save it as unique
+9 Select the value of your post via the combobox (Select Value)(Public, Private, or Group message)
+10 Click the Save New Post button
+
+Expected results:
+1 When creating a new post, I see a message on the page - New post successfully created.
+2 It is possible to go (by clicking the button) to My Profile
+3 There is an option to edit the message
+4 It is possible to delete the message
+
+#004 Checking for a valid post change (Update button)
+
+Pre-condition:
+Checking the successful change of an existing post via the update button
+
+Steps:
+1 Open login page - https://aqa-complexapp.onrender.com
+2 Enter your username in the Username field(leradalya)
+3 Enter the user password in the Password field(Leradalya1984)
+4 Click on button Login on Login Page
+5 Click the Create Post button at the top
+6 Enter the name of the new post in the "Title" field
+7 Enter the message text in the "Body Content" field in the new post
+8 Check the box in the pop-up to save it as unique
+9 Select the value of your post via the combobox (Select Value)(Public, Private, or Group message)
+10 Click the Save New Post button
+11 Click on the Create Post button
+12 Or edit the post in the Title/Body Content field
+13 Click the Save Updates button
+
+Expected results:
+1 I see a text message on the new page - Back to post permalink
+2 I see a text message on the new page - Post successfully updated
+
+#005 Checking for a valid transition to a personal profile
+
+Pre-condition:
+Checking whether the user has successfully logged in and gone to their personal profile
+
+Steps:
+1 Open login page - https://aqa-complexapp.onrender.com
+2 Enter your username in the Username field(leradalya)
+3 Enter the user password in the Password field(Leradalya1984)
+4 Click on button Login on Login Page
+5 In the top window of the site, click on the avatar (My Profile)
+
+Expected results:
+1 On the new page in My Profile I see the posts I created
+2 I can go to my followers tab
+3 There is also a following tab
