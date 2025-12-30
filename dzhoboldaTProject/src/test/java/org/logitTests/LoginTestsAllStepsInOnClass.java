@@ -54,6 +54,29 @@ public class LoginTestsAllStepsInOnClass {
         Assert.assertTrue("User is not Logged In ",isButtonSingOutVisible());
 
     }
+    @Test
+    public void invalidLogin() {
+        webDriver.get("https://aqa-complexapp.onrender.com");
+        logger.info("Site was opened");
+
+        WebElement inputLogin = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+        inputLogin.clear();
+        inputLogin.sendKeys("wrongUser");
+        logger.info("Invalid username entered");
+
+        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
+        inputPassword.clear();
+        inputPassword.sendKeys("Stringi23992399");
+        logger.info("Invalid password entered");
+
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Sign In button clicked");
+
+        // Проверки
+        Assert.assertFalse("Sign Out button should not be visible", isButtonSignOutVisible());
+        Assert.assertTrue("Sign In button should be visible", isButtonSignInVisible());
+        Assert.assertTrue("Error message is not displayed", isErrorMessageVisible());
+    }
 
     private boolean isButtonSingOutVisible() {
         try{
@@ -63,6 +86,32 @@ public class LoginTestsAllStepsInOnClass {
             return false;
         }
 
-
 }
+
+    private boolean isButtonSignOutVisible() {
+        try {
+            return webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+        } catch (Exception e) {
+            logger.info("Sign Out button is not found");
+            return false;
+        }
+    }
+    private boolean isButtonSignInVisible() {
+        try {
+            return webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
+        } catch (Exception e) {
+            logger.info("Sign In button is not found");
+            return false;
+        }
+    }
+
+    private boolean isErrorMessageVisible() {
+        try {
+            return webDriver.findElement(By.xpath("//div[text()='Invalid username/password.']")).isDisplayed();
+        } catch (Exception e) {
+            logger.info("Error message is not found");
+            return false;
+        }
+    }
+
 }
