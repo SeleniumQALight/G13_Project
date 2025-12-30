@@ -74,6 +74,8 @@ public class LoginTestAllStepsInOneClass {
 
         Assert.assertTrue("User is not LoggedIn: button SignIn is visible", isButtonSignInVisible());
         Assert.assertTrue("User is not LoggedIn: text about invalid SignIn is visible", isTextAboutInvalidDataVisible());
+        Assert.assertFalse("User is not LoggedIn: button SignOut is visible", isButtonSignOutVisible());
+
 
     }
 
