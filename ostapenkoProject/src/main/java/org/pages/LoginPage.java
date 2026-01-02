@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,5 +42,19 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignIn(){
         clickOnElement(buttonSingIn);
+    }
+
+    public void checkLoginAndPasswordInputsAreNotVisible() {
+        Assert.assertFalse(
+                "Login input is visible, but should NOT be",
+                checksElementVisible(inputLogin)
+        );
+
+        Assert.assertFalse(
+                "Password input is visible, but should NOT be",
+                checksElementVisible(inputPassword)
+        );
+
+        logger.info("Login and Password inputs are NOT visible");
     }
 }

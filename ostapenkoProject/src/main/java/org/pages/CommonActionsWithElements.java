@@ -25,6 +25,14 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean checksElementVisible(WebElement webElement) {
+        try {
+            return webElement.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     protected void clickOnElement(WebElement webElement) {
         try {
             webElement.click();

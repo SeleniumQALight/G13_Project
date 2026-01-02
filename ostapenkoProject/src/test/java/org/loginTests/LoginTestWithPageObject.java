@@ -12,5 +12,20 @@ public class LoginTestWithPageObject extends BaseTest { // get @before and @Afte
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
         pageProvider.getHomePage().checksButtonSignOutVisible();
+        pageProvider.getHomePage().checksButtonCreatePostVisible();
+        pageProvider.getLoginPage().checkLoginAndPasswordInputsAreNotVisible();
+
     }
+
+    @Test
+    public void invalidLogin() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto1");
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+
+        pageProvider.getHomePage().checksButtonSignOutNotVisible();
+        pageProvider.getHomePage().checksButtonSignInVisible();
+        pageProvider.getHomePage().checksInvalidMessageVisible();
+    }
+
 }
