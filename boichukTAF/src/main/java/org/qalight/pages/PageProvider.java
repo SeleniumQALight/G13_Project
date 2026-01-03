@@ -1,4 +1,4 @@
-package org.pages;
+package org.qalight.pages;
 
 import org.openqa.selenium.WebDriver;
 
