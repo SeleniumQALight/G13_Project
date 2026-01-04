@@ -16,7 +16,10 @@ public class LoginPage extends ParentPage {
     private WebElement inputPassword;
 
     @FindBy(xpath = "//button[text()='Sign In']")
-    private WebElement buttonSingIn;
+    private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement textInvalidMessage;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -40,21 +43,24 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextIntoElement(inputPassword, text);
     }
 
-    public void clickOnButtonSignIn(){
-        clickOnElement(buttonSingIn);
+    public void clickOnButtonSignIn() {
+        clickOnElement(buttonSignIn);
+    }
+
+    public void checksInvalidMessageVisible() {
+        checksElementVisible(textInvalidMessage, "Validation error message");
+        logger.info("Text InvalidMessage is visible");
     }
 
     public void checkLoginAndPasswordInputsAreNotVisible() {
-        Assert.assertFalse(
-                "Login input is visible, but should NOT be",
-                checksElementVisible(inputLogin)
-        );
+        checksElementNotVisible(inputLogin, "Login");
+        checksElementNotVisible(inputPassword, "Password");
 
-        Assert.assertFalse(
-                "Password input is visible, but should NOT be",
-                checksElementVisible(inputPassword)
-        );
+//        logger.info("Login and Password inputs are NOT visible");
+    }
 
-        logger.info("Login and Password inputs are NOT visible");
+    public void checksButtonSignInVisible() {
+        checksElementVisible(buttonSignIn, "Sign In");
+        logger.info("Button SingIn is visible");
     }
 }

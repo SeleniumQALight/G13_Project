@@ -21,11 +21,12 @@ public class LoginTestWithPageObject extends BaseTest { // get @before and @Afte
     public void invalidLogin() {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto1");
+//        pageProvider.getLoginPage().enterTextIntoInputPasswort("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
         pageProvider.getHomePage().checksButtonSignOutNotVisible();
-        pageProvider.getHomePage().checksButtonSignInVisible();
-        pageProvider.getHomePage().checksInvalidMessageVisible();
+        pageProvider.getLoginPage().checksButtonSignInVisible();
+        pageProvider.getLoginPage().checksInvalidMessageVisible();
     }
 
 }

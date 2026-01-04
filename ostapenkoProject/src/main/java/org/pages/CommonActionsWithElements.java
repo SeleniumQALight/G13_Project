@@ -2,9 +2,12 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -25,13 +28,28 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected boolean checksElementVisible(WebElement webElement) {
+    protected void checksElementVisible(WebElement webElement, String name) {
         try {
-            return webElement.isDisplayed();
+            Assert.assertTrue(name + " is not visible", webElement.isDisplayed());
         } catch (Exception e) {
-            return false;
+            Assert.fail(name + " is not visible");
         }
     }
+
+    protected void checksElementNotVisible(WebElement webElement, String name) {
+        try {
+            if (webElement.isDisplayed()) {
+                Assert.fail(name + " is visible, but should NOT be");
+            } else {
+                logger.info(name + " is NOT visible");
+            }
+        } catch (NoSuchElementException e) {
+            logger.info(name + " is NOT present in DOM, considered NOT visible");
+        } catch (StaleElementReferenceException e) {
+            logger.info(name + " is stale/removed, considered NOT visible");
+        }
+    }
+
 
     protected void clickOnElement(WebElement webElement) {
         try {
