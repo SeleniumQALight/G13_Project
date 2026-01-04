@@ -37,11 +37,15 @@ Expected result:
 Preconditions:
 * User is logged in
 * Home page is opened
+* Create post with tytle "TestTytleForPost"
 
 Steps to reproduce:
 1. Click the Search icon in the header -> Search modal window opens
-2. Enter a keyword into the Search input field
+2. Enter a keyword "TestTytleForPost" into the Search input field
 3. Click the “Search” button
+
+Postconditions:
+* Delete the post
 
 Expected result:
 * Search results are displayed
@@ -75,6 +79,8 @@ Postconditions:
 Preconditions:
 * User is logged in with login “qaauto”, password “123456qwerty”
 * Home page is opened
+* User is following some other users
+    (e.g., finds a random post, opens post details, clicks on the author name, and follows them)
 
 Steps to reproduce:
 1. Click the profile avatar in the header -> Profile page opens
