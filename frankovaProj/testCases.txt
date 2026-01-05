@@ -17,6 +17,9 @@ Expected results:
 2. The <Username> is correctly displayed in the top right corner of the page.
 3. The welcome message "Hello <Username>, your feed is empty." is displayed in the main content area.
 
+Post-condition:
+1. Delete the created <Username> user.
+
 
 #002 Create new post
 
@@ -49,6 +52,7 @@ Post-condition:
 Pre-condition:
 1. A user is created: Login: yuliiafrankova, Password: yuliiafrankova12345.
 2. The user is logged in and located on the Home page.
+3. The post with the specific <title> is created.
 
 Steps:
 1. Click on the "My Profile" icon/button.
