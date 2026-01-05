@@ -5,6 +5,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -12,14 +16,14 @@ public class CommonActionsWithElements {
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this);//ініціалізує елементи описані через @FindBy
+        PageFactory.initElements(webDriver, this); // ініціалізує @FindBy
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + "was inputted into element");
+            logger.info(text + " was inputted into element");
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -31,6 +35,27 @@ public class CommonActionsWithElements {
             logger.info("Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
+        }
+    }
+
+    protected boolean isElementDisplayed(WebElement webElement) {
+        try {
+            boolean state = webElement.isDisplayed();
+            logger.info("Element state: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not visible");
+            return false;
+        }
+    }
+
+    protected void waitForElementToBeVisible(WebElement webElement, int seconds) {
+        try {
+            new WebDriverWait(webDriver, Duration.ofSeconds(seconds))
+                    .until(ExpectedConditions.visibilityOf(webElement));
+            logger.info("Element became visible");
+        } catch (Exception e) {
+            logger.info("Element did not become visible in time");
         }
     }
 
