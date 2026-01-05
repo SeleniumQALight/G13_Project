@@ -20,7 +20,9 @@
         <module>avramovaProj</module>
         <module>frankovaProj</module>
         <module>stafiichukProj</module>
-        </modules>
+        <module>pokydkoProject</module>
+        <module>koniushenkoProject</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
