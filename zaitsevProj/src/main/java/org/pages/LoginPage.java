@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,8 +18,40 @@ public class LoginPage extends ParentPage {
   @FindBy(xpath = "//button[text()='Sign In']")
   private WebElement buttonSignIn;
 
+  @FindBy(xpath = "//div[text() = 'Invalid username/password.']")
+  private WebElement invalidUsernamePasswordMessage;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public void checkIsButtonSignInVisible(){
+        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
+        logger.info("Button SignIn is visible");
+    }
+
+    public void checkIsErrorMessageVisibleWithText(){
+        Assert.assertTrue("Message \"Invalid username/password.\" is not visible",
+                isElementDisplayed(invalidUsernamePasswordMessage));
+        logger.info("Message \"Invalid username/password.\" is visible");
+    }
+
+    public void checkIsErrorMessageIsVisibleWithText (String expectedText){
+        Assert.assertTrue("Error message is not visible", isElementDisplayed(invalidUsernamePasswordMessage));
+        logger.info("Error message is visible");
+        Assert.assertEquals("Error message is not correct", expectedText,
+                invalidUsernamePasswordMessage.getText());
+        logger.info("Error text is correct");
+    }
+
+    public void checkIsLoginInputNotVisible(){
+        Assert.assertFalse("Login input is visible, but should not be", isElementDisplayed(inputLogin));
+        logger.info("Login input is not visible");
+    }
+
+    public void checkIsPasswordInputNotVisible(){
+        Assert.assertFalse("Password input is visible, but should not be", isElementDisplayed(inputPassword));
+        logger.info("Password input is not visible");
     }
 
     public void openLoginPage(){
