@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +17,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement alertMessageAboutInvalidLogin;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -42,5 +46,24 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    public boolean isErrorMessageVisible(){
+        return isElementDisplayed(alertMessageAboutInvalidLogin);
+    }
 
+    public void checkIsButtonSignInVisible(){
+        Assert.assertTrue("SignIn button is not visible", isElementDisplayed(buttonSignIn));
+    }
+
+    public void checkIsErrorMessageVisible() {
+        Assert.assertTrue("Error message is not visible", isErrorMessageVisible());
+    }
+
+    public void checkIsInputLoginNotVisible() {
+        Assert.assertFalse("Input Login is visible, but should not be", isElementDisplayed(inputLogin));
+    }
+
+    public void checkIsInputPasswordNotVisible() {
+        Assert.assertFalse("Input Password is visible, but should not be", isElementDisplayed(inputPassword));
+    }
 }
+
