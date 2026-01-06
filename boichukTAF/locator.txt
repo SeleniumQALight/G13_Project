@@ -1,47 +1,42 @@
 #001 LoginPage
+input.Username = './/input[@placeholder='Username']']'
+input.Password = './/input[@placeholder='Password']'
+button.SignIn = './/button[@class='btn btn-primary btn-sm']'
 
-input.Username = './/input[@id='username3']'
-input.Password = './/input[@class='form-control form-control-sm input-dark']'
-button.SignIn = './/button[@class='btn btn-primary btn-sm'] '
-
-Username = './/input[@id='username8']'
+#002 RegistrationPage
+Username = './/input[@placeholder='Pick a username']'
 Email = './/input[@id='email-register']'
 Password = './/input[@id='password-register']'
 button.Sign Up for OurApp = './/button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']'
 
-#002 HomePage
-
+#003 HomePage
 click.ComplexAppForTesting-QA = './/a[@class='text-white']'
-click.Search = './/a[@class= 'text-white mr-2 header-search-icon']'
-click.Chat = './/span[@class= 'text-white mr-2 header-chat-icon']'
-click.MyProfile = './/a[@class= 'mr-2']'
+click.Search = './/a[@href='#']'
+click.Chat = './/span[@data-original-title='Chat']'
+click.MyProfile = './/img[@data-original-title='My Profile']'
 name = './/span[@class= 'text-white mr-2']'
 button.CreatePost = './/a[@class= 'btn btn-sm btn-success mr-2']'
 button.SignOut = './/button[@class= 'btn btn-sm btn-secondary']'
 click.OurApp = './/a[@class='text-muted']'
 
 
-#003 CreatePostPage
-
+#004 CreatePostPage
 input.Title = './/input[@id='post-title']'
 input.BodyContent = './/textarea[@id='post-body']'
 pop-up.IsThisPostUnique = './/input[@name='uniquePost']'
 combobox.SelectValue = './/select[@id='select1']'
 button.SaveNewPost = './/button[@class='btn btn-primary']'
 
-#004 Post created
-
-button.Edit = './/a[@class='text-primary mr-2']'
+#005 Post created
+button.Edit = './/a[@data-placement='top']'
 button.Delete = './/button[@class='delete-post-button text-danger']'
 button.avatar = './/img[@class='avatar-tiny']'
 
-#005 UpdatePost
-
+#006 UpdatePost
 button.Sava Updates = './/button[@class='btn btn-primary']'
 button.BackToPostPermalink = './/a[@class='small font-weight-bold']'
 
-#006 MyProfile
-
+#007 MyProfile
 tab.Posts = './/a[text()='Posts: 1']'
 tab.Followers = './/a[text()='Followers: 0']'
 tab.Following = './/a[text()='Following: 0']'
