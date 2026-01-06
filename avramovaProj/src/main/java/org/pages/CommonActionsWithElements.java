@@ -38,4 +38,20 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
+    protected boolean isElementDisplayed(WebElement webElement) {
+        try {
+            boolean state = webElement.isDisplayed();
+            if (state){
+                logger.info("Element is displayed");
+            }
+            else {
+                logger.info("Element is not displayed");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found or not displayed");
+            return false;
+        }
+    }
 }
