@@ -1,6 +1,6 @@
 #001 Valid Login
 
-input.login = .//input[@id='username5']
+input.login = .//input[@placeholder='Username']
 input.password = .//input[@name="password" and @class="form-control form-control-sm input-dark"]
 button.SignIn = .//button[@class='btn btn-primary btn-sm']
 

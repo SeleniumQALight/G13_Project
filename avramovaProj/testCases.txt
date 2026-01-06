@@ -26,8 +26,7 @@ Click on "Sign Out" button to return to the initial state.
 username=testuser2025 email=test2025@test.com password=Password123456!
 
 Pre-condition:
-1. User is on the main page.
-2. User is not logged in.
+1. User is not logged in.
 
 Steps:
 1. Open page https://aqa-complexapp.onrender.com
@@ -43,7 +42,8 @@ Expected results:
 4. Username "testuser2025"  is displayed in the header.
 
 Post-condition:
-Logout from the system.
+1. Delete user that was created.
+2. Logout from the system.
 
 #003 Success Sign Out
 
@@ -107,5 +107,6 @@ Expected results:
 3. The changes are saved and persist after refreshing the page.
 
 Post-condition:
-Return to the Home Page.
+1. Delete this post.
+2. Return to the Home Page.
 
