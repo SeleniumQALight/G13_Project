@@ -1,0 +1,48 @@
+#LoginPage
+
+input.usernameReg=".//input[@id='username-register']"
+input.emailReg=".//input[@id='username-register']"
+input.passwordReg=".//input[@id='password-register']"
+button.SignupforOurApp=".//button[@type='submit']"
+button.SignIn=".//button[contains(text(),'Sign In')]"
+input.username=".//input[@name='username' and not(@id='username-register')]"
+input.password=".//input[@name='password' and not (@id='password-register')]"
+message.InvalidUsernamePassword=".//*[contains(text(), 'Invalid username')]"
+
+
+#HomePage
+button.SignOut = ".//button[contains(text(), 'Sign Out')]"
+text.Username= ".//span[contains(text(), '<username>')]"
+message.Welcome= ".//h2[contains(text(), 'Hello')]"
+button.CreatePost= ".//a[@href='/create-post']"
+icon.MyProfile= ".//img[@alt="My profile"]"
+
+#PostPage
+message.CreatedPost=".//*[contains(text(), 'New post successfully created')]"
+title.postTitle=".//h2[contains(text(), '<title>')]"
+text.PostType=".//*[contains(text(), 'Note: ')]"
+text.UniquePost=".//p[contains(text(), 'unique')]"
+text.Post=".//p[contains(text(), '<text>')]"
+button.Edit=".//*[@data-icon='edit']"
+button.Delete=".//*[@data-icon='trash']"
+
+#MyProfilePage
+ref.postTitle=".//div[@class='list-group']//a[contains(., '<title>')]"
+
+
+#CreatePostPage
+input.TitleofPost=".//input[@id='post-title']"
+input.TexteofPost=".//textarea[@id='post-body']"
+checkbox.UniquePost=".//input[@type='checkbox' and @name='uniquePost']"
+dropdown.PostType=".//select[@id='select1']"
+button.SaveNewPost=".//button[contains(text(), 'Save')]"
+
+
+#EditPostPage
+input.TitleofPostUpdate=".//input[@id='post-title']"
+input.TexteofPostUpdate=".//textarea[@id='post-body']"
+checkbox.UniquePostUpdate=".//input[@type='checkbox' and @name='uniquePost']"
+dropdown.PostTypeUpdate=".//select[@id='select1']"
+button.SaveUpdates=".//button[contains(text(), 'Save Updates')]"
+message.PostUpdated=".//*[contains(text(), 'Post successfully updated.')]"
+ref.Backtopostpermalink=".//a[contains(text(), 'Back to post permalink')]"

@@ -1,0 +1,6 @@
+#LoginPage
+input.login=
+input.password =
+
+#HomePage
+button.SignOut = ""
