@@ -8,26 +8,24 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void validLogin() {
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
-        pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
-        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getLoginPage().enterLogin("qaauto");
+        pageProvider.getLoginPage().enterPassword("123456qwerty");
+        pageProvider.getLoginPage().clickOnSignInButton();
 
-        // Перевірки після успішного логіну
         pageProvider.getHomePage().checkIsButtonSignOutVisible();
         pageProvider.getHomePage().checkIsButtonCreatePostVisible();
-        pageProvider.getHomePage().checkLoginInputsAreNotVisible();
+        pageProvider.getLoginPage().checkLoginInputsAreNotVisible();
     }
 
     @Test
-    public void invalidLoginChecks() {
+    public void invalidLogin() {
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin("abrakadabraLogin");
-        pageProvider.getLoginPage().enterTextIntoInputPassword("abrakadabraPassword");
-        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getLoginPage().enterLogin("abrakadabraLogin");
+        pageProvider.getLoginPage().enterPassword("abrakadabraPassword");
+        pageProvider.getLoginPage().clickOnSignInButton();
 
-        // Перевірки після неуспішного логіну
         pageProvider.getHomePage().checkIsButtonSignOutNotVisible();
-        pageProvider.getHomePage().checkIsButtonSignInVisible();
-        pageProvider.getHomePage().checkInvalidLoginMessageIsVisible();
+        pageProvider.getLoginPage().checkIsSignInButtonVisible();
+        pageProvider.getLoginPage().checkInvalidLoginMessageIsVisible();
     }
 }
