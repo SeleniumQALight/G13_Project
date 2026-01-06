@@ -1,4 +1,4 @@
-package org.qalight.pages;
+package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
