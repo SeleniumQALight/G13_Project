@@ -41,11 +41,14 @@ public class CommonActionsWithElements {
             if (webElement.isDisplayed()) {
                 Assert.fail(name + " is visible, but should NOT be");
             } else {
+                Assert.assertTrue(name + " is NOT visible", true);
                 logger.info(name + " is NOT visible");
             }
         } catch (NoSuchElementException e) {
+            Assert.assertTrue(name + " is NOT present in DOM, considered NOT visible", true);
             logger.info(name + " is NOT present in DOM, considered NOT visible");
         } catch (StaleElementReferenceException e) {
+            Assert.assertTrue(name + " is stale/removed, considered NOT visible", true);
             logger.info(name + " is stale/removed, considered NOT visible");
         }
     }
