@@ -39,4 +39,15 @@ public class CommonActionsWithElement {
         Assert.fail("Error while working with element ");
     }
 
+    protected boolean isElementDisplayed(WebElement webElement){
+        try {
+            boolean state = webElement.isDisplayed();
+            logger.info("Element displayed state: " + state);
+            return state;
+        } catch (Exception e){
+            logger.info("Element is not displayed");
+            return false;
+        }
+    }
+
 }
