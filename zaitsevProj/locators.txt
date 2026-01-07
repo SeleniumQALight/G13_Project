@@ -1,9 +1,43 @@
 #Login Page
 
-input.login = ""
-input.password =
+input.login = "//input[@id='username0']"
+input.password = "//input[@name='password' and not(@id)]"
+button.SignIn = "//button [not(@type)]"
+button.SignUpForOurApp = "//button [@type='submit']"
+input.registrationUsername = "//input [@id='username-register']"
+input.registrationEmail = "//input [@id='email-register']"
+input.registrationPassword = "//input [@id='password-register']"
 
 
 #HomePage
 
-button.SignOut = ""
+button.SignOut = "//button"
+button.CreatePost = "//a [@href='/create-post']"
+H2.Hello = "//h2"
+
+
+#Post Creation page
+
+input.title = "//input [@id='post-title']"
+textarea.bodyContent = "//textarea [@id='post-body']"
+button.SaveNewPost = "//button [text() = 'Save New Post']"
+
+
+#Post Editor
+
+button.delete = "//button [@data-original-title='Delete']"
+button.edit = "//a [@data-original-title='Edit']"
+link.postedByUser = "//p//a[2]"
+output.newPostCreated = "//div [text() = 'New post successfully created.']"
+
+#Edit Post Page
+
+button.saveUpdates = "//button [text() = 'Save Updates']"
+link.backToPostPermalink = "//div[2]//a"
+output.postUpdated = "//div//div[1] [text() = 'Post successfully updated.']"
+
+#User Editor
+
+tab.posts = "//body//div[2]//a[1]"
+tab.followers = "//body//div[2]//a[2]"
+tab.following = "//body//div[2]//a[3]"
