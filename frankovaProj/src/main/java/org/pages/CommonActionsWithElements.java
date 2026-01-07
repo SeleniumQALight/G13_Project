@@ -28,9 +28,29 @@ public class CommonActionsWithElements {
     protected void clickOnElement (WebElement webElement){
         try{
             webElement.click();
-            logger.info("Element was clicked");
+            logger.info(webElement+ " Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
+        }
+    }
+    protected void checkIsElementVisible(WebElement webElement){
+        Assert.assertTrue(webElement + " Element is not visible", isElementVisible(webElement));
+        logger.info(webElement + " Element is visible");
+    }
+
+    protected void checkIsNotElementVisible(WebElement webElement){
+        Assert.assertFalse(webElement + " Element is visible", isElementVisible(webElement));
+        logger.info(webElement + " Element is NOT visible");
+    }
+
+    protected boolean isElementVisible(WebElement webElement){
+        try {
+            boolean state = webElement.isDisplayed();
+            logger.info(webElement + " Element state: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.info(webElement + " Element is not found");
+            return false;
         }
     }
 
@@ -38,4 +58,6 @@ public class CommonActionsWithElements {
         logger.error("Error while working with element");
         Assert.fail("Error while working with element");
     }
+
+
 }
