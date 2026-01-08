@@ -95,6 +95,7 @@ Expected Result:
 1."New post successfully created" message displayed.
 2."Edit post" button displayed.
 3."Delete post button displayed.
+4.Created post with title "devaqa" and body "dinamo chempion" is displayed in the list of the posts.
 
 Post condition:
 1.Delete created post
