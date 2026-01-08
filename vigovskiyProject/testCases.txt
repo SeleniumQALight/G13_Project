@@ -59,6 +59,9 @@ Expected results:
 3. Button "Sign Out" is displayed in the header.
 4. Button "Create Post"  is displayed in the header.
 
+Post condition:
+1.Delete created account
+
 #004 Sign Out option validation
 
 Pre-condition:
