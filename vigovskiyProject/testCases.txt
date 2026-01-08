@@ -103,22 +103,24 @@ Post condition:
 
 #006 Delete Post
 
-Pre-condition:
-1. User is authorized.
-2. Home Page displayed.
-
 title "dk"
 body "dinamo kiev chempion"
 
+Pre-condition:
+1. User is authorized.
+2. Home Page displayed.
+3. Click on  button "Create Post" (icon with a plus/pencil) in the header.
+4. Enter "dk" into "Title" field on Create Post page.
+5. Enter "dinamo kiev chempion" into textarea "Body Content" on Create Post page.
+6. Click on button "Save New Post", created post is displayed.
+
+
 Steps:
-1. Click on  button "Create Post" (icon with a plus/pencil) in the header.
-2. Enter "dk" into "Title" field on Create Post page.
-3. Enter "dinamo kiev chempion" into textarea "Body Content" on Create Post page.
-4. Click on button "Save New Post".
-5. Click on "Delete button"
+1.Go to page with created post, choose created post and click on "Delete" button.
 
 Expected Result:
 1. "Post successfully deleted" message displayed.
+2. Created post is not displayed in the list of the posts.
 
 
 
