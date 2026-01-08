@@ -20,7 +20,7 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();//идет в инет и скачивает атуальую версию браузера, стягиваем исп файл
         webDriver = new ChromeDriver();//здесь инициализируем конкретный вебдрайвер для хром
         webDriver.manage().window().maximize();//сдлали на вест екран браузер
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//установили задержку на 5 сек
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));//установили задержку на 5 сек
         logger.info("Browser was opened");
         pageProvider = new PageProvider(webDriver);
 
