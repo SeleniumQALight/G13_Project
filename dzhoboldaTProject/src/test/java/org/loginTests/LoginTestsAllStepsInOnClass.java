@@ -1,4 +1,4 @@
-package org.logitTests;
+package org.loginTests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
