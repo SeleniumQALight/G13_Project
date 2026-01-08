@@ -96,6 +96,9 @@ Expected Result:
 2."Edit post" button displayed.
 3."Delete post button displayed.
 
+Post condition:
+1.Delete created post
+
 
 #006 Delete Post
 
