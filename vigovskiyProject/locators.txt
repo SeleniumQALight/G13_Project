@@ -3,7 +3,7 @@
 
 
 
-Input UserName = "//input[@id='username4']"
+Input UserName = "//input[@name='username' and @placeholder='Username']"
 Input Password = "//input[@placeholder='Password']"
 Sign In button = "//button[@class='btn btn-primary btn-sm']"
 
