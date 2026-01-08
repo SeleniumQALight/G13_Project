@@ -1,8 +1,28 @@
-#LoginPage
+#001 Valid Login
 
-input.login=".//input[@id='login']"
-input.password=""
+input.login = .//input[@placeholder='Username']
+input.password = .//input[@name="password" and @class="form-control form-control-sm input-dark"]
+button.SignIn = .//button[@class='btn btn-primary btn-sm']
 
+#002 Valid Registration
+input.Username = .//input[@id='username-register']
+input.Email = .//input[@id='email-register']
+input.Password = .//input[@id='password-register']
+button.SignUp = .//button[@type='submit']
 
-#HomePage
-button.SignOut = ""
+#003 Success Sign Out
+button.SignOut = .//button[@class='btn btn-sm btn-secondary']
+
+#004 Create New Post
+
+link.CreatePost = .//a[@href='/create-post']
+input.Title = .//input[@id='post-title']
+textarea.BodyContent = .//textarea[@id='post-body']
+button.SaveNewPost = .//button[@class='btn btn-primary']
+
+#005 Edit Existing Post
+
+link.Edit = .//a[@href='/post/6949224e3ab62000478718fa/edit']
+input.Title = .//input[@id='post-title']
+textarea.BodyContent = .//textarea[@id='post-body']
+button.SaveUpdates = .//button[@class='btn btn-primary']
