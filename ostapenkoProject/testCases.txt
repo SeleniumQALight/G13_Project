@@ -1,2 +1,96 @@
-#001 Valid Login
+#001 Sign up new user
 
+Preconditions:
+* User is not logged in
+
+Steps to reproduce:
+1. Open the login page
+2. Enter a valid username (≥ 3 characters) into the Username field
+3. Enter a valid email (e.g., testUser@gmail.com) into the Email field
+4. Enter a valid password (≥ 12 characters) into the Password field
+5. Click the “Sign up for OurApp” button
+
+Expected result:
+* The “Sign Out” button is displayed
+* The user’s username is displayed in the header
+
+Postconditions:
+* Delete the user from the database
+
+#002 Send message in the chat
+
+Preconditions:
+* User is logged in
+* Home page is opened
+
+Steps to reproduce:
+1. Click the chat icon in the header -> Chat modal window opens
+2. Type a message into the message input field
+3. Press Enter
+
+Expected result:
+* The message is sent successfully
+* The message is displayed in the chat
+
+#003 Search for a post by title
+
+Preconditions:
+* User is logged in
+* Home page is opened
+* Create post with tytle "TestTytleForPost"
+
+Steps to reproduce:
+1. Click the Search icon in the header -> Search modal window opens
+2. Enter a keyword "TestTytleForPost" into the Search input field
+3. Click the “Search” button
+
+Postconditions:
+* Delete the post
+
+Expected result:
+* Search results are displayed
+* Relevant posts matching the keyword are shown
+
+#004 Create a private unique post
+
+Preconditions:
+* User is logged in
+* Home page or dashboard is opened
+
+Steps to reproduce:
+1. Click the “Create Post” button in the header -> Post creation page opens
+2. Enter a valid title into the Title field
+3. Enter valid body content into the Body field
+4. Check the “Is this post unique?” checkbox
+5. Open the “Select value” dropdown and choose “Private”
+6. Click the “Save New Post”  button
+
+Expected result:
+* The post is created successfully, confirmation message “New post successfully created.” is displayed
+* The post is marked as unique
+* The post is publicly visible
+* The post displays the correct title and body content
+
+Postconditions:
+* Delete the post
+
+#005 Check followers in My Profile
+
+Preconditions:
+* User is logged in with login “qaauto”, password “123456qwerty”
+* Home page is opened
+* User is following some other users
+    (e.g., finds a random post, opens post details, clicks on the author name, and follows them)
+
+Steps to reproduce:
+1. Click the profile avatar in the header -> Profile page opens
+2. Go to the “Followers” tab
+3. Observe the list of followers
+
+Expected result:
+* The Followers tab is displayed correctly
+* All followers are listed with:
+    * Username
+    * Avatar
+* The number of followers matches the displayed count
+* Clicking on a follower navigates to their profile page
