@@ -15,6 +15,10 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement buttonCreatePost;
 
+
+    @FindBy(xpath = "//a[text()='Create Post']")
+    private WebElement createNewPostButton;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -31,6 +35,17 @@ public class HomePage extends ParentPage {
     public void checksButtonCreatePostVisible() {
         checksElementVisible(buttonCreatePost, "Create Post");
         logger.info("Button CreatePost is visible");
+    }
+
+    public HomePage checkIsRedirectToHomePage() {
+        // TODO check URL
+        // TODO check some unique element on HomePage
+        return this;
+    }
+
+    public CreatePostPage clickOnButtonCreatePost() {
+        clickOnElement(createNewPostButton);
+        return new CreatePostPage(webDriver);
     }
 
 }
