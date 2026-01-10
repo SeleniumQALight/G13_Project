@@ -1,0 +1,13 @@
+package org.postsTest;
+
+import org.baseTest.BaseTest;
+import org.junit.Test;
+
+public class CreateNewPostTest extends BaseTest {
+    @Test
+    public void createNewPostTest() {
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred();
+
+    }
+}
