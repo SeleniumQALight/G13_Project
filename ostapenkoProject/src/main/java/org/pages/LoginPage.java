@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +17,10 @@ public class LoginPage extends ParentPage {
     private WebElement inputPassword;
 
     @FindBy(xpath = "//button[text()='Sign In']")
-    private WebElement buttonSingIn;
+    private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement textInvalidMessage;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -43,8 +47,25 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void clickOnButtonSignIn(){
-        clickOnElement(buttonSingIn);
+    public void clickOnButtonSignIn() {
+        clickOnElement(buttonSignIn);
+    }
+
+    public void checksInvalidMessageVisible() {
+        checksElementVisible(textInvalidMessage, "Validation error message");
+        logger.info("Text InvalidMessage is visible");
+    }
+
+    public void checkLoginAndPasswordInputsAreNotVisible() {
+        checksElementNotVisible(inputLogin, "Login");
+        checksElementNotVisible(inputPassword, "Password");
+
+//        logger.info("Login and Password inputs are NOT visible");
+    }
+
+    public void checksButtonSignInVisible() {
+        checksElementVisible(buttonSignIn, "Sign In");
+        logger.info("Button SingIn is visible");
     }
 
     public HomePage openLoginPageAndFillFormWithValidCred() {

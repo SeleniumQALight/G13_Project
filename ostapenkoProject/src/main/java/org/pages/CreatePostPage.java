@@ -13,8 +13,11 @@ public class CreatePostPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement clickOnSaveNewPostButton;
 
-    @FindBy(xpath = "//select") // xpath = "//select"
+    @FindBy(xpath = "//select")
     private WebElement dropdownAccess;
+
+    @FindBy(xpath = "//input[@type='checkbox']")
+    private WebElement checkbox;
 
     public CreatePostPage(org.openqa.selenium.WebDriver webDriver) {
         super(webDriver);
@@ -33,6 +36,11 @@ public class CreatePostPage extends ParentPage {
 
     public CreatePostPage enterTextIntoInputBody(String bodyForPost) {
         clearAndEnterTextIntoElement(inputBody, bodyForPost);
+        return this;
+    }
+
+    public CreatePostPage setStateToCheckbox(String state) {
+        setCheckboxState(checkbox,state);
         return this;
     }
 

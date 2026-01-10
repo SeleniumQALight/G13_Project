@@ -13,11 +13,13 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle("G13 Ostapenko")
                 .enterTextIntoInputBody("G13 Ostapenko Some body")
+                .setStateToCheckbox("check")
                 .selectTextInDropDownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessageIsDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkPostIsUniqueByState("yes")
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
     }
 }
