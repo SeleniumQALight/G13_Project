@@ -59,7 +59,7 @@ Click the "Save New Post" button.
 1. Expected Result:
 2. The post is successfully created and the user is redirected to the individual post page.
 3. A green success message appears: "New post successfully created.".
-4. The displayed Title and Body Content match the data entered in steps 2 and 3.
+4.
 *************
 TC-05: Delete an Existing Post
 
@@ -71,7 +71,7 @@ Steps:
 1. Click on the "Delete" icon on the individual post page.
 2. Confirm the action in the browser's confirmation pop-up.
 Expected Result:
-1. The post is successfully deleted.
+1.
 2. The user is redirected back to their Profile page.
 3. A success message appears: "Post successfully deleted.".
 4. The deleted post is no longer visible in the user's post list on the Profile page.
