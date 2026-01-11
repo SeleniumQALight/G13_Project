@@ -19,6 +19,12 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
 
+    @FindBy(xpath = "//button[text()='Sign Out']")
+    private WebElement buttonSignOut;
+
+    @FindBy(xpath = "//a[text()='Create Post']")
+    private WebElement buttonCreatePost;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }

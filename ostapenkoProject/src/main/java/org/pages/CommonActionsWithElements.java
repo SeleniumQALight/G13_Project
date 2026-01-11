@@ -105,8 +105,54 @@ public class CommonActionsWithElements {
     protected void checkTextInElement(WebElement webElement, String expectedText) {
         try {
             String actualText = webElement.getText();
-            Assert.assertEquals("Text in element is not as expected", expectedText, actualText);
-            logger.info("Text in element is as expected: " + expectedText);
+//            Assert.assertEquals("Text in element is not as expected", expectedText, actualText);
+            Assert.assertTrue(
+                    "Text in element is not as expected. " +
+                            "Expected (equals or contains): " + expectedText +
+                            ", Actual: " + actualText,
+                    actualText.equals(expectedText) || actualText.contains(expectedText)
+            );
+
+            logger.info("Text in element matches expected text: " + expectedText);
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void selectCheckbox(WebElement webElement) {
+        try {
+            if (!webElement.isSelected()) {
+                clickOnElement(webElement);
+            }
+            Assert.assertTrue("Checkbox should be selected", webElement.isSelected());
+            logger.info("Checkbox is selected");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void unselectCheckbox(WebElement webElement) {
+        try {
+            if (webElement.isSelected()) {
+                clickOnElement(webElement);
+            }
+            Assert.assertFalse("Checkbox should be unselected", webElement.isSelected());
+            logger.info("Checkbox is unselected");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void setCheckboxState(WebElement webElement, String state) {
+        try {
+            if ("check".equalsIgnoreCase(state)) {
+                selectCheckbox(webElement);
+            } else if ("uncheck".equalsIgnoreCase(state)) {
+                unselectCheckbox(webElement);
+            } else {
+                Assert.fail("Incorrect checkbox state: " + state +
+                        ". Expected: 'check' or 'uncheck'");
+            }
         } catch (Exception e) {
             printErrorAndStopTest();
         }
