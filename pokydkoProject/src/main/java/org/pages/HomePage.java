@@ -18,9 +18,10 @@ public class HomePage extends ParentPage{
         super(webDriver);
     }
 
-    public void checkIsButtonSignOutVisible(){
+    public HomePage checkIsButtonSignOutVisible(){
         Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         logger.info("Button Sign Out is visible");
+        return this;
     }
 
     public boolean isButtonSignOutVisible() {
@@ -37,7 +38,6 @@ public class HomePage extends ParentPage{
     public HomePage checkIsRedirectToHomePage() {
         //TODO Check URL
         //TODO check some unique element on HomePage
-
         return this;
     }
 
@@ -45,4 +45,23 @@ public class HomePage extends ParentPage{
         clickOnElement(createNewPostButton);
         return new CreatePostPage(webDriver);
     }
+
+    public HomePage checkIsButtonCreatePostVisible() {
+        Assert.assertTrue("Button Create Post is not visible", isButtonCreatePostVisible());
+        logger.info("Button Create Post is visible");
+        return this;
+    }
+
+    private boolean isButtonCreatePostVisible() {
+        try{
+            boolean state = createNewPostButton.isDisplayed();
+            logger.info("Element state: " + state);
+            return state;
+        } catch (Exception e){
+            logger.info("Element is not found");
+            return false;
+        }
+    }
+
+
 }

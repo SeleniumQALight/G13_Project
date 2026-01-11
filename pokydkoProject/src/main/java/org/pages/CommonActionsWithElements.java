@@ -16,19 +16,19 @@ public class CommonActionsWithElements {
         PageFactory.initElements(webDriver, this); //ініціалізує елементи описані через @FindBy
     }
 
-    protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
+    protected void clearAndEnterTextIntoElement(WebElement element, String text) {
         try {
-            webElement.clear();
-            webElement.sendKeys(text);
+            element.clear();
+            element.sendKeys(text);
             logger.info(text + "was inputted into element");
         } catch (Exception e) {
           printErrorAndStopTest();
         }
     }
 
-    protected void clickOnElement(WebElement webElement){
+    protected void clickOnElement(WebElement element){
         try{
-            webElement.click();
+            element.click();
             logger.info("Element was clicked");
         } catch (Exception e){
             printErrorAndStopTest();

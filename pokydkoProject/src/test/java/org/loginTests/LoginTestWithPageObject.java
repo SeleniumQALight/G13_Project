@@ -7,12 +7,28 @@ import static org.testdata.TestData.VALID_LOGIN_UI;
 import static org.testdata.TestData.VALID_PASSWORD_UI;
 
 public class LoginTestWithPageObject extends BaseTest {
+
     @Test
     public void validLogin() {
         pageProvider.getLoginPage().openLoginPage()
                 .enterTextIntoInputLogin(VALID_LOGIN_UI)
                 .enterTextIntoInputPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
-        pageProvider.getHomePage().checkIsButtonSignOutVisible();
+        pageProvider.getHomePage().checkIsButtonSignOutVisible()
+                .checkIsButtonCreatePostVisible();
     }
+
+    //Add test for invalid login
+    @Test
+    public void invalidLogin() {
+        pageProvider.getLoginPage().openLoginPage()
+                .enterTextIntoInputLogin(VALID_LOGIN_UI)
+                .enterTextIntoInputPassword("invalidPassword")
+                .clickOnButtonSignIn();
+        pageProvider.getLoginPage().checkIsErrorMessageVisible();
+        pageProvider.getLoginPage().checkIsErrorMessageText("Invalid username/password.");
+        pageProvider.getLoginPage().checkIsButtonSignOutVisible();
+    }
+
+
 }
