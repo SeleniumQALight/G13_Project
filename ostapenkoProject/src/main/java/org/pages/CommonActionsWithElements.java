@@ -2,10 +2,13 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -25,6 +28,32 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
+    protected void checksElementVisible(WebElement webElement, String name) {
+        try {
+            Assert.assertTrue(name + " is not visible", webElement.isDisplayed());
+        } catch (Exception e) {
+            Assert.fail(name + " is not visible");
+        }
+    }
+
+    protected void checksElementNotVisible(WebElement webElement, String name) {
+        try {
+            if (webElement.isDisplayed()) {
+                Assert.fail(name + " is visible, but should NOT be");
+            } else {
+                Assert.assertTrue(name + " is NOT visible", true);
+                logger.info(name + " is NOT visible");
+            }
+        } catch (NoSuchElementException e) {
+            Assert.assertTrue(name + " is NOT present in DOM, considered NOT visible", true);
+            logger.info(name + " is NOT present in DOM, considered NOT visible");
+        } catch (StaleElementReferenceException e) {
+            Assert.assertTrue(name + " is stale/removed, considered NOT visible", true);
+            logger.info(name + " is stale/removed, considered NOT visible");
+        }
+    }
+
 
     protected void selectTextInDropDown(WebElement webElement, String text) {
         try {
