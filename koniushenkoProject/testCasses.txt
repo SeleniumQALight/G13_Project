@@ -1,10 +1,103 @@
-#001 Valid login
-login=qaauto
-pass=123456qwerty
+#001 Invalid Login
+invalid login = qaauto123
+invalid password = 123qwerty
+
+STR
+1. Open Login page https://aqa-complexapp.onrender.com/
+2. Enter <invalid login> in to input login on Login page
+3. Enter <invalid password> in to input password on Login page
+4. Click on Sing In button on Login page
+
+Expected result:
+Sing In button is displayed on Login page.
+Sign Out button is NOT displayed on Home page.
+Error text 'Invalid username/password' is displayed on Login page.
+
+
+
+
+#002 Registration of a new user with valid data
+username = nelly
+email = nelly@gmail.com
+password = 1234567nelly
+
+STR
+1. Open Login page https://aqa-complexapp.onrender.com/
+2. Enter <username> in to input register username on Login page
+3. Enter <email> in to input register email on Login page
+4. Enter <password> in to input register password on Login page
+5. Click on Sing Up button on Login page
+
+Expected result:
+Username is displayed in the Heder on Home page.
+Sign Out button is displayed on Home page.
+
+Post-condition:
+delete new user from DB
+
+
+
+#003 Create new post
+title = "new post"
+content = "Lorem ipsum"
+
 Pre-condition:
+User on Home page logged with valid credentials
+
+STR:
+1. Click on Create post button in the Heder
+Expected result: Save New Post button is displayed on Post Page  // перевірка встановлена для впевненості що ми на сторінці створення поста
+2. Enter <title> in to input title on Post page
+3. Enter <content> in to textarea content on Post page
+4. Click on Save New Post button
+
+Expected result:
+Info text "New post successfully created." is displayed on Post Page
+New post title with text <title> is displayed on Post Page
+
+Post-condition:
+delete new post
+
+
+
+#004 Found post
+
+searchText ="post_test1"
+
+Pre-condition:
+User on Home page logged with valid credentials
 
 Steps:
-1. Open login page
-2.
-3.
+1. Click on Search button in the Heder
+Expected result: Search field is displayed
+2. Clear and Enter <searchText> in to search field
+3. Wait for 2 seconds
+
+Expected result:
+Search Results header with text “Search Results (1 item found)” is displayed
+<searchText> link is displayed in the search results
+Info text "Sorry, we could not find any results for that search." is NOT displayed in the search results
+
+Post-condition:
+Return to Home page by clicking on close button of search field
+
+
+#005 Create chat message
+
+chatMessage = "Hello, how are you?"
+
+Pre-condition:
+User on Home page logged with valid credentials
+
+Steps:
+1. Click on Chat span in the Heder
+Expected result: Chat form is displayed
+2. Enter <chatMessage> in to chat input field
+3. Press Enter key
+
+Expected result:
+<chatMessage> is displayed in chat messages list
+
+Post-condition:
+Close chat form by clicking on close chat button
 
