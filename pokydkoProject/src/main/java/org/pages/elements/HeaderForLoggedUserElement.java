@@ -7,7 +7,7 @@ import org.pages.CommonActionsWithElements;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
 
-    @FindBy(xpath = "//img[@alt='My Profile']")
+    @FindBy(xpath = "//img[@alt='My profile']")
     private WebElement buttonMyProfile;
 
     public HeaderForLoggedUserElement(WebDriver webDriver) {

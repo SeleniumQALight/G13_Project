@@ -17,6 +17,111 @@ Expected results:
 2. I don't see Sign In button on Login Page
 
 Post-condition:
-1.
+1. Sign Out from the application
+2. Close the browser
 
-#002
+#002 Invalid Login
+
+login=qaauto
+password = wrongPassword
+
+Pre-condition:
+1. Create a user with unique name
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com
+2. Enter <login> into input Login on Login Page
+3. Enter <password> into input Password on Login Page
+4. Click on button "Login" on Login Page
+
+Expected results:
+1. I see error message "Invalid username/password." on Login Page
+2. I see red-colored invalid message alert on Login Page
+3. Input Username is cleared on Login Page
+4. Input Password is cleared on Login Page
+
+Post-condition:
+1. Close the browser
+
+#003 Create a new user with unique name
+login=uniqueUser123
+email = {valid users email}
+password = 123456qwerty
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com
+2. Enter <login> into input Username (input.username = //input[@placeholder='Pick a username']) on Login Page
+3. Enter <email> into input Email (input.email = //input[@placeholder='you@example.com']) on Login Page
+4. Enter <password> into input Create a password (input.newPassword = //input[@placeholder='Create a password']) on Login Page
+5. Click on button "Sign up for OurApp" (button.signUpForOurApp
+
+Expected results:
+1. I see Sign Out button on Home Page
+2. I don't see Sign In button on Login Page
+3. I see invitation message on Home Page
+4. I see my profile image and username on Home Page
+
+Post-condition:
+1. Sign Out from the application
+2. Close the browser
+
+#004 Create a new post with unique title
+login=qaauto
+password = 123456qwerty
+postTitle = G13 Vladislav's Post
+postBody = This is the body content of Vladislav's post.
+isThisPostUnique = true
+selectValue = //select[@value='One Person']
+
+Pre-condition:
+1. User is logged in
+
+Steps:
+1. Click on button "Create Post" on Home Page
+2. Enter <postTitle> into input Title on Create Post Page
+3. Enter <postBody> into input Body Content on Create Post Page
+4. Check checkbox "Is this post unique?" on Create Post Page - mark as unique
+5. Select <selectValue> from dropdown Select Value on Create Post Page
+6. Click on button "Save New Post" on Create Post Page
+
+Expected results:
+1. I see success post creation message on Post Page
+2. I see post title <postTitle> on Post Page
+3. I see post body content <postBody> on Post Page
+4. I see note with chosen value from dropdown on Post Page
+5. I see that post is marked as unique on Post Page
+
+Post-condition:
+1. Delete the created post
+2. Sign Out from the application
+3. Close the browser
+
+#005 Delete a newly created post
+login=qaauto
+password = 123456qwerty
+postTitle = G13 Vladislav's Post to Delete
+postBody = This is the body content of Vladislav's post to be deleted.
+isThisPostUnique = false
+selectValue = //select[@value='One Person']
+
+Pre-condition:
+1. User is logged in
+2. A post is created
+
+Steps:
+1. Click on button "Delete Post" on Post Page
+
+Expected results:
+1. I see a notification that post has been deleted "Post successfully deleted." on MyProfile Page
+2. I don't see the deleted post in My Posts list on MyProfile Page
+
+Post-condition:
+1. Sign Out from the application
+2. Close the browser
+
+
+
+
+
+
+
