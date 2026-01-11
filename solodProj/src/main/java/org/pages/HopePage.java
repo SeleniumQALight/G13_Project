@@ -4,9 +4,13 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class HopePage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
+    @FindBy(xpath = "//a[text()='Create Post']")
+    private WebElement createNewPostButton;
 
     public HopePage(WebDriver webDriver) {
         super(webDriver);
@@ -28,5 +32,17 @@ public class HopePage extends ParentPage {
 
         }
     }
+
+    public HopePage checkIsRedirectToHomePage() {
+        //TODO check URL
+        //TODO check some unique element on HomePage
+        return this;
+    }
+
+    public CreatePostPage clickOnButtonCreateNewPost() {
+        clickOnElement(createNewPostButton);
+        return new CreatePostPage(webDriver);
+    }
+
 
 }
