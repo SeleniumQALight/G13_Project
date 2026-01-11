@@ -38,8 +38,15 @@ public class CommonActionsWithElements {
         Assert.fail("Error while working with element"); // пишет в репорт
     }
 
-
-
-
+    protected boolean isElementDisplayed(WebElement webElement) {
+        try {
+            boolean state = webElement.isDisplayed();
+            logger.info("Element displayed " + state);
+            return state;
+        } catch (Exception e){
+            logger.info("Element is not found");
+            return false;
+        }
+    }
 }
 
