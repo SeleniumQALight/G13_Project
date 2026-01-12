@@ -13,7 +13,7 @@ public class PostPage extends ParentPage {
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(webDriver, this); // инициализация @FindBy элементов
+//        PageFactory.initElements(webDriver, this); // инициализация @FindBy элементов
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {

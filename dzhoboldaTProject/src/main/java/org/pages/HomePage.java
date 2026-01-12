@@ -12,7 +12,7 @@ public class HomePage  extends ParentPage{
     private final Logger logger = Logger.getLogger(getClass());
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
-
+    @FindBy(xpath = "//button[text()='Sign Out']")
     private WebElement signOutButton;
 
     public HomePage(WebDriver webDriver) {

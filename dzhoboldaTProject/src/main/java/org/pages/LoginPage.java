@@ -42,10 +42,22 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+//    public HomePage clickOnButtonSignIn() {
+//        clickOnElement(buttonSignIn);
+//        return new HomePage(webDriver);
+//    }
+
     public HomePage clickOnButtonSignIn() {
-        clickOnElement(buttonSignIn);
-        return new HomePage(webDriver);
-    }
+        try {
+            logger.info("Clicking Sign In button");
+            clickOnElement(buttonSignIn);
+            logger.info("Sign In button was clicked");
+            return new HomePage(webDriver);
+        } catch (Exception e) {
+            logger.error("Cannot click Sign In button", e);
+            throw new RuntimeException("Cannot click Sign In button", e);
+        }
+    } //Checked this method for exception handling Accidently deleted the commented method above
 
     public HomePage openLoginPageAndFillLoginFormWithVailidCred() {
         openLoginPage();

@@ -19,8 +19,8 @@ public class CreatePostPage extends ParentPage{
     private WebElement buttonSaveNewPost;
     @FindBy(tagName = "select")
     private WebElement dropdownAccess;
-    @FindBy(xpath = "//*[@class='alert alert-success text-center']")
-    private WebElement messagePostWasCreatedSuccessfully;;
+//    @FindBy(xpath = "//*[@class='alert alert-success text-center']")
+//    private WebElement messagePostWasCreatedSuccessfully;;
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
