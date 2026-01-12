@@ -1,20 +1,77 @@
-#001 Valid Login
+TC-01: New User Registration with Valid Data
 
-login = qaauto
-password = 1234456qwerty
-
-Pre-condition:
-1.
-
+Preconditions:
+The user is not registered in the system.
+The user is on the landing page (https://aqa-complexapp.onrender.com).
 Steps:
-1. Open login page https://
-2. Enter <login> in to input Login on Login page
-3. Enter <password> into input Password on Login Page
-4. Click on button Login on Login Page
+1. Enter a valid Username in the "Sign up" form.
+2. Enter a valid Email address .
+3. Enter a valid Password (at least 12 characters, as per standard security).
+4. Click the "Sign up for OurApp" button.
+Expected Result:
+1. The user is successfully registered and automatically redirected to the Home/Feed page.
+2. A greeting message is displayed: "Hello [username], your feed is empty."
+3. The "Feed" description text is visible, explaining how to follow people and search for content.
+4. Header navigation elements for authorized users (Search, Chat, Profile, Create Post, Sign Out) are displayed.
+**********
+TC-02: User Login with Valid Credentials
 
-Expected result:
-1. I see Sing out
-2. I don´t see Sing In button on Login Page
+Preconditions:
+The user is already registered in the system.
+The user is on the landing page (https://aqa-complexapp.onrender.com).
+Steps:
+1. Enter a valid Username in the "Sign In" form.
+2. Enter the corresponding valid Password.
+3.Click the "Sign In" button.
+Expected Result:
+1. The user is successfully authenticated and redirected to the Home page.
+2. The Username is displayed in the top right corner of the header.
+3. The "Create Post" button is visible and clickable in the header.
+4. The "Sign Out" button is displayed.
+5. The greeting message "Hello [username], your feed is empty" is visible on the main page.
+***********
+TC-03: Failed Login with Invalid Password
 
-PostCondition:
+Preconditions:
+A user with a valid username exists in the system.
+The user is on the landing page (https://aqa-complexapp.onrender.com).
+Steps:
+1. Enter a valid Username in the "Sign In" form.
+2. Enter an Invalid Password.
+3. Click the "Sign In" button.
+Expected Result:
+1. An error message "Invalid username / password" appears on the screen.
+2. The user is not logged in (no redirect to the Home page).
+3. The user remains on the landing page, and the login fields are still visible.
+4. Header navigation for authorized users (Create Post, Profile, etc.) is not displayed.
+***********
+TC-04: Create a New Post
 
+Preconditions:
+The user is successfully logged into the system.
+The user is on the "Home" page or any page with the header navigation.
+Steps:
+1. Click the "Create Post" button  in the top header.
+2. Enter a valid Title in the "Title" field.
+3. Enter content in the "Body Content" textarea.
+4. Select a visibility option from the dropdown: "One Person" or "Group Message".
+Click the "Save New Post" button.
+1. Expected Result:
+2. The post is successfully created and the user is redirected to the individual post page.
+3. A green success message appears: "New post successfully created.".
+4.
+*************
+TC-05: Delete an Existing Post
+
+Preconditions:
+The user is successfully logged into the system.
+At least one post created by the current user exists.
+The user is on the individual post page of the post they want to delete.
+Steps:
+1. Click on the "Delete" icon on the individual post page.
+2. Confirm the action in the browser's confirmation pop-up.
+Expected Result:
+1.
+2. The user is redirected back to their Profile page.
+3. A success message appears: "Post successfully deleted.".
+4. The deleted post is no longer visible in the user's post list on the Profile page.

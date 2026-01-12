@@ -1,0 +1,86 @@
+#001 Valid login with default user
+
+Steps:
+1. Open login page - https://aqa-complexapp.onrender.com
+2. Enter "qaauto" into the Login field
+3. Enter "123456qwerty" into the Password field
+4. Click the Login button
+
+Expected results:
+1. I see the Sign Out button on Home Page
+2. I don't see the Sign In button on Login Page
+
+#002 Valid login with new user (registration)
+
+Steps:
+1. Open login page - https://aqa-complexapp.onrender.com
+2. Enter your username in the Username field (leradalya)
+3. Enter your email in the Email field (lera@dalya.com)
+4. Enter the password in the Password field (Leradalya1984)
+5. Click the Login button
+
+Expected results:
+1. On the page after successful registration, I see a greeting text (Hello "name", your feed is empty)
+2. Next to the Sign Out button on the Home Page, I see the name I registered under
+
+Post-condition:
+1. Delete the newly created user
+
+#003 Checking the valid creation of a new post
+
+Pre-condition:
+1. Log in with an existing user (leradalya)
+2. Navigate to the new post creation page
+
+Steps:
+1. Click the Create Post button at the top
+2. Enter the post title in the "Title" field
+3. Enter the message text in the "Body Content" field
+4. Check the box to save it as unique
+5. Select the post visibility via the combobox (Public, Private, or Group message)
+6. Click the Save New Post button
+
+Expected results:
+
+1. I see a message - New post successfully created
+2. I can go to My Profile by clicking the corresponding button
+3. The post has an option to edit
+4. The post can be deleted
+
+Post-condition:
+1. Delete the created post
+
+#004 Checking for a valid post update
+
+Pre-condition:
+1. Log in with an existing user (leradalya)
+2. Create a post with the title "Test Post" and some body content
+
+Steps:
+1. Click the Edit button on the created post
+2. Edit the Title and/or Body Content fields
+3. Click the Save Updates button
+
+Expected results:
+1. I see a message - Post successfully updated
+2. The updated post appears correctly in the post list and its content matches the changes
+
+Post-condition:
+1. Delete the created/updated post
+
+#005 Checking for a valid transition to personal profile
+
+Pre-condition:
+1. Log in with an existing user (leradalya)
+2. Create a post to ensure there is content on the profile
+
+Steps:
+1. Click on the avatar in the top window (My Profile)
+
+Expected results:
+1. On My Profile page, I see the posts I created
+2. I can go to the Followers tab
+3. I can go to the Following tab
+
+Post-condition:
+1. Delete the created post

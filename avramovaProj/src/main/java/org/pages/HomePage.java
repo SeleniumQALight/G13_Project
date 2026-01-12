@@ -16,6 +16,9 @@ public class HomePage extends ParentPage{
     @FindBy(xpath = ".//a[@href='/create-post']")
     private WebElement buttonCreatePost;
 
+    @FindBy(xpath = "//a[text()='Create Post']")
+    private WebElement createNewPostButton;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -34,5 +37,16 @@ public class HomePage extends ParentPage{
 
     public void checkIsButtonSignOutNotVisible(){
         Assert.assertFalse("Button SignOut is visible", isButtonSignOutVisible());
+    }
+
+    public HomePage checkIsRedirectToHomePage() {
+        //TODO add check URL
+        //TODO check some unique element on HomePage
+        return this;
+    }
+
+    public CreatePostPage clickOnButtonCreatePost() {
+        clickOnElement(createNewPostButton);
+        return new CreatePostPage(webDriver);
     }
 }
