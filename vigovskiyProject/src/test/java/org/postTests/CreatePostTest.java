@@ -15,10 +15,12 @@ public class CreatePostTest extends BaseTest {
                 .enterTextIntoInputTitle("G13 Jenya")
                 .enterTextIntoInputBody("G13 Jenya")
                 .selectTextInDropdownAccess("Приватне повідомлення")
+                .setUniquePostCheckboxState("check")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessageIsDisplayed("G13 Jenya")
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkIsPostUnique("yes")
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
 
 //        String title = "My first post";
