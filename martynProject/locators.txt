@@ -1,0 +1,24 @@
+#LoginPage
+
+logInUsernameInput = ".//input[@name="username" and not(@id="username-register")]",
+logInPasswordInput = ".//input[@name="password" and not(@id="password-register")]",
+signInButton = ".//form[@action="/login"]//button",
+logInError = ".//div[contains(text(),"Invalid username/password")]"
+
+signUpUsernameInput = ".//input[@name="username" and @id="username-register"]",
+signUpEmailInput = ".//input[@id="email-register"]",
+signUpPasswordInput = ".//input[@name="password" and @id="password-register"]",
+signUpButton = ".//button[@type="submit"]",
+signUpUsernameError = ".//div[contains(text(),"Username must be at least 3 characters.")]",
+signUpEmailError = ".//div[contains(text(),"You must provide a valid email address.")]",
+signUpPasswordError = ".//div[contains(text(),"Password must be at least 12 characters.")]",
+
+====================================================================================
+
+#Header
+
+myProfileButton = ".//a//img[@data-original-title="My Profile"]",
+createPostButton = ".//a[@href="/create-post"]",
+signOutButton = ".//form[@action="/logout"]//button",
+
+

@@ -16,6 +16,8 @@ public class HomePage extends ParentPage {
     private WebElement inputLogin;
     @FindBy(xpath ="//input[@placeholder='Password']")
     private WebElement inputPassword;
+    @FindBy(xpath = "//a[text()='Create Post']")
+    private WebElement createNewPostButton;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -42,6 +44,18 @@ public class HomePage extends ParentPage {
         logger.info("Button Create post is visible");
     }
 
+
+
+    public HomePage checkIsRedirectToHomePage() {
+        //TODO check URL
+        //TODO check some unique element on HomePage
+        return this;
+    }
+
+    public CreatePostPage clickOnButtonCreatePost() {
+        clickOnElement(createNewPostButton);
+        return new CreatePostPage(webDriver);
+    }
 //    public boolean isButtonSighOutIsVisible() {
 //        try {
 //            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
