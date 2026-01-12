@@ -1,3 +1,99 @@
-#LoginPage
+TC-01
+#Fild Username(type-id)
+By.id("username-register")
+#Fild Email(type-id)
+By.id("email-register")
+#Fild Password(type-id)
+By.id("password-register")
+#Button Sign up(type-xpath)
+By.xpath("//button[text()='Sign up for OurApp']");
+#Message in the feed(type-xpath/Assertion)
+By.xpath("//strong[text()='dzh2399']"));
 
-input.login= ".//input"
+TC-02
+#Fild Username(type-xpath)
+By.xpath("//span[contains(text(), 'dzh2399')]")
+#Fild Password(type-name)
+By.name("password")
+#Button Sign in(type-xpath)
+By.xpath("//button[text()='Sign In']")
+#Icon profile Username(type-xpath)
+By.xpath("//img[@alt='My profile']")
+#Button Create Post(type-xpath)
+By.xpath("//a[text()='Create Post']")
+#Button Sign up(type-xpath)
+By.xpath("//button[text()='Sign Out']")
+#Greeting(type-xpath/Assertion)
+By.xpath("//strong[text()='dzh2399']")
+
+TC-03
+#Fild Username(type-id)
+By.id("username8")
+#Fild Password(type-name)
+By.name("password")
+#Button Sign in(type-xpath)
+By.xpath("//button[text()='Sign In']")
+#Error message(type-xpath)
+By.xpath("//div[text()='Invalid username/password.']")
+#Button Sign up(type-xpath/Assertion)
+By.xpath("//button[text()='Sign Out']")
+
+TC-04
+#Button Create Post(type-xpath)
+By.xpath("//a[@href='/create-post']")
+#Field Title(type-id)
+By.id("post-title")
+#Field Body Content(type-id)
+By.id("post-body")
+#Сheckbox(type-name)
+By.name("uniquePost");
+#Drop-down list(type-name)
+By.xpath("//option[@value='One Person']");
+#Button Save New Post(type-xpath)
+By.xpath("//button[text()='Save New Post']");
+#Successful message (type-xpath/Assertion)
+By.xpath("//div[contains(@class,'alert-success')]");
+
+TC-05
+#Icon delete(type-xpath)
+By.xpath("//svg[@id='icon-cart']//path[contains(@d, 'M0 84V56c0-13.3')]"));
+#Successful message(type-xpath)
+By.xpath("//div[text()='Post successfully deleted.']");
+#My Profile(type-xpath/Assertion)
+By.xpath(//div[span[text()='dzh2399']]//img[@class='avatar-small']);
+
+
+##############################################################################
+
+class RegistrationPageLocators
+USERNAME = By.id("username-register");
+EMAIL = By.id("email-register");
+PASSWORD = By.id("password-register");
+SIGN_UP_BUTTON = By.xpath("//button[text()='Sign up for OurApp']");
+
+class LoginPageLocators
+USERNAME = By.xpath("//span[contains(text(), 'dzh2399')]");
+PASSWORD = By.name("password");
+SIGN_IN_BUTTON = By.xpath("//button[text()='Sign In']");
+ERROR_MESSAGE = By.xpath("//div[text()='Invalid username/password.']");
+
+class HomePageLocators
+PROFILE_USERNAME_SPAN = By.xpath("//span[contains(text(), 'dzh2399')]");
+PROFILE_ICON = By.xpath("//img[@alt='My profile']");
+CREATE_POST_LINK = By.xpath("//a[text()='Create Post']");
+SIGN_OUT_BUTTON = By.xpath("//button[text()='Sign Out']");
+GREETING = By.xpath("//strong[text()='dzh2399']");
+
+class CreatePostPageLocators
+CREATE_POST_LINK = By.xpath("//a[@href='/create-post']");
+POST_TITLE_FIELD = By.id("post-title");
+POST_BODY_FIELD = By.id("post-body");
+UNIQUE_POST_CHECKBOX = By.name("uniquePost");
+VISIBILITY_DROPDOWN_OPTION = By.xpath("//option[@value='One Person']");
+SAVE_NEW_POST_BUTTON = By.xpath("//button[text()='Save New Post']");
+SUCCESS_MESSAGE = By.xpath("//div[contains(@class,'alert-success')]");
+
+class PostPageLocators
+DELETE_ICON = By.xpath("//svg[@id='icon-cart']//path[contains(@d, 'M0 84V56c0-13.3')]");
+POST_DELETED_MESSAGE = By.xpath("//div[text()='Post successfully deleted.']");
+MY_PROFILE_AVATAR = By.xpath("//div[span[text()='dzh2399']]//img[@class='avatar-small']");
