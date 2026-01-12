@@ -1,0 +1,103 @@
+#TC-001 Successful user registration
+
+    Test Data:
+    username = imartyn;
+    email = mailforivanna@gmail.com;
+    password = 123456qwerty;
+
+    Steps:
+    1. Open Login page https://aqa-complexapp.onrender.com/
+    2. Assert that Username field is present and empty on Login page
+    3. Assert that Email field is present and empty on Login page
+    4. Assert that Password field is present and empty on Login page
+    5. Assert 'Sign up for OurApp' button is enabled on Login page
+    6. Enter <username> into Username field on Login page
+    7. Enter <email> into Email field on Login page
+    8. Enter <password> into Password field on Login page
+    9. Click 'Sign up for OurApp' button on Login page
+
+    Expected Results:
+    1. User is redirected to the page with latest posts (h2: Latest posts from those you follow)
+    2. <username> is displayed on the top right corner of the page
+    3. There's Create Post button
+    3. There's Sign out button
+    4. There's no Sign in button
+
+
+#TC-002 User is not created when submitting registration form with blank fields
+
+    Steps:
+    1. Open Login page https://aqa-complexapp.onrender.com/
+    2. Assert that Username field is present and empty on Login page
+    3. Assert that Email field is present and empty on Login page
+    4. Assert that Password field is present and empty on Login page
+    5. Assert 'Sign up for OurApp' button is enabled on Login page
+    6. Click 'Sign up for OurApp' button on Login page
+
+    Expected Results:
+    1. Login page with registration form is still opened https://aqa-complexapp.onrender.com/
+    2. Error appears above Username field: "Username must be at least 3 characters."
+    2. Error appears above Email field: "You must provide a valid email address."
+    3. Error appears above Password field: "Password must be at least 12 characters."
+    4. 'Sign up for OurApp' button is enabled on Login page
+
+
+#TC-003 User log in successfully
+
+    Test Data:
+    username = imartyn;
+    password = 123456qwerty;
+
+    Pre-conditions:
+    1. User is registered. (#TC-001)
+    2. User is not logged in.
+
+    Steps:
+    1. Open Login page https://aqa-complexapp.onrender.com/
+    2. Assert that Sign in button is present and enabled on Login page
+    3. Enter <username> into Username field on Login page
+    4. Enter <password> into Password field on Login page
+    5. Click 'Sign in' button on Login page
+
+    Expected Results:
+     1. User is redirected to the page with the latest posts (h2: Latest posts from those you follow)
+     2. <username> is displayed on the top right corner of the page
+     3. There's Create Post button
+     4. There's Sign out button
+     5. There's no Sign in button
+
+
+#TC-004 User is not logged in when submitting login form with invalid credentials
+
+    Test Data:
+    username = imartyn;
+    password = 123456123456;
+
+    Steps:
+     1. Open Login page https://aqa-complexapp.onrender.com/
+     2. Assert that Sign in button is present and enabled on Login page
+     3. Enter <username> into Username field on Login page
+     4. Enter <password> into Password field on Login page
+     5. Click 'Sign in' button on Login page
+
+     Expected Results:
+     1. Login page with login form is still opened https://aqa-complexapp.onrender.com/
+     2. Error appears on Login page: "Invalid username/password."
+     3. There's enabled Sign in button on Login page
+
+
+#TC-005 User log out successfully
+
+    Pre-conditions:
+    1. User is logged in. (#TC-003)
+
+    Steps:
+    1. Click 'Sign out' button
+
+    Expected Results:
+    1. User is redirected to Login page https://aqa-complexapp.onrender.com with registration form
+    2. There's Sign in button on Login page
+    3. There's no Sign out button on Login page
+    4. <username> is not displayed on Login page
+    5. Create Post button is not displayed
+
