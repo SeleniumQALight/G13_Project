@@ -16,7 +16,7 @@ public class BaseTest {
     protected PageProvider pageProvider;
 
     @Before
-    public void setup() {
+    public void setup(){
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
@@ -24,12 +24,12 @@ public class BaseTest {
         logger.info("Browser was opened");
 
         pageProvider = new PageProvider(webDriver);
-
     }
 
     @After
-    public void tearDown() {
+    public void tearDown(){
         webDriver.quit();
         logger.info("Browser was closed");
     }
+
 }

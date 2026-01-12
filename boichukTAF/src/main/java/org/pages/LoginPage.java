@@ -22,37 +22,37 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public LoginPage openLoginPage() {
+    public LoginPage openLoginPage(){
         webDriver.get(baseUrl);
         logger.info("Login page was opened with url " + baseUrl);
         return this;
     }
 
-    public LoginPage enterTextIntoInputLogin(String text) {
-//        WebElement inputLogin = webDriver.findElement(
-//                By.xpath("//input[@placeholder='Username']"));
+    public LoginPage enterTextIntoInputLogin (String text){
+//    WebElement inputLogin = webDriver.findElement(
+//            By.xpath("//input[@placeholder='Username']"));
 //        inputLogin.clear();
 //        inputLogin.sendKeys(text);
-//        logger.info(text + "was entered in input UserName");
+//        logger.info(text + " was entered in input Username");
         clearAndEnterTextIntoElement(inputLogin, text);
         return this;
-
     }
 
-    public LoginPage enterTextIntoInputPassword(String text) {
+    public LoginPage enterTextIntoInputPassword (String text){
         clearAndEnterTextIntoElement(inputPassword, text);
         return this;
     }
 
-    public void clickOnButtonSignIn() {
+    public void clickOnButtonSignIn(){
         clickOnElement(buttonSignIn);
     }
 
+
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
-        enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
-        enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
+        enterTextIntoInputLogin(TestData.VALID_LOGIN);
+        enterTextIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonSignIn();
-    return new HomePage(webDriver);
+        return new HomePage(webDriver);
     }
 }
