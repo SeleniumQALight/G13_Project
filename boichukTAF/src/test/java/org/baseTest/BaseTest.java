@@ -16,7 +16,6 @@ public class BaseTest {
 
     @Before
     public void setUp() {
-    public void setup(){
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
@@ -30,9 +29,5 @@ public class BaseTest {
             webDriver.quit();
             logger.info("Browser was closed");
         }
-    public void tearDown(){
-        webDriver.quit();
-        logger.info("Browser was closed");
     }
-
 }
