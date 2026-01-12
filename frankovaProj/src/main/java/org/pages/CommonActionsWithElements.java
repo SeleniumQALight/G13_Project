@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -15,8 +16,8 @@ public class CommonActionsWithElements {
         PageFactory.initElements(webDriver, this); //ініціалізує елементи описані через findby
     }
 
-    protected void clearAndEnterTextIntoElement(WebElement webElement, String text){
-        try{
+    protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
+        try {
             webElement.clear();
             webElement.sendKeys(text);
             logger.info(text + " was inputted into element");
@@ -25,25 +26,27 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void clickOnElement (WebElement webElement){
-        try{
+    protected void clickOnElement(WebElement webElement) {
+        try {
             webElement.click();
             logger.info("Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
         }
     }
-    protected void checkIsElementVisible(WebElement webElement){
+
+    //аналог до checkIsElementEnabled
+   /* protected void checkIsElementVisible(WebElement webElement){
         Assert.assertTrue(webElement + " Element is not visible", isElementVisible(webElement));
         logger.info(webElement + " Element is visible");
-    }
+    }*/
 
-    protected void checkIsNotElementVisible(WebElement webElement){
+    protected void checkIsNotElementVisible(WebElement webElement) {
         Assert.assertFalse(webElement + " Element is visible", isElementVisible(webElement));
         logger.info(webElement + " Element is NOT visible");
     }
 
-    protected boolean isElementVisible(WebElement webElement){
+    protected boolean isElementVisible(WebElement webElement) {
         try {
             boolean state = webElement.isDisplayed();
             logger.info(webElement + " Element state: " + state);
@@ -64,17 +67,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    /*protected void selectTextInDropDown(WebElement webElement, String value) {
-        try {
-            Select select = new Select(webElement);
-            select.selectByVisibleText(text);
-            logger.info("Text '" + text + "' was selected in DropDown");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }*/
 
-    //check is element enabled
     protected void checkIsElementEnabled(WebElement webElement) {
         Assert.assertTrue("Element is not enabled", webElement.isEnabled());
         logger.info("Element is enabled");
@@ -103,10 +96,9 @@ public class CommonActionsWithElements {
     }
 
 
-
-private void printErrorAndStopTest() {
-    logger.error("Error while working with element");
-    Assert.fail("Error while working with element");
-}
+    private void printErrorAndStopTest() {
+        logger.error("Error while working with element");
+        Assert.fail("Error while working with element");
+    }
 
 }

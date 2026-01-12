@@ -21,9 +21,10 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//div[text()='Invalid username/password.']")
     private WebElement errorMessageInvalidCred;
 
-    public LoginPage(WebDriver webDriver) {
+     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
+
 
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
@@ -54,11 +55,11 @@ public class LoginPage extends ParentPage {
     }
 
     public void checkIsButtonSignInVisible(){
-        checkIsElementVisible(buttonSignIn);
+        checkIsElementEnabled(buttonSignIn);
     }
 
     public void checkIsErrorMessageInvalidCredVisible(){
-        checkIsElementVisible(errorMessageInvalidCred);
+        checkIsElementEnabled(errorMessageInvalidCred);
     }
 
     public void checkIsNotInputLoginVisible(){
@@ -78,5 +79,6 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
+
 
 }
