@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,10 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidLoginMessage;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -55,4 +60,44 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
+
+//    public void checkInvalidLoginMessageIsVisible() {
+//        try {
+//            Assert.assertTrue(
+//                    "Invalid login message is not visible",
+//                    invalidLoginMessage.isDisplayed()
+//            );
+//        } catch (Exception e) {
+//            logger.error("Error while checking invalid login message", e);
+//            Assert.fail("Invalid login message is not visible");
+//        }
+//    }
+
+    public void checkInvalidLoginMessageIsVisible() {
+        try {
+            Assert.assertTrue(
+                    "Invalid login message is not visible",
+                    invalidLoginMessage.isDisplayed()
+            );
+            logger.info("Invalid login message is visible");
+        } catch (Exception e) {
+            logger.error("Error while checking invalid login message", e);
+            Assert.fail("Invalid login message is not visible");
+        }
+    }
+
+
+    public void checkIsSignInButtonVisible() {
+        try {
+            Assert.assertTrue(
+                    "Sign In button should be visible",
+                    buttonSignIn.isDisplayed()
+            );
+            logger.info("Sign In button is visible as expected");
+        } catch (Exception e) {
+            logger.error("Sign In button is NOT visible", e);
+            Assert.fail("Sign In button is NOT visible");
+        }
+    }
+
 }

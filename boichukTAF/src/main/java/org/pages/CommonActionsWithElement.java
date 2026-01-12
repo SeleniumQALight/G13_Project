@@ -84,7 +84,7 @@ public class CommonActionsWithElement {
     }
 
 
-    private void printErrorAndStopTest() {
+    protected void printErrorAndStopTest() {
         logger.error("Error while working with element");
         Assert.fail("Error while working with element ");
     }

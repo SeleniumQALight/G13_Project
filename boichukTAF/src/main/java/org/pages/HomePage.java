@@ -11,6 +11,7 @@ public class HomePage extends ParentPage{
     private Logger logger = Logger.getLogger(getClass());
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
+    private WebElement buttonSignOut;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -42,4 +43,17 @@ public class HomePage extends ParentPage{
         clickOnElement(createNewPostButton);
         return new CreatePostPage(webDriver);
     }
+
+    public void checkIsButtonSignOutNotVisible() {
+        try {
+            Assert.assertFalse(
+                    "Sign Out button should NOT be visible",
+                    buttonSignOut.isDisplayed()
+            );
+            logger.info("Sign Out button is not visible as expected");
+        } catch (Exception e) {
+            logger.info("Sign Out button is not visible (ok)");
+        }
+    }
+
 }
