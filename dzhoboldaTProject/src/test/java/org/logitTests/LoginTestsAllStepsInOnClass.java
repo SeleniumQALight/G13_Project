@@ -73,7 +73,7 @@ public class LoginTestsAllStepsInOnClass {
         logger.info("Sign In button clicked");
 
         // Проверки
-        Assert.assertFalse("Sign Out button should not be visible", isButtonSignOutVisible());
+        Assert.assertFalse("Sign Out button should not be visible", isButtonSingOutVisible());
         Assert.assertTrue("Sign In button should be visible", isButtonSignInVisible());
         Assert.assertTrue("Error message is not displayed", isErrorMessageVisible());
     }
@@ -88,22 +88,22 @@ public class LoginTestsAllStepsInOnClass {
 
 }
 
-    private boolean isButtonSignOutVisible() {
-        try {
-            return webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-        } catch (Exception e) {
-            logger.info("Sign Out button is not found");
-            return false;
-        }
-    }
-    private boolean isButtonSignInVisible() {
-        try {
-            return webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
-        } catch (Exception e) {
-            logger.info("Sign In button is not found");
-            return false;
-        }
-    }
+//    private boolean isButtonSignOutVisible() {
+//        try {
+//            return webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+//        } catch (Exception e) {
+//            logger.info("Sign Out button is not found");
+//            return false;
+//        }
+//    }
+//    private boolean isButtonSignInVisible() {
+//        try {
+//            return webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
+//        } catch (Exception e) {
+//            logger.info("Sign In button is not found");
+//            return false;
+//        }
+//    }
 
     private boolean isErrorMessageVisible() {
         try {
