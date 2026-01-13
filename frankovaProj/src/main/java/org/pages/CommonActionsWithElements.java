@@ -35,8 +35,8 @@ public class CommonActionsWithElements {
         }
     }
 
-    //analog select by visible value
-/*    protected void selectTextInDropDown(WebElement webElement, String text) {
+
+ protected void selectTextInDropDown(WebElement webElement, String text) {
         try {
             Select select = new Select(webElement);
             select.selectByVisibleText(text);
@@ -44,9 +44,10 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest();
         }
-    }*/
+    }
 
-    protected void selectValueInDropDown(WebElement webElement, String value) {
+    //analog for selectTextInDropDown
+  /*  protected void selectValueInDropDown(WebElement webElement, String value) {
         try {
             Select select = new Select(webElement);
             select.selectByValue(value);
@@ -54,7 +55,7 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest();
         }
-    }
+    }*/
 
     //check is element enabled
     protected void checkIsElementEnabled(WebElement webElement) {
