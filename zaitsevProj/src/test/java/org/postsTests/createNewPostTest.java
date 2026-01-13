@@ -13,10 +13,12 @@ public class createNewPostTest extends BaseTest {
                 .enterTextIntoInputTitle("G13 Zaitsev Title")
                 .enterTextIntoInputBody("G13 Zaitsev Body")
                 .selectTextInDropdownAccess("Приватне повідомлення")
+                .setUniquePostCheckBox("uncheck")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToCreatePostPage()
                 .checkPostWasCreatedMessageIsDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkUniquePostCheckBoxState()
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
     }
 }
