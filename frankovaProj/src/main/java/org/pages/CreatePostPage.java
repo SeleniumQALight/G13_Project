@@ -50,7 +50,7 @@ public class CreatePostPage extends ParentPage {
     }
 
     public CreatePostPage selectTextInDropdownAccess(String textForSelection) {
-        selectTextInDropDown(dropdownAccess, textForSelection);
+        selectValueInDropDown(dropdownAccess, textForSelection);
         return this;
     }
 

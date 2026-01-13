@@ -35,17 +35,8 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void selectTextInDropDown(WebElement webElement, String text) {
-        try {
-            Select select = new Select(webElement);
-            select.selectByVisibleText(text);
-            logger.info("Text '" + text + "' was selected in DropDown");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    /*protected void selectTextInDropDown(WebElement webElement, String value) {
+    //analog select by visible value
+/*    protected void selectTextInDropDown(WebElement webElement, String text) {
         try {
             Select select = new Select(webElement);
             select.selectByVisibleText(text);
@@ -54,6 +45,16 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }*/
+
+    protected void selectValueInDropDown(WebElement webElement, String value) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByValue(value);
+            logger.info("Value '" + value + "' was selected in DropDown");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
 
     //check is element enabled
     protected void checkIsElementEnabled(WebElement webElement) {
