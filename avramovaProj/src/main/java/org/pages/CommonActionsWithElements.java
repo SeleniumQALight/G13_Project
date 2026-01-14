@@ -103,4 +103,44 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
+    //set checkbox selected
+    protected void setCheckBoxSelected(WebElement webElement) {
+        try {
+            if (!webElement.isSelected()) {
+                webElement.click();
+                logger.info("Checkbox was selected");
+            } else {
+                logger.info("Checkbox is already selected");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //set checkbox unselected
+    protected void setCheckBoxUnselected(WebElement webElement) {
+        try {
+            if (webElement.isSelected()) {
+                webElement.click();
+                logger.info("Checkbox was unselected");
+            } else {
+                logger.info("Checkbox is already unselected");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //set status to checkbox
+    public void setStatusToCheckbox(WebElement webElement, String status) {
+        if (status.equalsIgnoreCase("check")) {
+            setCheckBoxSelected(webElement);
+        } else if (status.equalsIgnoreCase("uncheck")) {
+            setCheckBoxUnselected(webElement);
+        } else {
+            logger.error("Invalid status for checkbox: " + status);
+            printErrorAndStopTest();
+        }
+    }
 }
