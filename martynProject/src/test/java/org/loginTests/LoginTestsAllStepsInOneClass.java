@@ -45,7 +45,7 @@ public class LoginTestsAllStepsInOneClass {
         openLoginPage();
         fillInAndSubmitLoginForm("invalisusername", "invalidpass12");
         Assert.assertTrue("User is logged in: Invalid Login error message isn't visible and Sign Out button is visible"
-                , isInvalidLoginMessageVisible() && !isButtonSignOutVisible());
+                , isInvalidLoginMessageVisible() && isButtonSignInVisible() && !isButtonSignOutVisible());
 
     }
 
@@ -73,6 +73,10 @@ public class LoginTestsAllStepsInOneClass {
 
     private boolean isInvalidLoginMessageVisible() {
         return isEllementVisible(".//div[contains(text(),'Invalid username/password')]");
+    }
+
+    private boolean isButtonSignInVisible() {
+        return isEllementVisible(".//form[@action='/login']//button");
     }
 
     private boolean isButtonSignOutVisible() {
