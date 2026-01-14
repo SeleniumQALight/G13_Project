@@ -1,26 +1,24 @@
-package org.postsTests;
+package org.postsTest;
 
 import org.baseTest.BaseTest;
 import org.junit.Test;
 
 public class CreateNewPostTest extends BaseTest {
     @Test
-    public void createNewPost(){
-        //login
+    public void createNewPostTest() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreateNewPostPage()
-                .enterTextIntoInputTitle("G13 Avramova")
-                .enterTextIntoInputBody("G13 Avramova Some body")
-                .setCheckboxIsUniqueState("uncheck")
+                .enterTextInInputTitle("G13 Nelly Title")
+                .enterTextInInputBody("G13 Nelly Body")
                 .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
-                .checkIsRedirectToPostPage()
+                .chechIsRedirectToPostPage()
                 .checkPostWasCreatedMessageIsDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-                .checkIsPostUnique("no");
-//                .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
+                .getHederForLoggedUserElement().clickOnButtonMyProfile();
+
     }
 }
