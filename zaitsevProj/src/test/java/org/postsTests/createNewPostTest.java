@@ -18,7 +18,7 @@ public class createNewPostTest extends BaseTest {
                 .checkIsRedirectToCreatePostPage()
                 .checkPostWasCreatedMessageIsDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-                .checkUniquePostCheckBoxState()
+                .checkUniquePostCheckBoxState("no")
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
     }
 }

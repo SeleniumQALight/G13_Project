@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,15 +42,11 @@ public class PostPage extends ParentPage {
         return this;
     }
 
-    public PostPage checkUniquePostCheckBoxState(){
-        String text = stateIsThisPostUnique.getText();
-        if (text.toLowerCase().contains("yes")){
-            logger.info("Checkbox was selected");
-        }else if (text.toLowerCase().contains("no")){
-            logger.info("Checkbox was not selected");
-        }else {
-            logger.info("Unexpected text for unique post: " + text);
-        }
+    public PostPage checkUniquePostCheckBoxState(String expectedState){
+        String actualText = stateIsThisPostUnique.getText();
+        String expectedText = "Is this post unique? : " + expectedState;
+        Assert.assertEquals("Unique post checkbox state is correct: ", actualText, expectedText);
+        logger.info("Unique post checkbox state is correct: " + expectedState);
         return this;
     }
 }
