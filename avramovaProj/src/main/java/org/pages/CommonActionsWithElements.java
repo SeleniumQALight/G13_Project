@@ -31,12 +31,28 @@ public class CommonActionsWithElements {
         Assert.fail("Error while working with element");
     }
 
-    protected void clickOnElement(WebElement webElement) {
+    protected void clickOnElement(WebElement webElement){
         try {
             webElement.click();
             logger.info("Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
+        }
+    }
+
+    protected boolean isElementDisplayed(WebElement webElement) {
+        try {
+            boolean state = webElement.isDisplayed();
+            if (state){
+                logger.info("Element is displayed");
+            }
+            else {
+                logger.info("Element is not displayed");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found or not displayed");
+            return false;
         }
     }
 

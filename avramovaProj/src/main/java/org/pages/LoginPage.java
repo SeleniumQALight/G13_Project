@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement alertMessageAboutInvalidLogin;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -25,7 +29,6 @@ public class LoginPage extends ParentPage {
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("login page was opened with url " + baseUrl);
-        return this;
     }
 
     public LoginPage enterTextIntoInputLogin(String text) {
@@ -46,7 +49,13 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    public boolean isErrorMessageVisible(){
+        return isElementDisplayed(alertMessageAboutInvalidLogin);
+    }
 
+    public void checkIsButtonSignInVisible(){
+        Assert.assertTrue("SignIn button is not visible", isElementDisplayed(buttonSignIn));
+    }
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -55,3 +64,17 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 }
+
+    public void checkIsErrorMessageVisible() {
+        Assert.assertTrue("Error message is not visible", isErrorMessageVisible());
+    }
+
+    public void checkIsInputLoginNotVisible() {
+        Assert.assertFalse("Input Login is visible, but should not be", isElementDisplayed(inputLogin));
+    }
+
+    public void checkIsInputPasswordNotVisible() {
+        Assert.assertFalse("Input Password is visible, but should not be", isElementDisplayed(inputPassword));
+    }
+}
+
