@@ -24,6 +24,7 @@ public class CreateNewPostTest extends BaseTest {
                 .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile();
 
+
         pageProvider.getMyProfilePage()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWithTitelProfile(POST_TITLE, 1);
