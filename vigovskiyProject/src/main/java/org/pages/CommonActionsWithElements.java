@@ -39,6 +39,17 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+    public boolean isWebElementIsVisible(WebElement webElement) {
+        try {
+            boolean state = webElement.isDisplayed();
+            logger.info("Element state: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found");
+            return false;
+        }
+
+    }
 
     protected void selectTextInDropDown(WebElement webElement, String text) {
         try {
