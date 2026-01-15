@@ -7,11 +7,8 @@ import org.pages.elements.HeaderForLoggedUserElement;
 
 public class PostPage extends ParentPage {
 
-    @FindBy(xpath = "//*[@class='alert alert-success text-center']")
-    private WebElement messagePostWasCreatedSuccesfully;
-
-    @FindBy(xpath = ".//p[contains(text(), 'Is this post unique?')]")
-    private WebElement textIsPostUnique;
+    @FindBy(xpath = ".//div[@class='alert alert-success text-center']")
+    private WebElement messagePostWasCreatedSuccessfully;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -21,25 +18,20 @@ public class PostPage extends ParentPage {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-    public PostPage checkIsRedirectToPostPage() {
-        //TODO  check URL
-        //TODO check some unique element on the Page
+    public PostPage checkIsRedirectToCreatePostPage() {
+        //TODO check URL
+        //TODO check some unique element on the page
         return this;
     }
 
     //check success message that post was created
     public PostPage checkPostWasCreatedMessageIsDisplayed() {
-        checkIsElementEnabled(messagePostWasCreatedSuccesfully);
+        checkElementIsEnabled(messagePostWasCreatedSuccessfully);
         return this;
     }
 
     public PostPage checkTextInSuccessMessage(String textOfMessage) {
-        checkTextInElement(messagePostWasCreatedSuccesfully, textOfMessage);
-        return this;
-    }
-
-    public PostPage checkIsPostUnique(String expectedText) {
-        checkTextInElement(textIsPostUnique, "Is this post unique? : " + expectedText);
+        checkTextInElement(messagePostWasCreatedSuccessfully, textOfMessage);
         return this;
     }
 }

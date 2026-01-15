@@ -37,6 +37,18 @@ public class CommonActionsWithElements {
 
 
  protected void selectTextInDropDown(WebElement webElement, String text) {
+    //аналог до checkIsElementEnabled
+   /* protected void checkIsElementVisible(WebElement webElement){
+        Assert.assertTrue(webElement + " Element is not visible", isElementVisible(webElement));
+        logger.info(webElement + " Element is visible");
+    }*/
+
+    protected void checkIsNotElementVisible(WebElement webElement) {
+        Assert.assertFalse(webElement + " Element is visible", isElementVisible(webElement));
+        logger.info(webElement + " Element is NOT visible");
+    }
+
+    protected boolean isElementVisible(WebElement webElement) {
         try {
             Select select = new Select(webElement);
             select.selectByVisibleText(text);
@@ -112,10 +124,9 @@ public class CommonActionsWithElements {
     }
 
 
-
-private void printErrorAndStopTest() {
-    logger.error("Error while working with element");
-    Assert.fail("Error while working with element");
-}
+    private void printErrorAndStopTest() {
+        logger.error("Error while working with element");
+        Assert.fail("Error while working with element");
+    }
 
 }

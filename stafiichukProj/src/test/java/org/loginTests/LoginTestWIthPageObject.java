@@ -4,14 +4,18 @@ import org.baseTest.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.data.TestData.VALID_LOGIN_UI;
+import static org.data.TestData.VALID_PASSWORD_UI;
+
 public class LoginTestWIthPageObject extends BaseTest {
 
     @Test
     public void validLogin(){
-        pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
-        pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
-        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getLoginPage()
+                .openLoginPage()
+                .enterTextIntoInputLogin(VALID_LOGIN_UI)
+                .enterTextIntoInputPassword(VALID_PASSWORD_UI)
+                .clickOnButtonSignIn();
 
         pageProvider.getHomePage().checkIsButtonSignOutVisible();
 

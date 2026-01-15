@@ -7,25 +7,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HomePage extends ParentPage {
+public class HomePage extends ParentPage{
     private Logger logger = Logger.getLogger(getClass());
-
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
+    private WebElement buttonSignOut;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
+
     public void checkIsButtonSignOutVisible(){
-        Assert.assertTrue("Button Sign Out is NOT visible",isButtonSingOutVisible());
-        logger.info("Button Sign Out is visible");
+        Assert.assertTrue("Button SignOut is not visible", isButtonSignOutVisible());
+        logger.info("Button SignOut is visible");
     }
 
-    public boolean isButtonSingOutVisible() {
+    boolean isButtonSignOutVisible() {
         try {
-            boolean state = webDriver.findElement(By.xpath(
-                    "//button[text()='Sign Out']")).isDisplayed();
-            logger.info("Element state:" + state);
+            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+            logger.info("Element state: + " + state);
             return state;
         } catch (Exception e) {
             logger.info("Element is not found");
@@ -34,8 +34,8 @@ public class HomePage extends ParentPage {
     }
 
     public HomePage checkIsRedirectToHomePage() {
-        //TODO Check URL
-        //TODO check some unique element on Home Page
+        // TODO Check URL
+        // TODO check some unique element on HomePage
         return this;
     }
 
@@ -43,4 +43,17 @@ public class HomePage extends ParentPage {
         clickOnElement(createNewPostButton);
         return new CreatePostPage(webDriver);
     }
+
+    public void checkIsButtonSignOutNotVisible() {
+        try {
+            Assert.assertFalse(
+                    "Sign Out button should NOT be visible",
+                    buttonSignOut.isDisplayed()
+            );
+            logger.info("Sign Out button is not visible as expected");
+        } catch (Exception e) {
+            logger.info("Sign Out button is not visible (ok)");
+        }
+    }
+
 }

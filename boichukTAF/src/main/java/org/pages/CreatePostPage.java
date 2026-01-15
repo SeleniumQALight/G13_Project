@@ -6,28 +6,22 @@ import org.openqa.selenium.support.FindBy;
 
 public class CreatePostPage extends ParentPage {
 
-    @FindBy(id = "post-title")
+    @FindBy(id = "post-title") //xpath= "//*[@id='post-title']"
     private WebElement inputTitle;
-
-    @FindBy(name = "body")
+    @FindBy(name = "body") //xpath= "//*[@name='body']"
     private WebElement inputBody;
-
-    @FindBy(xpath = ".//button[text()='Save New Post']")
+    @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
-
-    @FindBy(tagName = "select")
+    @FindBy(tagName = "select") // xpath= "//select"
     private WebElement dropdownAccess;
-
-    @FindBy(xpath = ".//input[@type='checkbox']")
-    private WebElement checkboxUniquePost;
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public CreatePostPage checkIsRedirectToCreateNewPostPage() {
-        //TODO check URL
-        //TODO check some unique element on CreateNewPostPage
+    public CreatePostPage checkIsRedirectToCreatePostPage() {
+        // TODO Check URL
+        // TODO check some unique element on CreatePostPage
         return this;
     }
 
@@ -46,18 +40,8 @@ public class CreatePostPage extends ParentPage {
         return new PostPage(webDriver);
     }
 
-    public CreatePostPage selectTextInDropdownAccess (String textForSelection){
+    public CreatePostPage selectTextInDropdownAccess(String textForSelection) {
         selectTextInDropDown(dropdownAccess, textForSelection);
-        return this;
-    }
-
-    public CreatePostPage setCheckboxUniquePostSelected(){
-        clickOnElement(checkboxUniquePost);
-        return this;
-    }
-
-    public CreatePostPage setCheckboxIsUniqueState(String status) {
-        setStatusToCheckbox(checkboxUniquePost, status);
         return this;
     }
 }
