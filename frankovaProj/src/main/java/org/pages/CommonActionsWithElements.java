@@ -35,46 +35,99 @@ public class CommonActionsWithElements {
         }
     }
 
+
+ protected void selectTextInDropDown(WebElement webElement, String text) {
+
+            try {
+                Select select = new Select(webElement);
+                select.selectByVisibleText(text);
+                logger.info("Text '" + text + "' was selected in DropDown");
+            } catch (Exception e) {
+                printErrorAndStopTest();
+            }
+ }
+
+     //analog for selectTextInDropDown
+  /*  protected void selectValueInDropDown(WebElement webElement, String value) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByValue(value);
+            logger.info("Value '" + value + "' was selected in DropDown");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }*/
+
+
+
+     protected void checkTextInElement (WebElement webElement, String expectedText){
+         try {
+             String actualText = webElement.getText();
+             Assert.assertEquals("Text in element is not as expected", expectedText, actualText);
+             logger.info("Text in element is as expected: " + expectedText);
+         } catch (Exception e) {
+             printErrorAndStopTest();
+         }
+     }
+
+     protected void checkCheckbox (WebElement webElement){
+         try {
+             if (!webElement.isSelected()) {
+                 clickOnElement(webElement);
+                 logger.info("Checkbox was checked");
+             } else {
+                 logger.info("Checkbox is already checked");
+             }
+         } catch (Exception e) {
+             printErrorAndStopTest();
+         }
+     }
+
+     protected void uncheckCheckbox (WebElement webElement){
+         try {
+             if (webElement.isSelected()) {
+                 clickOnElement(webElement);
+                 logger.info("Checkbox was unchecked");
+             } else {
+                 logger.info("Checkbox is already unchecked");
+             }
+         } catch (Exception e) {
+             printErrorAndStopTest();
+         }
+     }
+
+
     //аналог до checkIsElementEnabled
-   /* protected void checkIsElementVisible(WebElement webElement){
+    /*protected void checkIsElementVisible(WebElement webElement){
         Assert.assertTrue(webElement + " Element is not visible", isElementVisible(webElement));
         logger.info(webElement + " Element is visible");
     }*/
 
-    protected void checkIsNotElementVisible(WebElement webElement) {
+    protected void checkIsNotElementVisible (WebElement webElement){
         Assert.assertFalse(webElement + " Element is visible", isElementVisible(webElement));
         logger.info(webElement + " Element is NOT visible");
     }
 
-    protected boolean isElementVisible(WebElement webElement) {
+    protected boolean isElementVisible (WebElement webElement){
         try {
             boolean state = webElement.isDisplayed();
-            logger.info(webElement + " Element state: " + state);
+            logger.info("Element visible state: " + state);
             return state;
         } catch (Exception e) {
-            logger.info(webElement + " Element is not found");
+            logger.info("Element is not found");
             return false;
         }
+
     }
 
-    protected void selectTextInDropDown(WebElement webElement, String text) {
-        try {
-            Select select = new Select(webElement);
-            select.selectByVisibleText(text);
-            logger.info("Text '" + text + "' was selected in DropDown");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-
-    protected void checkIsElementEnabled(WebElement webElement) {
-        Assert.assertTrue("Element is not enabled", webElement.isEnabled());
+    //check is element enabled
+    protected void checkIsElementEnabled (WebElement webElement){
+        Assert.assertTrue("Element is not enabled", isElementEnabled(webElement));
         logger.info("Element is enabled");
     }
 
     //is element enabled
-    protected boolean isElementEnabled(WebElement webElement) {
+    protected boolean isElementEnabled (WebElement webElement){
         try {
             boolean state = webElement.isEnabled();
             logger.info("Element enabled state: " + state);
@@ -85,20 +138,10 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void checkTextInElement(WebElement webElement, String expectedText) {
-        try {
-            String actualText = webElement.getText();
-            Assert.assertEquals("Text in element is not as expected", expectedText, actualText);
-            logger.info("Text in element is as expected: " + expectedText);
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
 
+     private void printErrorAndStopTest () {
+         logger.error("Error while working with element");
+         Assert.fail("Error while working with element");
+     }
 
-    private void printErrorAndStopTest() {
-        logger.error("Error while working with element");
-        Assert.fail("Error while working with element");
-    }
-
-}
+ }
