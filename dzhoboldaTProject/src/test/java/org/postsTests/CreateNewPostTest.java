@@ -1,27 +1,48 @@
 package org.postsTests;
 
 import org.baseTest.BaseTest;
+import org.junit.After;
 import org.junit.Test;
 
 public class CreateNewPostTest extends BaseTest {
+    private final String POST_TITLE = "G13 DZHOBOLDA1236";
 
     @Test
-    public  void createNewPost(){
+    public  void createNewPost() {
         pageProvider.getLoginPage()
-                        .openLoginPageAndFillLoginFormWithVailidCred()
+                .openLoginPageAndFillLoginFormWithVailidCred()
                 .checkRedirectToHomePage()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
-                .enterTextIntoInputTitle("G13 DZHOBOLDA")
+                .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 DZH  body text")
                 .selectTextInDropDownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
-        .checkIsRedirectToPostPage()
+                .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessagesDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-        .getHeaderForLoggedUserElement()
+                .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile();
+
+        pageProvider.getMyProfilePage()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWithTitelProfile(POST_TITLE, 1);
+    }
+
+        @After
+        public  void deletePost(){
+        logger.info("Post conddition - delete post");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePosTitlePresent(POST_TITLE);
+
+        }
+
+
+
 
     }
 
-}
+
