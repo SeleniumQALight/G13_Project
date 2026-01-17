@@ -92,6 +92,46 @@ public class CommonActionsWithElements {
         }
     }
 
+    // A method to set a checkbox to selected
+    protected void setCheckboxSelected(WebElement webElement) {
+        try {
+            if (!webElement.isSelected()) {
+                clickOnElement(webElement);
+                logger.info("Checkbox was selected");
+            } else {
+                logger.info("Checkbox is already selected");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    // Method for deselecting a checkbox
+    protected void setCheckboxUnselected(WebElement webElement) {
+        try {
+            if (webElement.isSelected()) {
+                clickOnElement(webElement);
+                logger.info("Checkbox was unselected");
+            } else {
+                logger.info("Checkbox is already unselected");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    // Universal method of setting the state
+    protected void setStatusToCheckbox(WebElement webElement, String state) {
+        if (state.equalsIgnoreCase("check")) {
+            setCheckboxSelected(webElement);
+        } else if (state.equalsIgnoreCase("uncheck")) {
+            setCheckboxUnselected(webElement);
+        } else {
+            logger.error("State should be 'check' or 'uncheck'");
+            Assert.fail("State should be 'check' or 'uncheck'");
+        }
+    }
+
     private void printErrorAndStopTest() {
         logger.error("Error while working with element ");
         Assert.fail("Error while working with element " );

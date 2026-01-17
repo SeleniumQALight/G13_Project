@@ -14,11 +14,13 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle("G13 DZHOBOLDA")
                 .enterTextIntoInputBody("G13 DZH  body text")
+                .setCheckboxUniquePostState("check") //new step from hom work 3 lesson
                 .selectTextInDropDownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
         .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessagesDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkIsPostUnique("yes")// check of status
         .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile();
 

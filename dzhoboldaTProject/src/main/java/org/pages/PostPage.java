@@ -8,8 +8,9 @@ import org.pages.elements.HeaderForLoggedUserElement;
 
 public class PostPage extends ParentPage {
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
-
     private WebElement messagePostWasCreatedSuccessfully;
+    @FindBy(xpath = ".//*[contains(text(), 'Is this post unique?')]")
+    private WebElement isPostUniqueText;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -36,7 +37,10 @@ public class PostPage extends ParentPage {
         checkTextInElement(messagePostWasCreatedSuccessfully, textOfMessage);
         return this;
     }
-
+    public PostPage checkIsPostUnique(String expectedText) {
+        checkTextInElement(isPostUniqueText, "Is this post unique? : " + expectedText);
+        return this;
+    }
 
 
 }
