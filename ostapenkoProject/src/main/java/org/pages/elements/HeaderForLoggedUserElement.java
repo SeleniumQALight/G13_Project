@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
+import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
@@ -13,7 +14,8 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
-    public void clickOnButtonMyProfile() {
+    public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
+        return new MyProfilePage(webDriver);
     }
 }
