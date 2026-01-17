@@ -32,7 +32,7 @@ public class CreateNewPostTest extends BaseTest {
 
         @After
         public  void deletePost(){
-        logger.info("Post conddition - delete post");
+        logger.info("Post condition - delete post");
         pageProvider.getHomePage()
                 .openHomePageAndLoginIfNeeded()
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
