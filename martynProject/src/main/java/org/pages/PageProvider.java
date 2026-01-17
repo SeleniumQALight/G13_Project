@@ -9,15 +9,11 @@ public class PageProvider {
         this.webDriver = webDriver;
     }
 
-    public LoginPage getLoginPage() {
+    public LoginPage getLoginPage(){
         return new LoginPage(webDriver);
     }
 
-    public HopePage getHopePage() {
-        return new HopePage(webDriver);
+    public HomePage getHomePage(){
+        return new HomePage(webDriver);
     }
-    public MyProfilePage getMyProfilePage() {
-        return new MyProfilePage(webDriver);
-    }
-
 }

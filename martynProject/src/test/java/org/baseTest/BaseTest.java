@@ -9,28 +9,26 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.pages.PageProvider;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     private WebDriver webDriver;
-    protected Logger logger = Logger.getLogger(getClass());
+    private Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
     @Before
-    public void  setUp() {
+    public void setUp(){
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Browser was opened");
-        pageProvider = new PageProvider(webDriver);
 
+        pageProvider = new PageProvider(webDriver);
     }
 
     @After
     public void tearDown(){
         webDriver.quit();
-        logger.info("Brousers was closed");
-
+        logger.info("Browser was closed");
     }
 }

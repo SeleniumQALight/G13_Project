@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class BaseTest {
     private WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass());
+    protected Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
 
@@ -30,8 +30,8 @@ public class BaseTest {
 
     @After
     public void tearDown() {
-        webDriver.quit();
         logger.info("Browser was closed");
+        pageProvider.getHopePage();
 
     }
 }
