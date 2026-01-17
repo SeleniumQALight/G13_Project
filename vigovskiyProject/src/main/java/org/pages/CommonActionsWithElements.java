@@ -77,6 +77,7 @@ public class CommonActionsWithElements {
             return false;
         }
     }
+
     protected void checkTextInElement(WebElement webElement, String expectedText) {
         try {
             String actualText = webElement.getText();
@@ -86,4 +87,46 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
+    protected void checkCheckbox(WebElement webElement) {
+        try {
+            if (!webElement.isSelected()) {
+                clickOnElement(webElement);
+                logger.info("checkbox was checked");
+            } else {
+                logger.info("checkbox is already checked");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void uncheckedCheckbox(WebElement webElement) {
+        try {
+            if (webElement.isSelected()) {
+                clickOnElement(webElement);
+                logger.info("checkbox was unchecked");
+            } else {
+                logger.info("checkbox is already unchecked");
+            }
+
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void setCheckboxState(WebElement webElement, String state) {
+        switch (state.toLowerCase()) {
+            case "check":
+                checkCheckbox(webElement);
+                break;
+            case "uncheck":
+                uncheckedCheckbox(webElement);
+                break;
+            default:
+                logger.error("Unknown checkbox state: " + state);
+                Assert.fail("Unknown checkbox state: " + state);
+        }
+    }
+
 }
