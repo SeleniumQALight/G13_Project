@@ -14,11 +14,13 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle("G13 Avramova")
                 .enterTextIntoInputBody("G13 Avramova Some body")
+                .setCheckboxIsUniqueState("uncheck")
                 .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessageIsDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-                .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
+                .checkIsPostUnique("no");
+//                .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
     }
 }

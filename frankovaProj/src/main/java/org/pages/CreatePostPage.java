@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,9 +19,14 @@ public class CreatePostPage extends ParentPage {
     @FindBy(tagName = "select")
     private WebElement dropdownAccess;
 
+    @FindBy(name="uniquePost")
+        private WebElement checkboxUniquePost;
+
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
     }
+
+    private Logger logger = Logger.getLogger(getClass());
 
     public CreatePostPage checkIsRedirectToCreatePostPage() {
         //TODO check URL
@@ -47,4 +53,26 @@ public class CreatePostPage extends ParentPage {
         selectTextInDropDown(dropdownAccess, textForSelection);
         return this;
     }
+
+    public CreatePostPage enterStateForCheckbox(String state) {
+        if (state == null || state.trim().isEmpty()) {
+            logger.info("State for checkbox is null or empty");
+            throw new AssertionError("State for checkbox is null or empty");
+        }
+
+        String s = state.trim().toLowerCase();
+        switch (s) {
+            case "check":
+                checkCheckbox(checkboxUniquePost);
+                break;
+            case "uncheck":
+                uncheckCheckbox(checkboxUniquePost);
+                break;
+            default:
+                logger.info("State for checkbox is incorrect: " + state);
+                throw new AssertionError("Incorrect checkbox state: " + state);
+        }
+        return this;
+    }
+
 }
