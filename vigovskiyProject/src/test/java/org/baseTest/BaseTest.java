@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class BaseTest {
     private WebDriver webDriver; //интерфейс описывает любой браузер
-    private Logger logger = Logger.getLogger(getClass());
+    protected Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
     @Before
