@@ -56,6 +56,7 @@ public class LoginTestsAllStepsInOnClass {
         Assert.assertTrue("User is not Logged In ",isButtonSingOutVisible());
 
     }
+
     @Test
     public void invalidLogin() {
         webDriver.get("https://aqa-complexapp.onrender.com");
