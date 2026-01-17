@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElement;
+import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElement {
 
@@ -11,11 +12,13 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElement {
     private WebElement buttonMyProfile;
 
 
-
     public HeaderForLoggedUserElement(WebDriver webDriver) {
         super(webDriver);
     }
-    public void clickOnButtonMyProfile() {
+
+    public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
+        return new MyProfilePage(webDriver);
     }
+
 }
