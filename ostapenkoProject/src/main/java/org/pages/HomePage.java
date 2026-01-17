@@ -20,6 +20,15 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
 
+    @FindBy(xpath = "//a[@data-original-title='Search']")
+    private WebElement buttonSearch;
+
+    @FindBy(xpath = "//span[@data-original-title='Chat']")
+    private WebElement buttonChat;
+
+    @FindBy(xpath = "//a[@href='/profile/qaauto']")
+    private WebElement buttonAvatar;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -28,18 +37,28 @@ public class HomePage extends ParentPage {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-    public void checksButtonSignOutVisible() {
+    public HomePage checksButtonSignOutVisible() {
         checksElementVisible(buttonSignOut, "Sing Out");
         logger.info("Button SingOut is visible");
+        return this;
     }
 
-    public void checksButtonSignOutNotVisible() {
+    public HomePage checksButtonSignOutNotVisible() {
         checksElementNotVisible(buttonSignOut, "Sign Out");
+        logger.info("Button SingOut is NOT visible");
+        return this;
     }
 
-    public void checksButtonCreatePostVisible() {
+    public HomePage checksButtonCreatePostVisible() {
         checksElementVisible(buttonCreatePost, "Create Post");
         logger.info("Button CreatePost is visible");
+        return this;
+    }
+
+    public HomePage checksButtonCreatePostNotVisible() {
+        checksElementNotVisible(buttonCreatePost, "Create Post");
+        logger.info("Button CreatePost is NOT visible");
+        return this;
     }
 
     public HomePage checkIsRedirectToHomePage() {
@@ -68,5 +87,45 @@ public class HomePage extends ParentPage {
         return this;
     }
 
+
+    public HomePage checksButtonSearchVisible() {
+        checksElementVisible(buttonSearch, "Search");
+        logger.info("Button Search is visible");
+        return this;
+    }
+
+    public HomePage checksButtonSearchNotVisible() {
+        checksElementNotVisible(buttonSearch, "Search");
+        logger.info("Button Search is NOT visible");
+        return this;
+    }
+
+    public HomePage checksButtonChatVisible() {
+        checksElementVisible(buttonChat, "Chat");
+        logger.info("Button Chat is visible");
+        return this;
+    }
+
+    public HomePage checksButtonChatNotVisible() {
+        checksElementNotVisible(buttonChat, "Chat");
+        logger.info("Button Chat is NOT visible");
+        return this;
+    }
+
+    public HomePage checksAvatarVisible() {
+        checksElementVisible(buttonAvatar, "Avatar");
+        logger.info("Button Avatar is visible");
+        return this;
+    }
+
+    public HomePage checksAvatarNotVisible() {
+        checksElementNotVisible(buttonAvatar, "Avatar");
+        logger.info("Button Avatar is NOT visible");
+        return this;
+    }
+
+    public void clickOnButtonSignOut() {
+        clickOnElement(buttonSignOut);
+    }
 
 }

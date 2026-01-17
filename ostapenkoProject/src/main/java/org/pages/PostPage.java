@@ -15,6 +15,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -34,7 +37,7 @@ public class PostPage extends ParentPage {
         checkElementIsEnabled(messagePostWasCreatedSuccessfully);
         return this;
     }
-
+    
     public PostPage checkTextInSuccessMessage(String textOfMessage) {
         checkTextInElement(messagePostWasCreatedSuccessfully, textOfMessage);
         return this;
@@ -48,5 +51,10 @@ public class PostPage extends ParentPage {
     public MyProfilePage clickOnDeletePostButton() {
         clickOnElement(buttonDeletePost);
         return new MyProfilePage(webDriver);
+    }
+
+    public EditPostPage clickOnEditButton() {
+        clickOnElement(buttonEditPost);
+        return new EditPostPage(webDriver);
     }
 }
