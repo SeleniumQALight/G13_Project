@@ -1,6 +1,6 @@
 #Login Page
 
-input.login = "//input[@id='username0']"
+input.login = "//input[@placeholder='Username']"
 input.password = "//input[@name='password' and not(@id)]"
 button.SignIn = "//button [not(@type)]"
 button.SignUpForOurApp = "//button [@type='submit']"

@@ -25,7 +25,7 @@ Preconditions:
 
 Steps:
 1. Open the login page
-2. Enter a <login> in to Registration Username field
+2. Enter a <0z111> in to Registration Username field (the entered login must be unique and not used before)
 3. Enter a <Email> in to Registration Email field
 4. Enter a <Password> in to Registration Password field
 5. Click the "Sign up for OurApp" button
@@ -37,7 +37,7 @@ Expected result:
 #003 Create a Post
 
 Preconditions:
-1.User must be logged in
+1. User must be logged in
 
 Steps:
 1. Click the "Crate Post" button
@@ -49,6 +49,7 @@ Expected result:
 1. I see the "Edit" and "Delete" buttons
 2. I see the "New post successfully created" message
 3. I see a link to the user who created this post.
+4. I see the created Post on "My profile" page -> "Posts" tab
 
 PostConditions:
 1. Delete the created Post
@@ -57,40 +58,40 @@ PostConditions:
 #004 Edit the created Post
 
 Preconditions:
-1.User must be logged in
+1. User must be logged in
+2. A Post should be created
 
 Steps:
-1. Click the "Crate Post" button
-2. Enter any text in to the "Title" field
-3. Enter any text in to the "Body Content" field
-4. Click the "Save New Post" button
-5. Click the "Edit" button
-6. Change the text in the "Title" and "Body Content" fields
-7. Click the "Save Updates" button
+1. Open "My profile" page -> "Posts" tab
+2. Click the created Post
+3. Click the "Edit" button
+4. Change the text in the "Title" and "Body Content" fields
+5. Click the "Save Updates" button
 
 Expected result:
 1. I see the "Post successfully updated." message
 2. I see the "« Back to post permalink" link
+3. Verify that the changes are saved and displayed on "My profile" page -> "Posts" tab
 
 PostConditions:
 1. Click the "« Back to post permalink" link
-1. Delete the created Post
+2. Delete the created Post
 
 
 #005 Delete the created Post
 
 Preconditions:
-1.User must be logged in
+1. User must be logged in
+2. A Post should be created
 
 Steps:
-1. Click the "Crate Post" button
-2. Enter any text in to the "Title" field
-3. Enter any text in to the "Body Content" field
-4. Click the "Save New Post" button
-5. Click the "Delete" button
+1. Open "My profile" page -> "Posts" tab
+2. Click the created Post
+3. Click the "Delete" button
 
 Expected result:
 1. I see the "Post successfully deleted." message
 2. I see the "Post: int" tab
 3. I see the "Followers: int" tab
 4. I see the "Following: int" tab
+5. Verify that the deleted Post is not displayed on "My profile" page -> "Posts" tab
