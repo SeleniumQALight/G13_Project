@@ -4,12 +4,13 @@ login=qaauto
 password=123456qwerty
 
 Pre-condition:
-1.
+1. User is not logged in.
+2. User has a valid account with login "qaauto".
 
 Steps:
 1. Open login page https://aqa-complexapp.onrender.com
-2. Enter <login> in to input Login on Login page
-3. Enter <password> into input Password on Login Page
+2. Enter <login> in to input Login on Login form
+3. Enter <password> into input Password on Login form
 4. Click on button Login on Login Page
 
 Expected results:
@@ -17,6 +18,95 @@ Expected results:
 2. I don't see Sign In button on Login Page
 
 PostCondition:
+Click on "Sign Out" button to return to the initial state.
 
 
-#002
+#002 Valid Registration
+
+username=testuser2025 email=test2025@test.com password=Password123456!
+
+Pre-condition:
+1. User is not logged in.
+
+Steps:
+1. Open page https://aqa-complexapp.onrender.com
+2. Enter <username> into "Username" field in Sign Up form.
+3. Enter <email> into "Email" field in Sign Up form.
+4. Enter <password> into "Password" field in Sign Up form.
+5. Click on "Sign up for OurApp" button.
+
+Expected results:
+1. Redirect to Home Page.
+2. Text "Hello testuser2025” is displayed on the Home Page.
+3. Button "Sign Out" is displayed in the header.
+4. Username "testuser2025"  is displayed in the header.
+
+Post-condition:
+1. Delete user that was created.
+2. Logout from the system.
+
+#003 Success Sign Out
+
+Pre-condition:
+1. User is logged in to the system.
+2. User is on the Home Page.
+3. Button "Sign Out" is visible in the header.
+
+Steps:
+1. Click on button "Sign Out" on Home Page.
+
+Expected results:
+1. User is redirected to the Login page.
+2. Button "Sign Out" is no longer visible.
+3. Input fields for Login and Password are visible.
+4. I see the "Sign In" button.
+
+Post-condition:
+Close the browser.
+
+#004 Create New Post
+
+title=My First Post body=This is a test content for the new post.
+
+Pre-condition:
+1. User is logged in.
+2. User is on the Home Page.
+
+Steps:
+1. Click on the button "Create Post" (icon with a plus/pencil) in the header.
+2. Enter <title> into input "Title" on Create Post page.
+3. Enter <body> into textarea "Body Content" on Create Post page.
+4. Click on button "Save New Post".
+
+Expected results:
+1. Success message "New post successfully created." appears.
+2. The page redirects to the new post's view.
+3. The title and body of the post match the entered data (<title> and <body>).
+
+Post-condition:
+Click on "Delete" icon to remove the test post and keep the profile clean.
+
+#005 Edit Existing Post
+
+new_title=Updated Post Title new_body=Updated content for this post.
+
+Pre-condition:
+1. User is logged in.
+2. User has already created a post and is currently viewing it.
+3. User is the author of this post.
+
+Steps:
+1. Click on the "Edit" icon (pencil) on the post page.
+2. Change the "Title" field to <new_title>.
+3. Change the "Body Content" field to <new_body>.
+4. Click on the "Save Updates" button.
+
+Expected results:
+1. Success message "Post successfully updated." appears.
+2. The page displays the new title <new_title> and the new body <new_body>.
+3. The changes are saved and persist after refreshing the page.
+
+Post-condition:
+1. Delete this post.
+2. Return to the Home Page.
+
