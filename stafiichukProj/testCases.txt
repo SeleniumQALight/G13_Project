@@ -69,15 +69,21 @@ Steps:
 2. Enter 'teststf' into 'Title' input on /create-post page
 3. Enter 'abracadabra' into 'Body Content' input on /create-post page
 4. Click on 'Save New Post' button
+5. After redirection to Success Page, open https://aqa-complexapp.onrender.com/profile/qaauto
 
 Expected Result:
-1. I see 'New post successfully created.' text on Success Page
+I see 'New post successfully created.' text on Success Page
+I see the post 'teststf' in the list of posts on Profile Page
+
+Post-Condition:
+1. Remove post 'teststf' from /profile page or via API
 
 #005 Search by title
 
 Pre-Condition:
 https://aqa-complexapp.onrender.com/ page is open
 User is logged in via 'stftest' and 'Qwerty123456!' data
+Post with title 'teststf' is created
 
 Steps:
 1. Click on 'Search' icon in Header
@@ -87,9 +93,13 @@ Steps:
 Expected Result:
 1. Post was found and opened.
 
+Post-Condition:
+1. Remove post 'teststf' from /profile page or via API
+
 #006 There is a post on Profile Page
 User is logged in via 'stftest' and 'Qwerty123456!' data
 https://aqa-complexapp.onrender.com/ page is open
+Post with title 'teststf' is created
 
 Steps:
 1. Click on 'My Profile' icon in Header
@@ -97,6 +107,9 @@ Steps:
 Expected Result:
 1. 'My Profile' page is open
 2. I see the post 'teststf' in the list of posts
+
+Post-Condition:
+1. Remove post 'teststf' from /profile page or via API
 
 
 
