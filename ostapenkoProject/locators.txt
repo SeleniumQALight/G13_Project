@@ -1,1 +1,43 @@
-#001 test
+# Login Page
+
+input.username = .//input[@name='username' and @id='username-register']
+input.password = .//input[@name='password' and @id]
+input.email =.//input[@name='email']
+button.signUp = .//button[@type]
+
+# Home Page
+
+button.signOut = .//button[@class]
+img.avatar = .//img[@alt]
+svg.chat = .//span//*[@data-icon='comment']
+div.chatModalWindow = .//div[@id='chat-wrapper’]
+input.message = .//input[@type='text' and @class='chat-field']
+div.sentMessage = .//div[@class='chat-message-inner']
+svg.searchPost = .//a//*[@data-icon='search']
+input.search = .//input[@type='text' and @id='live-search-field']
+svg.searchByWord = .//label//*[@data-icon='search']
+a.createPost = .//a[@href='/create-post’]
+
+# Create Post Page
+
+form.createPostPage = .//form[@action='/create-post']
+input.title = .//input[@name='title’]
+textarea.content = .//textarea[@name=‘body']
+input.checkbox = .//input[@type=‘checkbox’]
+option.private = .//option[@value='One Person']
+button.savePost = .//form[@action='/create-post']//button
+
+# Post Detail Page
+
+div.successMessage = .//div[contains(text(),'New post successfully created.')]
+h2.title = .//h2
+i.sentTo = .//i
+u.typeOfGroupSendTo = .//u
+p.uniqueMessage = .//p[contains(text(), 'unique')]
+p.content = .//div[@class="body-content"]//p
+svg.edit = .//a//*[@data-icon='edit']
+svg.deletePost = .//button//*[@data-icon='trash'] 
+
+# Profile Page
+
+a.followersTab = .//a[@href="/profile/qaauto/followers"]

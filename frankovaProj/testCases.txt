@@ -1,0 +1,109 @@
+#001 Success registration
+
+Pre-condition:
+username=yuliiafrankova
+Email=julialapa1996@gmail.com
+Password=yuliiafrankova12345
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com.
+2. Enter <Username> into the Username input in the Registration form.
+3. Enter <Email> into the Email input in the Registration form.
+4. Enter <Password> into the Password input in the Registration form.
+5. Click the "Sign up for OurApp" button.
+
+Expected results:
+1. The "Sign out" button is displayed on the Home page.
+2. The <Username> is correctly displayed in the top right corner of the page.
+3. The welcome message "Hello <Username>, your feed is empty." is displayed in the main content area.
+
+Post-condition:
+1. Delete the created <Username> user.
+
+
+#002 Create new post
+
+Pre-condition:
+1. A user is created: Login: yuliiafrankova, Password: yuliiafrankova12345.
+2. The user is logged in and located on the Home page.
+
+Steps:
+1. Click the "Create Post" button.
+2. Enter <title> into the Title input field.
+3. Enter <text> into the Body Content textarea.
+4. Select the "Is this post unique?" checkbox.
+5. Select a value <option> from the dropdown menu.
+6. Click the "Save New Post" button.
+
+Expected results:
+1. The user is redirected to the Home page.
+2. The success message "New post successfully created." is displayed.
+3. The post <title> matches the entered value.
+4. The text "Note: This post was written for [option]" is displayed.
+5. The status "Is this post unique? : yes" is displayed.
+6. The post <text> matches the entered value.
+7. "Edit" and "Delete" buttons are visible on the page.
+
+Post-condition:
+1. Delete the created post to clean up the test data.
+
+#003 Edit existing post
+
+Pre-condition:
+1. A user is created: Login: yuliiafrankova, Password: yuliiafrankova12345.
+2. The user is logged in and located on the Home page.
+3. The post with the specific <title> is created.
+
+Steps:
+1. Click on the "My Profile" icon/button.
+2. Click on the post with the specific <title>.
+3. Click the "Edit" button.
+4. Enter a new <title> into the Title input.
+5. Enter a new <text> into the Body Content textarea.
+6. Select the "Is this post unique?" checkbox.
+7. Select a new value <option> from the dropdown.
+8. Click the "Save Updates" button.
+
+
+Expected results:
+1. The success message "Post successfully updated." is displayed.
+2. The updated title and text are correctly displayed on the page.
+3. The "Back to post permalink" link is displayed and functional.
+
+Post-condition:
+1. Delete the updated post to clean up the test data.
+
+
+
+#004 User logout
+
+Pre-conditions:
+1. A user is created: Login: qaauto, Password: 123456qwerty.
+2. The user is logged in and on the Home page.
+
+Steps:
+1. Click the "Sign Out" button.
+
+Expected results:
+1. The user is redirected to the Login page.
+2. The "Sign Out" button is no longer displayed.
+3. The "Sign In" button and login form are visible.
+
+
+#005 Login with invalid data
+
+Pre-condition:
+1. A user with the following credentials does not exist in the system:
+Login: test_invalid_user
+Password: test_password_123
+
+Steps:
+1. Open the login page: https://aqa-complexapp.onrender.com
+2. Enter the invalid <login> into the Username input in the Login form.
+3. Enter the invalid <password> into the Password input in the Login form.
+4. Click the "Sign In" button.
+
+Expected results:
+1. The user remains on the Login page.
+2. An error message "Invalid username / password" is displayed.
+3. The "Sign In" button is still visible.
