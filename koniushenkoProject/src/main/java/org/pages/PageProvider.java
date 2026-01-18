@@ -1,4 +1,4 @@
-package org.qalight.pages;
+package org.pages;
 
 import org.openqa.selenium.WebDriver;
 
@@ -17,5 +17,6 @@ public class PageProvider {
         return new HomePage(webDriver);
     }
 
+    public MyProfilePage getMyProfilePage() {return new MyProfilePage(webDriver);}
 
 }

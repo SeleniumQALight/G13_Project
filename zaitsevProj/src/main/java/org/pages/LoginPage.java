@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,7 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    public LoginPage openLoginPage(){
     public void checkIsButtonSignInVisible(){
         Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
         logger.info("Button SignIn is visible");
@@ -57,19 +59,22 @@ public class LoginPage extends ParentPage {
     public void openLoginPage(){
         webDriver.get(baseUrl);
         logger.info("Login page was opened with url " + baseUrl);
+        return this;
     }
 
-    public void enterTextIntoInputLogin (String text){
+    public LoginPage enterTextIntoInputLogin (String text){
 //    WebElement inputLogin = webDriver.findElement(
 //            By.xpath("//input[@placeholder='Username']"));
 //        inputLogin.clear();
 //        inputLogin.sendKeys(text);
 //        logger.info(text + " was entered in input Username");
         clearAndEnterTextIntoElement(inputLogin, text);
+        return this;
     }
 
-    public void enterTextIntoInputPassword (String text){
+    public LoginPage enterTextIntoInputPassword (String text){
         clearAndEnterTextIntoElement(inputPassword, text);
+        return this;
     }
 
     public void clickOnButtonSignIn(){
@@ -77,5 +82,11 @@ public class LoginPage extends ParentPage {
     }
 
 
-
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
+        openLoginPage();
+        enterTextIntoInputLogin(TestData.VALID_LOGIN);
+        enterTextIntoInputPassword(TestData.VALID_PASSWORD);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
+    }
 }

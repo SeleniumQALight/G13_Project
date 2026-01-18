@@ -1,4 +1,4 @@
-package org.qalight.pages;
+package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -12,26 +12,38 @@ public class CommonActionsWithElements {
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this);//ініціалізує елементи описані через @FindBy
+        PageFactory.initElements(webDriver, this); //initialise elements described with @FindBy
     }
 
-    protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
+    protected void clearAndEnterTextIntoElement(WebElement webElement, String text){
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + "was inputted into element");
-        } catch (Exception e) {
+            logger.info(text + " was inputted into element");
+        }catch (Exception e){
             printErrorAndStopTest();
         }
     }
 
-    protected void clickOnElement(WebElement webElement) {
+    protected void clickOnElement(WebElement webElement){
         try {
             webElement.click();
             logger.info("Element was clicked");
-        } catch (Exception e) {
+        }catch (Exception e){
             printErrorAndStopTest();
         }
+    }
+
+    public boolean isElementVisible(WebElement webElement) {
+        try {
+            boolean state = webElement.isDisplayed();
+            logger.info("Element state: " + state);
+            return state;
+        }catch (Exception e) {
+            printErrorAndStopTest();
+            return false;
+        }
+
     }
 
     private void printErrorAndStopTest() {
