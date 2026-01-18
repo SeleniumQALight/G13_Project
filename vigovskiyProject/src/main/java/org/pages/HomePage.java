@@ -12,10 +12,6 @@ public class HomePage extends ParentPage {
     WebElement buttonSignOut;
     @FindBy(xpath = "//a[@href=\"/create-post\"]")
     WebElement buttonCreatePost;
-    @FindBy(xpath ="//input[@placeholder='Username']")
-    private WebElement inputLogin;
-    @FindBy(xpath ="//input[@placeholder='Password']")
-    private WebElement inputPassword;
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
 
@@ -23,27 +19,16 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
-    public void checkIsButtonSighOutVisible() {
-        Assert.assertTrue("Button SignOut is not visible", isWebElementIsVisible(buttonSignOut));
-        logger.info("Button SignOut is visible");
-    }
-    public void checkButtonSignOutVisible(){
-        Assert.assertTrue("Button Sign Out is not visible",isWebElementIsVisible(buttonSignOut));
+    public HomePage checkButtonSignOutIsVisible() {
+        Assert.assertTrue("Button Sign Out is not visible", isWebElementIsVisible(buttonSignOut));
         logger.info("Button Sign Out is visible");
-    }
-    public void checkInputPasswordFieldIsNotVisible(){
-        Assert.assertFalse("Input Password Field is visible",isWebElementIsVisible(inputPassword));
-        logger.info("Input Password Field is visible");
-    }
-    public void checkInputLoginFieldIsNotVisible(){
-        Assert.assertFalse("Input Login Field is visible",isWebElementIsVisible(inputLogin));
-        logger.info("Input Login Field is not visible");
-    }
-    public void checkButtonCreatePostVisible(){
-        Assert.assertTrue("Button Create post is not visible",isWebElementIsVisible(buttonCreatePost));
-        logger.info("Button Create post is visible");
+        return this;
     }
 
+    public void checkButtonCreatePostVisible() {
+        Assert.assertTrue("Button Create post is not visible", isWebElementIsVisible(buttonCreatePost));
+        logger.info("Button Create post is visible");
+    }
 
 
     public HomePage checkIsRedirectToHomePage() {

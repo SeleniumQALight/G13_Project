@@ -1,8 +1,8 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 import org.data.TestData;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,8 +17,6 @@ public class LoginPage extends ParentPage {
     private WebElement buttonSignIn;
     @FindBy(xpath = "//div[text()='Invalid username/password.']")
     private WebElement messageInvalidUserOrPassword;
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
 
 
     public LoginPage(WebDriver webDriver) {
@@ -49,22 +47,20 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void clickOnButtonSignIn() {
+    public LoginPage clickOnButtonSignIn() {
         // webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
 //        buttonSignIn.click();
 //        logger.info("Button SignIn was clicked");
         clickOnElement(buttonSignIn);
+        return this;
     }
 
-    public void checkButtonSignInIsVisible() {
+    public LoginPage checkButtonSignInIsVisible() {
         Assert.assertTrue("Button Sign In is not visible", isWebElementIsVisible(buttonSignIn));
         logger.info("Button Sign In is visible");
+        return this;
     }
 
-    public void checkButtonSignOutIsNotVisible() {
-        Assert.assertFalse("Button Sign Out is visible", isWebElementIsVisible(buttonSignOut));
-        logger.info("Button Sign Out is not visible");
-    }
 
     public void checkMessageInvalidUserOrPassword() {
         Assert.assertTrue("Message \"Invalid User Or Password\" is not visible", isWebElementIsVisible(messageInvalidUserOrPassword));
