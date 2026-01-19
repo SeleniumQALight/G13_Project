@@ -59,6 +59,30 @@ public class LoginTestAllStepsInOneClass {
         Assert.assertTrue("User is not LoggedIn: button SignOut is not visible",
                 isButtonSignOutVisible());
     }
+    @Test
+    public void invalidLogin(){
+        webDriver.get("https://aqa-complexapp.onrender.com");
+        logger.info("Site was opened");
+
+        WebElement inputLogin = webDriver.findElement(
+                By.xpath("//input[@placeholder='Username']"));
+        inputLogin.clear();
+        inputLogin.sendKeys("qaauto1");
+        logger.info("qaauto1 was entered in input Username");
+
+        WebElement inputPassword = webDriver.findElement(
+                By.xpath("//input[@placeholder='Password']"));
+        inputPassword.clear();
+        inputPassword.sendKeys("123456qwerty");
+        logger.info("123456qwerty was entered in input Password");
+
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Button Sign In was clicked");
+
+        Assert.assertFalse("User is Logged In: button SignOut is visible", isButtonSignOutVisible());
+
+        Assert.assertTrue("Validation message is not visible", isInvalidMessageVisible());
+    }
 
     private boolean isButtonSignOutVisible() {
         try{
@@ -70,5 +94,14 @@ public class LoginTestAllStepsInOneClass {
             return false;
         }
     }
-
+    private boolean isInvalidMessageVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//div[@class='alert alert-danger text-center']")).isDisplayed();
+            logger.info("Validation message is displayed");
+            return state;
+        } catch (Exception e) {
+            logger.info("Validation message is not found");
+            return false;
+        }
+    }
 }

@@ -1,22 +1,41 @@
 package org.postsTests;
 
 import org.baseTest.BaseTest;
+import org.junit.After;
 import org.junit.Test;
 
 public class createNewPostTest extends BaseTest {
+    private final String POST_TITLE = "G13 Zaitsev Title112";
     @Test
     public void createNewPost() {
         pageProvider.getLoginPage().openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
-                .enterTextIntoInputTitle("G13 Zaitsev Title")
+                .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 Zaitsev Body")
                 .selectTextInDropdownAccess("Приватне повідомлення")
+                .setUniquePostCheckBox("uncheck")
                 .clickOnSaveNewPostButton()
-                .checkIsRedirectToCreatePostPage()
+                .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessageIsDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkUniquePostCheckBoxState("no")
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
+
+        pageProvider.getMyProfilePage()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWithTitlePresent(POST_TITLE, 1);
     }
-}
+
+    @After
+    public void deletePosts(){
+        logger.info("Post condition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostsTillPresent(POST_TITLE);
+
+        }
+ }
