@@ -26,7 +26,7 @@ login=qaauto
 password = wrongPassword
 
 Pre-condition:
-1. Create a user with unique name
+1. Use the previously created user login/password
 
 Steps:
 1. Open login page https://aqa-complexapp.onrender.com
@@ -58,11 +58,12 @@ Steps:
 Expected results:
 1. I see Sign Out button on Home Page
 2. I don't see Sign In button on Login Page
-3. I see invitation message on Home Page
+3. I see invitation message on Home Page "Hello {userName}, your feed is empty."
 4. I see my profile image and username on Home Page
 
 Post-condition:
 1. Sign Out from the application
+2. Delete the created user (TODO using API call)
 2. Close the browser
 
 #004 Create a new post with unique title
@@ -107,6 +108,8 @@ selectValue = //select[@value='One Person']
 Pre-condition:
 1. User is logged in
 2. A post is created
+3. Navigate to MyProfile Page
+4. Navigate to the newly created post page
 
 Steps:
 1. Click on button "Delete Post" on Post Page
