@@ -3,34 +3,40 @@ package org.loginTests;
 import org.baseTest.BaseTest;
 import org.junit.Test;
 
+import static org.data.TestData.VALID_LOGIN;
+import static org.data.TestData.VALID_PASSWORD;
+
+
 public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void validLogin() {
-        pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputUsername("qaauto");
-        pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
-        pageProvider.getLoginPage().clickButtonSignIn();
+        pageProvider.getLoginPage().openLoginPage()
+                .enterTextIntoInputUsername(VALID_LOGIN)
+                .enterTextIntoInputPassword(VALID_PASSWORD)
+                .clickButtonSignIn();
 
-        pageProvider.getHomePage().checkIsButtonSignOutVisible(true);
-        pageProvider.getHomePage().checkIsButtonCreatePostVisible(true);
-        pageProvider.getLoginPage().checkIsInputLoginVisible(false);
-        pageProvider.getLoginPage().checkIsInputPasswordVisible(false);
-        pageProvider.getLoginPage().checkIsButtonSignInVisible(false);
-        pageProvider.getLoginPage().checkIsInvalidLoginErrorMessageVisible(false);
+        pageProvider.getHomePage().getHeaderForLoggedUserElement()
+                .checkIsButtonSignOutVisible(true)
+                .checkIsButtonCreatePostVisible(true);
+        pageProvider.getLoginPage().checkIsInputLoginVisible(false)
+                .checkIsInputPasswordVisible(false)
+                .checkIsButtonSignInVisible(false)
+                .checkIsInvalidLoginErrorMessageVisible(false);
     }
 
     @Test
     public void invalidLogin() {
-        pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputPassword("invalid");
-        pageProvider.getLoginPage().enterTextIntoInputPassword("invalid12");
-        pageProvider.getLoginPage().clickButtonSignIn();
+        pageProvider.getLoginPage().openLoginPage()
+                .enterTextIntoInputPassword("invalid")
+                .enterTextIntoInputPassword("invalid12")
+                .clickButtonSignIn();
 
-        pageProvider.getLoginPage().checkIsInvalidLoginErrorMessageVisible(true);
-        pageProvider.getLoginPage().checkIsButtonSignInVisible(true);
-        pageProvider.getLoginPage().checkIsInputLoginVisible(true);
-        pageProvider.getLoginPage().checkIsInputPasswordVisible(true);
-        pageProvider.getHomePage().checkIsButtonSignOutVisible(false);
-        pageProvider.getHomePage().checkIsButtonCreatePostVisible(false);
+        pageProvider.getLoginPage().checkIsInvalidLoginErrorMessageVisible(true)
+                .checkIsButtonSignInVisible(true)
+                .checkIsInputLoginVisible(true)
+                .checkIsInputPasswordVisible(true);
+        pageProvider.getHomePage().getHeaderForLoggedUserElement()
+                .checkIsButtonSignOutVisible(false)
+                .checkIsButtonCreatePostVisible(false);
     }
 }
