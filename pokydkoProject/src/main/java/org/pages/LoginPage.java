@@ -107,18 +107,18 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage checkIsEnterTextIntoInputLoginVisible() {
-        Assert.assertTrue("Input Login is not visible", isEnterTextIntoInputLoginVisible());
+        Assert.assertTrue("Input Login is not visible", isInputLoginVisible());
         logger.info("Input Login is visible");
         return this;
     }
 
     public LoginPage checkIsEnterTextIntoInputPasswordVisible() {
-        Assert.assertTrue("Input Password is not visible", isEnterTextIntoInputPasswordVisible());
+        Assert.assertTrue("Input Password is not visible", isInputPasswordVisible());
         logger.info("Input Password is visible");
         return this;
     }
 
-    private boolean isEnterTextIntoInputLoginVisible() {
+    private boolean isInputLoginVisible() {
         try {
             return inputLogin.isDisplayed();
         } catch (Exception e) {
@@ -126,7 +126,7 @@ public class LoginPage extends ParentPage {
         }
     }
 
-    private boolean isEnterTextIntoInputPasswordVisible() {
+    private boolean isInputPasswordVisible() {
         try {
             return inputPassword.isDisplayed();
         } catch (Exception e) {

@@ -24,7 +24,6 @@ public class HomePage extends ParentPage{
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-    public void checkIsButtonSignOutVisible(){
     public HomePage checkIsButtonSignOutVisible(){
         Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         logger.info("Button Sign Out is visible");
