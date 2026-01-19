@@ -29,6 +29,7 @@ public class LoginPage extends ParentPage {
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("login page was opened with url " + baseUrl);
+        return this;
     }
 
     public LoginPage enterTextIntoInputLogin(String text) {
@@ -63,7 +64,6 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
-}
 
     public void checkIsErrorMessageVisible() {
         Assert.assertTrue("Error message is not visible", isErrorMessageVisible());
