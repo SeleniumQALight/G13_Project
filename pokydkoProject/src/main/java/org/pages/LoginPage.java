@@ -1,6 +1,8 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +21,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath="//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement errorMessage;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -60,4 +65,73 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
 
     }
+
+    public LoginPage checkIsErrorMessageVisible() {
+        Assert.assertTrue("Error message is not visible", isErrorMessageVisible());
+        logger.info("Error message is visible");
+        return this;
+    }
+
+    private boolean isErrorMessageVisible() {
+        try {
+            boolean state = errorMessage.isDisplayed();
+            logger.info("Element state: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found");
+            return false;
+        }
+    }
+
+    public LoginPage checkIsErrorMessageText(String text) {
+        Assert.assertEquals("Text in error message is not expected", text,
+                errorMessage.getText());
+        return this;
+    }
+
+    public LoginPage checkIsButtonSignOutVisible(){
+        Assert.assertFalse("Button Sign Out is not visible", isButtonSignOutVisible());
+        logger.info("Button Sign Out is not visible");
+        return this;
+    }
+
+    public boolean isButtonSignOutVisible() {
+        try{
+            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+            logger.info("Element state: " + state);
+            return state;
+        } catch (Exception e){
+            logger.info("Element is not found");
+            return false;
+        }
+    }
+
+    public LoginPage checkIsEnterTextIntoInputLoginVisible() {
+        Assert.assertTrue("Input Login is not visible", isInputLoginVisible());
+        logger.info("Input Login is visible");
+        return this;
+    }
+
+    public LoginPage checkIsEnterTextIntoInputPasswordVisible() {
+        Assert.assertTrue("Input Password is not visible", isInputPasswordVisible());
+        logger.info("Input Password is visible");
+        return this;
+    }
+
+    private boolean isInputLoginVisible() {
+        try {
+            return inputLogin.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean isInputPasswordVisible() {
+        try {
+            return inputPassword.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
