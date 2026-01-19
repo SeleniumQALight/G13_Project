@@ -1,28 +1,32 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.openqa.selenium.By;
+import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage{
     private Logger logger= Logger.getLogger(getClass());
-
-    @FindBy(xpath = "//a[text()='Create Post']")
-    private WebElement createNewPostButton;
-
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void checkIsButtonSignOutVisible(){
-        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
-        logger.info("Button Sign Out is visible");
+    @FindBy(xpath = "//button[text()='Sign Out']")
+    private WebElement buttonSignOut;
+
+    @FindBy(xpath = ".//a[@href='/create-post']")
+    private WebElement buttonCreatePost;
+
+
+    public HomePage checkIsButtonSignOutVisible(){
+        checkIsElementEnabled(buttonSignOut);
+        return this;
     }
 
-    public boolean isButtonSignOutVisible() {
+    //приклад альтернативного способу перевірки видимості елемента
+/*    public boolean isButtonSignOutVisible() {
         try {
             boolean state = webDriver.findElement(
                     By.xpath("//button[text()='Sign Out']")).isDisplayed();
@@ -32,7 +36,7 @@ public class HomePage extends ParentPage{
             logger.info("Sign Out Element is not found");
             return false;
         }
-    }
+    }*/
 
     public HomePage checkIsRedirectToHomePage() {
         //TODO Check URL
@@ -40,8 +44,41 @@ public class HomePage extends ParentPage{
         return this;
     }
 
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
+
     public CreatePostPage clickOnButtonCreateNewPost() {
-        clickOnElement(createNewPostButton);
+        clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
     }
+
+    public HomePage checkIsButtonCreatePostVisible() {
+        checkIsElementEnabled(buttonCreatePost);
+        return this;
+    }
+
+
+    public HomePage checkIsNotButtonSignOutVisible() {
+        checkIsNotElementVisible(buttonSignOut);
+        return this;
+    }
+
+    public HomePage openHomePageAndLoginIfNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if (isElementEnabled(buttonSignOut)) {
+            logger.info("User is already logged in");
+            return this;
+        } else {
+            loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN)
+                    .enterTextIntoInputPassword(TestData.VALID_PASSWORD)
+                    .clickOnButtonSignIn();
+                    checkIsButtonSignOutVisible();
+                    logger.info("User was logged in successfully");
+        }
+        return this;
+    }
+
+
 }
