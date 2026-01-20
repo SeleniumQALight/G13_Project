@@ -1,11 +1,13 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage{
     private Logger logger = Logger.getLogger(getClass());
@@ -14,7 +16,11 @@ public class HomePage extends ParentPage{
     private WebElement buttonSignOut;
 
     public HomePage(WebDriver webDriver) {
-        super(webDriver);
+        super(webDriver);}
+
+        public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+            return new HeaderForLoggedUserElement(webDriver);
+
     }
 
     public void checkIsButtonSignOutVisible(){
@@ -55,5 +61,21 @@ public class HomePage extends ParentPage{
             logger.info("Sign Out button is not visible (ok)");
         }
     }
+
+    public HomePage openHomePageAndLoginNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if (isButtonSignOutVisible()) {
+            logger.info("User is already logged in");
+        }else {
+            loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN)
+                    .enterTextIntoInputPassword(TestData.VALID_PASSWORD)
+                    .clickOnButtonSignIn();
+            checkIsRedirectToHomePage();
+            logger.info("User was logged in successfully");
+        }
+        return this;
+    }
+
 
 }

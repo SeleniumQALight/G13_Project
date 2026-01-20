@@ -1,11 +1,13 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HederForLoggedUserElement;
 
 public class HomePage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -16,9 +18,19 @@ public class HomePage extends ParentPage {
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
+
+    public HederForLoggedUserElement getHederForLoggedUserElement() {
+        return  new HederForLoggedUserElement(webDriver);
+    }
     public void checkIsButtonSignOutVisible(){
         Assert.assertTrue("Button Sign Out is NOT visible",isButtonSingOutVisible());
         logger.info("Button Sign Out is visible");
+    }
+
+
+    public void checkIsButtonSignOutNotVisible(){
+        Assert.assertFalse("Button Sign Out is visible",isButtonSingOutVisible());
+        logger.info("Button Sign Out is not visible");
     }
 
     public boolean isButtonSingOutVisible() {
@@ -42,5 +54,38 @@ public class HomePage extends ParentPage {
     public CreatePostPage clickOnButtonCreatePost() {
         clickOnElement(createNewPostButton);
         return new CreatePostPage(webDriver);
+    }
+
+    public HomePage openHomePageAndLoginIfNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if (isButtonSingOutVisible()) {
+            logger.info("User is already logged in");
+        } else {
+           loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
+                     .enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI)
+                     .clickOnButtonSignIn();
+           checkIsRedirectToHomePage();
+           logger.info("User was logged in");
+        }
+        return  this;
+    }
+
+
+    public void checkIsButtonCreatePostVisible(){
+        Assert.assertTrue("Button CreatePost is NOT visible",isButtonCreatePostVisible());
+        logger.info("Button CreatePost is visible");
+    }
+
+    public boolean isButtonCreatePostVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath(
+                    "//a[text()='Create Post']")).isDisplayed();
+            logger.info("Element state:" + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found");
+            return false;
+        }
     }
 }

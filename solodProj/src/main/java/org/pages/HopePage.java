@@ -1,11 +1,13 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HopePage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -45,4 +47,22 @@ public class HopePage extends ParentPage {
     }
 
 
+    public HopePage openHomePageAndLoginIfNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if (isButtonSingOutVisible()) {
+            logger.info("User is already logged in");
+        } else {
+            loginPage.enterTextInputLogin(TestData.VALID_LOGIN_UI)
+                    .enterTextInputPassword(TestData.VALID_PASSWORD_UI)
+                    .clickOnButtonSingIn();
+            checkIsRedirectToHomePage();
+            logger.info("User was logged in");
+        }
+        return this;
+    }
+
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
 }

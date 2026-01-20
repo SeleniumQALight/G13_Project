@@ -17,6 +17,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//p[contains(text(), 'Is this post unique')]")
     private WebElement stateIsThisPostUnique;
 
+    @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
+    private WebElement buttonDeletePost;
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -48,5 +51,15 @@ public class PostPage extends ParentPage {
         Assert.assertEquals("Unique post checkbox state is correct: ", actualText, expectedText);
         logger.info("Unique post checkbox state is correct: " + expectedState);
         return this;
+    }
+
+    public PostPage checkIsRedirectToPostPage() {
+        // TODO check URL and unique element
+        return this;
+    }
+
+    public MyProfilePage clickOnDeleteButton() {
+        clickOnElement(buttonDeletePost);
+        return new MyProfilePage(webDriver);
     }
 }

@@ -1,9 +1,11 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage{
     private Logger logger= Logger.getLogger(getClass());
@@ -18,8 +20,9 @@ public class HomePage extends ParentPage{
     private WebElement buttonCreatePost;
 
 
-    public void checkIsButtonSignOutVisible(){
+    public HomePage checkIsButtonSignOutVisible(){
         checkIsElementEnabled(buttonSignOut);
+        return this;
     }
 
     //приклад альтернативного способу перевірки видимості елемента
@@ -41,6 +44,10 @@ public class HomePage extends ParentPage{
         return this;
     }
 
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
+
     public CreatePostPage clickOnButtonCreateNewPost() {
         clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
@@ -56,4 +63,22 @@ public class HomePage extends ParentPage{
         checkIsNotElementVisible(buttonSignOut);
         return this;
     }
+
+    public HomePage openHomePageAndLoginIfNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if (isElementEnabled(buttonSignOut)) {
+            logger.info("User is already logged in");
+            return this;
+        } else {
+            loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN)
+                    .enterTextIntoInputPassword(TestData.VALID_PASSWORD)
+                    .clickOnButtonSignIn();
+                    checkIsButtonSignOutVisible();
+                    logger.info("User was logged in successfully");
+        }
+        return this;
+    }
+
+
 }
