@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class MyProfilePage extends ParentPage {
+
     private Logger logger = Logger.getLogger(getClass());
 
     //параматрезований локатор - стрінга
