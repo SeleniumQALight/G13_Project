@@ -15,8 +15,11 @@ public class LoginTestWithPageObject extends BaseTest {
                 .enterTextIntoInputPassword(VALID_PASSWORD)
                 .clickOnButtonSignIn();
 
-        pageProvider.getHomePage().checkIsButtonSignOutVisible();
-        pageProvider.getHomePage().checkIsButtonCreatePostVisible();
+        pageProvider.getHomePage()
+                .checkIsRedirectToHomePage()
+                .getHeaderForLoggedUserElement()
+                .checkIsButtonSignOutVisible()
+                .checkIsButtonCreatePostVisible();
         pageProvider.getLoginPage().checkIsLoginInputNotVisible();
         pageProvider.getLoginPage().checkIsPasswordInputNotVisible();
     }
@@ -29,7 +32,32 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
         pageProvider.getHomePage().checkIsButtonSignOutIsNotVisible();
-        pageProvider.getLoginPage().checkIsButtonSignInVisible();
+        pageProvider.getLoginPage()
+                .getHeaderForLoggedUserElement()
+                .checkIsButtonSignInVisible();
         pageProvider.getLoginPage().checkIsErrorMessageIsVisibleWithText("Invalid username/password.");
+    }
+
+    @Test
+    public void signOut(){
+        pageProvider.getLoginPage().openLoginPageAndFillLoginFormWithValidCred()
+                .checkIsRedirectToHomePage()
+                .getHeaderForLoggedUserElement()
+                .checkIsButtonSearchVisible()
+                .checkIsButtonChatVissible()
+                .checkIsButtonMyProfileVisible()
+                .checkIsButtonCreatePostVisible()
+                .checkIsButtonSignOutVisible()
+                .clickOnButtonSignOut()
+                .checkIsRedirectToLoginPage()
+                .getHeaderForLoggedUserElement()
+                .checkIsButtonSearchIsNotVisible()
+                .checkIsButtonChatIsNotVissible()
+                .checkIsButtonMyProfileIsNotVisible()
+                .checkIsButtonCreatePostIsNotVisible()
+                .checkIsButtonSignOutIsNotVisible()
+                .checkIsLoginInputVisible()
+                .checkIsPasswordInputVisible()
+                .checkIsButtonSignInVisible();
     }
 }

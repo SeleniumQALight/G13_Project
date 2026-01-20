@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class LoginPage extends ParentPage {
   private Logger logger = Logger.getLogger(getClass());
@@ -17,7 +18,7 @@ public class LoginPage extends ParentPage {
   private WebElement inputPassword;
 
   @FindBy(xpath = "//button[text()='Sign In']")
-  private WebElement buttonSignIn;
+  private WebElement buttonSignIn; // Need to delete from here?
 
   @FindBy(xpath = "//div[text() = 'Invalid username/password.']")
   private WebElement invalidUsernamePasswordMessage;
@@ -25,12 +26,15 @@ public class LoginPage extends ParentPage {
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
-
-
-    public void checkIsButtonSignInVisible(){
-        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
-        logger.info("Button SignIn is visible");
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
+
+
+//    public void checkIsButtonSignInVisible(){
+//        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
+//        logger.info("Button SignIn is visible");
+//    }
 
     public void checkIsErrorMessageVisibleWithText(){
         Assert.assertTrue("Message \"Invalid username/password.\" is not visible",
@@ -85,5 +89,11 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkIsRedirectToLoginPage() {
+        // TODO Check URL
+        // TODO check some unique element on LoginPage
+        return this;
     }
 }
