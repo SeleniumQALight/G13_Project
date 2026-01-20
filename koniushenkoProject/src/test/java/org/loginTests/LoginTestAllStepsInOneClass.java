@@ -73,10 +73,10 @@ public class LoginTestAllStepsInOneClass {
         webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
         logger.info("Button 'Sign In' was clicked");
 
-        Assert.assertFalse("User is not LoggedIn: button SignOut is visible",isButtonSingOutVisible());
-        Assert.assertTrue("User is not loggedIn: button SignIn is NOT visible",
+        Assert.assertFalse("User is LoggedIn: button SignOut is visible",isButtonSingOutVisible());
+        Assert.assertTrue("User is loggedIn: button SignIn is NOT visible",
                 isButtonSingInVisible());
-        Assert.assertTrue("User is not loggedIn: Text error 'Invalid username/password' is NOT visible", isTextErrorInvalidDataVisible());
+        Assert.assertTrue("User is loggedIn: Text error 'Invalid username/password' is NOT visible", isTextErrorInvalidDataVisible());
 
 
 

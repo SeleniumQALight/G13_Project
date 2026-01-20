@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class BaseTest {
     private WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass());
+    public Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
     @Before

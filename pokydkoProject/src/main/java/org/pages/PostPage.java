@@ -8,6 +8,8 @@ import org.pages.elements.HeaderForLoggedUserElement;
 public class PostPage extends ParentPage {
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     private WebElement messagePostWasCreatedSuccessfully;
+    @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
+    private WebElement buttonDeletePost;
 
     @FindBy(xpath = "//p[contains(text(),'Is this post unique?')]")
     private WebElement isPostUnique;
@@ -40,5 +42,10 @@ public class PostPage extends ParentPage {
     public PostPage checkIsPostUnique(String expectedText) {
         checkTextInElement(isPostUnique, "Is this post unique? : " + expectedText);
         return this;
+    }
+
+    public MyProfilePage clickOnDeleteButton() {
+        clickOnElement(buttonDeletePost);
+        return new MyProfilePage(webDriver);
     }
 }

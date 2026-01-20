@@ -144,4 +144,15 @@ public class CommonActionsWithElements {
          Assert.fail("Error while working with element");
      }
 
- }
+    public static class MyProfilePage extends ParentPage {
+
+        public MyProfilePage(WebDriver webDriver) {
+            super(webDriver);
+        }
+
+        public MyProfilePage checkIsRedirectToMyProfilePage() {
+            // TODO: implement check by URL or unique element
+            return this;
+        }
+    }
+}

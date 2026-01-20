@@ -2,6 +2,8 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -59,4 +61,72 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return  new HomePage(webDriver);
     }
+    public void checkIsButtonSingInVisible() {
+        Assert.assertTrue("Button SignIn is NOT visible", isButtonSingInVisible());
+        logger.info("Button SignIn is visible");
+    }
+
+    public boolean isButtonSingInVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath(
+                    "//button[text()='Sign In']")).isDisplayed();
+            logger.info("SignIn button is found:" + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("SignIn button is not found");
+            return false;
+        }
+    }
+
+    public void checkIsTextErrorInvalidDataVisible() {
+        Assert.assertTrue("Text error 'Invalid username/password' is NOT visible",
+                isTextErrorInvalidDataVisible());
+        logger.info("Text error 'Invalid username/password' is visible");
+    }
+
+    private boolean isTextErrorInvalidDataVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//div[text()='Invalid username/password.']")).isDisplayed();
+            logger.info("Text error 'Invalid username/password' is found: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Text error 'Invalid username/password' is not found");
+            return false;
+        }
+    }
+
+    public void checkIsInputLoginNotVisible() {
+        Assert.assertFalse("Input Login is visible", isInputLoginIsVisible());
+        logger.info("Input Login is NOT visible");
+    }
+
+    private boolean isInputLoginIsVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath(
+                    "//input[@placeholder='Username']")).isDisplayed();
+            logger.info("Input Login is found:" + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Input Login is not found");
+            return false;
+        }
+    }
+
+    public void checkIsInputPasswordNotVisible() {
+        Assert.assertFalse("Input Password is visible", isInputPasswordIsVisible());
+        logger.info("Input Password is NOT visible");
+    }
+
+    private boolean isInputPasswordIsVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath(
+                    "//input[@placeholder='Password']")).isDisplayed();
+            logger.info("Input Password is found:" + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Input Password is not found");
+            return false;
+        }
+    }
+
 }

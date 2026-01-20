@@ -17,4 +17,6 @@ public class PageProvider {
         return new HomePage(webDriver);
     }
 
+    public MyProfilePage getMyProfilePage() {return new MyProfilePage(webDriver);}
+
 }
