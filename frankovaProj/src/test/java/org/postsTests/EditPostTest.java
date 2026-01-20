@@ -2,19 +2,21 @@ package org.postsTests;
 
 import org.baseTest.BaseTest;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-public class CreateNewPostTest extends BaseTest {
+public class EditPostTest extends BaseTest {
 
-    private final String POST_TITLE = "G13 Frankova11";
+    private final String POST_TITLE = "G13 Frankova11111";
+    private final String UPDATED_POST_TITLE = "G13 FrankovaUpdated";
 
-    @Test
-    public void createNewPost(){
+    @Before
+    public void logInAndCreatePost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
                 .getHeaderForLoggedUserElement().clickOnButtonCreateNewPost()
-        .checkIsRedirectToCreatePostPage()
+                .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 Frankova Some Body")
                 .selectTextInDropdownAccess("Приватне повідомлення")
@@ -27,10 +29,26 @@ public class CreateNewPostTest extends BaseTest {
                 .checkStateOfCheckboxInCreatedPost("check")
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
 
+
+    }
+
+
+    @Test
+    public void editPostTest() {
         pageProvider.getMyProfilePage()
                 .checkIsRedirectToMyProfilePage()
-                .checkIsPostWithTitlePresent(POST_TITLE, 1);
-
+                .checkIsPostWithTitlePresent(POST_TITLE, 1)
+                .clickOnPostWithTitle(POST_TITLE)
+                .checkIsRedirectToPostPage()
+                .clickOnEditPostButton()
+                .checkIsRedirectToEditPostPage()
+                .enterTextIntoInputTitleEdit(UPDATED_POST_TITLE)
+                .clickOnButtonSaveUpdates()
+                .clickOnBackToPostPermalink()
+                .checkIsRedirectToPostPage()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .checkIsPostWithTitlePresent(UPDATED_POST_TITLE, 1);
     }
 
     @After
@@ -40,6 +58,10 @@ public class CreateNewPostTest extends BaseTest {
                 .openHomePageAndLoginIfNeeded()
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
+                .deletePostsTillPresent(UPDATED_POST_TITLE)
                 .deletePostsTillPresent(POST_TITLE);
     }
+
+
 }
+

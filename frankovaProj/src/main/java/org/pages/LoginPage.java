@@ -5,6 +5,7 @@ import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -25,6 +26,9 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
 
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
@@ -47,15 +51,17 @@ public class LoginPage extends ParentPage {
     return this;
     }
 
-    public void clickOnButtonSignIn() {
+    public HomePage clickOnButtonSignIn() {
         //webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
         /*buttonSignIn.click();
         logger.info("Button SignIn was clicked");*/
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
-    public void checkIsButtonSignInVisible(){
+    public LoginPage checkIsButtonSignInVisible(){
         checkIsElementEnabled(buttonSignIn);
+        return this;
     }
 
     public void checkIsErrorMessageInvalidCredVisible(){
@@ -66,9 +72,19 @@ public class LoginPage extends ParentPage {
         checkIsNotElementVisible(inputLogin);
     }
 
+    public LoginPage checkIsInputLoginVisible(){
+        checkIsElementEnabled(inputLogin);
+        return this;
+    }
+
 
     public void checkIsNotInputPasswordVisible(){
         checkIsNotElementVisible(inputPassword);
+    }
+
+    public LoginPage checkIsInputPasswordVisible(){
+        checkIsElementEnabled(inputPassword);
+        return this;
     }
 
 
@@ -78,6 +94,12 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkIsRedirectToLoginPage() {
+        //TODO Check URL
+        //TODO check some unique element
+        return this;
     }
 
 

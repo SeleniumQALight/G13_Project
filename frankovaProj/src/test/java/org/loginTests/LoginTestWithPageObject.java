@@ -12,10 +12,9 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().openLoginPage()
                 .enterTextIntoInputLogin(VALID_LOGIN)
                 .enterTextIntoInputPassword(VALID_PASSWORD)
-                .clickOnButtonSignIn();
-
-        pageProvider.getHomePage().checkIsButtonSignOutVisible();
-        pageProvider.getHomePage().checkIsButtonCreatePostVisible();
+                .clickOnButtonSignIn()
+        .getHeaderForLoggedUserElement().checkIsButtonSignOutVisible()
+       .checkIsButtonCreatePostVisible();
         pageProvider.getLoginPage().checkIsNotInputLoginVisible();
         pageProvider.getLoginPage().checkIsNotInputPasswordVisible();
     }
@@ -28,8 +27,8 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().enterTextIntoInputPassword("invalid_password");
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
-        pageProvider.getLoginPage().checkIsButtonSignInVisible();
-        pageProvider.getHomePage().checkIsNotButtonSignOutVisible();
+        pageProvider.getLoginPage().checkIsButtonSignInVisible()
+                .getHeaderForLoggedUserElement().checkIsNotButtonSignOutVisible();
         pageProvider.getLoginPage().checkIsErrorMessageInvalidCredVisible();
     }
 }

@@ -54,24 +54,8 @@ public class CreatePostPage extends ParentPage {
         return this;
     }
 
-    public CreatePostPage enterStateForCheckbox(String state) {
-        if (state == null || state.trim().isEmpty()) {
-            logger.info("State for checkbox is null or empty");
-            throw new AssertionError("State for checkbox is null or empty");
-        }
-
-        String s = state.trim().toLowerCase();
-        switch (s) {
-            case "check":
-                checkCheckbox(checkboxUniquePost);
-                break;
-            case "uncheck":
-                uncheckCheckbox(checkboxUniquePost);
-                break;
-            default:
-                logger.info("State for checkbox is incorrect: " + state);
-                throw new AssertionError("Incorrect checkbox state: " + state);
-        }
+    public CreatePostPage enterStateForCheckboxUniquePost(String state) {
+        enterStateForCheckbox(state, checkboxUniquePost);
         return this;
     }
 

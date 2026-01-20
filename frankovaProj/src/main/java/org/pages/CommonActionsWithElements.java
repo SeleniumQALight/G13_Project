@@ -70,6 +70,28 @@ public class CommonActionsWithElements {
          }
      }
 
+
+
+    protected void enterStateForCheckbox(String state, WebElement webElement) {
+        if (state == null || state.trim().isEmpty()) {
+            logger.info("State for checkbox is null or empty");
+            throw new AssertionError("State for checkbox is null or empty");
+        }
+
+        String s = state.trim().toLowerCase();
+        switch (s) {
+            case "check":
+                checkCheckbox(webElement);
+                break;
+            case "uncheck":
+                uncheckCheckbox(webElement);
+                break;
+            default:
+                logger.info("State for checkbox is incorrect: " + state);
+                throw new AssertionError("Incorrect checkbox state: " + state);
+        }
+    }
+
      protected void checkCheckbox (WebElement webElement){
          try {
              if (!webElement.isSelected()) {
@@ -144,15 +166,5 @@ public class CommonActionsWithElements {
          Assert.fail("Error while working with element");
      }
 
-    public static class MyProfilePage extends ParentPage {
 
-        public MyProfilePage(WebDriver webDriver) {
-            super(webDriver);
-        }
-
-        public MyProfilePage checkIsRedirectToMyProfilePage() {
-            // TODO: implement check by URL or unique element
-            return this;
-        }
-    }
 }
