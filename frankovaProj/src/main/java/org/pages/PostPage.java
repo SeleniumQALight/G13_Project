@@ -21,6 +21,11 @@ public class PostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeURL() {
+        return "/post/[a-zA-Z0-9]*";
+    }
+
     private Logger logger = Logger.getLogger(getClass());
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
@@ -28,7 +33,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        //TODO check URL
+        checkUrlWithPattern();
         //TODO check some unique element on PostPage
         return this;
     }
