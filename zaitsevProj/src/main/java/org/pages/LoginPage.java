@@ -26,6 +26,11 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
 
     public void checkIsButtonSignInVisible(){
         Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
