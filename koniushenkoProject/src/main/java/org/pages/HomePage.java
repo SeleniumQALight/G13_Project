@@ -28,6 +28,11 @@ public class HomePage extends ParentPage {
     }
 
 
+    public void checkIsButtonSignOutNotVisible(){
+        Assert.assertFalse("Button Sign Out is visible",isButtonSingOutVisible());
+        logger.info("Button Sign Out is not visible");
+    }
+
     public boolean isButtonSingOutVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath(
@@ -66,4 +71,21 @@ public class HomePage extends ParentPage {
         return  this;
     }
 
+
+    public void checkIsButtonCreatePostVisible(){
+        Assert.assertTrue("Button CreatePost is NOT visible",isButtonCreatePostVisible());
+        logger.info("Button CreatePost is visible");
+    }
+
+    public boolean isButtonCreatePostVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath(
+                    "//a[text()='Create Post']")).isDisplayed();
+            logger.info("Element state:" + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found");
+            return false;
+        }
+    }
 }

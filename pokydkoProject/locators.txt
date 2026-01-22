@@ -1,6 +1,37 @@
 #LoginPage
-input.login=
-input.password =
+input.login= //input[@placeholder='Username']
+input.password = //input[@placeholder='Password']
+button.signIn = //button[text()='Sign In']
+input.username = //input[@placeholder='Pick a username']
+input.email = //input[@placeholder='you@example.com']
+input.newPassword = //input[@placeholder='Create a password']
+button.signUpForOurApp = //button[text()='Sign up for OurApp']
 
-#HomePage
-button.SignOut = ""
+
+#HomePage (Header locators)
+link.search = //a[@href='#']
+link.chat = //span[@data-original-title='Chat']
+image.myProfile = //img[@alt='My profile']
+button.createPost = //a[@href='/create-post']
+button.SignOut = //button[text()='Sign Out']
+
+#CreatePostPage
+input.title = //input[@id='post-title']
+input.bodyContent = //textarea[@id='post-body']
+checkbox.isThisPostUnique = //input[@name='uniquePost']
+dropdown.selectValue = //select[@id='select1']
+button.saveNewPost = //button[text()='Save New Post']
+
+#PostPage
+message.successPostCreation = //div[@class='alert alert-success text-center']
+text.title = //h2
+button.editPost = --TODO
+button.deletePost = //button[@class='delete-post-button text-danger']
+text.noteChosenValue = //i --//div[@class='body-content'][1]
+text.isThisPostUnique = --TODO
+text.bodyContent = //div[@class='body-content'][2]
+
+#MyProfilePage
+link.myPosts = //a[@class='profile-nav-link nav-item nav-link active']
+link.followers = //a[@class='profile-nav-link nav-item nav-link '][1]
+link.following = //a[@class='profile-nav-link nav-item nav-link '][2]
