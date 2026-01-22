@@ -40,10 +40,6 @@ public class CreateNewPostTest extends BaseTest {
                 .deletePosTitlePresent(POST_TITLE);
 
         }
-
-
-
-
     }
 
 

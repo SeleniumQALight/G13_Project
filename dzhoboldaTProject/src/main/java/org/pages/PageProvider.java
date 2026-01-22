@@ -6,6 +6,9 @@ public class PageProvider {
     private final WebDriver webDriver;
     private LoginPage loginPage;
     private HomePage homePage;
+    // ОСЬ ЦІ ДВА РЯДКИ МАЮТЬ БУТИ ТУТ:
+    private PostPage postPage;
+    private CreatePostPage createPostPage;
 
     public PageProvider(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -29,4 +32,19 @@ public class PageProvider {
         return new MyProfilePage(webDriver);
     }
 
+    // Ці методи мають бути ВСЕРЕДИНІ останньої дужки
+    public PostPage getPostPage() {
+        if (postPage == null) {
+            postPage = new PostPage(webDriver);
+        }
+        return postPage;
+    }
+
+    public CreatePostPage getCreatePostPage() {
+        if (createPostPage == null) {
+            createPostPage = new CreatePostPage(webDriver);
+        }
+        return createPostPage;
+    }
 }
+

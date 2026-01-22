@@ -65,4 +65,26 @@ public class MyProfilePage extends ParentPage {
         checkIsElementEnabled(successMessageDelete);
         return this;
     }
+
+    public MyProfilePage checkPostWithTitleVisible(String title) {
+        checkIsElementDisplayed(
+                webDriver.findElement(By.xpath("//a[text()='" + title + "']"))
+        );
+        return this;
+    }
+
+    public PostPage clickOnPostWithTitle(String title) {
+        WebElement post = webDriver.findElement(By.xpath(String.format(".//*[text()='%s']", title)));;
+        post.click();
+        return new PostPage(webDriver); // возвращаем PostPage для редактирования
+    }
+
+
+
+
+
+
+
+
+
 }

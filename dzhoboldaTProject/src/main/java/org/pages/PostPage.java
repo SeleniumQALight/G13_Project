@@ -1,22 +1,39 @@
 package org.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.pages.elements.HeaderForLoggedUserElement;
 
-public class PostPage extends ParentPage {
-    @FindBy(xpath = "//*[@class='alert alert-success text-center']")
+import java.time.Duration;
 
+public class PostPage extends ParentPage {
+
+
+    @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     private WebElement messagePostWasCreatedSuccessfully;
+
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
+
+    @FindBy(xpath = "//a[text()='Edit']")
+    private WebElement buttonEditPost;
+
+    @FindBy(xpath = "//input[@name='title']")
+    private WebElement inputTitle;
+
+    @FindBy(xpath = "//button[text()='Save Updates']")
+    private WebElement buttonSaveUpdates;
+
 
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
-//        PageFactory.initElements(webDriver, this); // инициализация @FindBy элементов
+        PageFactory.initElements(webDriver, this); // инициализация @FindBy элементов
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
@@ -44,5 +61,25 @@ public class PostPage extends ParentPage {
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDeletePost);
         return new MyProfilePage(webDriver);
+    }
+
+
+    public PostPage editPostTitle(String newTitle) {
+        clickOnElement(buttonEditPost);
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(inputTitle));
+        clearAndEnterTextIntoElement(inputTitle, newTitle);
+        clickOnElement(buttonSaveUpdates);
+        return this;
+    }
+
+    public PostPage clickOnSavedPost(String title) {
+        // Ждем, пока пост появится на странице (явное ожидание)
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        WebElement post = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[text()='" + title + "']")
+        ));
+        post.click();
+        return new PostPage(webDriver);
     }
 }
