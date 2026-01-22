@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -101,6 +102,39 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
+    //accept Alert using class Actions
+    protected void acceptAlert() {
+        try {
+            webDriverWait10.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //scroll to element using Actions class
+    protected void scrollToElement(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement).perform();
+            logger.info("Scrolled to element " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //open new browser tab using JavaScript
+    protected void openNewTab() {
+        try {
+            ((org.openqa.selenium.JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New browser tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
 
     private String getElementName(WebElement webElement) {
         try {
