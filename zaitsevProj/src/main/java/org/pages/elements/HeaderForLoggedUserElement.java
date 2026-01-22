@@ -27,14 +27,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElement {
     @FindBy(xpath = "//button[text()='Sign Out']")
     private WebElement buttonSignOut;
 
-    @FindBy(xpath = "//button[text()='Sign In']")
-    private WebElement buttonSignIn;
 
-    @FindBy(xpath = "//input[@placeholder='Username']")
-    private WebElement inputLogin;
-
-    @FindBy(xpath = "//input[@placeholder='Password']")
-    private WebElement inputPassword;
 
     public HeaderForLoggedUserElement(WebDriver webDriver) {
         super(webDriver);
@@ -43,6 +36,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElement {
     public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
+    }
+    public LoginPage getLoginPage(){
+        return new LoginPage(webDriver);
     }
 
 
@@ -61,12 +57,6 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElement {
     public HeaderForLoggedUserElement checkIsButtonMyProfileVisible() {
         Assert.assertTrue("Button MyProfile is not visible", isElementDisplayed(buttonMyProfile));
         logger.info("Button MyProfile is visible");
-        return this;
-    }
-
-    public HeaderForLoggedUserElement checkIsButtonSignInVisible(){
-        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
-        logger.info("Button SignIn is visible");
         return this;
     }
 
@@ -114,18 +104,6 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElement {
     public HeaderForLoggedUserElement checkIsButtonSignOutIsNotVisible() {
         Assert.assertFalse("Button SignOut is visible",isElementDisplayed(buttonSignOut));
         logger.info("Button SignOut is not visible");
-        return this;
-    }
-
-    public HeaderForLoggedUserElement checkIsLoginInputVisible(){
-        Assert.assertTrue("Login input is not visible", isElementDisplayed(inputLogin));
-        logger.info("Login input is not visible");
-        return this;
-    }
-
-    public HeaderForLoggedUserElement checkIsPasswordInputVisible(){
-        Assert.assertTrue("Password input is not visible", isElementDisplayed(inputPassword));
-        logger.info("Password input is not visible");
         return this;
     }
 }

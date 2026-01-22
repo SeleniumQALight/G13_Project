@@ -30,18 +30,6 @@ public class LoginPage extends ParentPage {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-
-//    public void checkIsButtonSignInVisible(){
-//        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
-//        logger.info("Button SignIn is visible");
-//    }
-
-    public void checkIsErrorMessageVisibleWithText(){
-        Assert.assertTrue("Message \"Invalid username/password.\" is not visible",
-                isElementDisplayed(invalidUsernamePasswordMessage));
-        logger.info("Message \"Invalid username/password.\" is visible");
-    }
-
     public void checkIsErrorMessageIsVisibleWithText (String expectedText){
         Assert.assertTrue("Error message is not visible", isElementDisplayed(invalidUsernamePasswordMessage));
         logger.info("Error message is visible: " + expectedText);
@@ -94,6 +82,24 @@ public class LoginPage extends ParentPage {
     public LoginPage checkIsRedirectToLoginPage() {
         // TODO Check URL
         // TODO check some unique element on LoginPage
+        return this;
+    }
+
+    public LoginPage checkIsLoginInputVisible(){
+        Assert.assertTrue("Login input is not visible", isElementDisplayed(inputLogin));
+        logger.info("Login input is not visible");
+        return this;
+    }
+
+    public LoginPage checkIsPasswordInputVisible(){
+        Assert.assertTrue("Password input is not visible", isElementDisplayed(inputPassword));
+        logger.info("Password input is not visible");
+        return this;
+    }
+
+    public LoginPage checkIsButtonSignInVisible(){
+        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
+        logger.info("Button SignIn is visible");
         return this;
     }
 }
