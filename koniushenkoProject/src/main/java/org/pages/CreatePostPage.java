@@ -19,8 +19,14 @@ public class CreatePostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/create-post";
+    }
+
+
     public CreatePostPage checkIsRedirectToCreateNewPostPage() {
-        //TODO Check URL
+        checkUrl();
         //TODO check some unique element on Create Post Page
         return this;
     }
