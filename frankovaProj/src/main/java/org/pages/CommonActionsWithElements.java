@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -86,6 +87,29 @@ public class CommonActionsWithElements {
             String actualText = webElement.getText();
             Assert.assertEquals(getElementName(webElement) + "Text in element is not as expected", expectedText, actualText);
             logger.info("Text in element is as expected: " + expectedText);
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //accept alert using actions
+    protected void acceptAlert() {
+        try {
+            webDriverWait10.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //scroll to element using actions class
+    protected void scrollToElement(WebElement webElement) {
+        try {
+           Actions actions = new org.openqa.selenium.interactions.Actions(webDriver);
+           actions.moveToElement(webElement);
+           actions.perform();
+            logger.info("Scrolled to element " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest();
         }
