@@ -19,12 +19,17 @@ public class PostPage extends ParentPage {
 //        PageFactory.initElements(webDriver, this); // инициализация @FindBy элементов
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        // TODO Check URL
+        checkUrlWithPattern();
         // TODO Check unique element
         return this;
     }
