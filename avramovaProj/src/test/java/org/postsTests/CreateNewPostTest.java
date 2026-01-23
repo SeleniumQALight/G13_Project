@@ -3,7 +3,7 @@ package org.postsTests;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
-import org.utils.Utils_Custom;
+import org.utilits.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
     private final String POST_TITLE = "TC01 G13 Avramova"+ Utils_Custom.getDateAndTimeFormatted();

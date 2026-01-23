@@ -20,12 +20,17 @@ public class PostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        //TODO  check URL
+        checkUrlWithPattern();
         //TODO check some unique element on the Page
         return this;
     }
