@@ -34,6 +34,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkPostWithTitelProfile(POST_TITLE, 1);
     }
 
+
         @After
         public  void deletePost(){
         logger.info("Post condition - delete post");
