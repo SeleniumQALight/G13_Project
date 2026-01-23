@@ -20,8 +20,14 @@ public class MyProfilePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/profile/[a-zA-Z0-9]*";
+    }
+
     public MyProfilePage checkIsRedirectToMyProfilePage() {
-        // TODO check URL and some unique element
+        checkUrlWithPattern();
+        // TODO check some unique element
         return this;
     }
 
@@ -63,5 +69,17 @@ public class MyProfilePage extends ParentPage {
     private MyProfilePage checkMessagePostWasDeleted() {
         checkElementIsEnabled(successMessageDelete);
         return this;
+    }
+
+    // methods to open post details by title
+    public PostPage openPostDetails(String postTitle, int postIndex){
+        List<WebElement> postsList = getPostListByTitle(postTitle);
+        if (postsList.size() >= postIndex){
+            clickOnElement(postsList.get(postIndex - 1));
+            logger.info("Post with title '" + postTitle + "' was opened");
+        } else {
+            Assert.fail("Post with title '" + postTitle + "' and index " + postIndex + " is not found");
+        }
+        return new PostPage(webDriver);
     }
 }

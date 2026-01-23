@@ -5,29 +5,51 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
+    protected WebDriverWait webDriverWait10, webDriverWait15;
     private Logger logger = Logger.getLogger(getClass());
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); //ініціалізує елементи описані через @FindBy
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
     protected void clearAndEnterTextIntoElement (WebElement webElement, String text) {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was input into element");
+            logger.info(text + " was input into element " + getElementName(webElement));
         }catch (Exception e){
             printErrorAndStopTest ();
         }
     }
+
+    protected void clickOnElement (WebElement webElement, String elementName) {
+        try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+            logger.info(elementName + " was clicked");
+        } catch (Exception e){
+            printErrorAndStopTest ();
+        }
+    }
+
+
     protected void clickOnElement (WebElement webElement) {
         try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName (webElement);
             webElement.click();
-            logger.info("Button was clicked");
+            logger.info(elementName + " was clicked");
         } catch (Exception e){
             printErrorAndStopTest ();
         }
@@ -37,7 +59,7 @@ public class CommonActionsWithElements {
         try {
             Select select = new Select(webElement);
             select.selectByVisibleText(text);
-            logger.info("Text '" + text + "' was selected in DropDown");
+            logger.info("Text '" + text + "' was selected in DropDown "+ getElementName(webElement));
         } catch (Exception e){
             printErrorAndStopTest ();
         }
@@ -47,9 +69,17 @@ public class CommonActionsWithElements {
         try {
             Select select = new Select(webElement);
             select.selectByValue(value);
-            logger.info("Value '" + value + "' was selected in DropDown");
+            logger.info("Value '" + value + "' was selected in DropDown "+ getElementName(webElement));
         } catch (Exception e){
             printErrorAndStopTest ();
+        }
+    }
+
+    private String getElementName(WebElement webElement) {
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
         }
     }
 
@@ -62,7 +92,7 @@ public class CommonActionsWithElements {
     protected boolean isElementEnabled (WebElement webElement) {
         try {
             boolean state = webElement.isEnabled();
-            logger.info("Element enabled:" + state);
+            logger.info(getElementName(webElement)+"Element enabled" + state);
             return state;
         } catch (Exception e) {
             logger.info("Element is not found");
@@ -73,7 +103,7 @@ public class CommonActionsWithElements {
         try {
             String actualText = webElement.getText();
             Assert.assertEquals("Text in element does not match expected text",expectedText, actualText);
-            logger.info("Text in element is as expected: " + expectedText);
+            logger.info("Text in element "+getElementName(webElement)+" is as expected: " + expectedText);
         }
         catch (Exception e){
             printErrorAndStopTest ();

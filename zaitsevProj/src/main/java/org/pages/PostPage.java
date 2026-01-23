@@ -24,14 +24,13 @@ public class PostPage extends ParentPage {
         super(webDriver);
     }
 
-    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
-        return new HeaderForLoggedUserElement(webDriver);
+    @Override
+    protected String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*";
     }
 
-    public PostPage checkIsRedirectToCreatePostPage() {
-        //TODO check URL
-        //TODO check some unique element on the page
-        return this;
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     //check success message that post was created
@@ -54,12 +53,13 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        // TODO check URL and unique element
+        checkUrlWithPattern();
+        // TODO check unique element
         return this;
     }
 
     public MyProfilePage clickOnDeleteButton() {
-        clickOnElement(buttonDeletePost);
+        clickOnElement(buttonDeletePost, "'Delete Post Button'");
         return new MyProfilePage(webDriver);
     }
 }
