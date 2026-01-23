@@ -12,10 +12,10 @@ import org.pages.elements.HeaderForLoggedUserElement;
 import java.time.Duration;
 
 public class PostPage extends ParentPage {
-
-
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     private WebElement messagePostWasCreatedSuccessfully;
+    @FindBy(xpath = ".//*[contains(text(), 'Is this post unique?')]")
+    private WebElement isPostUniqueText;
 
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
@@ -33,7 +33,12 @@ public class PostPage extends ParentPage {
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(webDriver, this); // инициализация @FindBy элементов
+//        PageFactory.initElements(webDriver, this); // инициализация @FindBy элементов
+    }
+
+    @Override
+    String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*";
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
@@ -41,7 +46,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        // TODO Check URL
+        checkUrlWithPattern();
         // TODO Check unique element
         return this;
     }
@@ -56,10 +61,14 @@ public class PostPage extends ParentPage {
         checkTextInElement(messagePostWasCreatedSuccessfully, textOfMessage);
         return this;
     }
+    public PostPage checkIsPostUnique(String expectedText) {
+        checkTextInElement(isPostUniqueText, "Is this post unique? : " + expectedText);
+        return this;
+    }
 
 
     public MyProfilePage clickOnDeleteButton() {
-        clickOnElement(buttonDeletePost);
+        clickOnElement(buttonDeletePost, "Delete Post Button");
         return new MyProfilePage(webDriver);
     }
 
