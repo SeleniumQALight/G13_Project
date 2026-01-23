@@ -18,8 +18,13 @@ public class EditPostPage extends ParentPage{
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*/edit";
+    }
+
     public EditPostPage checkIsRedirectToEditPostPage() {
-        //TODO check URL
+        checkUrlWithPattern();
         //TODO check some unique element on EditPostPage
         return this;
     }

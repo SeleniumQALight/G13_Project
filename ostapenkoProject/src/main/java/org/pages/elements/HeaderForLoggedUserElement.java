@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
 import org.pages.CreatePostPage;
 import org.openqa.selenium.NoSuchElementException;
+import org.pages.HomePage;
 import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
@@ -46,6 +47,11 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checksElementVisible(buttonSignOut, "Sing Out");
         logger.info("Button SingOut is visible");
         return this;
+    }
+
+
+    public HomePage getHomePage() {
+        return new HomePage(webDriver);
     }
 
     public HeaderForLoggedUserElement checksButtonSignOutNotVisible() {

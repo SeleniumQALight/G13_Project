@@ -184,8 +184,44 @@ public class CommonActionsWithElements {
         }
     }
 
+    public void openNewTab() {
+        try {
+            String currentUrl = webDriver.getCurrentUrl();
+            ((org.openqa.selenium.JavascriptExecutor) webDriver)
+                    .executeScript("window.open(arguments[0]);", currentUrl);
+            logger.info("New tab was opened with the same URL: " + currentUrl);
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    public void switchToNewTab(String mainTabHandle) {
+        try {
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(mainTabHandle)) {
+                    webDriver.switchTo().window(handle);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    public void closeNewTabAndSwitchToMainTab(String mainTabHandle) {
+        for (String handle : webDriver.getWindowHandles()) {
+            if (!handle.equals(mainTabHandle)) {
+                webDriver.switchTo().window(handle);
+                webDriver.close();
+            }
+        }
+        webDriver.switchTo().window(mainTabHandle);
+        logger.info("Closed new tab and switched back to main tab");
+    }
+
     private void printErrorAndStopTest() {
         logger.error("Error while working with element");
         Assert.fail("Error while working with element"); // wrote info into report
     }
+
 }

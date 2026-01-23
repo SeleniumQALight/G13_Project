@@ -2,9 +2,8 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage {
@@ -41,6 +40,27 @@ public class HomePage extends ParentPage {
             checkIsRedirectToHomePage();
             logger.info("User was logged in");
         }
+        return this;
+    }
+
+    public HomePage saveMainTabHandle() {
+        this.mainTabHandle = webDriver.getWindowHandle();
+        return this;
+    }
+
+    public HomePage openNewTabInBrowser() {
+        openNewTab();
+        return this;
+    }
+
+    public HomePage switchToNewTab() {
+        switchToNewTab(mainTabHandle);
+        return this;
+    }
+
+    public HomePage closeNewTabAndSwitchToMainTab() {
+        saveMainTabHandle();
+        closeNewTabAndSwitchToMainTab(mainTabHandle);
         return this;
     }
 
