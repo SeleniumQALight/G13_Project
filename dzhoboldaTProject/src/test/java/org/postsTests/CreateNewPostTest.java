@@ -1,6 +1,7 @@
 package org.postsTests;
 
 import org.baseTest.BaseTest;
+import org.junit.After;
 import org.junit.Test;
 import org.utils.Utils_Custom;
 
@@ -15,7 +16,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkRedirectToHomePage()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
-                .enterTextIntoInputTitle("G13 DZHOBOLDA")
+                .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 DZH  body text")
                 .setCheckboxUniquePostState("check") //new step from hom work 3 lesson
                 .selectTextInDropDownAccess("Приватне повідомлення")

@@ -11,6 +11,8 @@ public class PostPage extends ParentPage {
     private WebElement messagePostWasCreatedSuccessfully;
     @FindBy(xpath = ".//*[contains(text(), 'Is this post unique?')]")
     private WebElement isPostUniqueText;
+    @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
+    private WebElement buttonDeletePost;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
