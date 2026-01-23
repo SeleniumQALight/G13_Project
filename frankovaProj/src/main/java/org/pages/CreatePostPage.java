@@ -26,10 +26,14 @@ public class CreatePostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeURL() {
+        return "/create-post";}
+
     private Logger logger = Logger.getLogger(getClass());
 
     public CreatePostPage checkIsRedirectToCreatePostPage() {
-        //TODO check URL
+        checkUrl();
         //TODO check some unique element on CreatePostPage
         return this;
     }

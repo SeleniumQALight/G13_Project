@@ -2,7 +2,6 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,52 +10,29 @@ import org.pages.elements.HeaderForLoggedUserElement;
 public class HomePage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
 
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
-
-    @FindBy(xpath = "//a[text()='Create Post']")
-    private WebElement buttonCreatePost;
-
-    @FindBy(xpath = "//a[text()='Create Post']")
-    private WebElement createNewPostButton;
-
     public HomePage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-    public void checksButtonSignOutVisible() {
-        checksElementVisible(buttonSignOut, "Sing Out");
-        logger.info("Button SingOut is visible");
-    }
-
-    public void checksButtonSignOutNotVisible() {
-        checksElementNotVisible(buttonSignOut, "Sign Out");
-    }
-
-    public void checksButtonCreatePostVisible() {
-        checksElementVisible(buttonCreatePost, "Create Post");
-        logger.info("Button CreatePost is visible");
-    }
-
     public HomePage checkIsRedirectToHomePage() {
-        // TODO check URL
+        checkUrl();
         // TODO check some unique element on HomePage
         return this;
-    }
-
-    public CreatePostPage clickOnButtonCreatePost() {
-        clickOnElement(createNewPostButton);
-        return new CreatePostPage(webDriver);
     }
 
     public HomePage openHomePageAndLoginNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);
         loginPage.openLoginPage();
-        if (buttonSignOut.isDisplayed()) {
+        if (getHeaderForLoggedUserElement().isUserLoggedIn()) {
             logger.info("User is already logged in");
         } else {
             loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
@@ -67,6 +43,5 @@ public class HomePage extends ParentPage {
         }
         return this;
     }
-
 
 }

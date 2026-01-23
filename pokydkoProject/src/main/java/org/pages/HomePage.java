@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 import org.testdata.TestData;
 
-public class HomePage extends ParentPage{
+public class HomePage extends ParentPage {
 
     private Logger logger = Logger.getLogger(getClass());
 
@@ -20,28 +20,33 @@ public class HomePage extends ParentPage{
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeURL() {
+        return "/";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-    public void checkIsButtonSignOutVisible(){
+    public void checkIsButtonSignOutVisible() {
         Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         logger.info("Button Sign Out is visible");
     }
 
     public boolean isButtonSignOutVisible() {
-        try{
+        try {
             boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
             logger.info("Element state: " + state);
             return state;
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info("Element is not found");
             return false;
         }
     }
 
     public HomePage checkIsRedirectToHomePage() {
-        //TODO Check URL
+        checkUrl();
         //TODO check some unique element on HomePage
 
         return this;

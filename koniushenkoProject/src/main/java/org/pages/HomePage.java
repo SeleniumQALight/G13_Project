@@ -19,6 +19,12 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
+
     public HederForLoggedUserElement getHederForLoggedUserElement() {
         return  new HederForLoggedUserElement(webDriver);
     }
@@ -46,8 +52,7 @@ public class HomePage extends ParentPage {
     }
 
     public HomePage checkIsRedirectToHomePage() {
-        //TODO Check URL
-        //TODO check some unique element on Home Page
+        checkUrl();
         return this;
     }
 

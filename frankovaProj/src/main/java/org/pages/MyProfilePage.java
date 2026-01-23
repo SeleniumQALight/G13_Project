@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class MyProfilePage extends ParentPage {
+
     private Logger logger = Logger.getLogger(getClass());
 
     //параматрезований локатор - стрінга
@@ -21,7 +22,13 @@ public class MyProfilePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeURL() {
+        return "/profile/[a-zA-Z0-9]*";
+    }
+
     public MyProfilePage checkIsRedirectToMyProfilePage() {
+        checkUrlWithPattern();
         //TODO check URL and unique element on MyProfilePage
         return this;
     }

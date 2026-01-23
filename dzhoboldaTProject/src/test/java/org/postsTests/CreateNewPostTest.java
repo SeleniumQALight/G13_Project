@@ -3,25 +3,29 @@ package org.postsTests;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
-    private final String POST_TITLE = "G13 DZHOBOLDA1236";
+    //GUID =  G13 DZHOBOLDA1237gggfgfdf
+    private final String POST_TITLE = "TC01 G13 DZHOBOLDA" + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public  void createNewPost() {
+    public  void TC01_createNewPost() {
         pageProvider.getLoginPage()
-                .openLoginPageAndFillLoginFormWithVailidCred()
+                        .openLoginPageAndFillLoginFormWithVailidCred()
                 .checkRedirectToHomePage()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 DZH  body text")
+                .setCheckboxUniquePostState("check") //new step from hom work 3 lesson
                 .selectTextInDropDownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
-                .checkIsRedirectToPostPage()
+        .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessagesDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-                .getHeaderForLoggedUserElement()
+                .checkIsPostUnique("yes")// check of status
+        .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile();
 
 
@@ -30,9 +34,10 @@ public class CreateNewPostTest extends BaseTest {
                 .checkPostWithTitelProfile(POST_TITLE, 1);
     }
 
+
         @After
         public  void deletePost(){
-        logger.info("Post conddition - delete post");
+        logger.info("Post condition - delete post");
         pageProvider.getHomePage()
                 .openHomePageAndLoginIfNeeded()
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
@@ -40,10 +45,6 @@ public class CreateNewPostTest extends BaseTest {
                 .deletePosTitlePresent(POST_TITLE);
 
         }
-
-
-
-
     }
 
 
