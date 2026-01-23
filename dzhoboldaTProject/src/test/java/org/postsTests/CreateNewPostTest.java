@@ -2,11 +2,14 @@ package org.postsTests;
 
 import org.baseTest.BaseTest;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
+    //GUID =  G13 DZHOBOLDA1237gggfgfdf
+    private final String POST_TITLE = "TC01 G13 DZHOBOLDA" + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public  void createNewPost(){
+    public  void TC01_createNewPost() {
         pageProvider.getLoginPage()
                         .openLoginPageAndFillLoginFormWithVailidCred()
                 .checkRedirectToHomePage()
@@ -24,6 +27,22 @@ public class CreateNewPostTest extends BaseTest {
         .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile();
 
+
+        pageProvider.getMyProfilePage()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWithTitelProfile(POST_TITLE, 1);
     }
 
-}
+        @After
+        public  void deletePost(){
+        logger.info("Post condition - delete post");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePosTitlePresent(POST_TITLE);
+
+        }
+    }
+
+

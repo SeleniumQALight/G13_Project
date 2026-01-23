@@ -8,14 +8,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends ParentPage{
     private Logger logger = Logger.getLogger(getClass());
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
 
+    @FindBy(xpath = "//button[text()='Sign Out']")
+    private WebElement buttonSignOut;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
@@ -23,8 +33,18 @@ public class HomePage extends ParentPage{
     }
 
     public void checkIsButtonSignOutVisible(){
-        Assert.assertTrue("Button SignOut is not visible", isButtonSignOutVisible());
+        Assert.assertTrue("Button SignOut is not visible", isElementDisplayed(buttonSignOut));
         logger.info("Button SignOut is visible");
+    }
+
+    public void checkIsButtonCreatePostVisible(){
+        Assert.assertTrue("Button CreatePost is not visible", isElementDisplayed(createNewPostButton));
+        logger.info("Button CreatePost is visible");
+    }
+
+    public void checkIsButtonSignOutIsNotVisible(){
+        Assert.assertFalse("Button Sign Out is visible, but should not be", isElementDisplayed(buttonSignOut));
+        logger.info("Button Sign Out is not visible");
     }
 
      boolean isButtonSignOutVisible() {
@@ -39,7 +59,7 @@ public class HomePage extends ParentPage{
      }
 
     public HomePage checkIsRedirectToHomePage() {
-        // TODO Check URL
+        checkUrl();
         // TODO check some unique element on HomePage
         return this;
     }

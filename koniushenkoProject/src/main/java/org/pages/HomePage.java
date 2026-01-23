@@ -19,6 +19,12 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
+
     public HederForLoggedUserElement getHederForLoggedUserElement() {
         return  new HederForLoggedUserElement(webDriver);
     }
@@ -27,6 +33,11 @@ public class HomePage extends ParentPage {
         logger.info("Button Sign Out is visible");
     }
 
+
+    public void checkIsButtonSignOutNotVisible(){
+        Assert.assertFalse("Button Sign Out is visible",isButtonSingOutVisible());
+        logger.info("Button Sign Out is not visible");
+    }
 
     public boolean isButtonSingOutVisible() {
         try {
@@ -41,8 +52,7 @@ public class HomePage extends ParentPage {
     }
 
     public HomePage checkIsRedirectToHomePage() {
-        //TODO Check URL
-        //TODO check some unique element on Home Page
+        checkUrl();
         return this;
     }
 
@@ -66,4 +76,21 @@ public class HomePage extends ParentPage {
         return  this;
     }
 
+
+    public void checkIsButtonCreatePostVisible(){
+        Assert.assertTrue("Button CreatePost is NOT visible",isButtonCreatePostVisible());
+        logger.info("Button CreatePost is visible");
+    }
+
+    public boolean isButtonCreatePostVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath(
+                    "//a[text()='Create Post']")).isDisplayed();
+            logger.info("Element state:" + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found");
+            return false;
+        }
+    }
 }
