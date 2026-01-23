@@ -2,15 +2,18 @@ package org.postsTests;
 
 import org.baseTest.BaseTest;
 import org.junit.*;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
-    private final String POST_TITLE = "G13 Ostapenko1";
+
+    private final String POST_TITLE = "TC01 G13 Ostapenko " + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public void createNewPost() {
+    public void TC01_createNewPost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillFormWithValidCred()
                 .checkIsRedirectToHomePage()
+                .getHeaderForLoggedUserElement()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
