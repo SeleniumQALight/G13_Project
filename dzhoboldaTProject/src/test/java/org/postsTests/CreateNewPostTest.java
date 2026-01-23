@@ -3,12 +3,14 @@ package org.postsTests;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
-    private final String POST_TITLE = "G13 DZHOBOLDA1236";
+    //GUID =  G13 DZHOBOLDA1237gggfgfdf
+    private final String POST_TITLE = "TC01 G13 DZHOBOLDA" + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public  void createNewPost() {
+    public  void TC01_createNewPost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithVailidCred()
                 .checkRedirectToHomePage()
@@ -40,10 +42,6 @@ public class CreateNewPostTest extends BaseTest {
                 .deletePosTitlePresent(POST_TITLE);
 
         }
-
-
-
-
     }
 
 
