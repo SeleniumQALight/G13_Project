@@ -34,15 +34,6 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void clickOnElement(WebElement element) {
-        try {
-            element.click();
-            logger.info("Element was clicked");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
     //create a method markCheckbox to mark checkbox as checked
     protected void markCheckbox(WebElement webElement) {
         try {
@@ -83,110 +74,123 @@ public class CommonActionsWithElements {
                 Assert.fail("Unknown checkbox state: " + state);
             }
         } catch (Exception e) {
-            protected void clickOnElement (WebElement webElement){
-                try {
-                    webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
-                    String elementName = getElementName(webElement);
-                    webElement.click();
-                    logger.info("Element " + elementName + " was clicked");
-                } catch (Exception e) {
-                    printErrorAndStopTest();
-                }
-            }
-
-
-            protected void selectTextInDropDown (WebElement webElement, String text){
-                try {
-                    Select select = new Select(webElement);
-                    select.selectByVisibleText(text);
-                    logger.info("Text '" + text + "' was selected in DropDown");
-                } catch (Exception e) {
-                    printErrorAndStopTest();
-                }
-            }
-
-            protected void selectValueInDropDown (WebElement webElement, String value){
-                try {
-                    Select select = new Select(webElement);
-                    select.selectByValue(value);
-                    logger.info("Value '" + value + "' was selected in DropDown");
-                } catch (Exception e) {
-                    printErrorAndStopTest();
-                }
-            }
-
-            //check is element enabled
-            protected void checkIsElementEnabled (WebElement webElement){
-                Assert.assertTrue("Element is not enabled", isElementEnabled(webElement));
-                logger.info("Element is enabled");
-            }
-
-            //is element enabled
-            protected boolean isElementEnabled (WebElement webElement){
-                try {
-                    boolean state = webElement.isEnabled();
-                    logger.info("Element " + getElementName(webElement) + " is enabled" + state);
-                    return state;
-                } catch (Exception e) {
-                    logger.error("Element is not found");
-                    return false;
-                }
-            }
-
-            protected void checkTextInElement (WebElement webElement, String expectedText){
-                try {
-                    String actualText = webElement.getText();
-                    Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
-                    logger.info("Text in element " + getElementName(webElement) + " matches expected text: " + expectedText);
-                } catch (Exception e) {
-                    printErrorAndStopTest();
-                }
-            }
-
-            //accept Alert using class Actions
-            protected void acceptAlert () {
-                try {
-                    webDriverWait10.until(ExpectedConditions.alertIsPresent());
-                    webDriver.switchTo().alert().accept();
-                    logger.info("Alert was accepted");
-                } catch (Exception e) {
-                    printErrorAndStopTest();
-                }
-            }
-
-            //scroll to element using Actions class
-            protected void scrollToElement (WebElement webElement){
-                try {
-                    Actions actions = new Actions(webDriver);
-                    actions.moveToElement(webElement).perform();
-                    logger.info("Scrolled to element " + getElementName(webElement));
-                } catch (Exception e) {
-                    printErrorAndStopTest();
-                }
-            }
-
-            //open new browser tab using JavaScript
-            protected void openNewTab () {
-                try {
-                    ((org.openqa.selenium.JavascriptExecutor) webDriver).executeScript("window.open()");
-                    logger.info("New browser tab was opened");
-                } catch (Exception e) {
-                    printErrorAndStopTest();
-                }
-            }
-
-
-            private String getElementName(WebElement webElement){
-                try {
-                    return webElement.getAccessibleName();
-                } catch (Exception e) {
-                    return "";
-                }
-            }
-
-            private void printErrorAndStopTest() {
-                logger.error("Error while working with element");
-                Assert.fail("Error while working with element");
-            }
-
+            printErrorAndStopTest();
         }
+    }
+
+    protected void clickOnElement(WebElement webElement) {
+        try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName(webElement);
+            webElement.click();
+            logger.info("Element " + elementName + " was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void clickOnElement(WebElement webElement, String elementName) {
+        try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+            logger.info("Element " + elementName + " was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void selectTextInDropDown(WebElement webElement, String text) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByVisibleText(text);
+            logger.info("Text '" + text + "' was selected in DropDown");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void selectValueInDropDown(WebElement webElement, String value) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByValue(value);
+            logger.info("Value '" + value + "' was selected in DropDown");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //check is element enabled
+    protected void checkIsElementEnabled(WebElement webElement) {
+        Assert.assertTrue("Element is not enabled", isElementEnabled(webElement));
+        logger.info("Element is enabled");
+    }
+
+    //is element enabled
+    protected boolean isElementEnabled(WebElement webElement) {
+        try {
+            boolean state = webElement.isEnabled();
+            logger.info("Element " + getElementName(webElement) + " is enabled" + state);
+            return state;
+        } catch (Exception e) {
+            logger.error("Element is not found");
+            return false;
+        }
+    }
+
+    protected void checkTextInElement(WebElement webElement, String expectedText) {
+        try {
+            String actualText = webElement.getText();
+            Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
+            logger.info("Text in element " + getElementName(webElement) + " matches expected text: " + expectedText);
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //accept Alert using class Actions
+    protected void acceptAlert() {
+        try {
+            webDriverWait10.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //scroll to element using Actions class
+    protected void scrollToElement(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement).perform();
+            logger.info("Scrolled to element " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //open new browser tab using JavaScript
+    protected void openNewTab() {
+        try {
+            ((org.openqa.selenium.JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New browser tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+
+    private String getElementName(WebElement webElement) {
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private void printErrorAndStopTest() {
+        logger.error("Error while working with element");
+        Assert.fail("Error while working with element");
+    }
+
+}
