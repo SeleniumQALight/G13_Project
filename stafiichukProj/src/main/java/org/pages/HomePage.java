@@ -1,10 +1,12 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -18,6 +20,10 @@ public class HomePage extends ParentPage {
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public boolean isButtonSignOutVisible(){
@@ -43,4 +49,23 @@ public class HomePage extends ParentPage {
         clickOnElement(createNewPostButton);
         return new CreatePostPage(webDriver);
     }
+
+    public HomePage openHomePageAndLoginIfNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if (isButtonSignOutVisible()) {
+            logger.info("User is already logged in");
+            return this;
+        } else {
+            loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
+                    .enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI)
+                    .clickOnButtonSignIn();
+            checkIsRedirectToHomePage();
+            logger.info("User was logged in");
+
+        }
+        return this;
+    }
+
+
 }
