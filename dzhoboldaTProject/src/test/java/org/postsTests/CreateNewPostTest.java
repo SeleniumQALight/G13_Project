@@ -12,18 +12,20 @@ public class CreateNewPostTest extends BaseTest {
     @Test
     public  void TC01_createNewPost() {
         pageProvider.getLoginPage()
-                .openLoginPageAndFillLoginFormWithVailidCred()
+                        .openLoginPageAndFillLoginFormWithVailidCred()
                 .checkRedirectToHomePage()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 DZH  body text")
+                .setCheckboxUniquePostState("check") //new step from hom work 3 lesson
                 .selectTextInDropDownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
-                .checkIsRedirectToPostPage()
+        .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessagesDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-                .getHeaderForLoggedUserElement()
+                .checkIsPostUnique("yes")// check of status
+        .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile();
 
 
@@ -31,6 +33,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWithTitelProfile(POST_TITLE, 1);
     }
+
 
         @After
         public  void deletePost(){

@@ -19,6 +19,8 @@ public class CreatePostPage extends ParentPage{
     private WebElement buttonSaveNewPost;
     @FindBy(tagName = "select")
     private WebElement dropdownAccess;
+    @FindBy(xpath = ".//input[@type='checkbox']")
+    private WebElement checkboxUniquePost;
 
 
 //    @FindBy(xpath = "//*[@class='alert alert-success text-center']")
@@ -32,6 +34,12 @@ public class CreatePostPage extends ParentPage{
     @Override
     String getRelativeUrl() {
          return "/create-post";
+    }
+
+
+    public CreatePostPage setCheckboxUniquePostState(String state) {
+        setStatusToCheckbox(checkboxUniquePost, state);
+        return this;
     }
 
 
