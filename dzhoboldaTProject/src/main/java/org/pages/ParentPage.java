@@ -20,7 +20,7 @@ import org.openqa.selenium.WebDriver;
       // метод по перевірці чи відкрита потрібна сторінка по патерну
      // https://aqa-complexapp.onrender.com/post/64d21e84903640003414c338
     // regex for 64d21e84903640003414c338
-   // [a-zA-Z0-9]{24}
+   // [a-zA-Z0-9]*
      protected void checkUrlWithPattern(){
         Assert.assertTrue("Url is not expected \n"
                 + "Expected pattern: " + baseUrl + getRelativeUrl() + "\n"

@@ -20,7 +20,7 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
-    @FindBy(xpath = "//a[text()='Edit']")
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
     private WebElement buttonEditPost;
 
     @FindBy(xpath = "//input[@name='title']")
@@ -33,7 +33,7 @@ public class PostPage extends ParentPage {
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
-//        PageFactory.initElements(webDriver, this); // инициализация @FindBy элементов
+        PageFactory.initElements(webDriver, this); // инициализация @FindBy элементов
     }
 
     @Override
@@ -73,15 +73,26 @@ public class PostPage extends ParentPage {
     }
 
 
+//    public PostPage editPostTitle(String newTitle) {
+//        clickOnElement(buttonEditPost);
+//        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+//        wait.until(ExpectedConditions.visibilityOf(inputTitle));
+//        clearAndEnterTextIntoElement(inputTitle, newTitle);
+//        clickOnElement(buttonSaveUpdates);
+//        return this;
+//    }
+
     public PostPage editPostTitle(String newTitle) {
-        clickOnElement(buttonEditPost);
+        checkIsRedirectToPostPage();
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(buttonEditPost));
+        clickOnElement(buttonEditPost, "Edit Post Button");
         wait.until(ExpectedConditions.visibilityOf(inputTitle));
         clearAndEnterTextIntoElement(inputTitle, newTitle);
-        clickOnElement(buttonSaveUpdates);
+        clickOnElement(buttonSaveUpdates, "Save Updates Button");
+        wait.until(ExpectedConditions.visibilityOf(messagePostWasCreatedSuccessfully));
         return this;
     }
-
     public PostPage clickOnSavedPost(String title) {
         // Ждем, пока пост появится на странице (явное ожидание)
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
