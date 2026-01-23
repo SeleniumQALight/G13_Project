@@ -70,4 +70,16 @@ public class MyProfilePage extends ParentPage {
         checkElementIsEnabled(successMessageDelete);
         return this;
     }
+
+    // methods to open post details by title
+    public PostPage openPostDetails(String postTitle, int postIndex){
+        List<WebElement> postsList = getPostListByTitle(postTitle);
+        if (postsList.size() >= postIndex){
+            clickOnElement(postsList.get(postIndex - 1));
+            logger.info("Post with title '" + postTitle + "' was opened");
+        } else {
+            Assert.fail("Post with title '" + postTitle + "' and index " + postIndex + " is not found");
+        }
+        return new PostPage(webDriver);
+    }
 }

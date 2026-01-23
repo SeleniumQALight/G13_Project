@@ -13,6 +13,7 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillFormWithValidCred()
                 .checkIsRedirectToHomePage()
+                .getHeaderForLoggedUserElement()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
