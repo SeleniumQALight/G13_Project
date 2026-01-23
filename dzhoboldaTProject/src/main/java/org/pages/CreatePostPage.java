@@ -29,9 +29,14 @@ public class CreatePostPage extends ParentPage{
         PageFactory.initElements(webDriver, this);
     }
 
+    @Override
+    String getRelativeUrl() {
+         return "/create-post";
+    }
+
 
     public CreatePostPage checkIsRedirectToCreatePostPage(){
-        // TODO Check URL
+        checkUrl();
         // TODO Check unique element
         return this;
     }
