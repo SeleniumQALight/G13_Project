@@ -48,6 +48,11 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
 
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
