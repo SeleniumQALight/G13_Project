@@ -16,6 +16,7 @@ public class EditPostTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillFormWithValidCred()
                 .checkIsRedirectToHomePage()
+                .getHeaderForLoggedUserElement()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle(ORIGINAL_POST_TITLE)

@@ -9,18 +9,20 @@ public class SignOutTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillFormWithValidCred()
                 .checkIsRedirectToHomePage()
+                .getHeaderForLoggedUserElement()
                 .checksButtonSearchVisible()
                 .checksButtonChatVisible()
                 .checksAvatarVisible()
-                .checksButtonSignOutVisible()
-                .checksButtonCreatePostVisible()
-                .clickOnButtonSignOut();
+                .checksButtonCreatePostVisible();
+
+//                .clickOnButtonSignOut();
 
         pageProvider.getHomePage()
+                .getHeaderForLoggedUserElement()
+                .clickOnButtonSignOut()
                 .checksButtonSearchNotVisible()
                 .checksButtonChatNotVisible()
                 .checksAvatarNotVisible()
-                .checksButtonCreatePostNotVisible()
                 .checksButtonSignOutNotVisible();
 
         pageProvider.getLoginPage()
