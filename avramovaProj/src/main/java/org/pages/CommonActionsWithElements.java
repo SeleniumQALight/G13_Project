@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass());
+    protected Logger logger = Logger.getLogger(getClass());
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
