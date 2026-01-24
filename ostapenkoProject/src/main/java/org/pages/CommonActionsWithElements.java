@@ -128,6 +128,14 @@ public class CommonActionsWithElements {
         logger.info("Enter key was pressed using Actions");
     }
 
+    public void pressEnterKey() {
+        Actions actions = new Actions(webDriver);
+        actions
+                .sendKeys("\n")
+                .perform();
+        logger.info("Enter key was pressed using Actions");
+    }
+
     // check is element enabled
     protected void checkElementIsEnabled(WebElement webElement) {
         Assert.assertTrue("Element is not enabled", isElementEnabled(webElement));
