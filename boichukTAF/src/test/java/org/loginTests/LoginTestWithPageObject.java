@@ -9,7 +9,7 @@ import static org.data.TestData.VALID_PASSWORD;
 public class LoginTestWithPageObject extends BaseTest {
 
     @Test
-    public void validLogin() {
+    public void TC02_validLogin() {
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .enterTextIntoInputLogin(VALID_LOGIN)
@@ -20,7 +20,7 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
-    public void invalidLogin() {
+    public void TC03_invalidLogin() {
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .enterTextIntoInputLogin("abrakadabraLogin")
