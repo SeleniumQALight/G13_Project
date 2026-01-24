@@ -151,4 +151,20 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
+
+    public LoginPage enterTextIntoInputLoginUsingActions(String username) {
+        moveViaTabAndEnterTextIntoElement(inputLogin, username);
+        return this;
+    }
+
+
+
+    public LoginPage enterTextIntoInputPasswordUsingActions(String password) {
+        moveViaTabAndEnterTextIntoElement(inputPassword, password);
+        return this;
+    }
+
+    public void pressEnterKeyOnSignIn() {
+        pressEnterKey(buttonSignIn);
+    }
 }

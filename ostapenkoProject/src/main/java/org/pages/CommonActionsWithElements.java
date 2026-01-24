@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -35,6 +36,21 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
+    protected void moveViaTabAndEnterTextIntoElement(WebElement webElement, String text) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions
+                    .moveToElement(webElement)
+                    .click()
+                    .sendKeys(text)
+                    .perform();
+            logger.info(text + " was entered in input Username using Actions");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
 
     protected void checksElementVisible(WebElement webElement, String name) {
         try {
@@ -100,6 +116,16 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest();
         }
+    }
+
+    public void pressEnterKey(WebElement webElement) {
+        Actions actions = new Actions(webDriver);
+        actions
+                .moveToElement(webElement)
+                .click()
+                .sendKeys("\n")
+                .perform();
+        logger.info("Enter key was pressed using Actions");
     }
 
     // check is element enabled
