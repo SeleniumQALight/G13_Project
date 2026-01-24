@@ -31,7 +31,7 @@ public class CommonActionsWithElements {
         Assert.fail("Error while working with element");
     }
 
-    protected void clickOnElement(WebElement webElement){
+    protected void clickOnElement(WebElement webElement) {
         try {
             webElement.click();
             logger.info("Element was clicked");
@@ -43,10 +43,9 @@ public class CommonActionsWithElements {
     protected boolean isElementDisplayed(WebElement webElement) {
         try {
             boolean state = webElement.isDisplayed();
-            if (state){
+            if (state) {
                 logger.info("Element is displayed");
-            }
-            else {
+            } else {
                 logger.info("Element is not displayed");
             }
             return state;
@@ -88,7 +87,7 @@ public class CommonActionsWithElements {
             boolean state = webElement.isEnabled();
             logger.info("Element enabled - " + state);
             return state;
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.info("Element is not found");
             return false;
         }
@@ -141,6 +140,22 @@ public class CommonActionsWithElements {
         } else {
             logger.error("Invalid status for checkbox: " + status);
             printErrorAndStopTest();
+        }
+    }
+
+    public void checksElementVisible(WebElement element, String name) {
+        try {
+            Assert.assertTrue("Element " + name + " is not visible", isElementDisplayed(element));
+        } catch (Exception e) {
+            logger.error("Element " + name + " is not visible");
+            Assert.fail("Element " + name + " is not visible"); // Тепер тест впаде по-справжньому
+        }
+    }
+
+    public void checksElementNotVisible(WebElement element, String name) {
+        try {
+            Assert.assertFalse("Element " + name + " is visible", isElementDisplayed(element));
+        } catch (Exception e) {
         }
     }
 }
