@@ -219,6 +219,12 @@ public class CommonActionsWithElements {
         logger.info("Closed new tab and switched back to main tab");
     }
 
+    public LoginPage refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page was refreshed");
+        return new LoginPage(webDriver);
+    }
+
     private void printErrorAndStopTest() {
         logger.error("Error while working with element");
         Assert.fail("Error while working with element"); // wrote info into report
