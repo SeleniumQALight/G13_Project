@@ -26,7 +26,7 @@ import org.openqa.selenium.WebDriver;
                 + "Expected pattern: " + baseUrl + getRelativeUrl() + "\n"
                 + "Actual URL: " + webDriver.getCurrentUrl(),
                 webDriver.getCurrentUrl().matches(baseUrl + getRelativeUrl()));
+     }
 
 
-}
  }

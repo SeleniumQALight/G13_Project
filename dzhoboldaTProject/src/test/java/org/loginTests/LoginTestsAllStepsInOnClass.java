@@ -91,14 +91,7 @@ public class LoginTestsAllStepsInOnClass {
 
 }
 
-//    private boolean isButtonSignOutVisible() {
-//        try {
-//            return webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-//        } catch (Exception e) {
-//            logger.info("Sign Out button is not found");
-//            return false;
-//        }
-//    }
+
     private boolean isButtonSignInVisible() {
         try {
             return webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();

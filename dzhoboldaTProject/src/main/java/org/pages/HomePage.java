@@ -4,11 +4,15 @@ import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.pages.elements.HeaderForLoggedUserElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomePage  extends ParentPage{
     private final Logger logger = Logger.getLogger(getClass());
@@ -71,6 +75,33 @@ public class HomePage  extends ParentPage{
         }
         return this;
     }
+
+    public HomePage openNewTabByJS() {
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        logger.info("New tab was opened via JavaScript");
+        return this;
+    }
+    public HomePage switchToNewTab() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(tabs.size() - 1)); // переключаемся на последнюю вкладку
+        logger.info("Switched to new tab");
+        return this;
+    }
+
+    public HomePage switchToMainTab() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(0)); // переключаемся на первую вкладку
+        logger.info("Switched to main tab");
+        return this;
+    }
+
+    public void checkIsButtonSignOutNotVisible(){
+        Assert.assertFalse("Button SignOut is visible but should NOT be", isButtonSignOutVisible());
+        logger.info("Button SignOut is NOT visible");
+    }
+
+
+
 
 
 }

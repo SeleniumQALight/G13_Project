@@ -38,7 +38,7 @@ public class LoginPage extends ParentPage {
     private WebElement inputPasswordInRegistrationForm;
 
     final static String  listOfActualMessagesLocator
-    ="//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+    = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
 
     @FindBy(xpath = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfActualMessages;
@@ -130,5 +130,19 @@ public class LoginPage extends ParentPage {
 
         return this;
     }
+
+    public LoginPage refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page was refreshed");
+        return this;
+    }
+
+    public LoginPage checkInvalidLoginError() {
+        WebElement error = webDriver.findElement(By.xpath("//div[@class='alert alert-danger text-center' and text()='Invalid username/password.']"));
+        Assert.assertEquals("Invalid username/password.", error.getText());
+        return this;
+    }
+
+
 }
 

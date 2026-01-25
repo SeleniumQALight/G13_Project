@@ -159,6 +159,8 @@ public class CommonActionsWithElements {
         }
     }
 
+
+
     private void printErrorAndStopTest() {
         logger.error("Error while working with element ");
         Assert.fail("Error while working with element " );
