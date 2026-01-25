@@ -4,9 +4,9 @@ import org.baseTest.BaseTest;
 import org.junit.Test;
 import org.pages.HomePage;
 
-public class CheckLoggedUserInNewTab extends BaseTest {
+public class SignOutInTwoTabs extends BaseTest {
     @Test
-    public void checkLoggedUserInNewTab() {
+    public void signOutInTwoTabs() {
 
         HomePage homePage = pageProvider.getLoginPage()
                 .openLoginPageAndFillFormWithValidCred()
@@ -20,11 +20,16 @@ public class CheckLoggedUserInNewTab extends BaseTest {
         homePage.getHeaderForLoggedUserElement()
                 .checksButtonSignOutVisible();
 
-        homePage.closeNewTab();
         homePage.switchToMainTab();
         homePage.getHeaderForLoggedUserElement()
-                .checksButtonSignOutVisible();
+                .clickOnButtonSignOut()
+                .checksButtonSignOutNotVisible();
 
-        logger.info("'Check logged user' in new tab test completed successfully");
+        homePage.switchToNewTab()
+                .refreshPage();
+        homePage.getHeaderForLoggedUserElement()
+                .checksButtonSignOutNotVisible();
+
+        logger.info("'Sign out in two tabs' test completed successfully");
     }
 }

@@ -2,7 +2,6 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.pages.elements.HeaderForLoggedUserElement;
 
@@ -12,6 +11,8 @@ public class HomePage extends ParentPage {
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
+
+    protected String mainTabHandle, newTabHandle;
 
     @Override
     protected String getRelativeUrl() {
@@ -44,7 +45,8 @@ public class HomePage extends ParentPage {
     }
 
     public HomePage saveMainTabHandle() {
-        this.mainTabHandle = webDriver.getWindowHandle();
+        mainTabHandle = webDriver.getWindowHandle();
+        logger.info("Main tab saved: " + mainTabHandle);
         return this;
     }
 
@@ -52,15 +54,18 @@ public class HomePage extends ParentPage {
         openNewTab();
         return this;
     }
-
     public HomePage switchToNewTab() {
-        switchToNewTab(mainTabHandle);
+        switchToNewTab(mainTabHandle, newTabHandle);
         return this;
     }
 
-    public HomePage closeNewTabAndSwitchToMainTab() {
-        saveMainTabHandle();
-        closeNewTabAndSwitchToMainTab(mainTabHandle);
+    public HomePage switchToMainTab() {
+        switchToMainTab(mainTabHandle);
+        return this;
+    }
+
+    public HomePage closeNewTab (){
+        closeNewTab(mainTabHandle);
         return this;
     }
 

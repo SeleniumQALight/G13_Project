@@ -2,10 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -107,6 +104,7 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
@@ -221,19 +219,21 @@ public class CommonActionsWithElements {
     public void openNewTab() {
         try {
             String currentUrl = webDriver.getCurrentUrl();
-            ((org.openqa.selenium.JavascriptExecutor) webDriver)
+            ((JavascriptExecutor) webDriver)
                     .executeScript("window.open(arguments[0]);", currentUrl);
-            logger.info("New tab was opened with the same URL: " + currentUrl);
         } catch (Exception e) {
             printErrorAndStopTest();
         }
+
     }
 
-    public void switchToNewTab(String mainTabHandle) {
+    public void switchToNewTab(String mainTabHandle, String newTabHandle) {
         try {
             for (String handle : webDriver.getWindowHandles()) {
                 if (!handle.equals(mainTabHandle)) {
+                    newTabHandle = handle;
                     webDriver.switchTo().window(handle);
+                    logger.info("Switched to NEW tab: " + newTabHandle);
                     break;
                 }
             }
@@ -242,15 +242,26 @@ public class CommonActionsWithElements {
         }
     }
 
-    public void closeNewTabAndSwitchToMainTab(String mainTabHandle) {
-        for (String handle : webDriver.getWindowHandles()) {
-            if (!handle.equals(mainTabHandle)) {
-                webDriver.switchTo().window(handle);
-                webDriver.close();
-            }
+    public void switchToMainTab(String mainTabHandle) {
+        try {
+            webDriver.switchTo().window(mainTabHandle);
+            logger.info("Switched to MAIN tab: " + mainTabHandle);
+        } catch (Exception e) {
+            printErrorAndStopTest();
         }
-        webDriver.switchTo().window(mainTabHandle);
-        logger.info("Closed new tab and switched back to main tab");
+    }
+
+    public void closeNewTab(String mainTabHandle) {
+        try {
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(mainTabHandle)) {
+                    webDriver.close();
+                }
+            }
+            logger.info("Close NEW tab");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
     }
 
     public LoginPage refreshPage() {
