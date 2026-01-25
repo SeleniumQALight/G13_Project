@@ -6,7 +6,7 @@ import org.junit.Test;
 public class SignOutTest extends BaseTest {
 
     @Test
-    public void signOutTest() {
+    public void TC03_signOutTest() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()

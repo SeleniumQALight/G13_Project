@@ -148,18 +148,6 @@ public class CommonActionsWithElements {
         }
     }
 
-     protected void checkCheckbox (WebElement webElement){
-         try {
-             if (!webElement.isSelected()) {
-                 clickOnElement(webElement);
-                 logger.info("Checkbox was checked");
-             } else {
-                 logger.info("Checkbox is already checked");
-             }
-         } catch (Exception e) {
-             printErrorAndStopTest();
-         }
-     }
 
     protected void uncheckCheckbox(WebElement webElement) {
         try {

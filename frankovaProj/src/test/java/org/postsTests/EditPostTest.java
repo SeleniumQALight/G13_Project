@@ -4,11 +4,12 @@ import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class EditPostTest extends BaseTest {
 
-    private final String POST_TITLE = "G13 Frankova11111";
-    private final String UPDATED_POST_TITLE = "G13 FrankovaUpdated";
+    private final String POST_TITLE =  "TC05 G13 Frankova" + Utils_Custom.getDateAndTimeFormatted();
+    private final String UPDATED_POST_TITLE = "TC05 G13 Frankova_Updated" + Utils_Custom.getDateAndTimeFormatted();
 
     @Before
     public void logInAndCreatePost() {
@@ -34,7 +35,7 @@ public class EditPostTest extends BaseTest {
 
 
     @Test
-    public void editPostTest() {
+    public void TC05_editPostTest() {
         pageProvider.getMyProfilePage()
                 .checkIsRedirectToMyProfilePage()
                 .checkIsPostWithTitlePresent(POST_TITLE, 1)

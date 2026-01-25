@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.Utils_Custom;
 
 import java.util.List;
@@ -57,6 +58,7 @@ public class LoginPage extends ParentPage {
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
+
 
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
@@ -125,7 +127,7 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage checkIsRedirectToLoginPage() {
-        //TODO Check URL
+        checkUrl();
         //TODO check some unique element
         return this;
     }

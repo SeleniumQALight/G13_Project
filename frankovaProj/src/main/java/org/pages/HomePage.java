@@ -29,11 +29,6 @@ public class HomePage extends ParentPage{
     private WebElement buttonCreatePost;
 
 
-    public HomePage checkIsButtonSignOutVisible(){
-        checkIsElementEnabled(buttonSignOut);
-        return this;
-    }
-
     //приклад альтернативного способу перевірки видимості елемента
 /*    public boolean isButtonSignOutVisible() {
         try {
@@ -52,26 +47,6 @@ public class HomePage extends ParentPage{
         //TODO check some unique element on HomePage
         return this;
     }
-
-  /*  public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
-        return new HeaderForLoggedUserElement(webDriver);
-    }
-
-    public CreatePostPage clickOnButtonCreateNewPost() {
-        clickOnElement(buttonCreatePost);
-        return new CreatePostPage(webDriver);
-    }
-
-    public HomePage checkIsButtonCreatePostVisible() {
-        checkIsElementEnabled(buttonCreatePost);
-        return this;
-    }
-
-
-    public HomePage checkIsNotButtonSignOutVisible() {
-        checkIsNotElementVisible(buttonSignOut);
-        return this;
-    } */
 
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);
