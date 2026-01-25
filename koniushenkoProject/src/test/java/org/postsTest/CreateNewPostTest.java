@@ -3,11 +3,13 @@ package org.postsTest;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
-    private final String POST_TITLE = "G13 Nelly Title_001";
+    //GUID = 1b1c3e2e-87f4-11ee-be56-0242ac120002
+    private final String POST_TITLE = "TC01 G13 Nelly "+ Utils_Custom.getDateAndTimeFormatted();
     @Test
-    public void createNewPostTest() {
+    public void TC01_createNewPostTest() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()

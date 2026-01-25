@@ -16,12 +16,17 @@ public class PostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*";
+    }
+
     public HederForLoggedUserElement getHederForLoggedUserElement() {
         return new HederForLoggedUserElement(webDriver);
     }
 
     public PostPage chechIsRedirectToPostPage() {
-        //TODO Check URL
+        checkUrlWithPattern();
         //TODO check some unique element on Post Page
         return this;
     }
@@ -37,7 +42,7 @@ public class PostPage extends ParentPage {
     }
 
     public MyProfilePage clickOnDeleteButton() {
-        clickOnElement(buttonDeletePost);
+        clickOnElement(buttonDeletePost, "Delete Post Button");
         return new MyProfilePage(webDriver);
     }
 }
