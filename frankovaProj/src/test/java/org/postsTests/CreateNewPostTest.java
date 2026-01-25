@@ -3,13 +3,16 @@ package org.postsTests;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
 
-    private final String POST_TITLE = "G13 Frankova11";
+    //GUID - генерує унік значення для кожного запуску тесту, щоб не було конфлікту з існуючими постами
+
+    private final String POST_TITLE = "TC01 G13 Frankova" + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public void createNewPost(){
+    public void TC01_createNewPost(){
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()

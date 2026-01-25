@@ -23,8 +23,13 @@ public class CreatePostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/create-post";
+    }
+
     public CreatePostPage checkIsRedirectToCreatePostPage() {
-        //TODO check URL
+        checkUrl();
         //TODO check some unique element on CreatePostPage
         return this;
     }
@@ -40,7 +45,7 @@ public class CreatePostPage extends ParentPage {
     }
 
     public CreatePostPage setStateToCheckbox(String state) {
-        setCheckboxState(checkbox,state);
+        setCheckboxState(checkbox, state);
         return this;
     }
 

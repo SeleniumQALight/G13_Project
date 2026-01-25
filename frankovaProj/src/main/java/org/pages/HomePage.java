@@ -13,6 +13,11 @@ public class HomePage extends ParentPage{
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeURL() {
+        return "/";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
@@ -20,13 +25,53 @@ public class HomePage extends ParentPage{
     @FindBy(xpath = "//button[text()='Sign Out']")
     private WebElement buttonSignOut;
 
+    @FindBy(xpath = ".//a[@href='/create-post']")
+    private WebElement buttonCreatePost;
+
+
+    public HomePage checkIsButtonSignOutVisible(){
+        checkIsElementEnabled(buttonSignOut);
+        return this;
+    }
+
+    //приклад альтернативного способу перевірки видимості елемента
+/*    public boolean isButtonSignOutVisible() {
+        try {
+            boolean state = webDriver.findElement(
+                    By.xpath("//button[text()='Sign Out']")).isDisplayed();
+            logger.info("Sign Out Element state: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Sign Out Element is not found");
+            return false;
+        }
+    }*/
 
     public HomePage checkIsRedirectToHomePage() {
-        //TODO Check URL
+        checkUrl();
         //TODO check some unique element on HomePage
         return this;
     }
 
+  /*  public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
+
+    public CreatePostPage clickOnButtonCreateNewPost() {
+        clickOnElement(buttonCreatePost);
+        return new CreatePostPage(webDriver);
+    }
+
+    public HomePage checkIsButtonCreatePostVisible() {
+        checkIsElementEnabled(buttonCreatePost);
+        return this;
+    }
+
+
+    public HomePage checkIsNotButtonSignOutVisible() {
+        checkIsNotElementVisible(buttonSignOut);
+        return this;
+    } */
 
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);

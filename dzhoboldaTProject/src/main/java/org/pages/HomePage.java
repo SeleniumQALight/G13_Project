@@ -22,6 +22,11 @@ public class HomePage  extends ParentPage{
         PageFactory.initElements(webDriver, this);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
@@ -42,7 +47,7 @@ public class HomePage  extends ParentPage{
         }
     }
     public HomePage checkRedirectToHomePage(){
-        // TODO Check URL
+        checkUrl();
         // TODO Check unique element
         return this;
     }

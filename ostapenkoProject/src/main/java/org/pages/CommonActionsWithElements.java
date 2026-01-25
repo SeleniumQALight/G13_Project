@@ -7,23 +7,30 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
+    protected WebDriverWait webDriverWait10, webDriverWait15;
     private Logger logger = Logger.getLogger(getClass());
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // init elements declare by "@FindBy"
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was inputed into element");
+            logger.info(text + " was inputed into element " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -75,10 +82,21 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void clickOnElement(WebElement webElement, String elementName) {
+        try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+            logger.info(elementName + " Element was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
     protected void clickOnElement(WebElement webElement) {
         try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName(webElement);
             webElement.click();
-            logger.info("Element was clicked");
+            logger.info(elementName + " Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -87,14 +105,14 @@ public class CommonActionsWithElements {
     // check is element enabled
     protected void checkElementIsEnabled(WebElement webElement) {
         Assert.assertTrue("Element is not enabled", isElementEnabled(webElement));
-        logger.info("Element is enabled");
+        logger.info(getElementName(webElement) + "Element is enabled");
     }
 
     // is element enabled
     protected boolean isElementEnabled(WebElement webElement) {
         try {
             boolean state = webElement.isEnabled();
-            logger.info("Element enabled status: " + state);
+            logger.info(getElementName(webElement) + " element enabled status: " + state);
             return state;
         } catch (Exception e) {
             logger.info("Element is not enabled");
@@ -155,6 +173,14 @@ public class CommonActionsWithElements {
             }
         } catch (Exception e) {
             printErrorAndStopTest();
+        }
+    }
+
+    private String getElementName(WebElement webElement) {
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
         }
     }
 
