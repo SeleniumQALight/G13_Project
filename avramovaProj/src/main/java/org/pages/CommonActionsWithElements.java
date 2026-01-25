@@ -2,10 +2,14 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -31,7 +35,7 @@ public class CommonActionsWithElements {
         Assert.fail("Error while working with element");
     }
 
-    protected void clickOnElement(WebElement webElement){
+    protected void clickOnElement(WebElement webElement) {
         try {
             webElement.click();
             logger.info("Element was clicked");
@@ -43,10 +47,9 @@ public class CommonActionsWithElements {
     protected boolean isElementDisplayed(WebElement webElement) {
         try {
             boolean state = webElement.isDisplayed();
-            if (state){
+            if (state) {
                 logger.info("Element is displayed");
-            }
-            else {
+            } else {
                 logger.info("Element is not displayed");
             }
             return state;
@@ -88,7 +91,7 @@ public class CommonActionsWithElements {
             boolean state = webElement.isEnabled();
             logger.info("Element enabled - " + state);
             return state;
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.info("Element is not found");
             return false;
         }
@@ -141,6 +144,58 @@ public class CommonActionsWithElements {
         } else {
             logger.error("Invalid status for checkbox: " + status);
             printErrorAndStopTest();
+        }
+    }
+
+    public HomePage openNewTab() {
+        ((JavascriptExecutor) webDriver).executeScript("window.open();");
+        logger.info("New tab was opened");
+        return new HomePage(webDriver); // Повертаємо об'єкт сторінки
+    }
+
+    public HomePage switchToTab(int tabIndex) {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(tabIndex));
+        logger.info("Switched to tab with index " + tabIndex);
+        return new HomePage(webDriver); // Тепер ланцюжок знає, що далі йде HomePage
+    }
+
+    public HomePage closeCurrentTabAndSwitchToMain(int mainTabIndex) {
+        webDriver.close();
+        switchToTab(mainTabIndex);
+        logger.info("Current tab was closed and switched to main tab");
+        return new HomePage(webDriver);
+    }
+
+    public LoginPage refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page was refreshed");
+        return new LoginPage(webDriver);
+    }
+
+
+
+
+
+
+
+
+
+
+    //ці 2 методи були додані в hw5, тому потрібно видалити їх з hw6 після мержу hw5 в main:
+    public void checksElementVisible(WebElement element, String name) {
+        try {
+            Assert.assertTrue("Element " + name + " is not visible", isElementDisplayed(element));
+        } catch (Exception e) {
+            logger.error("Element " + name + " is not visible");
+            Assert.fail("Element " + name + " is not visible"); // Тепер тест впаде по-справжньому
+        }
+    }
+
+    public void checksElementNotVisible(WebElement element, String name) {
+        try {
+            Assert.assertFalse("Element " + name + " is visible", isElementDisplayed(element));
+        } catch (Exception e) {
         }
     }
 }
