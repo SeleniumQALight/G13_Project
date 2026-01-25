@@ -32,4 +32,29 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().checkIsButtonSignInVisible();
         pageProvider.getLoginPage().checkIsErrorMessageIsVisibleWithText("Invalid username/password.");
     }
+
+    @Test
+    public void checkIsUserLoggedInAfterOpenInNewTab(){
+        pageProvider.getLoginPage().openLoginPageAndFillLoginFormWithValidCred()
+                .checkIsButtonSignOutVisible();
+
+        String mainTabHandle = pageProvider.getHomePage().getCurrentTabHandle();
+
+        pageProvider.getHomePage().openNewTab();
+
+        String newTabHandle = pageProvider.getHomePage().switchToNewTab(mainTabHandle);
+
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getHomePage().checkIsButtonSignOutVisible();
+
+        pageProvider.getHomePage().switchToTab(mainTabHandle);
+        pageProvider.getHomePage().checkIsButtonSignOutVisible();
+
+        pageProvider.getHomePage().switchToTab(newTabHandle);
+        pageProvider.getHomePage().closeCurrentTab();
+        pageProvider.getHomePage().switchToTab(mainTabHandle);
+
+        pageProvider.getHomePage().checkIsButtonSignOutVisible();
+
+    }
 }
