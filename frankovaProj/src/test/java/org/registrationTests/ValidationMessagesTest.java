@@ -11,7 +11,7 @@ import static org.data.RegistrationValidationMessages.ERROR_PASSWORD;
 public class ValidationMessagesTest extends BaseTest {
 
     @Test
-    public void TC03_testValidationMessages(){
+    public void TC06_testValidationMessages(){
         pageProvider.getLoginPage().openLoginPage()
                 .enterTextIntoRegistrationUserNameField("tr")
                 .enterTextIntoRegistrationEmailField("tr")
