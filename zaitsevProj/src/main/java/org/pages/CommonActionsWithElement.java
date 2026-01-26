@@ -209,5 +209,12 @@ public class CommonActionsWithElement {
             printErrorAndStopTest();
         }
     }
-
+    public void refreshPage() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("location.reload();");
+            logger.info("Page was refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
 }
