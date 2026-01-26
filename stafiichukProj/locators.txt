@@ -1,7 +1,36 @@
 #LoginPage
 
-input.login=".//input[@id='login']""
-input.login=""
+input.login=".//input[@placeholder='Username']"
+input.password=".//input[@placeholder='Password']"
+text.invalidDataNotification="//div[text()='Invalid username/password.']"
+
+input.signUpUsername = ".//input[@id='username-register']"
+input.signUpEmail = ".//input[@id='email-register']"
+input.signUpPassword = ".//input[@id='password-register']"
+
+
 
 #HomePage
-button.SignOut = ""
+button.signOut = ".//form//button[text()='Sign Out']"
+text.welcome = ".//h2[text()='Hello ']"
+
+#Header
+button.createPost= ".//a[@href="/create-post"]"
+icon.search = ".//a[@data-original-title='Search']"
+icon.myProfile = .//img[@data-original-title='My Profile']
+
+#Search
+input.search = ".//div[@class='search-overlay-top shadow-sm']"
+input.post = ".//a[@href='/post/6952e1b93ab62000478719de']"
+
+
+#CreatePostPage
+input.title = ".//input[@id='post-title']"
+input.bodyContent = ".//textarea[@id='post-body']"
+button.saveNewPost = ".//button[@class='btn btn-primary']"
+
+#CreatePostSuccessPage
+text.newPostCreated = ".//div[@class='alert alert-success text-center']"
+
+#MyProfile
+text.post = ".//strong[text()='teststf']"

@@ -3,12 +3,13 @@ package org.postsTests;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.utilits.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
-    private final String POST_TITLE = "G13 Avramova7";
+    private final String POST_TITLE = "TC01 G13 Avramova"+ Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public void createNewPost(){
+    public void TC01_createNewPost(){
         //login
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
