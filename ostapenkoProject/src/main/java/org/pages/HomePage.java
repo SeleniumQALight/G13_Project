@@ -54,18 +54,14 @@ public class HomePage extends ParentPage {
         openNewTab();
         return this;
     }
-    public HomePage switchToNewTab() {
-        switchToNewTab(mainTabHandle, newTabHandle);
+
+    public HomePage switchToTabByInt(int tabNumber) {
+        switchToTab(tabNumber);
         return this;
     }
 
-    public HomePage switchToMainTab() {
-        switchToMainTab(mainTabHandle);
-        return this;
-    }
-
-    public HomePage closeNewTab (){
-        closeNewTab(mainTabHandle);
+    public HomePage closeTabByInt(int tabNumber){
+        closeTab(tabNumber);
         return this;
     }
 

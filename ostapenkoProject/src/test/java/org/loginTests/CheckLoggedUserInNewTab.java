@@ -12,19 +12,23 @@ public class CheckLoggedUserInNewTab extends BaseTest {
                 .openLoginPageAndFillFormWithValidCred()
                 .checkIsRedirectToHomePage();
 
-        homePage.saveMainTabHandle();
+        homePage.getHeaderForLoggedUserElement()
+                .checksButtonSignOutVisible();
+
 
         homePage.openNewTabInBrowser();
-        homePage.switchToNewTab();
+        homePage.switchToTabByInt(1) // switch to new tab
+                .getHeaderForLoggedUserElement()
+                .checksButtonSignOutVisible();
 
+
+        homePage.switchToTabByInt(0); // switch back to main tab
         homePage.getHeaderForLoggedUserElement()
                 .checksButtonSignOutVisible();
 
-        homePage.closeNewTab();
-        homePage.switchToMainTab();
-        homePage.getHeaderForLoggedUserElement()
-                .checksButtonSignOutVisible();
 
+        homePage.closeTabByInt(1); // close new tab
+        homePage.switchToTabByInt(0).checkIsRedirectToHomePage();
         logger.info("'Check logged user' in new tab test completed successfully");
     }
 }

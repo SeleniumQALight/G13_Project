@@ -12,24 +12,28 @@ public class SignOutInTwoTabs extends BaseTest {
                 .openLoginPageAndFillFormWithValidCred()
                 .checkIsRedirectToHomePage();
 
-        homePage.saveMainTabHandle();
-
-        homePage.openNewTabInBrowser();
-        homePage.switchToNewTab();
-
         homePage.getHeaderForLoggedUserElement()
                 .checksButtonSignOutVisible();
 
-        homePage.switchToMainTab();
+
+        homePage.openNewTabInBrowser();
+        homePage.switchToTabByInt(1) // switch to new tab
+                .getHeaderForLoggedUserElement()
+                .checksButtonSignOutVisible(); // check 'sign out' button is visible in new tab
+
+        homePage.switchToTabByInt(0); // switch back to main tab
         homePage.getHeaderForLoggedUserElement()
-                .clickOnButtonSignOut()
+                .clickOnButtonSignOut() // sign out in main tab
                 .checksButtonSignOutNotVisible();
 
-        homePage.switchToNewTab()
-                .refreshPage();
+        homePage.switchToTabByInt(1)
+                        .refreshPage();
+
         homePage.getHeaderForLoggedUserElement()
                 .checksButtonSignOutNotVisible();
 
         logger.info("'Sign out in two tabs' test completed successfully");
+
+
     }
 }

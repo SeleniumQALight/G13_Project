@@ -49,10 +49,6 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return this;
     }
 
-    public HomePage getHomePage() {
-        return new HomePage(webDriver);
-    }
-
     public HeaderForLoggedUserElement checksButtonSignOutNotVisible() {
         checksElementNotVisible(buttonSignOut, "Sign Out");
         logger.info("Button SingOut is NOT visible");

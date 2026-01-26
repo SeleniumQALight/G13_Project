@@ -153,27 +153,32 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage enterTextIntoInputLoginUsingActions(String username) {
-        moveViaTabAndEnterTextIntoElement(inputLogin, username);
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputLogin, username);
         return this;
     }
 
     public LoginPage enterTextIntoInputPasswordUsingActions(String password) {
-        moveViaTabAndEnterTextIntoElement(inputPassword, password);
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputPassword, password);
         return this;
     }
 
     public LoginPage enterTextIntoRegistrationUserNameFieldUsingActions(String username) {
-        moveViaTabAndEnterTextIntoElement(inputUserNameRagistrationForm, username);
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputUserNameRagistrationForm, username);
         return this;
     }
 
     public LoginPage enterTextIntoRegistrationEmailFieldUsingActions(String email) {
-        moveViaTabAndEnterTextIntoElement(inputEmailRagistrationForm, email);
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputEmailRagistrationForm, email);
         return this;
     }
 
     public LoginPage enterTextIntoRegistrationPasswordFieldUsingActions(String password) {
-        moveViaTabAndEnterTextIntoElement(inputPasswordRagistrationForm, password);
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputPasswordRagistrationForm, password);
         return this;
     }
 

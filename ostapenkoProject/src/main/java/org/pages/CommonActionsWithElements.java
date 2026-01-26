@@ -15,7 +15,7 @@ import java.time.Duration;
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     protected WebDriverWait webDriverWait10, webDriverWait15;
-    private Logger logger = Logger.getLogger(getClass());
+    private static Logger logger = Logger.getLogger(CommonActionsWithElements.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -33,22 +33,6 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
-
-    protected void moveViaTabAndEnterTextIntoElement(WebElement webElement, String text) {
-        try {
-            Actions actions = new Actions(webDriver);
-            actions
-                    .moveToElement(webElement)
-                    .click()
-                    .sendKeys(text)
-                    .perform();
-            logger.info(text + " was entered in input Username using Actions");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-
     protected void checksElementVisible(WebElement webElement, String name) {
         try {
             Assert.assertTrue(name + " is not visible", webElement.isDisplayed());
@@ -216,61 +200,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    public void openNewTab() {
-        try {
-            String currentUrl = webDriver.getCurrentUrl();
-            ((JavascriptExecutor) webDriver)
-                    .executeScript("window.open(arguments[0]);", currentUrl);
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-
-    }
-
-    public void switchToNewTab(String mainTabHandle, String newTabHandle) {
-        try {
-            for (String handle : webDriver.getWindowHandles()) {
-                if (!handle.equals(mainTabHandle)) {
-                    newTabHandle = handle;
-                    webDriver.switchTo().window(handle);
-                    logger.info("Switched to NEW tab: " + newTabHandle);
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    public void switchToMainTab(String mainTabHandle) {
-        try {
-            webDriver.switchTo().window(mainTabHandle);
-            logger.info("Switched to MAIN tab: " + mainTabHandle);
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    public void closeNewTab(String mainTabHandle) {
-        try {
-            for (String handle : webDriver.getWindowHandles()) {
-                if (!handle.equals(mainTabHandle)) {
-                    webDriver.close();
-                }
-            }
-            logger.info("Close NEW tab");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    public LoginPage refreshPage() {
-        webDriver.navigate().refresh();
-        logger.info("Page was refreshed");
-        return new LoginPage(webDriver);
-    }
-
-    private void printErrorAndStopTest() {
+    protected static void printErrorAndStopTest() {
         logger.error("Error while working with element");
         Assert.fail("Error while working with element"); // wrote info into report
     }

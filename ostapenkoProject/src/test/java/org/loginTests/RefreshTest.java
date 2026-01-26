@@ -12,7 +12,9 @@ public class RefreshTest extends BaseTest {
                 .openLoginPage()
                 .enterTextIntoInputLogin("qaauto")
                 .enterTextIntoInputPasswort("123456qwerty")
-                .refreshPage()
+                .refreshPage();
+
+        pageProvider.getLoginPage()
                 .clickOnButtonSignIn();
 
         pageProvider.getHomePage()
