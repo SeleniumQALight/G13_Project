@@ -3,12 +3,15 @@ package org.postsTests;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
-    private final String POST_TITLE = "G13 SOLART937111";
+
+    //GUID =1d1d1d1d1d1d1d1d1d1d1d1d1d1d1d1d
+    private final String POST_TITLE = "TC01 G13 SOLART937111"+ Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public void createNewPost() {
+    public void TC01_createNewPost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFromWithValidCrea()
                 .checkIsRedirectToHomePage()
@@ -17,6 +20,7 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextInInputTitle(POST_TITLE)
                 .enterTextInInputBody("G13 SOLAR Some body text")
                 .selectTextInDropDownAccess("Приватне повідомлення")
+
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMassagelsDisplay()
