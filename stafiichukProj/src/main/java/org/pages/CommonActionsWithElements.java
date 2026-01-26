@@ -98,5 +98,42 @@ public class CommonActionsWithElements {
         logger.error("Error while working with element"); // пишет в лог
         Assert.fail("Error while working with element"); // пишет в репорт
     }
+
+    protected void checkCheckBox(WebElement checkbox){
+        try {
+            if (!checkbox.isSelected()) {
+                checkbox.click();
+                logger.info("Checkbox was checked");
+            } else {
+                logger.info("Checkbox is already checked");
+            }
+        }catch (Exception e){
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void uncheckCheckBox(WebElement checkbox){
+        try {
+            if (checkbox.isSelected()){
+                checkbox.click();
+                logger.info("Checkbox was unchecked");
+            } else {
+                logger.info("Checkbox is already unchecked");
+            }
+        } catch (Exception e){
+            printErrorAndStopTest();
+        }
+    }
+
+    public void setCheckBoxState(WebElement checkbox,String state){
+        if (state.equalsIgnoreCase("check")){
+            checkCheckBox(checkbox);
+        } else if (state.equalsIgnoreCase("uncheck")){
+            uncheckCheckBox(checkbox);
+        } else {
+            logger.info("Incorrect checkbox state: " + state);
+            printErrorAndStopTest();
+        }
+    }
 }
 

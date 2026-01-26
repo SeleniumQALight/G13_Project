@@ -18,7 +18,7 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 Yulii Some body")
                 .selectTextInDropdownAccess("Приватне повідомлення")
-
+                .setCheckBoxState("check")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessageIsDisplayed()
