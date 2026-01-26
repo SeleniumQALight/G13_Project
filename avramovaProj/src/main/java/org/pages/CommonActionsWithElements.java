@@ -169,4 +169,20 @@ public class CommonActionsWithElements {
             return "";
         }
     }
+
+    public void checksElementVisible(WebElement element, String name) {
+        try {
+            Assert.assertTrue("Element " + name + " is not visible", isElementDisplayed(element));
+        } catch (Exception e) {
+            logger.error("Element " + name + " is not visible");
+            Assert.fail("Element " + name + " is not visible"); // Тепер тест впаде по-справжньому
+        }
+    }
+
+    public void checksElementNotVisible(WebElement element, String name) {
+        try {
+            Assert.assertFalse("Element " + name + " is visible", isElementDisplayed(element));
+        } catch (Exception e) {
+        }
+    }
 }
