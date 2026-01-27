@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class PageProvider {
     private WebDriver webDriver;
@@ -20,5 +21,11 @@ public class PageProvider {
     public MyProfilePage getMyProfilePage(){
         return new MyProfilePage(webDriver);
     }
+
+    public CommonActionsWithElements getCommonActionsWithElements(){
+        return new CommonActionsWithElements(webDriver);}
+
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement(){
+        return new HeaderForLoggedUserElement(webDriver);}
 
     }
