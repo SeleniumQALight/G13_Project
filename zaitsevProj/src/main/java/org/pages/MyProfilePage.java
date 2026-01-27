@@ -22,8 +22,18 @@ public class MyProfilePage extends ParentPage{
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/profile/[a-zA-Z0-9]*";
+    }
+
+    public EditPostPage getEditPostPage() {
+        return new EditPostPage(webDriver);
+    }
+
     public MyProfilePage checkIsRedirectToMyProfilePage(){
-        // TODO check URL and unique element
+        checkUrlWithPattern();
+        // TODO check unique element
         return this;
     }
 
@@ -65,6 +75,18 @@ public class MyProfilePage extends ParentPage{
 
     private MyProfilePage checkIsMessageSuccessPostDeletePresent() {
         checkElementIsEnabled(successMessageDelete);
+        return this;
+    }
+
+    public MyProfilePage editPostWithTitle(String postTitle) {
+        List<WebElement> postsList = getPostElementsByTitle(postTitle);
+        if (postsList.isEmpty()) {
+            Assert.fail("No post found with title: '" + postTitle + "' to edit.");
+        }
+        clickOnElement(postsList.get(0));
+        new EditPostPage(webDriver)
+                .checkIsRedirectToEditPostPage()
+                .clickOnEditButton();
         return this;
     }
 }
