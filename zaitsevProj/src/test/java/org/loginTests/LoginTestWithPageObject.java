@@ -3,6 +3,8 @@ package org.loginTests;
 import org.baseTest.BaseTest;
 import org.junit.Test;
 
+import java.util.Set;
+
 import static org.data.TestData.VALID_LOGIN;
 import static org.data.TestData.VALID_PASSWORD;
 
@@ -25,7 +27,7 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
-    public void invalidLogin(){
+    public void invalidLogin() {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto1");
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty"); //is not a necessary step
@@ -38,7 +40,7 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
-    public void signOut(){
+    public void signOut() {
         pageProvider.getLoginPage().openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
                 .getHeaderForLoggedUserElement()
@@ -64,26 +66,34 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void checkIsUserLoggedInAfterOpenInNewTab() {
         pageProvider.getLoginPage().openLoginPageAndFillLoginFormWithValidCred()
+                .checkIsRedirectToHomePage()
+                .getHeaderForLoggedUserElement()
                 .checkIsButtonSignOutVisible();
 
         String mainTabHandle = pageProvider.getHomePage().getCurrentTabHandle();
-
+        Set<String> oldTabHandles = pageProvider.getHomePage().getAllTabHandles();
         pageProvider.getHomePage().openNewTab();
 
-        String newTabHandle = pageProvider.getHomePage().switchToNewTab(mainTabHandle);
+        String newTabHandle = pageProvider.getHomePage().switchToNewTab(oldTabHandles);
 
-        pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getHomePage().checkIsButtonSignOutVisible();
+        pageProvider.getLoginPage()
+                .openLoginPage();
+        pageProvider.getHomePage()
+                .getHeaderForLoggedUserElement()
+                .checkIsButtonSignOutVisible();
 
         pageProvider.getHomePage().switchToTab(mainTabHandle);
-        pageProvider.getHomePage().checkIsButtonSignOutVisible();
+
+        pageProvider.getHomePage()
+                .getHeaderForLoggedUserElement()
+                .checkIsButtonSignOutVisible();
 
         pageProvider.getHomePage().switchToTab(newTabHandle);
-        pageProvider.getHomePage().closeCurrentTab();
-        pageProvider.getHomePage().switchToTab(mainTabHandle);
+        pageProvider.getHomePage().closeCurrentTabAndSwitchToTab(mainTabHandle);
 
-        pageProvider.getHomePage().checkIsButtonSignOutVisible();
-
+        pageProvider.getHomePage()
+                .getHeaderForLoggedUserElement()
+                .checkIsButtonSignOutVisible();
     }
 
     @Test

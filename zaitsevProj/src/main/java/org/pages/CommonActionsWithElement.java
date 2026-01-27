@@ -141,7 +141,7 @@ public class CommonActionsWithElement {
     }
 
 
-    private void printErrorAndStopTest() {
+    public void printErrorAndStopTest() {
         logger.error("Error while working with element");
         Assert.fail("Error while working with element ");
     }
@@ -154,67 +154,6 @@ public class CommonActionsWithElement {
         } catch (Exception e){
             logger.info("Element is not displayed");
             return false;
-        }
-    }
-
-    public String getCurrentTabHandle(){
-        String handle = webDriver.getWindowHandle();
-        logger.info("Current tab handle is: " + handle);
-        return handle;
-    }
-
-    public void openNewTab() {
-        try {
-            ((JavascriptExecutor) webDriver)
-                    .executeScript("window.open('about:blank','_blank');");
-            logger.info("New tab opened");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    public String switchToNewTab(String mainTabHandle) {
-        try {
-            webDriverWait10.until(driver -> driver.getWindowHandles().size() > 1);
-
-            for (String handle : webDriver.getWindowHandles()) {
-                if (!handle.equals(mainTabHandle)) {
-                    webDriver.switchTo().window(handle);
-                    logger.info("Switched to new tab: " + handle);
-                    return handle;
-                }
-            }
-            Assert.fail("New tab handle not found");
-            return null;
-        } catch (Exception e) {
-            printErrorAndStopTest();
-            return null;
-        }
-    }
-
-    public void switchToTab(String tabHandle) {
-        try {
-            webDriver.switchTo().window(tabHandle);
-            logger.info("Switched to tab: " + tabHandle);
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    public void closeCurrentTab() {
-        try {
-            webDriver.close();
-            logger.info("Current tab closed");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-    public void refreshPage() {
-        try {
-            ((JavascriptExecutor) webDriver).executeScript("location.reload();");
-            logger.info("Page was refreshed");
-        } catch (Exception e) {
-            printErrorAndStopTest();
         }
     }
 }
