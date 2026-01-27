@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.Utils_Custom;
 
 import java.util.List;
@@ -52,10 +53,8 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
-
-    public void checkIsButtonSignInVisible(){
-        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
-        logger.info("Button SignIn is visible");
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public void checkIsErrorMessageVisibleWithText(){
@@ -111,6 +110,30 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkIsRedirectToLoginPage() {
+        // TODO Check URL
+        // TODO check some unique element on LoginPage
+        return this;
+    }
+
+    public LoginPage checkIsLoginInputVisible(){
+        Assert.assertTrue("Login input is not visible", isElementDisplayed(inputLogin));
+        logger.info("Login input is not visible");
+        return this;
+    }
+
+    public LoginPage checkIsPasswordInputVisible(){
+        Assert.assertTrue("Password input is not visible", isElementDisplayed(inputPassword));
+        logger.info("Password input is not visible");
+        return this;
+    }
+
+    public LoginPage checkIsButtonSignInVisible(){
+        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
+        logger.info("Button SignIn is visible");
+        return this;
     }
 
     public LoginPage enterTextintoRegistrationUserField(String userName) {
