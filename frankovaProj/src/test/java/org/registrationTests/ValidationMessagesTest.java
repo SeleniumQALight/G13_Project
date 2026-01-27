@@ -11,7 +11,7 @@ import static org.data.RegistrationValidationMessages.ERROR_PASSWORD;
 public class ValidationMessagesTest extends BaseTest {
 
     @Test
-    public void TC06_testValidationMessages(){
+    public void TC06_testValidationMessages() {
         pageProvider.getLoginPage().openLoginPage()
                 .enterTextIntoRegistrationUserNameField("tr")
                 .enterTextIntoRegistrationEmailField("tr")
@@ -21,5 +21,26 @@ public class ValidationMessagesTest extends BaseTest {
                         + ERROR_EMAIL
                         + SEMICOLON
                         + ERROR_PASSWORD);
+    }
+
+    @Test
+    public void TC09_testValidationMessagesWithTabAndEnter() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions("tr");
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions("tr");
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions("tr");
+        pageProvider.getCommonActionsWithElements().pressEnterKeyOnKeyboard();
+        pageProvider.getLoginPage().checkErrorsMessages(ERROR_USERNAME
+                + SEMICOLON
+                + ERROR_EMAIL
+                + SEMICOLON
+                + ERROR_PASSWORD);
     }
 }

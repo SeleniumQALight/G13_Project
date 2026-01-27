@@ -31,4 +31,16 @@ public class LoginTestWithPageObject extends BaseTest {
                 .getHeaderForLoggedUserElement().checkIsNotButtonSignOutVisible();
         pageProvider.getLoginPage().checkIsErrorMessageInvalidCredVisible();
     }
+
+    @Test
+    public void TC09_validLoginWithTabAndEnter(){
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions(VALID_LOGIN);
+        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
+        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions(VALID_PASSWORD);
+        pageProvider.getCommonActionsWithElements().pressEnterKeyOnKeyboard();
+        pageProvider.getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
+    }
 }
