@@ -62,6 +62,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.aeonbits.owner/owner -->
+        <!--  helpful library for working with configuration files -->
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.12</version>
+        </dependency>
+
     </dependencies>
 
     <build>
