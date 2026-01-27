@@ -28,7 +28,7 @@ public class CommonActionsWithElements {
         try {
             element.clear();
             element.sendKeys(text);
-            logger.info(text + "was inputted into element");
+            logger.info(text + "was inputted into element" + getElementName(element));
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -103,7 +103,7 @@ public class CommonActionsWithElements {
         try {
             Select select = new Select(webElement);
             select.selectByVisibleText(text);
-            logger.info("Text '" + text + "' was selected in DropDown");
+            logger.info("Text '" + text + "' was selected in DropDown" + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -113,7 +113,7 @@ public class CommonActionsWithElements {
         try {
             Select select = new Select(webElement);
             select.selectByValue(value);
-            logger.info("Value '" + value + "' was selected in DropDown");
+            logger.info("Value '" + value + "' was selected in DropDown" +getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest();
         }
