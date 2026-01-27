@@ -43,6 +43,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfActualMessages;
 
+    @FindBy(xpath = "//div[text()='Invalid username/password.']")
+    private WebElement errorMessage;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -110,6 +113,25 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextIntoElement(inputPasswordInRegistrationForm, password);
         return this;
     }
+
+    // геттеры для проверок
+    public WebElement getButtonSignIn() {
+        return buttonSignIn;
+    }
+
+    public WebElement getErrorMessage() {
+        return errorMessage;
+    }
+
+    public WebElement getInputUsername() {
+        return inputLogin;
+    }
+
+    public WebElement getInputPassword() {
+        return inputPassword;
+    }
+
+
 
     public LoginPage checkErrorsMessages(String expectedMessages) {
         //error1;error2;error3 ->
