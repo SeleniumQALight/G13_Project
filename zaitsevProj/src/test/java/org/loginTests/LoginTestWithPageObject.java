@@ -56,8 +56,8 @@ public class LoginTestWithPageObject extends BaseTest {
                 .checkIsButtonChatIsNotVissible()
                 .checkIsButtonMyProfileIsNotVisible()
                 .checkIsButtonCreatePostIsNotVisible()
-                .checkIsButtonSignOutIsNotVisible()
-                .getLoginPage()
+                .checkIsButtonSignOutIsNotVisible();
+        pageProvider.getLoginPage()
                 .checkIsLoginInputVisible()
                 .checkIsPasswordInputVisible()
                 .checkIsButtonSignInVisible();

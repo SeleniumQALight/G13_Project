@@ -37,9 +37,6 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElement {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
-    public LoginPage getLoginPage(){
-        return new LoginPage(webDriver);
-    }
 
 
     public HeaderForLoggedUserElement checkIsButtonSearchVisible() {
