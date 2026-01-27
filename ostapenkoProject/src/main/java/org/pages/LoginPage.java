@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.pages.elements.HeaderForLoggedUserElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.utils.Utils_Custom;
 
@@ -152,4 +151,44 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
+
+    public LoginPage enterTextIntoInputLoginUsingActions(String username) {
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputLogin, username);
+        return this;
+    }
+
+    public LoginPage enterTextIntoInputPasswordUsingActions(String password) {
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputPassword, password);
+        return this;
+    }
+
+    public LoginPage enterTextIntoRegistrationUserNameFieldUsingActions(String username) {
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputUserNameRagistrationForm, username);
+        return this;
+    }
+
+    public LoginPage enterTextIntoRegistrationEmailFieldUsingActions(String email) {
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputEmailRagistrationForm, email);
+        return this;
+    }
+
+    public LoginPage enterTextIntoRegistrationPasswordFieldUsingActions(String password) {
+        focusOnElementViaTab();
+        clearAndEnterTextIntoElement(inputPasswordRagistrationForm, password);
+        return this;
+    }
+
+    public void pressEnterKeyOnSignIn() {
+        pressEnterKey(buttonSignIn);
+    }
+
+    public LoginPage pressEnterKeyOnRegistrationForm() {
+        pressEnterKey();
+        return this;
+    }
+
 }

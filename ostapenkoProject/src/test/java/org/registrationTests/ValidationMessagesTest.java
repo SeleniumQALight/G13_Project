@@ -18,4 +18,19 @@ public class ValidationMessagesTest extends BaseTest {
                         + SEMICOLON
                         + ERROR_PASSWORD);
     }
+
+    @Test
+    public void TC04_testValidationMessagesViaTabAntEnter() {
+
+        pageProvider.getLoginPage().openLoginPage()
+                .enterTextIntoRegistrationUserNameFieldUsingActions("tr")
+                .enterTextIntoRegistrationEmailFieldUsingActions("tr")
+                .enterTextIntoRegistrationPasswordFieldUsingActions("tr")
+                .pressEnterKeyOnRegistrationForm()
+                .checkErrorMessages(ERROR_USERNAME
+                        + SEMICOLON
+                        + ERROR_EMAIL
+                        + SEMICOLON
+                        + ERROR_PASSWORD);
+    }
 }

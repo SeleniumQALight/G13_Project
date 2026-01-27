@@ -32,4 +32,17 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().checksInvalidMessageVisible();
     }
 
+    @Test
+    public void validLoginViaTabAndEnter() {
+
+        pageProvider.getLoginPage().openLoginPage()
+                .enterTextIntoInputLoginUsingActions(VALID_LOGIN_UI)
+                .enterTextIntoInputPasswordUsingActions(VALID_PASSWORD_UI)
+                .pressEnterKeyOnSignIn();
+
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checksButtonSignOutVisible();
+
+        logger.info("Valid login via Tab and Enter test completed successfully");
+    }
+
 }
