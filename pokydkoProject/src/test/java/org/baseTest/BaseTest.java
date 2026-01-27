@@ -6,6 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.pages.PageProvider;
 
 import java.time.Duration;
@@ -18,9 +22,10 @@ public class BaseTest {
     @Before
     public void setup(){
         //оновлюємо версію браузера
-        WebDriverManager.chromedriver().setup();
-        //відкриваємо браузер
-        webDriver = new ChromeDriver();
+//        WebDriverManager.chromedriver().setup();
+//        //відкриваємо браузер
+//        webDriver = new ChromeDriver();
+        initDriver();
         //робимо його на весь екран (не фулскрін)
         webDriver.manage().window().maximize();
         //неявне очікування на дію
@@ -28,6 +33,34 @@ public class BaseTest {
         logger.info("Browser was opened");
 
         pageProvider = new PageProvider(webDriver);
+    }
+
+    private WebDriver initDriver() {
+        String browserFromProperty = System.getProperty("browser");
+        if (browserFromProperty == null){
+            logger.info("Browser from property is null. Will be used Chrome browser by default");
+            browserFromProperty = "chrome";
+        } else {
+            logger.info("Browser from property: " + browserFromProperty);
+        }
+        if ((browserFromProperty.equalsIgnoreCase("chrome"))) {
+            WebDriverManager.chromedriver().setup();
+            webDriver = new ChromeDriver();
+            logger.info("Browser is chrome");
+        } else if (browserFromProperty.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            webDriver = new FirefoxDriver();
+        } else if ("ie".equals(browserFromProperty.toLowerCase())) {
+            WebDriverManager.iedriver().setup(); //zoom 100%
+            webDriver = new InternetExplorerDriver(); //security level - Medium
+        } else if ("safari".equalsIgnoreCase(browserFromProperty)) {
+            WebDriverManager.safaridriver().setup();
+            webDriver = new SafariDriver();
+        } else if ("edge".equalsIgnoreCase(browserFromProperty)) {
+            WebDriverManager.edgedriver().setup();
+            webDriver = new EdgeDriver();
+        }
+        return webDriver;
     }
 
     @After
