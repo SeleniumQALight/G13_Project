@@ -44,6 +44,7 @@ public class PostPage extends ParentPage {
         checkTextInElement(messagePostWasCreatedSuccessfully, textOfMessage);
         return this;
     }
+
     public PostPage checkIsPostUnique(String expectedText) {
         checkTextInElement(isPostUniqueText, "Is this post unique? : " + expectedText);
         return this;
