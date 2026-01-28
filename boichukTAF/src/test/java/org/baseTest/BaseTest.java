@@ -8,9 +8,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.pages.PageProvider;
 
+import java.time.Duration;
+
 public class BaseTest {
 
-    protected WebDriver webDriver;
+    private WebDriver webDriver;
     protected PageProvider pageProvider;
     protected Logger logger = Logger.getLogger(getClass());
 
@@ -19,6 +21,7 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         pageProvider = new PageProvider(webDriver);
         logger.info("Browser was opened");
     }
