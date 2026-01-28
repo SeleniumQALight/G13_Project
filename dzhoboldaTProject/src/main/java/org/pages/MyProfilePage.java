@@ -18,13 +18,19 @@ public class MyProfilePage extends ParentPage {
     @FindBy(xpath = "//*[text()='Post successfully deleted.']")
     private WebElement successMessageDelete;
 
+    @FindBy(xpath = "//button[text()='Search']")
+    private WebElement buttonSearch;
+
+    // 2. Шаблон для динамического локатора (выносим вверх)
+//    private final String postTitleLocator = ".//*[text()='%s']";
+
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
 
     @Override
-    String getRelativeUrl() {
+    protected String getRelativeUrl() {
         return ".*/profile/[a-zA-Z0-9]*";
     }
 
@@ -75,16 +81,31 @@ public class MyProfilePage extends ParentPage {
     }
 
     public MyProfilePage checkPostWithTitleVisible(String title) {
-        checkIsElementDisplayed(
-                webDriver.findElement(By.xpath("//a[text()='" + title + "']"))
+        // Используем шаблон, который уже есть вверху класса
+        String xpath = String.format(postTitleLocator, title);
+        WebElement post = webDriverWait10.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
         );
+
+        checkIsElementDisplayed(post);
         return this;
     }
 
-    public PostPage clickOnPostWithTitle(String title) {
-        WebElement post = webDriver.findElement(By.xpath(String.format(".//*[text()='%s']", title)));;
-        post.click();
-        return new PostPage(webDriver); // возвращаем PostPage для редактирования
-    }
 
+    public PostPage clickOnPostWithTitle(String title) {
+        // Формируем XPath из шаблона
+        String xpath = String.format(postTitleLocator, title);
+
+        // Используем ожидание из базового класса для надежности
+        WebElement post = webDriverWait10.until(
+                ExpectedConditions.elementToBeClickable(By.xpath(xpath))
+        );
+
+        clickOnElement(post, "Post with title: " + title);
+        return new PostPage(webDriver);
+    }
 }
+
+
+
+

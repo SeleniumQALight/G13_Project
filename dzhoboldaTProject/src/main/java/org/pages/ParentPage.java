@@ -9,7 +9,8 @@ import org.openqa.selenium.WebDriver;
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }
-    abstract String getRelativeUrl();
+
+     protected abstract  String getRelativeUrl();
 
     protected void checkUrl(){
         Assert.assertEquals("Url is not expected"

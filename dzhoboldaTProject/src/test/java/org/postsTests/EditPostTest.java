@@ -31,9 +31,12 @@ public class EditPostTest extends BaseTest {
                 .clickOnButtonMyProfile(); // Переходимо в профіль
 
         pageProvider.getMyProfilePage()
-                .clickOnPostWithTitle(OLD_TITLE) // Знаходимо наш старий пост і клікаємо
-                .editPostTitle(NEW_TITLE)       // Змінюємо тайтл і тиснемо Save всередині методу
-                .checkPostWasCreatedMessagesDisplayed(); // Перевіряємо повідомлення "Post updated"
+                .clickOnPostWithTitle(OLD_TITLE) // Находим пост, попадаем на PostPage
+                .clickOnEditButton()             // Кликаем Edit, попадаем на EditPostPage
+                .checkIsRedirectToEditPostPage() // Проверяем, что мы на нужной странице
+                .enterNewTitle(NEW_TITLE)        // Вводим текст
+                .clickOnSaveUpdatesButton()      // Жмем сейв, возвращаемся на PostPage
+                .checkPostWasCreatedMessagesDisplayed(); // Проверяем алерт успеха
 
         // 3. ПЕРЕВІРКА: чи бачимо новий тайтл у профілі (як у твоєму робочому тесті)
         pageProvider.getPostPage()

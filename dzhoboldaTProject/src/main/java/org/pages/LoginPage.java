@@ -49,7 +49,7 @@ public class LoginPage extends ParentPage {
     }
 
     @Override
-    String getRelativeUrl() {
+    protected String getRelativeUrl() {
         return "/";
     }
 
