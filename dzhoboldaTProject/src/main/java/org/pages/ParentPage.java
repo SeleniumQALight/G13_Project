@@ -1,10 +1,18 @@
 package org.pages;
 
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializerBase;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.utils.ConfigProvider;
 
- abstract public class ParentPage extends CommonActionsWithElements{
-    protected  String baseUrl = "https://aqa-complexapp.onrender.com";
+abstract public class ParentPage extends CommonActionsWithElements{
+
+     String environment = System.getProperty("env", "aqa");
+
+//    protected  String baseUrl = "https://"+environment+"-complexapp.onrender.com";
+
+     protected String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
+
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
