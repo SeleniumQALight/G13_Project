@@ -30,8 +30,9 @@ public class BaseTest {
 
     @After
     public void tearDown() {
+        webDriver.quit();
         logger.info("Browser was closed");
-        pageProvider.getHopePage();
+
 
     }
 }

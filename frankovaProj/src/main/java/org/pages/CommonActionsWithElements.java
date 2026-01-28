@@ -44,7 +44,6 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest();
         }
-
     }
 
     protected void clickOnElement(WebElement webElement) {
@@ -70,7 +69,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    //analog for selectTextInDropDown
+     //analog for selectTextInDropDown
   /*  protected void selectValueInDropDown(WebElement webElement, String value) {
         try {
             Select select = new Select(webElement);
@@ -128,6 +127,28 @@ public class CommonActionsWithElements {
         }
     }
 
+
+    protected void enterStateForCheckbox(String state, WebElement webElement) {
+        if (state == null || state.trim().isEmpty()) {
+            logger.info("State for checkbox is null or empty");
+            throw new AssertionError("State for checkbox is null or empty");
+        }
+
+        String s = state.trim().toLowerCase();
+        switch (s) {
+            case "check":
+                checkCheckbox(webElement);
+                break;
+            case "uncheck":
+                uncheckCheckbox(webElement);
+                break;
+            default:
+                logger.info("State for checkbox is incorrect: " + state);
+                throw new AssertionError("Incorrect checkbox state: " + state);
+        }
+    }
+
+
     protected void uncheckCheckbox(WebElement webElement) {
         try {
             if (webElement.isSelected()) {
@@ -153,7 +174,7 @@ public class CommonActionsWithElements {
         logger.info(webElement + " Element is NOT visible");
     }
 
-    protected boolean isElementVisible(WebElement webElement) {
+    protected boolean isElementVisible (WebElement webElement){
         try {
             boolean state = webElement.isDisplayed();
             logger.info(getElementName(webElement) + " Element visible state: " + state);
@@ -191,9 +212,10 @@ public class CommonActionsWithElements {
         }
     }
 
-    private void printErrorAndStopTest() {
-        logger.error("Error while working with element");
-        Assert.fail("Error while working with element");
-    }
+     private void printErrorAndStopTest () {
+         logger.error("Error while working with element");
+         Assert.fail("Error while working with element");
+     }
+
 
 }
