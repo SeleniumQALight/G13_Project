@@ -135,5 +135,10 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
+    protected void checkIsElementDisplayed(WebElement webElement) {
+        Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
+        logger.info("Element is displayed");
+    }
 }
 
