@@ -37,7 +37,7 @@ public class CommonActionsWithElements {
         try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
             webElement.click();
-            logger.info(elementName + " Element was clicked" );
+            logger.info(elementName + " Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -48,7 +48,7 @@ public class CommonActionsWithElements {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
             String elementName = getElementName(webElement);
             webElement.click();
-            logger.info(getElementName(webElement) + "Element was clicked" );
+            logger.info(getElementName(webElement) + "Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -83,7 +83,7 @@ public class CommonActionsWithElements {
     protected boolean isElementEnabled(WebElement webElement) {
         try {
             boolean state = webElement.isEnabled();
-            logger.info(getElementName(webElement ) + "Element is enabled - " + state);
+            logger.info(getElementName(webElement) + "Element is enabled - " + state);
             return state;
         } catch (Exception e) {
             logger.info("Element is not found");
@@ -101,11 +101,12 @@ public class CommonActionsWithElements {
             return false;
         }
     }
+
     protected void checkTextInElement(WebElement webElement, String text) {
         try {
             String actualText = webElement.getText();
             Assert.assertEquals("Text in element is not as expected", text, webElement.getText());
-            logger.info("Text in element " + getElementName(webElement) +"is as expected: " + text);
+            logger.info("Text in element " + getElementName(webElement) + "is as expected: " + text);
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -160,10 +161,9 @@ public class CommonActionsWithElements {
     }
 
 
-
     private void printErrorAndStopTest() {
         logger.error("Error while working with element ");
-        Assert.fail("Error while working with element " );
+        Assert.fail("Error while working with element ");
     }
 }
 

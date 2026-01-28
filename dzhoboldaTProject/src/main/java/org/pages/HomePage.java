@@ -14,7 +14,7 @@ import org.pages.elements.HeaderForLoggedUserElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePage  extends ParentPage{
+public class HomePage extends ParentPage {
     private final Logger logger = Logger.getLogger(getClass());
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
@@ -35,7 +35,7 @@ public class HomePage  extends ParentPage{
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-    public void checkIsButtonSignOutVisible(){
+    public void checkIsButtonSignOutVisible() {
         Assert.assertTrue("Button SignOut is not visible", isButtonSignOutVisible());
         logger.info("Button SignOut is visible");
     }
@@ -45,16 +45,18 @@ public class HomePage  extends ParentPage{
             boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
             logger.info("Element sate: " + state);
             return state;
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info("Element is not found");
             return false;
         }
     }
-    public HomePage checkRedirectToHomePage(){
+
+    public HomePage checkRedirectToHomePage() {
         checkUrl();
         // TODO Check unique element
         return this;
     }
+
     public CreatePostPage clickOnButtonCreatePost() {
         clickOnElement(createNewPostButton);
         logger.info("Button Create Post was clicked");
@@ -66,7 +68,7 @@ public class HomePage  extends ParentPage{
         loginPage.openLoginPage();
         if (isButtonSignOutVisible()) {
             logger.info("User is already logged in");
-        }else {
+        } else {
             loginPage.enterTextIntoInputLogin(TestData.ValidLogin)
                     .enterTextIntoInputPassword(TestData.ValidPassword)
                     .clickOnButtonSignIn();
@@ -81,6 +83,7 @@ public class HomePage  extends ParentPage{
         logger.info("New tab was opened via JavaScript");
         return this;
     }
+
     public HomePage switchToNewTab() {
         List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(tabs.size() - 1)); // переключаемся на последнюю вкладку
@@ -89,19 +92,14 @@ public class HomePage  extends ParentPage{
     }
 
     public HomePage switchToMainTab() {
-        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
-        webDriver.switchTo().window(tabs.get(0)); // переключаемся на первую вкладку
-        logger.info("Switched to main tab");
+        super.switchToMainTab();
         return this;
     }
 
-    public void checkIsButtonSignOutNotVisible(){
+    public void checkIsButtonSignOutNotVisible() {
         Assert.assertFalse("Button SignOut is visible but should NOT be", isButtonSignOutVisible());
         logger.info("Button SignOut is NOT visible");
     }
-
-
-
 
 
 }

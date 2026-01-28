@@ -10,7 +10,7 @@ import org.pages.elements.HeaderForLoggedUserElement;
 
 public class LoginTestsHW6 extends BaseTest {
     @Test
-    public void testLoginInNewTab(){
+    public void testLoginInNewTab() {
         // Шаг 1-2: Открываем логин страницу и логинимся
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithVailidCred();
@@ -67,6 +67,7 @@ public class LoginTestsHW6 extends BaseTest {
         //  Проверка
         pageProvider.getHomePage().checkIsButtonSignOutVisible();
     }
+
     @Test
     public void testRegistrationErrorsWithTabAndEnter() {
         LoginPage loginPage = pageProvider.getLoginPage().openLoginPage();
