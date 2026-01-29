@@ -1,4 +1,4 @@
-package org.testdata;
+package org.data;
 
 import org.utils.ConfigProvider;
 
