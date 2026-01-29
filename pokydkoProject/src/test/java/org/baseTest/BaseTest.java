@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.pages.PageProvider;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
 
@@ -20,7 +21,7 @@ public class BaseTest {
     protected PageProvider pageProvider;
 
     @Before
-    public void setup(){
+    public void setup() {
         //оновлюємо версію браузера
 //        WebDriverManager.chromedriver().setup();
 //        //відкриваємо браузер
@@ -29,7 +30,8 @@ public class BaseTest {
         //робимо його на весь екран (не фулскрін)
         webDriver.manage().window().maximize();
         //неявне очікування на дію
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(
+                ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT()));
         logger.info("Browser was opened");
 
         pageProvider = new PageProvider(webDriver);
@@ -37,7 +39,7 @@ public class BaseTest {
 
     private WebDriver initDriver() {
         String browserFromProperty = System.getProperty("browser");
-        if (browserFromProperty == null){
+        if (browserFromProperty == null) {
             logger.info("Browser from property is null. Will be used Chrome browser by default");
             browserFromProperty = "chrome";
         } else {
@@ -64,7 +66,7 @@ public class BaseTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         webDriver.quit();
         logger.info("Browser was closed");
     }
