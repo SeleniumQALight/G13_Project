@@ -15,7 +15,6 @@ public class HomePage extends ParentPage {
     private WebElement buttonSignOut;
 
     @FindBy(xpath = "//a[text()='Create Post']")
-    private WebElement createNewPostButton;
     private WebElement buttonCreatePost;
 
     public HomePage(WebDriver webDriver) {
@@ -37,6 +36,7 @@ public class HomePage extends ParentPage {
     }
     public void checkIsButtonCreatePostVisible(){
         Assert.assertTrue("Button Create Post is not visible", isElementDisplayed(buttonCreatePost));
+        logger.info("Button Create Post is visible");
     }
 
     public HomePage checkIsRedirectToHomePage() {
@@ -46,7 +46,7 @@ public class HomePage extends ParentPage {
     }
 
     public CreatePostPage clickOnButtonCreatePost() {
-        clickOnElement(createNewPostButton);
+        clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
     }
 
