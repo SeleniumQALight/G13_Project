@@ -5,11 +5,16 @@ import junitparams.Parameters;
 import org.baseTest.BaseTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.utils.ConfigProvider;
+import org.utils.ExcelSpreadsheetData;
+
+import java.io.FileInputStream;
+import java.util.Collection;
 
 import static org.data.RegistrationValidationMessages.*;
 
 @RunWith(JUnitParamsRunner.class)
-public class ValidationMessagesTest extends BaseTest {
+public class ValidationMessagesTestWithExel extends BaseTest {
     @Test
     @Parameters(method = "parametersForTestValidationMessages")
     public void TC03_testValidationMessages(
@@ -21,12 +26,14 @@ public class ValidationMessagesTest extends BaseTest {
                 .checkErrorMessages(expectedMessages);
     }
 
-    public Object[][] parametersForTestValidationMessages() {
-        return new Object[][]{
-                {"tr", "tr1", "tr2", ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD},
-                {"taras", "tr1", "tr2", ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD},
-                {"taras", "tr1", "123456qwerty", ERROR_EMAIL}
-        };
+    public Collection parametersForTestValidationMessages() throws Exception {
+        String pathToDataFile = ConfigProvider.configProperties.DATA_FILE_PATH() + "TestDataSuit.xls";
+        String sheetName = "registrationErrors";
+        boolean skipFirstRow = false;
+        logger.info("Loading test data from file: " + pathToDataFile + ", sheet: " + sheetName
+        + ", skip first row: " + skipFirstRow);
+
+        return new ExcelSpreadsheetData(new FileInputStream(pathToDataFile), sheetName, skipFirstRow).getData();
     }
 
 }
