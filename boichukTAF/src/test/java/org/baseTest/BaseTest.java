@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.pages.PageProvider;
+import org.pages.utils.ConfigProvider;
 
 import java.time.Duration;
 import java.util.Locale;
@@ -27,7 +28,7 @@ public class BaseTest {
 //        webDriver = new ChromeDriver();
         initDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT()));
         pageProvider = new PageProvider(webDriver);
         logger.info("Browser was opened");
     }
@@ -57,7 +58,7 @@ public class BaseTest {
             WebDriverManager.edgedriver().setup();
             webDriver = new EdgeDriver();
         }
-         return  webDriver;
+        return  webDriver;
     }
 
     @After
