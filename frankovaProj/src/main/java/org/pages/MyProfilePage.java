@@ -24,7 +24,7 @@ public class MyProfilePage extends ParentPage {
 
     @Override
     protected String getRelativeURL() {
-        return "/profile/[a-zA-Z0-9]*";
+        return "/profile/[a-zA-Z0-9]*";//шаблон для перевірки URL з урахуванням ідентифікатора користувача, перевіряє частину урли
     }
 
     public MyProfilePage checkIsRedirectToMyProfilePage() {
