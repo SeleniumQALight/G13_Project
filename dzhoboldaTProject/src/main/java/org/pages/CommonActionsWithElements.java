@@ -160,6 +160,23 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void checkIsElementDisplayed(WebElement webElement) {
+        Assert.assertTrue(
+                "Element is not displayed",
+                isElementDisplayed(webElement)
+        );
+        logger.info("Element is displayed");
+    }
+
+    protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse(
+                "Element is displayed but should not be",
+                isElementDisplayed(webElement)
+        );
+        logger.info("Element is not displayed");
+    }
+
+
     private void printErrorAndStopTest() {
         logger.error("Error while working with element ");
         Assert.fail("Error while working with element " );
