@@ -27,7 +27,9 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().enterTextIntoInputPassword("invalid_password");
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
-        pageProvider.getLoginPage().checkIsButtonSignInVisible()
+        pageProvider.getLoginPage().checkIsButtonSignInVisible();
+
+        pageProvider.getHomePage()
                 .getHeaderForLoggedUserElement().checkIsNotButtonSignOutVisible();
         pageProvider.getLoginPage().checkIsErrorMessageInvalidCredVisible();
     }
