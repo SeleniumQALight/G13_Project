@@ -1,4 +1,4 @@
-package org.testdata;
+package org.data;
 
 public class RegistrationValidationMessages {
     public final static String ERROR_EMAIL_ALREADY_EXISTS = "This email is already being used.";
