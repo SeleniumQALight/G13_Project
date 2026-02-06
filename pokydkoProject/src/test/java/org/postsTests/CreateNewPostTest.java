@@ -17,10 +17,12 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 Vladislav's Some body text")
                 .selectTextInDropdownAccess("Приватне повідомлення")
+                .setCheckboxUniquePostState("check")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkPostWasCreatedMessageIsDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkIsPostUnique("yes")
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
 
         pageProvider.getMyProfilePage()

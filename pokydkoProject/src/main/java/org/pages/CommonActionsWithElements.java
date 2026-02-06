@@ -25,29 +25,74 @@ public class CommonActionsWithElements {
         webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
-    protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
+    protected void clearAndEnterTextIntoElement(WebElement element, String text) {
         try {
-            webElement.clear();
-            webElement.sendKeys(text);
-            logger.info(text + "was inputted into element" + getElementName(webElement));
+            element.clear();
+            element.sendKeys(text);
+            logger.info(text + "was inputted into element" + getElementName(element));
         } catch (Exception e) {
             printErrorAndStopTest();
         }
     }
 
-    protected void clickOnElement(WebElement webElement, String elementName) {
-       try {
+    //create a method markCheckbox to mark checkbox as checked
+    protected void markCheckbox(WebElement webElement) {
+        try {
+            if (!webElement.isSelected()) {
+                clickOnElement(webElement);
+                logger.info("Checkbox was marked");
+            } else {
+                logger.info("Checkbox was already marked");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //create a method unmarkCheckbox to unmark checkbox
+    protected void unmarkCheckbox(WebElement webElement) {
+        try {
+            if (webElement.isSelected()) {
+                clickOnElement(webElement);
+                logger.info("Checkbox was unmarked");
+            } else {
+                logger.info("Checkbox was already unmarked");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    //create a method
+    public void setCheckboxState(WebElement webElement, String state) {
+        try {
+            if ("check".equalsIgnoreCase(state)) {
+                markCheckbox(webElement);
+            } else if ("uncheck".equalsIgnoreCase(state)) {
+                unmarkCheckbox(webElement);
+            } else {
+                logger.info("Unknown checkbox state: " + state);
+                Assert.fail("Unknown checkbox state: " + state);
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest();
+        }
+    }
+
+    protected void clickOnElement(WebElement webElement) {
+        try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName(webElement);
             webElement.click();
             logger.info("Element " + elementName + " was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
         }
     }
-    protected void clickOnElement(WebElement webElement) {
+
+    protected void clickOnElement(WebElement webElement, String elementName) {
         try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
-            String elementName = getElementName(webElement);
             webElement.click();
             logger.info("Element " + elementName + " was clicked");
         } catch (Exception e) {
@@ -69,11 +114,10 @@ public class CommonActionsWithElements {
         try {
             Select select = new Select(webElement);
             select.selectByValue(value);
-            logger.info("Value '" + value + "' was selected in DropDown " + getElementName(webElement));
+            logger.info("Value '" + value + "' was selected in DropDown" +getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest();
         }
-
     }
 
     //check is element enabled
