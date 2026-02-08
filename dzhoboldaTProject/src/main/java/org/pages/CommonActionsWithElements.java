@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -55,6 +56,12 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void enterText(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(text);
+    }
+
+
     protected void selectTextInDropDown(WebElement webElement, String text) {
         try {
             Select select = new Select(webElement);
@@ -92,7 +99,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected boolean isElementDisplayed(WebElement webElement) {
+    public boolean isElementDisplayed(WebElement webElement) {
         try {
             boolean isDisplayed = webElement.isDisplayed();
             logger.info("Element is displayed - " + isDisplayed);
@@ -157,6 +164,15 @@ public class CommonActionsWithElements {
             return webElement.getAccessibleName();
         } catch (Exception e) {
             return "Unknown element";
+        }
+    }
+
+    private boolean isButtonSingOutVisible() {
+        try {
+            return webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+        } catch (Exception e) {
+            logger.info("Element is not found ");
+            return false;
         }
     }
 

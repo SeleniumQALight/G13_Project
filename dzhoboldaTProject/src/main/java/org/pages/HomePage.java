@@ -19,7 +19,7 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
     @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement signOutButton;
+    private WebElement buttonSignOut;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -76,6 +76,11 @@ public class HomePage extends ParentPage {
             logger.info("User was logged in");
         }
         return this;
+    }
+
+    //  геттеры
+    public WebElement getButtonSignOut() {
+        return buttonSignOut;
     }
 
     public HomePage openNewTabByJS() {
