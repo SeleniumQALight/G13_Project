@@ -9,12 +9,18 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.utils.ConfigProvider;
 
 abstract public class ParentPage extends CommonActionsWithElements {
     protected String baseUrl = "https://aqa-complexapp.onrender.com";
 
     Logger logger = Logger.getLogger(getClass());
 
+
+    String environment = System.getProperty("env", "aqa");
+//    protected String baseUrl = "https://" + environment + "-complexapp.onrender.com";
+
+    protected String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }

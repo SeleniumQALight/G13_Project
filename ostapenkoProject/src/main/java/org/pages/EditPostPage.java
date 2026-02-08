@@ -5,10 +5,15 @@ import org.openqa.selenium.support.FindBy;
 
 public class EditPostPage extends ParentPage{
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/edit";
+    }
+
     @FindBy(xpath = "//button[text()='Save Updates']")
     private WebElement clickOnSaveUpdatesButton;
 
-    @FindBy(id = "post-title")
+    @FindBy(id = "/post/[a-zA-Z0-9]*/edit")
     private WebElement newTitleForPost;
 
     @FindBy(xpath = "//div[text()='Post successfully updated.']")

@@ -3,12 +3,14 @@ package org.postTests;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
-    private final String POST_TITLE = "G13 Yulii";
+    // GUID = 9f3b3f4e-5d6a-4c2e-8f7a-123456789abc
+    private final String POST_TITLE = "TC01 G13 Yulii" + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public void createNewPost() {
+    public void TC01_createNewPost() {
         //test steps should be here
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
