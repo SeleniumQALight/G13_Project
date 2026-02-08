@@ -5,10 +5,15 @@ import org.openqa.selenium.support.FindBy;
 
 public class EditPostPage extends ParentPage{
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/edit";
+    }
+
     @FindBy(xpath = "//button[text()='Save Updates']")
     private WebElement clickOnSaveUpdatesButton;
 
-    @FindBy(id = "post-title")
+    @FindBy(id = "/post/[a-zA-Z0-9]*/edit")
     private WebElement newTitleForPost;
 
     @FindBy(xpath = "//div[text()='Post successfully updated.']")
@@ -18,8 +23,13 @@ public class EditPostPage extends ParentPage{
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*/edit";
+    }
+
     public EditPostPage checkIsRedirectToEditPostPage() {
-        //TODO check URL
+        checkUrlWithPattern();
         //TODO check some unique element on EditPostPage
         return this;
     }

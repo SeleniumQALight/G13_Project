@@ -103,5 +103,14 @@ public class LoginTestsAllStepsInOnClass extends BaseTest {
 
 
 
+    private boolean isButtonSignInVisible() {
+        try {
+            return webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
+        } catch (Exception e) {
+            logger.info("Sign In button is not found");
+            return false;
+        }
+    }
+
 
 

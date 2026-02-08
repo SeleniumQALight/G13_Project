@@ -4,13 +4,17 @@ import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.pages.elements.HeaderForLoggedUserElement;
 
-public class HomePage  extends ParentPage{
+import java.util.ArrayList;
+import java.util.List;
+
+public class HomePage extends ParentPage {
     private final Logger logger = Logger.getLogger(getClass());
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
@@ -23,7 +27,7 @@ public class HomePage  extends ParentPage{
     }
 
     @Override
-    String getRelativeUrl() {
+    protected String getRelativeUrl() {
         return "/";
     }
 
@@ -31,7 +35,7 @@ public class HomePage  extends ParentPage{
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-    public void checkIsButtonSignOutVisible(){
+    public void checkIsButtonSignOutVisible() {
         Assert.assertTrue("Button SignOut is not visible", isButtonSignOutVisible());
         logger.info("Button SignOut is visible");
     }
@@ -41,16 +45,18 @@ public class HomePage  extends ParentPage{
             boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
             logger.info("Element sate: " + state);
             return state;
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info("Element is not found");
             return false;
         }
     }
-    public HomePage checkRedirectToHomePage(){
+
+    public HomePage checkRedirectToHomePage() {
         checkUrl();
         // TODO Check unique element
         return this;
     }
+
     public CreatePostPage clickOnButtonCreatePost() {
         clickOnElement(createNewPostButton);
         logger.info("Button Create Post was clicked");
@@ -62,7 +68,7 @@ public class HomePage  extends ParentPage{
         loginPage.openLoginPage();
         if (isButtonSignOutVisible()) {
             logger.info("User is already logged in");
-        }else {
+        } else {
             loginPage.enterTextIntoInputLogin(TestData.ValidLogin)
                     .enterTextIntoInputPassword(TestData.ValidPassword)
                     .clickOnButtonSignIn();
@@ -75,6 +81,26 @@ public class HomePage  extends ParentPage{
     //  геттеры
     public WebElement getButtonSignOut() {
         return buttonSignOut;
+    }
+
+    public HomePage openNewTabByJS() {
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        logger.info("New tab was opened via JavaScript");
+        return this;
+    }
+
+    public HomePage switchToNewTab() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(tabs.size() - 1)); // переключаемся на последнюю вкладку
+        logger.info("Switched to new tab");
+        return this;
+    }
+
+
+
+    public void checkIsButtonSignOutNotVisible() {
+        Assert.assertFalse("Button SignOut is visible but should NOT be", isButtonSignOutVisible());
+        logger.info("Button SignOut is NOT visible");
     }
 
 

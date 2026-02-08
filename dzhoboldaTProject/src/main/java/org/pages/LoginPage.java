@@ -37,8 +37,8 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
 
-    final static String  listOfActualMessagesLocator
-    ="//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+    final static String listOfActualMessagesLocator
+            = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
 
     @FindBy(xpath = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfActualMessages;
@@ -47,12 +47,16 @@ public class LoginPage extends ParentPage {
     private WebElement errorMessage;
 
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center' and text()='Invalid username/password.']")
+    private WebElement invalidLoginError;
+
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
     @Override
-    String getRelativeUrl() {
+    protected String getRelativeUrl() {
         return "/";
     }
 
@@ -75,10 +79,6 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-//    public HomePage clickOnButtonSignIn() {
-//        clickOnElement(buttonSignIn);
-//        return new HomePage(webDriver);
-//    }
 
     public HomePage clickOnButtonSignIn() {
         try {
@@ -98,6 +98,24 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.ValidPassword);
         return clickOnButtonSignIn();
     }
+
+    public LoginPage checkLoginInputVisible() {
+        checkIsElementDisplayed(inputLogin);
+        return this;
+    }
+
+    public LoginPage checkPasswordInputVisible() {
+        checkIsElementDisplayed(inputPassword);
+        return this;
+    }
+
+    public LoginPage checkSignInButtonVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+
+
 
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameRegistrationForm, userName);
@@ -135,13 +153,13 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorsMessages(String expectedMessages) {
         //error1;error2;error3 ->
-        String [] expectedErrorsArray = expectedMessages.split(SEMICOLON);
+        String[] expectedErrorsArray = expectedMessages.split(SEMICOLON);
         webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfActualMessagesLocator),
                 expectedErrorsArray.length));
         Utils_Custom.waitABit(1); // додатково чекаємо 1 секунду щоб всі повідомлення встигли з
         Assert.assertEquals("Number of messages ", expectedErrorsArray.length, listOfActualMessages.size());
         SoftAssertions softAssertions = new SoftAssertions();
-        for(int i =0;i < expectedErrorsArray.length;i++){
+        for (int i = 0; i < expectedErrorsArray.length; i++) {
             softAssertions
                     .assertThat(listOfActualMessages.get(i).getText())
                     .as("Message " + (i + 1))
@@ -152,5 +170,18 @@ public class LoginPage extends ParentPage {
 
         return this;
     }
+
+    public LoginPage refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page was refreshed");
+        return this;
+    }
+
+
+    public LoginPage checkInvalidLoginError() {
+        Assert.assertEquals("Invalid username/password.", invalidLoginError.getText());
+        return this;
+    }
+
 }
 
