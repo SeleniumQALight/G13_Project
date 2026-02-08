@@ -53,7 +53,7 @@ public class LoginPage extends ParentPage {
     }
 
     @Override
-    String getRelativeUrl() {
+    protected String getRelativeUrl() {
         return "/";
     }
 
@@ -95,6 +95,24 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.ValidPassword);
         return clickOnButtonSignIn();
     }
+
+    public LoginPage checkLoginInputVisible() {
+        checkIsElementDisplayed(inputLogin);
+        return this;
+    }
+
+    public LoginPage checkPasswordInputVisible() {
+        checkIsElementDisplayed(inputPassword);
+        return this;
+    }
+
+    public LoginPage checkSignInButtonVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+
+
 
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameRegistrationForm, userName);

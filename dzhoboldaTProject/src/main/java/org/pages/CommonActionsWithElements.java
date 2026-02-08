@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
 
@@ -19,8 +20,8 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
@@ -101,12 +102,11 @@ public class CommonActionsWithElements {
             return false;
         }
     }
-
     protected void checkTextInElement(WebElement webElement, String text) {
         try {
             String actualText = webElement.getText();
             Assert.assertEquals("Text in element is not as expected", text, webElement.getText());
-            logger.info("Text in element " + getElementName(webElement) + "is as expected: " + text);
+            logger.info("Text in element " + getElementName(webElement) +"is as expected: " + text);
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -160,10 +160,26 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void checkIsElementDisplayed(WebElement webElement) {
+        Assert.assertTrue(
+                "Element is not displayed",
+                isElementDisplayed(webElement)
+        );
+        logger.info("Element is displayed");
+    }
+
+    protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse(
+                "Element is displayed but should not be",
+                isElementDisplayed(webElement)
+        );
+        logger.info("Element is not displayed");
+    }
+
 
     private void printErrorAndStopTest() {
         logger.error("Error while working with element ");
-        Assert.fail("Error while working with element ");
+        Assert.fail("Error while working with element " );
     }
 }
 

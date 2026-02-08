@@ -27,7 +27,7 @@ public class HomePage extends ParentPage {
     }
 
     @Override
-    String getRelativeUrl() {
+    protected String getRelativeUrl() {
         return "/";
     }
 

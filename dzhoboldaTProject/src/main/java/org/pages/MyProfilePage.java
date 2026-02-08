@@ -6,7 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class MyProfilePage extends ParentPage {
@@ -15,14 +18,20 @@ public class MyProfilePage extends ParentPage {
     @FindBy(xpath = "//*[text()='Post successfully deleted.']")
     private WebElement successMessageDelete;
 
+    @FindBy(xpath = "//button[text()='Search']")
+    private WebElement buttonSearch;
+
+    // 2. Шаблон для динамического локатора (выносим вверх)
+//    private final String postTitleLocator = ".//*[text()='%s']";
+
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
 
     @Override
-    String getRelativeUrl() {
-        return "/profile/[a-zA-Z0-9]*";
+    protected String getRelativeUrl() {
+        return ".*/profile/[a-zA-Z0-9]*";
     }
 
     public MyProfilePage checkIsRedirectToMyProfilePage(){
@@ -70,4 +79,33 @@ public class MyProfilePage extends ParentPage {
         checkIsElementEnabled(successMessageDelete);
         return this;
     }
+
+    public MyProfilePage checkPostWithTitleVisible(String title) {
+        // Используем шаблон, который уже есть вверху класса
+        String xpath = String.format(postTitleLocator, title);
+        WebElement post = webDriverWait10.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
+        );
+
+        checkIsElementDisplayed(post);
+        return this;
+    }
+
+
+    public PostPage clickOnPostWithTitle(String title) {
+        // Формируем XPath из шаблона
+        String xpath = String.format(postTitleLocator, title);
+
+        // Используем ожидание из базового класса для надежности
+        WebElement post = webDriverWait10.until(
+                ExpectedConditions.elementToBeClickable(By.xpath(xpath))
+        );
+
+        clickOnElement(post, "Post with title: " + title);
+        return new PostPage(webDriver);
+    }
 }
+
+
+
+

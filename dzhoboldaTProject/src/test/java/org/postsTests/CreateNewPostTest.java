@@ -18,7 +18,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 DZH  body text")
-                .setCheckboxUniquePostState("check") //new step from hom work 3 lesson
+                .setCheckboxUniquePostState("check") //new step from hom work
                 .selectTextInDropDownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
         .checkIsRedirectToPostPage()
