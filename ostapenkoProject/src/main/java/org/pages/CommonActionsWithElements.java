@@ -2,10 +2,8 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -18,7 +16,7 @@ import java.time.Duration;
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     protected WebDriverWait webDriverWait10, webDriverWait15;
-    private Logger logger = Logger.getLogger(getClass());
+    private static Logger logger = Logger.getLogger(CommonActionsWithElements.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -38,7 +36,6 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
-
     protected void checksElementVisible(WebElement webElement, String name) {
         try {
             Assert.assertTrue(name + " is not visible", webElement.isDisplayed());
@@ -94,6 +91,7 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
@@ -103,6 +101,24 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest();
         }
+    }
+
+    public void pressEnterKey(WebElement webElement) {
+        Actions actions = new Actions(webDriver);
+        actions
+                .moveToElement(webElement)
+                .click()
+                .sendKeys("\n")
+                .perform();
+        logger.info("Enter key was pressed using Actions");
+    }
+
+    public void pressEnterKey() {
+        Actions actions = new Actions(webDriver);
+        actions
+                .sendKeys("\n")
+                .perform();
+        logger.info("Enter key was pressed using Actions");
     }
 
     // check is element enabled
@@ -187,8 +203,9 @@ public class CommonActionsWithElements {
         }
     }
 
-    private void printErrorAndStopTest() {
+    protected static void printErrorAndStopTest() {
         logger.error("Error while working with element");
         Assert.fail("Error while working with element"); // wrote info into report
     }
+
 }
