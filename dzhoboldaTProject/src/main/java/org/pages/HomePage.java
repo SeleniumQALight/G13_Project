@@ -91,10 +91,7 @@ public class HomePage extends ParentPage {
         return this;
     }
 
-    public HomePage switchToMainTab() {
-        super.switchToMainTab();
-        return this;
-    }
+
 
     public void checkIsButtonSignOutNotVisible() {
         Assert.assertFalse("Button SignOut is visible but should NOT be", isButtonSignOutVisible());
