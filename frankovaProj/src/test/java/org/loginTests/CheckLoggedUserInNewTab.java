@@ -17,8 +17,8 @@ public class CheckLoggedUserInNewTab extends BaseTest {
                 .getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
         pageProvider.getCommonActionsWithElements().openNewTabInBrowser();
         pageProvider.getCommonActionsWithElements().switchToTabInBrowser(1);
-        pageProvider.getLoginPage().openLoginPage()
-                .getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
         pageProvider.getCommonActionsWithElements().switchToTabInBrowser(0);
         pageProvider.getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
         pageProvider.getCommonActionsWithElements().closeTabInBrowser(1);
