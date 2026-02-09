@@ -3,15 +3,18 @@ package org.postTests;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
     private final String POST_TITLE_CHECKED = "G13 Yulii";
     private final String POST_TITLE_UNCHECKED = "G13 Yulii unchecked";
 
 
+    // GUID = 9f3b3f4e-5d6a-4c2e-8f7a-123456789abc
+    private final String POST_TITLE = "TC01 G13 Yulii" + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public void createNewPost() {
+    public void TC01_createNewPost() {
         //test steps should be here
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
@@ -50,9 +53,6 @@ public class CreateNewPostTest extends BaseTest {
                 .checkPostWithTitlePresent(POST_TITLE_CHECKED, 1)
                 .checkPostWithTitlePresent(POST_TITLE_UNCHECKED, 1);
     }
-
-
-
     @After
     public void deletePosts(){
         logger.info("Post condition - delete posts");

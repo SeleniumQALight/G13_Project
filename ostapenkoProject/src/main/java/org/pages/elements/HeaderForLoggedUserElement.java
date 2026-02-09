@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
 import org.pages.CreatePostPage;
 import org.openqa.selenium.NoSuchElementException;
+import org.pages.HomePage;
 import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
