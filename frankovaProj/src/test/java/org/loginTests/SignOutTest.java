@@ -16,9 +16,11 @@ public class SignOutTest extends BaseTest {
                 .checkIsButtonCreatePostVisible()
                 .checkIsButtonSignOutVisible()
                 .clickOnButtonSignOut()
-                .checkIsRedirectToLoginPage()
+                .checkIsRedirectToLoginPage();
 
-                .getHeaderForLoggedUserElement().checkIsNotIconSearchInputVisible()
+        //дістаю елем ехедера через Хомепейдж, а не Логін пейдж
+                pageProvider.getHomePage()
+               .getHeaderForLoggedUserElement().checkIsNotIconSearchInputVisible()
                 .checkIsNotChatIconVisible()
                 .checkIsNotAvatarIconVisible()
                 .checkIsNotButtonSignOutVisible()

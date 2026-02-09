@@ -8,14 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testdata.RegistrationValidationMessages;
 import org.utils.Utils_Custom;
 
 import java.util.List;
 
-import static org.testdata.RegistrationValidationMessages.SEMICOLON;
-import static org.testdata.TestData.VALID_LOGIN_UI;
-import static org.testdata.TestData.VALID_PASSWORD_UI;
+import static org.data.RegistrationValidationMessages.SEMICOLON;
+import static org.data.TestData.VALID_LOGIN_UI;
+import static org.data.TestData.VALID_PASSWORD_UI;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
