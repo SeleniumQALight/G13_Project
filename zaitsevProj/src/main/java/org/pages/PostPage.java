@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 public class PostPage extends ParentPage {
@@ -53,6 +54,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
+        webDriverWait10.until(ExpectedConditions.urlMatches(baseUrl + "/post/[a-zA-Z0-9]*"));
         checkUrlWithPattern();
         // TODO check unique element
         return this;

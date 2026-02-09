@@ -52,6 +52,12 @@ public class PostPage extends ParentPage {
         return this;
     }
 
+    public PostPage checkCheckboxStateInCreatedPost (String expectedStateOfCheckbox) {
+        String expectedMessage = "Is this post unique? : " + expectedStateOfCheckbox;
+        checkTextInElement(messageWithStateOfCheckbox, expectedMessage);
+        return this;
+    }
+
     public PostPage checkStateOfCheckboxInCreatedPost(String stateOfCheckbox) {
         if (stateOfCheckbox == null || stateOfCheckbox.trim().isEmpty()) {
             logger.info("State of checkbox is null or empty");

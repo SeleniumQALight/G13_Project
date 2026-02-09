@@ -5,36 +5,78 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.utils.ConfigProvider;
 
-abstract public class ParentPage extends CommonActionsWithElements{
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
-     String environment = System.getProperty("env", "aqa");
+abstract public class ParentPage extends CommonActionsWithElements {
 
-//    protected  String baseUrl = "https://"+environment+"-complexapp.onrender.com";
 
-     protected String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
 
+
+
+
+    String environment = System.getProperty("env", "aqa");
+    protected String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }
-    abstract String getRelativeUrl();
 
-    protected void checkUrl(){
-        Assert.assertEquals("Url is not expected"
-                ,baseUrl + getRelativeUrl()
-                , webDriver.getCurrentUrl());
+    protected abstract String getRelativeUrl();
+    protected void checkUrl() {
+        String expected = normalizeUrl(baseUrl + getRelativeUrl());
+        String actual = normalizeUrl(webDriver.getCurrentUrl());
+        Assert.assertEquals("Url is not expected", expected, actual);
     }
 
-      // метод по перевірці чи відкрита потрібна сторінка по патерну
-     // https://aqa-complexapp.onrender.com/post/64d21e84903640003414c338
-    // regex for 64d21e84903640003414c338
-   // [a-zA-Z0-9]{24}
-     protected void checkUrlWithPattern(){
+    protected void checkUrlWithPattern() {
+        String regex = "^" + Pattern.quote(baseUrl) + getRelativeUrl();
+        String actual = webDriver.getCurrentUrl();
         Assert.assertTrue("Url is not expected \n"
-                + "Expected pattern: " + baseUrl + getRelativeUrl() + "\n"
-                + "Actual URL: " + webDriver.getCurrentUrl(),
-                webDriver.getCurrentUrl().matches(baseUrl + getRelativeUrl()));
+                        + "Expected pattern: " + regex + "\n"
+                        + "Actual URL: " + actual,
+                actual != null && Pattern.compile(regex).matcher(actual).lookingAt());
+    }
+
+    private String normalizeUrl(String url) {
+        if (url == null) return null;
+        return url.endsWith("/") && url.length() > 1 ? url.substring(0, url.length() - 1) : url;
+    }
 
 
+    public ParentPage switchToMainTab() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        if (tabs.isEmpty()) {
+            Assert.fail("No browser tabs found");
+        }
+        webDriver.switchTo().window(tabs.get(0));
+        return this;
+    }
+
+    public void checkIsButtonSignOutNotVisible() {
+        Assert.assertFalse("Button SignOut is visible but should NOT be", isButtonSignOutVisible());
+    }
+
+    private boolean isButtonSignOutVisible() {
+        try {
+            return webDriver.findElement(org.openqa.selenium.By.xpath(
+                    "//button[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), 'sign out') "
+                            + "or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), 'signout')]"
+            )).isDisplayed();
+        } catch (org.openqa.selenium.NoSuchElementException | org.openqa.selenium.StaleElementReferenceException e) {
+            return false;
+        }
+    }
+    public void checkIsButtonSignOutVisible() {
+        Assert.assertTrue("Button SignOut is not visible but should be", isButtonSignOutVisible());
+    }
 }
- }
+
+
+
+
+
+
+
+
