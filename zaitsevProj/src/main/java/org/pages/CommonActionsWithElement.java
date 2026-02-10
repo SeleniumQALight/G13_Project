@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -143,7 +144,7 @@ public class CommonActionsWithElement {
     }
 
 
-    private void printErrorAndStopTest() {
+    public void printErrorAndStopTest() {
         logger.error("Error while working with element");
         Assert.fail("Error while working with element ");
     }
@@ -158,5 +159,4 @@ public class CommonActionsWithElement {
             return false;
         }
     }
-
 }
