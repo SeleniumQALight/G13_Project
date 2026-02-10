@@ -1,5 +1,6 @@
 package org.loginTests;
 
+import io.qameta.allure.Step;
 import org.baseTest.BaseTest;
 import org.categories.SmokeTestsFilter;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import static org.data.TestData.ValidPassword;
 public class LoginTestWithPageObject extends BaseTest {
         @Test
         @Category(SmokeTestsFilter.class)
+
         public void validLogin(){
             pageProvider.getLoginPage()
                     .openLoginPage()
