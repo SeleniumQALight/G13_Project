@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -31,7 +32,8 @@ public class MyProfilePage extends ParentPage{
         return new EditPostPage(webDriver);
     }
 
-    public MyProfilePage checkIsRedirectToMyProfilePage(){
+    public MyProfilePage checkIsRedirectToMyProfilePage() {
+        webDriverWait10.until(ExpectedConditions.urlMatches(baseUrl + "/profile/[a-zA-Z0-9]*"));
         checkUrlWithPattern();
         // TODO check unique element
         return this;

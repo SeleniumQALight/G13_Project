@@ -97,7 +97,7 @@ public class CommonActionsWithElement {
         try {
             String actualText = webElement.getText();
             Assert.assertEquals("Text in element is not as expected", expectedText, actualText);
-            logger.info("Text in element "+getElementName(webElement)+" matches expected text: " + expectedText);
+            logger.info("Text in element " + getElementName(webElement) + " matches expected text: " + expectedText);
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -115,5 +115,4 @@ public class CommonActionsWithElement {
         logger.error("Error while working with element");
         Assert.fail("Error while working with element ");
     }
-
 }
