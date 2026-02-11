@@ -39,18 +39,17 @@ public class ValidationMessagesTest extends BaseTest {
 
     @Test
     public void TC09_testValidationMessagesWithTabAndEnter() {
-        pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions("tr");
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions("tr");
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions("tr");
-        pageProvider.getCommonActionsWithElements().pressEnterKeyOnKeyboard();
+        pageProvider.getLoginPage().openLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions("tr");
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions("tr");
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions("tr");
+        pageProvider.getLoginPage().pressEnterKeyOnKeyboard();
         pageProvider.getLoginPage().checkErrorsMessages(ERROR_USERNAME
                 + SEMICOLON
                 + ERROR_EMAIL

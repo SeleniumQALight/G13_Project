@@ -37,12 +37,12 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void TC09_validLoginWithTabAndEnter(){
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions(VALID_LOGIN);
-        pageProvider.getCommonActionsWithElements().pressTabKeyOnKeyboard();
-        pageProvider.getCommonActionsWithElements().enterTextInInputWithActions(VALID_PASSWORD);
-        pageProvider.getCommonActionsWithElements().pressEnterKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions(VALID_LOGIN);
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions(VALID_PASSWORD);
+        pageProvider.getLoginPage().pressEnterKeyOnKeyboard();
         pageProvider.getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
     }
 }

@@ -15,14 +15,14 @@ public class CheckLoggedUserInNewTab extends BaseTest {
                 .enterTextIntoInputPassword(VALID_PASSWORD)
                 .clickOnButtonSignIn()
                 .getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
-        pageProvider.getCommonActionsWithElements().openNewTabInBrowser();
-        pageProvider.getCommonActionsWithElements().switchToTabInBrowser(1);
+        pageProvider.getLoginPage().openNewTabInBrowser();
+        pageProvider.getLoginPage().switchToTabInBrowser(1);
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getHomePage().getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
-        pageProvider.getCommonActionsWithElements().switchToTabInBrowser(0);
+        pageProvider.getLoginPage().switchToTabInBrowser(0);
         pageProvider.getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
-        pageProvider.getCommonActionsWithElements().closeTabInBrowser(1);
-        pageProvider.getCommonActionsWithElements().switchToTabInBrowser(0);
+        pageProvider.getLoginPage().closeTabInBrowser(1);
+        pageProvider.getLoginPage().switchToTabInBrowser(0);
         pageProvider.getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
 
     }

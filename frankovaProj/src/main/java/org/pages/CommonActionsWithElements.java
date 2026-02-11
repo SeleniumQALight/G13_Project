@@ -97,81 +97,6 @@ public class CommonActionsWithElements {
     }
 
 
-    //open new tab in browser using javascript
-    public void openNewTabInBrowser() {
-        try {
-            ((org.openqa.selenium.JavascriptExecutor) webDriver).executeScript("window.open()");
-            logger.info("New tab in browser was opened");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    //switch to new tab
-    public void switchToTabInBrowser(int tabNumber) {
-        try {
-            java.util.ArrayList<String> tabs = new java.util.ArrayList<>(webDriver.getWindowHandles());
-            webDriver.switchTo().window(tabs.get(tabNumber));
-            logger.info("Switched to tab number " + tabNumber);
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    //close tab in browser
-    public void closeTabInBrowser(int tabNumber) {
-        try {
-            java.util.ArrayList<String> tabs = new java.util.ArrayList<>(webDriver.getWindowHandles());
-            webDriver.switchTo().window(tabs.get(tabNumber));
-            webDriver.close();
-            logger.info("Closed tab number " + tabNumber);
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    //refresh page in browser
-    public void refreshPageInBrowser() {
-        try {
-            webDriver.navigate().refresh();
-            logger.info("Page in browser was refreshed");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    //press tab key on keyboard Actions n-times
-    public void pressTabKeyOnKeyboard() {
-        try {
-            Actions actions = new Actions(webDriver);
-            actions.sendKeys(org.openqa.selenium.Keys.TAB).build().perform();
-            logger.info("Tab key on keyboard was pressed");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    //press enter key with actions
-    public void pressEnterKeyOnKeyboard() {
-        try {
-            Actions actions = new Actions(webDriver);
-            actions.sendKeys(org.openqa.selenium.Keys.ENTER).build().perform();
-            logger.info("Enter key on keyboard was pressed");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
-
-    //enter text in input with Actions without element
-    public void enterTextInInputWithActions(String text) {
-        try {
-            Actions actions = new Actions(webDriver);
-            actions.sendKeys(text).build().perform();
-            logger.info("Text '" + text + "' was entered in input with Actions");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
 
 
     protected void checkCheckbox(WebElement webElement) {
@@ -272,7 +197,7 @@ public class CommonActionsWithElements {
         }
     }
 
-     private void printErrorAndStopTest () {
+     protected void printErrorAndStopTest () {
          logger.error("Error while working with element");
          Assert.fail("Error while working with element");
      }

@@ -13,7 +13,7 @@ public class InputsAreCleanAfterPageRefreshingTest extends BaseTest {
         pageProvider.getLoginPage().openLoginPage()
                 .enterTextIntoInputLogin(TestData.VALID_LOGIN)
                 .enterTextIntoInputPassword(VALID_PASSWORD);
-        pageProvider.getCommonActionsWithElements().refreshPageInBrowser();
+        pageProvider.getLoginPage().refreshPageInBrowser();
         pageProvider.getLoginPage().clickOnButtonSignIn()
                 .getHeaderForLoggedUserElement().checkIsNotButtonSignOutVisible();
 

@@ -22,9 +22,6 @@ public class PageProvider {
         return new MyProfilePage(webDriver);
     }
 
-    public CommonActionsWithElements getCommonActionsWithElements(){
-        return new CommonActionsWithElements(webDriver);}
-
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement(){
         return new HeaderForLoggedUserElement(webDriver);}
 
