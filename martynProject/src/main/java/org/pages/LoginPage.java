@@ -25,24 +25,27 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened with url " + baseUrl);
+        return this;
     }
 
-    public void enterTextIntoInputUsername(String username) {
+    public LoginPage enterTextIntoInputUsername(String username) {
         clearAndEnterTextIntoElement(inputLogin, username);
+        return this;
     }
 
-    public void enterTextIntoInputPassword(String password) {
+    public LoginPage enterTextIntoInputPassword(String password) {
         clearAndEnterTextIntoElement(inputPassword, password);
+        return this;
     }
 
     public void clickButtonSignIn() {
         clickOnElement(buttonSignIn);
     }
 
-    public void checkIsButtonSignInVisible(boolean shouldBeVisible) {
+    public LoginPage checkIsButtonSignInVisible(boolean shouldBeVisible) {
         if (shouldBeVisible) {
             Assert.assertTrue("Button Sign In is not visible", isElementVisible(buttonSignIn));
             logger.info("Button Sign In is visible");
@@ -50,9 +53,10 @@ public class LoginPage extends ParentPage {
             Assert.assertFalse("Button Sign In is visible", isElementVisible(buttonSignIn));
             logger.info("Button Sign In isn't visible");
         }
+        return this;
     }
 
-    public void checkIsInvalidLoginErrorMessageVisible(boolean shouldBeVisible) {
+    public LoginPage checkIsInvalidLoginErrorMessageVisible(boolean shouldBeVisible) {
         if (shouldBeVisible) {
             Assert.assertTrue("Invalid Login error message isn't visible"
                     , isElementVisible(invalidLoginErrorMessage));
@@ -62,9 +66,10 @@ public class LoginPage extends ParentPage {
                     , isElementVisible(invalidLoginErrorMessage));
             logger.info("Invalid Login error message isn't visible");
         }
+        return this;
     }
 
-    public void checkIsInputLoginVisible(boolean shouldBeVisible) {
+    public LoginPage checkIsInputLoginVisible(boolean shouldBeVisible) {
         if (shouldBeVisible) {
             Assert.assertTrue("Username input isn't visible", isElementVisible(inputLogin));
             logger.info("Username input is visible");
@@ -72,9 +77,10 @@ public class LoginPage extends ParentPage {
             Assert.assertFalse("Username input is visible", isElementVisible(inputLogin));
             logger.info("Username input isn't visible");
         }
+        return this;
     }
 
-    public void checkIsInputPasswordVisible(boolean shouldBeVisible) {
+    public LoginPage checkIsInputPasswordVisible(boolean shouldBeVisible) {
         if (shouldBeVisible) {
             Assert.assertTrue("Password input isn't visible", isElementVisible(inputPassword));
             logger.info("Password input is visible");
@@ -82,5 +88,15 @@ public class LoginPage extends ParentPage {
             Assert.assertFalse("Password input is visible", isElementVisible(inputPassword));
             logger.info("Password input isn't visible");
         }
+        return this;
+    }
+
+    public HomePage getLoginPageAndFillLoginFormWithValidCreds(String username, String password) {
+        openLoginPage();
+        enterTextIntoInputUsername(username);
+        enterTextIntoInputPassword(password);
+        clickButtonSignIn();
+        logger.info("Login form was filled with valid credentials");
+        return new HomePage(webDriver);
     }
 }
