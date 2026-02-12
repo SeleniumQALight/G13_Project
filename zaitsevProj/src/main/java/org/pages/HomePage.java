@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.junit.Assert;
@@ -25,7 +26,7 @@ public class HomePage extends ParentPage{
     protected String getRelativeUrl() {
         return "/";
     }
-
+    @Step
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
@@ -55,7 +56,7 @@ public class HomePage extends ParentPage{
              return false;
          }
      }
-
+    @Step
     public HomePage checkIsRedirectToHomePage() {
         checkUrl();
         // TODO check some unique element on HomePage
