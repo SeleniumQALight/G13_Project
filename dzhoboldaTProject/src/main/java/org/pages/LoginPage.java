@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.RegistrationVadidationMessages;
@@ -61,18 +62,21 @@ public class LoginPage extends ParentPage {
     }
 
 
+
+
+@Step
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened with url " + baseUrl);
         return this;
     }
-
+@Step
     public LoginPage enterTextIntoInputLogin(String text) {
         clearAndEnterTextIntoElement(inputLogin, text);
         logger.info(text + " was entered in input UserName");
         return this;
     }
-
+@Step
     public LoginPage enterTextIntoInputPassword(String text) {
         clearAndEnterTextIntoElement(inputPassword, text);
         logger.info("Password was entered");
