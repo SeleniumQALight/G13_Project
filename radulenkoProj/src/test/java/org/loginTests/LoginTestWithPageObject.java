@@ -15,18 +15,6 @@ public class LoginTestWithPageObject extends BaseTest {
     public void TC02_validLogin(){
         pageProvider.getLoginPage()
                 .openLoginPage()
-                .enterTextIntoInputLogin(VALID_LOGIN_UI+11)
-                .enterTextIntoInputPassword(VALID_PASSWORD_UI)
-                .clickOnButtonSignIn();
-
-        pageProvider.getHomePage().checkIsButtonSignOutVisible();
-    }
-
-    @Test
-   @Ignore("This test is ignored because of some reasons")
-    public void TC044_validLogin(){
-        pageProvider.getLoginPage()
-                .openLoginPage()
                 .enterTextIntoInputLogin(VALID_LOGIN_UI)
                 .enterTextIntoInputPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
