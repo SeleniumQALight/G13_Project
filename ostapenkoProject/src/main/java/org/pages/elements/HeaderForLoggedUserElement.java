@@ -1,5 +1,6 @@
 package org.pages.elements;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,6 +44,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         }
     }
 
+    @Step
     public HeaderForLoggedUserElement checksButtonSignOutVisible() {
         checksElementVisible(buttonSignOut, "Sing Out");
         logger.info("Button SingOut is visible");
@@ -65,6 +67,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new MyProfilePage(webDriver);
     }
 
+    @Step
     public HeaderForLoggedUserElement checksButtonCreatePostVisible() {
         checksElementVisible(buttonCreatePost, "Create Post");
         logger.info("Button CreatePost is visible");

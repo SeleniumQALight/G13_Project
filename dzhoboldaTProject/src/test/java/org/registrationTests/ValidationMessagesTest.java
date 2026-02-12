@@ -3,9 +3,11 @@ package org.registrationTests;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.baseTest.BaseTest;
+import org.categories.SmokeTestsFilter;
 import org.data.RegistrationVadidationMessages;
 import org.data.TestData;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
 import static org.data.RegistrationVadidationMessages.*;
@@ -13,6 +15,7 @@ import static org.data.RegistrationVadidationMessages.ERROR_PASSWORD;
 
 
 @RunWith(JUnitParamsRunner.class)
+@Category(SmokeTestsFilter.class)
 public class ValidationMessagesTest  extends BaseTest {
 
     @Test
