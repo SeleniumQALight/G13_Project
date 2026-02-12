@@ -12,8 +12,6 @@ import java.util.List;
 import org.utils.ConfigProvider;
 
 abstract public class ParentPage extends CommonActionsWithElements {
-    protected String baseUrl = "https://aqa-complexapp.onrender.com";
-
     Logger logger = Logger.getLogger(getClass());
 
 
