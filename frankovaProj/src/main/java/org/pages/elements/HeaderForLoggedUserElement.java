@@ -96,4 +96,5 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
        return new CreatePostPage(webDriver);
     }
 
+
 }

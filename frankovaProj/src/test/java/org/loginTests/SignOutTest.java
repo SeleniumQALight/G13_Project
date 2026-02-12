@@ -32,4 +32,22 @@ public class SignOutTest extends BaseTest {
                 .checkIsButtonSignInVisible();
 
     }
+
+    @Test
+    public void TC10_signOutInTwoTabsTest() {
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred()
+                .getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
+        pageProvider.getLoginPage().openNewTabInBrowser();
+        pageProvider.getLoginPage().switchToTabInBrowser(1);
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
+        pageProvider.getLoginPage().switchToTabInBrowser(0);
+        pageProvider.getHeaderForLoggedUserElement().clickOnButtonSignOut();
+        pageProvider.getHeaderForLoggedUserElement().checkIsNotButtonSignOutVisible();
+        pageProvider.getLoginPage().switchToTabInBrowser(1);
+        pageProvider.getLoginPage().refreshPageInBrowser();
+        pageProvider.getHeaderForLoggedUserElement().checkIsNotButtonSignOutVisible();
+
+    }
 }
