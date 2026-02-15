@@ -39,4 +39,24 @@ public class ValidationMessagesTest extends BaseTest {
 
         };
     }
+
+    @Test
+    public void TC09_testValidationMessagesWithTabAndEnter() {
+        pageProvider.getLoginPage().openLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions("tr");
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions("tr");
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions("tr");
+        pageProvider.getLoginPage().pressEnterKeyOnKeyboard();
+        pageProvider.getLoginPage().checkErrorsMessages(ERROR_USERNAME
+                + SEMICOLON
+                + ERROR_EMAIL
+                + SEMICOLON
+                + ERROR_PASSWORD);
+    }
 }
