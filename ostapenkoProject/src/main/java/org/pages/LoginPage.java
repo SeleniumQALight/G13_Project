@@ -1,8 +1,10 @@
 package org.pages;
 
+import com.mysql.cj.log.Log;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import org.data.User;
 import org.junit.Assert;
 import org.data.TestData;
 import org.openqa.selenium.By;
@@ -44,6 +46,8 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
+    @FindBy(xpath = ".//button[@type='submit']")
+    private WebElement signUpButton;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -71,6 +75,7 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextIntoElement(inputLogin, text);
         return this;
     }
+
     @Step
     public LoginPage enterTextIntoInputPasswort(String text) {
         clearAndEnterTextIntoElement(inputPassword, text);
@@ -163,6 +168,7 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
+
     @Step
     public LoginPage enterTextIntoInputLoginUsingActions(String username) {
         focusOnElementViaTab();
@@ -205,4 +211,20 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage enterRegistrationDataIfNotNull(User userData) {
+        if (userData.getUserName() != null) {
+            enterTextIntoRegistrationUserNameField(userData.getUserName());
+        }
+        if (userData.getEmail() != null) {
+            enterTextIntoRegistrationEmailField(userData.getEmail());
+        }
+        if (userData.getPassword() != null) {
+            enterTextIntoRegistrationPasswordField(userData.getPassword());
+        }
+        return this;
+    }
+
+    public void clickSignUpButton() {
+        clickOnElement(signUpButton);
+    }
 }
