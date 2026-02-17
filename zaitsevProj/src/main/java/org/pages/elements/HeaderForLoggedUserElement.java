@@ -1,5 +1,6 @@
 package org.pages.elements;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -56,13 +57,13 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElement {
         logger.info("Button MyProfile is visible");
         return this;
     }
-
+    @Step
     public HeaderForLoggedUserElement checkIsButtonSignOutVisible(){
         Assert.assertTrue("Button SignOut is not visible", isElementDisplayed(buttonSignOut));
         logger.info("Button SignOut is visible");
         return this;
     }
-
+    @Step
     public HeaderForLoggedUserElement checkIsButtonCreatePostVisible(){
         Assert.assertTrue("Button CreatePost is not visible", isElementDisplayed(createNewPostButton));
         logger.info("Button CreatePost is visible");
