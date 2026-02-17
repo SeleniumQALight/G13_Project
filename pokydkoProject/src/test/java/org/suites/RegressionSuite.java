@@ -5,12 +5,15 @@ import org.junit.runners.Suite;
 import org.loginTests.LoginTestWithPageObject;
 import org.postsTests.CreateNewPostTest;
 import org.registrationTests.ValidationMessagesTest;
+import org.registrationTests.ValidationMessagesTestWithoutSomeFields;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         LoginTestWithPageObject.class,
         CreateNewPostTest.class,
-        ValidationMessagesTest.class
+        ValidationMessagesTest.class,
+        ValidationMessagesTestWithoutSomeFields.class,
+
 })
 public class RegressionSuite {
 }
