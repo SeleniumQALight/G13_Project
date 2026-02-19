@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.RegistrationValidationMessages;
 import org.data.TestData;
+import org.data.User;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -44,8 +45,11 @@ public class LoginPage extends ParentPage {
 
     final static String listOfActualMessagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy
-    (xpath = listOfActualMessagesLocator)
+            (xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement buttonSignUp;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -57,7 +61,7 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
-       public LoginPage openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login Page was Opened with url " + baseUrl);
         return this;
@@ -70,14 +74,14 @@ public class LoginPage extends ParentPage {
        /* inputLogin.clear();
         inputLogin.sendKeys(text);
         logger.info(text + " was entered in input UserName");*/
-    clearAndEnterTextIntoElement(inputLogin, text);
-    return this;
+        clearAndEnterTextIntoElement(inputLogin, text);
+        return this;
     }
 
     @Step
     public LoginPage enterTextIntoInputPassword(String text) {
-    clearAndEnterTextIntoElement(inputPassword, text);
-    return this;
+        clearAndEnterTextIntoElement(inputPassword, text);
+        return this;
     }
 
     @Step
@@ -90,40 +94,40 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
-    public LoginPage checkIsButtonSignInVisible(){
+    public LoginPage checkIsButtonSignInVisible() {
         checkIsElementEnabled(buttonSignIn);
         return this;
     }
 
     @Step
-    public void checkIsErrorMessageInvalidCredVisible(){
+    public void checkIsErrorMessageInvalidCredVisible() {
         checkIsElementEnabled(errorMessageInvalidCred);
     }
 
     @Step
-    public void checkIsNotInputLoginVisible(){
+    public void checkIsNotInputLoginVisible() {
         checkIsNotElementVisible(inputLogin);
     }
 
     @Step
-    public LoginPage checkIsInputLoginVisible(){
+    public LoginPage checkIsInputLoginVisible() {
         checkIsElementEnabled(inputLogin);
         return this;
     }
 
     @Step
-    public void checkIsNotInputPasswordVisible(){
+    public void checkIsNotInputPasswordVisible() {
         checkIsNotElementVisible(inputPassword);
     }
 
     @Step
-    public LoginPage checkIsInputPasswordVisible(){
+    public LoginPage checkIsInputPasswordVisible() {
         checkIsElementEnabled(inputPassword);
         return this;
     }
 
     @Step
-    public HomePage openLoginPageAndFillLoginFormWithValidCred(){
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         this.openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN);
         enterTextIntoInputPassword(TestData.VALID_PASSWORD);
@@ -162,7 +166,7 @@ public class LoginPage extends ParentPage {
 
         webDriverWait10.withMessage("Number of error messages is not as expected")
                 .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfActualMessagesLocator),
-                expectedErrorsArray.length));
+                        expectedErrorsArray.length));
 
         Utils_Custom.waitABit(1); //wait a bit to make sure all messages are loaded
 
@@ -182,5 +186,22 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll(); //method to trigger all assertions
 
         return this;
+    }
+
+    public LoginPage enterRegistrationDataIfNotNull(User userData) {
+        if (userData.getUserName() != null) {
+            enterTextIntoRegistrationUserNameField(userData.getUserName());
+        }
+        if (userData.getEmail() != null) {
+            enterTextIntoRegistrationEmailField(userData.getEmail());
+        }
+        if (userData.getPassword() != null) {
+            enterTextIntoRegistrationPasswordField(userData.getPassword());
+        }
+        return this;
+    }
+
+    public void clickOnButtonSignUp() {
+        clickOnElement(buttonSignUp);
     }
 }
