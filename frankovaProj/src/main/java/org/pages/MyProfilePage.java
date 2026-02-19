@@ -24,7 +24,7 @@ public class MyProfilePage extends ParentPage {
 
     @Override
     protected String getRelativeURL() {
-        return "/profile/[a-zA-Z0-9]*";
+        return "/profile/[a-zA-Z0-9]*";//шаблон для перевірки URL з урахуванням ідентифікатора користувача, перевіряє частину урли
     }
 
     public MyProfilePage checkIsRedirectToMyProfilePage() {
@@ -73,5 +73,18 @@ public class MyProfilePage extends ParentPage {
             checkIsElementEnabled(successMessageDelete);
             return this;
         }
+
+    public PostPage clickOnPostWithTitle(String postTitle) {
+        List<WebElement> postsList = getPostElementsByTitle(postTitle);
+        if (!postsList.isEmpty()) {
+            clickOnElement(postsList.get(0));
+            logger.info("Clicked on post with title '" + postTitle + "'");
+            return new PostPage(webDriver);
+        } else {
+            String errorMessage = "Post with title '" + postTitle + "' not found.";
+            logger.error(errorMessage);
+            throw new RuntimeException(errorMessage);
+        }
     }
+}
 

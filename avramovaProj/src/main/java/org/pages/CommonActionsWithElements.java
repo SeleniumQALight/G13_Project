@@ -174,6 +174,22 @@ public class CommonActionsWithElements {
         }
     }
 
+    public void checksElementVisible(WebElement element, String name) {
+        try {
+            Assert.assertTrue("Element " + name + " is not visible", isElementDisplayed(element));
+        } catch (Exception e) {
+            logger.error("Element " + name + " is not visible");
+            Assert.fail("Element " + name + " is not visible"); // Тепер тест впаде по-справжньому
+        }
+    }
+
+    public void checksElementNotVisible(WebElement element, String name) {
+        try {
+            Assert.assertFalse("Element " + name + " is visible", isElementDisplayed(element));
+        } catch (Exception e) {
+        }
+    }
+
     public HomePage openNewTab() {
         ((JavascriptExecutor) webDriver).executeScript("window.open();");
         logger.info("New tab was opened");
@@ -198,31 +214,5 @@ public class CommonActionsWithElements {
         webDriver.navigate().refresh();
         logger.info("Page was refreshed");
         return new LoginPage(webDriver);
-    }
-
-
-
-
-
-
-
-
-
-
-    //ці 2 методи були додані в hw5, тому потрібно видалити їх з hw6 після мержу hw5 в main:
-    public void checksElementVisible(WebElement element, String name) {
-        try {
-            Assert.assertTrue("Element " + name + " is not visible", isElementDisplayed(element));
-        } catch (Exception e) {
-            logger.error("Element " + name + " is not visible");
-            Assert.fail("Element " + name + " is not visible"); // Тепер тест впаде по-справжньому
-        }
-    }
-
-    public void checksElementNotVisible(WebElement element, String name) {
-        try {
-            Assert.assertFalse("Element " + name + " is visible", isElementDisplayed(element));
-        } catch (Exception e) {
-        }
     }
 }

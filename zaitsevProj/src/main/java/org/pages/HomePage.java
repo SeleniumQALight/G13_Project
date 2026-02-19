@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.junit.Assert;
@@ -8,16 +9,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends ParentPage{
     private Logger logger = Logger.getLogger(getClass());
     @FindBy(xpath = "//a[text()='Create Post']")
-    private WebElement createNewPostButton;
+    private WebElement createNewPostButton; // Need to delete from here?
 
     @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
+    private WebElement buttonSignOut; // Need to delete from here?
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -27,20 +26,20 @@ public class HomePage extends ParentPage{
     protected String getRelativeUrl() {
         return "/";
     }
-
+    @Step
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-    public void checkIsButtonSignOutVisible(){
-        Assert.assertTrue("Button SignOut is not visible", isElementDisplayed(buttonSignOut));
-        logger.info("Button SignOut is visible");
-    }
-
-    public void checkIsButtonCreatePostVisible(){
-        Assert.assertTrue("Button CreatePost is not visible", isElementDisplayed(createNewPostButton));
-        logger.info("Button CreatePost is visible");
-    }
+//    public void checkIsButtonSignOutVisible(){
+//        Assert.assertTrue("Button SignOut is not visible", isElementDisplayed(buttonSignOut));
+//        logger.info("Button SignOut is visible"); // Need to delete from here?
+//    }
+//
+//    public void checkIsButtonCreatePostVisible(){
+//        Assert.assertTrue("Button CreatePost is not visible", isElementDisplayed(createNewPostButton));
+//        logger.info("Button CreatePost is visible"); // Need to delete from here?
+//    }
 
     public void checkIsButtonSignOutIsNotVisible(){
         Assert.assertFalse("Button Sign Out is visible, but should not be", isElementDisplayed(buttonSignOut));
@@ -57,7 +56,7 @@ public class HomePage extends ParentPage{
              return false;
          }
      }
-
+    @Step
     public HomePage checkIsRedirectToHomePage() {
         checkUrl();
         // TODO check some unique element on HomePage

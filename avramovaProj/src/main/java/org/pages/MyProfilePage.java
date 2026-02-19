@@ -74,4 +74,11 @@ public class MyProfilePage extends ParentPage {
         checkIsElementEnabled(successMessageDelete);
         return this;
     }
+
+    public PostPage clickOnPostWithTitle(String postTitle) {
+        String locator = String.format(postTitleLocator, postTitle);
+        WebElement post = webDriver.findElement(By.xpath(locator));
+        clickOnElement(post);
+        return new PostPage(webDriver);
+    }
 }

@@ -1,27 +1,39 @@
 package org.loginTests;
 
+import io.qameta.allure.*;
 import org.baseTest.BaseTest;
+import org.categories.SmokeTestsFilter;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import static org.data.TestData.VALID_LOGIN;
 import static org.data.TestData.VALID_PASSWORD;
 
+@Epic("Allure examples")
+@Feature("Junit 4 support")
+
 public class LoginTestWithPageObject extends BaseTest {
     @Test
-    public void validLogin() {
+    @Category(SmokeTestsFilter.class)
+    @Description("Some detailed test description")
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @Issue("123") //атачим лінки на баги
+    @Issue("432")
+    @Story("Base support for bdd annotations")
+    public void TC01_validLogin() {
         pageProvider.getLoginPage().openLoginPage()
                 .enterTextIntoInputLogin(VALID_LOGIN)
                 .enterTextIntoInputPassword(VALID_PASSWORD)
-                .clickOnButtonSignIn();
-
-        pageProvider.getHomePage().checkIsButtonSignOutVisible();
-        pageProvider.getHomePage().checkIsButtonCreatePostVisible();
+                .clickOnButtonSignIn()
+        .getHeaderForLoggedUserElement().checkIsButtonSignOutVisible()
+       .checkIsButtonCreatePostVisible();
         pageProvider.getLoginPage().checkIsNotInputLoginVisible();
         pageProvider.getLoginPage().checkIsNotInputPasswordVisible();
     }
 
     @Test
-    public void invalidLogin(){
+    public void TC02_invalidLogin(){
         pageProvider.getLoginPage().openLoginPage();
 
         pageProvider.getLoginPage().enterTextIntoInputLogin("invalid_login");
@@ -29,7 +41,21 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
         pageProvider.getLoginPage().checkIsButtonSignInVisible();
-        pageProvider.getHomePage().checkIsNotButtonSignOutVisible();
+
+        pageProvider.getHomePage()
+                .getHeaderForLoggedUserElement().checkIsNotButtonSignOutVisible();
         pageProvider.getLoginPage().checkIsErrorMessageInvalidCredVisible();
+    }
+
+    @Test
+    public void TC09_validLoginWithTabAndEnter(){
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions(VALID_LOGIN);
+        pageProvider.getLoginPage().pressTabKeyOnKeyboard();
+        pageProvider.getLoginPage().enterTextInInputWithActions(VALID_PASSWORD);
+        pageProvider.getLoginPage().pressEnterKeyOnKeyboard();
+        pageProvider.getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
     }
 }

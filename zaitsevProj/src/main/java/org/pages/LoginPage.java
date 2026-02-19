@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
@@ -9,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.Utils_Custom;
 
 import java.util.List;
@@ -52,10 +54,8 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
-
-    public void checkIsButtonSignInVisible(){
-        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
-        logger.info("Button SignIn is visible");
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public void checkIsErrorMessageVisibleWithText(){
@@ -63,28 +63,28 @@ public class LoginPage extends ParentPage {
                 isElementDisplayed(invalidUsernamePasswordMessage));
         logger.info("Message \"Invalid username/password.\" is visible");
     }
-
+    @Step
     public void checkIsErrorMessageIsVisibleWithText (String expectedText){
         Assert.assertTrue("Error message is not visible", isElementDisplayed(invalidUsernamePasswordMessage));
         logger.info("Error message is visible: " + expectedText);
     }
-
+    @Step
     public void checkIsLoginInputNotVisible(){
         Assert.assertFalse("Login input is visible, but should not be", isElementDisplayed(inputLogin));
         logger.info("Login input is not visible");
     }
-
+    @Step
     public void checkIsPasswordInputNotVisible(){
         Assert.assertFalse("Password input is visible, but should not be", isElementDisplayed(inputPassword));
         logger.info("Password input is not visible");
     }
-
+    @Step
     public LoginPage openLoginPage(){
         webDriver.get(baseUrl);
         logger.info("Login page was opened with url " + baseUrl);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoInputLogin (String text){
 //    WebElement inputLogin = webDriver.findElement(
 //            By.xpath("//input[@placeholder='Username']"));
@@ -94,17 +94,17 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextIntoElement(inputLogin, text);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoInputPassword (String text){
         clearAndEnterTextIntoElement(inputPassword, text);
         return this;
     }
-
+    @Step
     public void clickOnButtonSignIn(){
       clickOnElement(buttonSignIn);
     }
 
-
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN);
@@ -112,22 +112,46 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
-
+    @Step
+    public LoginPage checkIsRedirectToLoginPage() {
+        // TODO Check URL
+        // TODO check some unique element on LoginPage
+        return this;
+    }
+    @Step
+    public LoginPage checkIsLoginInputVisible(){
+        Assert.assertTrue("Login input is not visible", isElementDisplayed(inputLogin));
+        logger.info("Login input is not visible");
+        return this;
+    }
+    @Step
+    public LoginPage checkIsPasswordInputVisible(){
+        Assert.assertTrue("Password input is not visible", isElementDisplayed(inputPassword));
+        logger.info("Password input is not visible");
+        return this;
+    }
+    @Step
+    public LoginPage checkIsButtonSignInVisible(){
+        Assert.assertTrue("Button Sign In is not visible", isElementDisplayed(buttonSignIn));
+        logger.info("Button SignIn is visible");
+        return this;
+    }
+    @Step
     public LoginPage enterTextintoRegistrationUserField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameRegistrationForm, userName);
         return this;
     }
-
+    @Step
     public LoginPage enterTextintoRegistrationEmailField(String email) {
         clearAndEnterTextIntoElement(inputEmailRegistrationForm, email);
         return this;
     }
-
+    @Step
     public LoginPage enterTextintoRegistrationPasswordField(String password) {
         clearAndEnterTextIntoElement(inputPasswordRegistrationForm, password);
         return this;
     }
-
+    @Step
     public LoginPage checkErrorsMessages(String expectedMessages) {
         // error1;error2;error3 -> [error1, error2, error3]
         String[] expectedErrorsArray = expectedMessages.split(SEMICOLON);

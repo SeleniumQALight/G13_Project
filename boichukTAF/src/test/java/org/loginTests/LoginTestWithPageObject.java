@@ -1,7 +1,9 @@
 package org.loginTests;
 
 import org.baseTest.BaseTest;
+import org.categories.SmokeTestsFilter;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import static org.data.TestData.VALID_LOGIN;
 import static org.data.TestData.VALID_PASSWORD;
@@ -9,7 +11,8 @@ import static org.data.TestData.VALID_PASSWORD;
 public class LoginTestWithPageObject extends BaseTest {
 
     @Test
-    public void validLogin() {
+    @Category(SmokeTestsFilter.class)
+    public void TC02_validLogin() {
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .enterTextIntoInputLogin(VALID_LOGIN)
@@ -20,7 +23,7 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
-    public void invalidLogin() {
+    public void TC03_invalidLogin() {
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .enterTextIntoInputLogin("abrakadabraLogin")

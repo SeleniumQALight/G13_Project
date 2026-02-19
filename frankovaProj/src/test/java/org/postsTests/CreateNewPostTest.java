@@ -9,19 +9,19 @@ public class CreateNewPostTest extends BaseTest {
 
     //GUID - генерує унік значення для кожного запуску тесту, щоб не було конфлікту з існуючими постами
 
-    private final String POST_TITLE = "TC01 G13 Frankova" + Utils_Custom.getDateAndTimeFormatted();
+    private final String POST_TITLE = "TC04 G13 Frankova" + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public void TC01_createNewPost(){
+    public void TC04_createNewPost(){
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
-                .clickOnButtonCreateNewPost()
-                .checkIsRedirectToCreatePostPage()
+                .getHeaderForLoggedUserElement().clickOnButtonCreateNewPost()
+        .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G13 Frankova Some Body")
                 .selectTextInDropdownAccess("Приватне повідомлення")
-                .enterStateForCheckbox("check")
+                .enterStateForCheckboxUniquePost("check")
 
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()

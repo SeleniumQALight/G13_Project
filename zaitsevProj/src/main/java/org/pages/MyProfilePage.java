@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -27,7 +28,12 @@ public class MyProfilePage extends ParentPage{
         return "/profile/[a-zA-Z0-9]*";
     }
 
-    public MyProfilePage checkIsRedirectToMyProfilePage(){
+    public EditPostPage getEditPostPage() {
+        return new EditPostPage(webDriver);
+    }
+
+    public MyProfilePage checkIsRedirectToMyProfilePage() {
+        webDriverWait10.until(ExpectedConditions.urlMatches(baseUrl + "/profile/[a-zA-Z0-9]*"));
         checkUrlWithPattern();
         // TODO check unique element
         return this;
@@ -71,6 +77,18 @@ public class MyProfilePage extends ParentPage{
 
     private MyProfilePage checkIsMessageSuccessPostDeletePresent() {
         checkElementIsEnabled(successMessageDelete);
+        return this;
+    }
+
+    public MyProfilePage editPostWithTitle(String postTitle) {
+        List<WebElement> postsList = getPostElementsByTitle(postTitle);
+        if (postsList.isEmpty()) {
+            Assert.fail("No post found with title: '" + postTitle + "' to edit.");
+        }
+        clickOnElement(postsList.get(0));
+        new EditPostPage(webDriver)
+                .checkIsRedirectToEditPostPage()
+                .clickOnEditButton();
         return this;
     }
 }

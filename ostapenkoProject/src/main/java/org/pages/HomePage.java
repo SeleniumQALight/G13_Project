@@ -1,10 +1,9 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage {
@@ -14,11 +13,14 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
+    protected String mainTabHandle, newTabHandle;
+
     @Override
     protected String getRelativeUrl() {
         return "/";
     }
 
+    @Step
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
@@ -41,6 +43,27 @@ public class HomePage extends ParentPage {
             checkIsRedirectToHomePage();
             logger.info("User was logged in");
         }
+        return this;
+    }
+
+    public HomePage saveMainTabHandle() {
+        mainTabHandle = webDriver.getWindowHandle();
+        logger.info("Main tab saved: " + mainTabHandle);
+        return this;
+    }
+
+    public HomePage openNewTabInBrowser() {
+        openNewTab();
+        return this;
+    }
+
+    public HomePage switchToTabByInt(int tabNumber) {
+        switchToTab(tabNumber);
+        return this;
+    }
+
+    public HomePage closeTabByInt(int tabNumber){
+        closeTab(tabNumber);
         return this;
     }
 

@@ -9,16 +9,23 @@ public class PageProvider {
         this.webDriver = webDriver;
     }
 
-    public LoginPage getLoginPage(){
+    public LoginPage getLoginPage() {
         return new LoginPage(webDriver);
     }
 
-    public HomePage getHomePage(){
+    public HomePage getHomePage() {
         return new HomePage(webDriver);
     }
 
-    public MyProfilePage getMyProfilePage(){
+    public MyProfilePage getMyProfilePage() {
         return new MyProfilePage(webDriver);
     }
 
+    public PostPage getPostPage() {
+        return new PostPage(webDriver);
+    }
+
+    public EditPostPage getEditPostPage() {
+        return new EditPostPage(webDriver);
+    }
 }

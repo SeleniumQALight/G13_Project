@@ -17,6 +17,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -49,6 +52,12 @@ public class PostPage extends ParentPage {
         return this;
     }
 
+    public PostPage checkCheckboxStateInCreatedPost (String expectedStateOfCheckbox) {
+        String expectedMessage = "Is this post unique? : " + expectedStateOfCheckbox;
+        checkTextInElement(messageWithStateOfCheckbox, expectedMessage);
+        return this;
+    }
+
     public PostPage checkStateOfCheckboxInCreatedPost(String stateOfCheckbox) {
         if (stateOfCheckbox == null || stateOfCheckbox.trim().isEmpty()) {
             logger.info("State of checkbox is null or empty");
@@ -64,5 +73,10 @@ public class PostPage extends ParentPage {
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDeletePost, "'Delete Post button'");
         return new MyProfilePage(webDriver);
+    }
+
+    public EditPostPage clickOnEditPostButton() {
+        clickOnElement(buttonEditPost);
+        return new EditPostPage(webDriver);
     }
 }

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
 
@@ -22,8 +23,12 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); //ініціалізує елементи описані через findby
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider
+                .configProperties.TIME_FOR_EXPLICIT_WAIT_LOW(
+
+                )));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider
+                .configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
@@ -44,7 +49,6 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest();
         }
-
     }
 
     protected void clickOnElement(WebElement webElement) {
@@ -70,7 +74,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    //analog for selectTextInDropDown
+     //analog for selectTextInDropDown
   /*  protected void selectValueInDropDown(WebElement webElement, String value) {
         try {
             Select select = new Select(webElement);
@@ -92,28 +96,8 @@ public class CommonActionsWithElements {
         }
     }
 
-    //accept alert using actions
-    protected void acceptAlert() {
-        try {
-            webDriverWait10.until(ExpectedConditions.alertIsPresent());
-            webDriver.switchTo().alert().accept();
-            logger.info("Alert was accepted");
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
 
-    //scroll to element using actions class
-    protected void scrollToElement(WebElement webElement) {
-        try {
-           Actions actions = new org.openqa.selenium.interactions.Actions(webDriver);
-           actions.moveToElement(webElement);
-           actions.perform();
-            logger.info("Scrolled to element " + getElementName(webElement));
-        } catch (Exception e) {
-            printErrorAndStopTest();
-        }
-    }
+
 
     protected void checkCheckbox(WebElement webElement) {
         try {
@@ -127,6 +111,28 @@ public class CommonActionsWithElements {
             printErrorAndStopTest();
         }
     }
+
+
+    protected void enterStateForCheckbox(String state, WebElement webElement) {
+        if (state == null || state.trim().isEmpty()) {
+            logger.info("State for checkbox is null or empty");
+            throw new AssertionError("State for checkbox is null or empty");
+        }
+
+        String s = state.trim().toLowerCase();
+        switch (s) {
+            case "check":
+                checkCheckbox(webElement);
+                break;
+            case "uncheck":
+                uncheckCheckbox(webElement);
+                break;
+            default:
+                logger.info("State for checkbox is incorrect: " + state);
+                throw new AssertionError("Incorrect checkbox state: " + state);
+        }
+    }
+
 
     protected void uncheckCheckbox(WebElement webElement) {
         try {
@@ -153,7 +159,7 @@ public class CommonActionsWithElements {
         logger.info(webElement + " Element is NOT visible");
     }
 
-    protected boolean isElementVisible(WebElement webElement) {
+    protected boolean isElementVisible (WebElement webElement){
         try {
             boolean state = webElement.isDisplayed();
             logger.info(getElementName(webElement) + " Element visible state: " + state);
@@ -191,9 +197,10 @@ public class CommonActionsWithElements {
         }
     }
 
-    private void printErrorAndStopTest() {
-        logger.error("Error while working with element");
-        Assert.fail("Error while working with element");
-    }
+     protected void printErrorAndStopTest () {
+         logger.error("Error while working with element");
+         Assert.fail("Error while working with element");
+     }
+
 
 }

@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.RegistrationValidationMessages;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.Utils_Custom;
 
 import java.util.List;
@@ -54,13 +56,14 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
-
-    public LoginPage openLoginPage() {
+    @Step
+       public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login Page was Opened with url " + baseUrl);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoInputLogin(String text) {
        /* WebElement inputLogin = webDriver.findElement(
                 By.xpath("//input[@placeholder='Username']"));*/
@@ -71,36 +74,55 @@ public class LoginPage extends ParentPage {
     return this;
     }
 
+    @Step
     public LoginPage enterTextIntoInputPassword(String text) {
     clearAndEnterTextIntoElement(inputPassword, text);
     return this;
     }
 
-    public void clickOnButtonSignIn() {
+    @Step
+    public HomePage clickOnButtonSignIn() {
         //webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
         /*buttonSignIn.click();
         logger.info("Button SignIn was clicked");*/
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
-    public void checkIsButtonSignInVisible(){
+    @Step
+    public LoginPage checkIsButtonSignInVisible(){
         checkIsElementEnabled(buttonSignIn);
+        return this;
     }
 
+    @Step
     public void checkIsErrorMessageInvalidCredVisible(){
         checkIsElementEnabled(errorMessageInvalidCred);
     }
 
+    @Step
     public void checkIsNotInputLoginVisible(){
         checkIsNotElementVisible(inputLogin);
     }
 
+    @Step
+    public LoginPage checkIsInputLoginVisible(){
+        checkIsElementEnabled(inputLogin);
+        return this;
+    }
 
+    @Step
     public void checkIsNotInputPasswordVisible(){
         checkIsNotElementVisible(inputPassword);
     }
 
+    @Step
+    public LoginPage checkIsInputPasswordVisible(){
+        checkIsElementEnabled(inputPassword);
+        return this;
+    }
 
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred(){
         this.openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN);
@@ -109,22 +131,32 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
+    public LoginPage checkIsRedirectToLoginPage() {
+        checkUrl();
+        //TODO check some unique element
+        return this;
+    }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextIntoElement(inputEmailRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextIntoElement(inputPasswordRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorsMessages(String expectedMessages) {
         String[] expectedErrorsArray = expectedMessages.split(SEMICOLON);
 
