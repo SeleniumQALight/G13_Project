@@ -17,7 +17,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//span[@data-original-title='Chat']")
     private WebElement buttonChat;
 
-    @FindBy(xpath = "//a[text()='Create Post']")   
+    @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement buttonCreatePost;
 
     @FindBy(xpath = "//button[text()='Sign Out']")

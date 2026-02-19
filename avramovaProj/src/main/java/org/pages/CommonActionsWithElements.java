@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -10,6 +11,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -184,5 +188,31 @@ public class CommonActionsWithElements {
             Assert.assertFalse("Element " + name + " is visible", isElementDisplayed(element));
         } catch (Exception e) {
         }
+    }
+
+    public HomePage openNewTab() {
+        ((JavascriptExecutor) webDriver).executeScript("window.open();");
+        logger.info("New tab was opened");
+        return new HomePage(webDriver); // Повертаємо об'єкт сторінки
+    }
+
+    public HomePage switchToTab(int tabIndex) {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(tabIndex));
+        logger.info("Switched to tab with index " + tabIndex);
+        return new HomePage(webDriver); // Тепер ланцюжок знає, що далі йде HomePage
+    }
+
+    public HomePage closeCurrentTabAndSwitchToMain(int mainTabIndex) {
+        webDriver.close();
+        switchToTab(mainTabIndex);
+        logger.info("Current tab was closed and switched to main tab");
+        return new HomePage(webDriver);
+    }
+
+    public LoginPage refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page was refreshed");
+        return new LoginPage(webDriver);
     }
 }
