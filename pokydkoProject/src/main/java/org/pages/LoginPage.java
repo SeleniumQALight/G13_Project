@@ -3,6 +3,7 @@ package org.pages;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import org.data.User;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,6 +38,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
+
+    @FindBy(xpath = ".//button[@type='submit']")
+    private WebElement buttonSignUp;
 
     final static String listOfActualMessagesLocator
             = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
@@ -135,5 +139,22 @@ public class LoginPage extends ParentPage {
 
         softAssertions.assertAll(); // to collect all assertion results - MUST HAVE
         return this;
+    }
+
+    public LoginPage enterRegistrationDataIfNotNull(User userData) {
+        if (userData.getUsername() != null) {
+            enterTextIntoRegistrationUserNameField(userData.getUsername());
+        }
+        if (userData.getEmail() != null) {
+            enterTextIntoRegistrationEmailField(userData.getEmail());
+        }
+        if (userData.getPassword() != null) {
+            enterTextIntoRegistrationPasswordField(userData.getPassword());
+        }
+            return this;
+    }
+
+    public void clickOnSignUpButton() {
+        clickOnElement(buttonSignUp);
     }
 }
