@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.junit.Assert;
@@ -38,6 +39,7 @@ public class HomePage extends ParentPage{
         return isElementDisplayed(buttonSignOut);
     }
 
+    @Step
     public void checkIsButtonSignOutVisible(){
         Assert.assertTrue("Button SignOut is not visible", isButtonSignOutVisible());
     }

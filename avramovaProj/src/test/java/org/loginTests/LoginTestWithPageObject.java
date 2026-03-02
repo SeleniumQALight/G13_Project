@@ -27,7 +27,7 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void invalidLogin(){
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto11");
+        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto11"+1);
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
