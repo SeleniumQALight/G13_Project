@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.RegistrationValidationMessages;
@@ -54,12 +55,14 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("login page was opened with url " + baseUrl);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoInputLogin(String text) {
 //        WebElement inputLogin = webDriver.findElement(By.xpath(".//input[@placeholder='Username']"));
 //        inputLogin.clear();
@@ -69,23 +72,28 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoInputPassword(String text) {
         clearAndEnterTextIntoElement(inputPassword, text);
         return this;
     }
 
+    @Step
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
     }
 
+    @Step
     public boolean isErrorMessageVisible() {
         return isElementDisplayed(alertMessageAboutInvalidLogin);
     }
 
+    @Step
     public void checkIsButtonSignInVisible() {
         Assert.assertTrue("SignIn button is not visible", isElementDisplayed(buttonSignIn));
     }
 
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -94,33 +102,40 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public void checkIsErrorMessageVisible() {
         Assert.assertTrue("Error message is not visible", isErrorMessageVisible());
     }
 
+    @Step
     public void checkIsInputLoginNotVisible() {
         Assert.assertFalse("Input Login is visible, but should not be", isElementDisplayed(inputLogin));
     }
 
+    @Step
     public void checkIsInputPasswordNotVisible() {
         Assert.assertFalse("Input Password is visible, but should not be", isElementDisplayed(inputPassword));
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextIntoElement(inputEmailRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextIntoElement(inputPasswordRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorMessages(String expectedMessages) {
         //error1;error2;error3 -> [error1, error2, error3]
         String[] expectedErrorArray = expectedMessages.split(SEMICOLON);

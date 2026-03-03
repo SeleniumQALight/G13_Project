@@ -1,13 +1,16 @@
 package org.loginTests;
 
 import org.baseTest.BaseTest;
+import org.categories.SmokeTestsFilter;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import static org.data.TestData.VALID_LOGIN_UI;
 import static org.data.TestData.VALID_PASSWORD_UI;
 
 public class LoginTestWithPageObject extends BaseTest {
     @Test
+    @Category(SmokeTestsFilter.class)
     public void validLogin(){
         pageProvider.getLoginPage()
                 .openLoginPage()
@@ -24,7 +27,7 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void invalidLogin(){
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto11");
+        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto11"+1);
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
