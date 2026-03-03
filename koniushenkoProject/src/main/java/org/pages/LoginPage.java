@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.RegistrationValidationMessages;
@@ -54,11 +55,13 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened with url: " + baseUrl);
         return  this;
     }
+    @Step
     public LoginPage enterTextIntoInputLogin (String text) {
 //        WebElement inputLogin = webDriver.findElement(
 //                By.xpath("//input[@placeholder='Username']"));
@@ -68,12 +71,12 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextIntoElement(inputLogin, text);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoInputPassword (String text) {
         clearAndEnterTextIntoElement(inputPassword, text);
         return this;
     }
-
+    @Step
     public void clickOnButtonSignIn () {
         clickOnElement(buttonSignIn);
 
@@ -81,7 +84,7 @@ public class LoginPage extends ParentPage {
 //      buttonSignIn.click();
 //      logger.info("Button 'Sign In' was clicked");
     }
-
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         this.openLoginPage();
         enterTextIntoInputLogin(VALID_LOGIN_UI);
@@ -89,11 +92,12 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return  new HomePage(webDriver);
     }
+    @Step
     public void checkIsButtonSingInVisible() {
         Assert.assertTrue("Button SignIn is NOT visible", isButtonSingInVisible());
         logger.info("Button SignIn is visible");
     }
-
+    @Step
     public boolean isButtonSingInVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath(
@@ -105,13 +109,13 @@ public class LoginPage extends ParentPage {
             return false;
         }
     }
-
+    @Step
     public void checkIsTextErrorInvalidDataVisible() {
         Assert.assertTrue("Text error 'Invalid username/password' is NOT visible",
                 isTextErrorInvalidDataVisible());
         logger.info("Text error 'Invalid username/password' is visible");
     }
-
+    @Step
     private boolean isTextErrorInvalidDataVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath("//div[text()='Invalid username/password.']")).isDisplayed();
@@ -122,12 +126,12 @@ public class LoginPage extends ParentPage {
             return false;
         }
     }
-
+    @Step
     public void checkIsInputLoginNotVisible() {
         Assert.assertFalse("Input Login is visible", isInputLoginIsVisible());
         logger.info("Input Login is NOT visible");
     }
-
+    @Step
     private boolean isInputLoginIsVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath(
@@ -139,12 +143,12 @@ public class LoginPage extends ParentPage {
             return false;
         }
     }
-
+    @Step
     public void checkIsInputPasswordNotVisible() {
         Assert.assertFalse("Input Password is visible", isInputPasswordIsVisible());
         logger.info("Input Password is NOT visible");
     }
-
+    @Step
     private boolean isInputPasswordIsVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath(
@@ -156,22 +160,22 @@ public class LoginPage extends ParentPage {
             return false;
         }
     }
-
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameRegistrationForm, userName);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextIntoElement(inputEmailRegistrationForm, email);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextIntoElement(inputPasswordRegistrationForm, password);
         return this;
     }
-
+    @Step
     public LoginPage checkErrorsMessages(String expectedMessages) {
         //error1;error2;error3->[error1,error2,error3]
         String[] expectedErrorsArray = expectedMessages.split(SEMICOLON);

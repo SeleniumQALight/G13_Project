@@ -15,11 +15,15 @@ public class HomePage extends ParentPage {
     private WebElement buttonSignOut;
 
     @FindBy(xpath = "//a[text()='Create Post']")
-    private WebElement createNewPostButton;
     private WebElement buttonCreatePost;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
@@ -37,16 +41,17 @@ public class HomePage extends ParentPage {
     }
     public void checkIsButtonCreatePostVisible(){
         Assert.assertTrue("Button Create Post is not visible", isElementDisplayed(buttonCreatePost));
+        logger.info("Button Create Post is visible");
     }
 
     public HomePage checkIsRedirectToHomePage() {
-        // TODO check URL
+        checkUrl();
         // TODO check some unique element on HomePage
         return this;
     }
 
     public CreatePostPage clickOnButtonCreatePost() {
-        clickOnElement(createNewPostButton);
+        clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
     }
 

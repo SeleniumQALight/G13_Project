@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.junit.Assert;
@@ -28,17 +29,18 @@ public class HomePage extends ParentPage {
     public HederForLoggedUserElement getHederForLoggedUserElement() {
         return  new HederForLoggedUserElement(webDriver);
     }
+    @Step
     public void checkIsButtonSignOutVisible(){
         Assert.assertTrue("Button Sign Out is NOT visible",isButtonSingOutVisible());
         logger.info("Button Sign Out is visible");
     }
 
-
+    @Step
     public void checkIsButtonSignOutNotVisible(){
         Assert.assertFalse("Button Sign Out is visible",isButtonSingOutVisible());
         logger.info("Button Sign Out is not visible");
     }
-
+    @Step
     public boolean isButtonSingOutVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath(
@@ -50,17 +52,17 @@ public class HomePage extends ParentPage {
             return false;
         }
     }
-
+    @Step
     public HomePage checkIsRedirectToHomePage() {
         checkUrl();
         return this;
     }
-
+    @Step
     public CreatePostPage clickOnButtonCreatePost() {
         clickOnElement(createNewPostButton);
         return new CreatePostPage(webDriver);
     }
-
+    @Step
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);
         loginPage.openLoginPage();
@@ -76,12 +78,12 @@ public class HomePage extends ParentPage {
         return  this;
     }
 
-
+    @Step
     public void checkIsButtonCreatePostVisible(){
         Assert.assertTrue("Button CreatePost is NOT visible",isButtonCreatePostVisible());
         logger.info("Button CreatePost is visible");
     }
-
+    @Step
     public boolean isButtonCreatePostVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath(

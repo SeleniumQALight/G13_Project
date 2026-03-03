@@ -16,9 +16,11 @@ public class SignOutTest extends BaseTest {
                 .checkIsButtonCreatePostVisible()
                 .checkIsButtonSignOutVisible()
                 .clickOnButtonSignOut()
-                .checkIsRedirectToLoginPage()
+                .checkIsRedirectToLoginPage();
 
-                .getHeaderForLoggedUserElement().checkIsNotIconSearchInputVisible()
+        //дістаю елем ехедера через Хомепейдж, а не Логін пейдж
+                pageProvider.getHomePage()
+               .getHeaderForLoggedUserElement().checkIsNotIconSearchInputVisible()
                 .checkIsNotChatIconVisible()
                 .checkIsNotAvatarIconVisible()
                 .checkIsNotButtonSignOutVisible()
@@ -28,6 +30,24 @@ public class SignOutTest extends BaseTest {
                 .checkIsInputLoginVisible()
                 .checkIsInputPasswordVisible()
                 .checkIsButtonSignInVisible();
+
+    }
+
+    @Test
+    public void TC10_signOutInTwoTabsTest() {
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred()
+                .getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
+        pageProvider.getLoginPage().openNewTabInBrowser();
+        pageProvider.getLoginPage().switchToTabInBrowser(1);
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getHeaderForLoggedUserElement().checkIsButtonSignOutVisible();
+        pageProvider.getLoginPage().switchToTabInBrowser(0);
+        pageProvider.getHeaderForLoggedUserElement().clickOnButtonSignOut();
+        pageProvider.getHeaderForLoggedUserElement().checkIsNotButtonSignOutVisible();
+        pageProvider.getLoginPage().switchToTabInBrowser(1);
+        pageProvider.getLoginPage().refreshPageInBrowser();
+        pageProvider.getHeaderForLoggedUserElement().checkIsNotButtonSignOutVisible();
 
     }
 }

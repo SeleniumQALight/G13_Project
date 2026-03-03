@@ -2,12 +2,14 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
 
@@ -19,8 +21,8 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
@@ -37,7 +39,7 @@ public class CommonActionsWithElements {
         try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
             webElement.click();
-            logger.info(elementName + " Element was clicked" );
+            logger.info(elementName + " Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
         }
@@ -48,11 +50,17 @@ public class CommonActionsWithElements {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
             String elementName = getElementName(webElement);
             webElement.click();
-            logger.info(getElementName(webElement) + "Element was clicked" );
+            logger.info(getElementName(webElement) + "Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest();
         }
     }
+
+    protected void enterText(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(text);
+    }
+
 
     protected void selectTextInDropDown(WebElement webElement, String text) {
         try {
@@ -83,7 +91,7 @@ public class CommonActionsWithElements {
     protected boolean isElementEnabled(WebElement webElement) {
         try {
             boolean state = webElement.isEnabled();
-            logger.info(getElementName(webElement ) + "Element is enabled - " + state);
+            logger.info(getElementName(webElement) + "Element is enabled - " + state);
             return state;
         } catch (Exception e) {
             logger.info("Element is not found");
@@ -91,7 +99,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected boolean isElementDisplayed(WebElement webElement) {
+    public boolean isElementDisplayed(WebElement webElement) {
         try {
             boolean isDisplayed = webElement.isDisplayed();
             logger.info("Element is displayed - " + isDisplayed);
@@ -158,6 +166,32 @@ public class CommonActionsWithElements {
             return "Unknown element";
         }
     }
+
+    private boolean isButtonSingOutVisible() {
+        try {
+            return webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+        } catch (Exception e) {
+            logger.info("Element is not found ");
+            return false;
+        }
+    }
+
+    protected void checkIsElementDisplayed(WebElement webElement) {
+        Assert.assertTrue(
+                "Element is not displayed",
+                isElementDisplayed(webElement)
+        );
+        logger.info("Element is displayed");
+    }
+
+    protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse(
+                "Element is displayed but should not be",
+                isElementDisplayed(webElement)
+        );
+        logger.info("Element is not displayed");
+    }
+
 
     private void printErrorAndStopTest() {
         logger.error("Error while working with element ");

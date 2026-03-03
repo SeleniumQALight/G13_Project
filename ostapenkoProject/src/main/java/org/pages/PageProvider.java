@@ -13,8 +13,13 @@ public class PageProvider {
         return new LoginPage(webDriver);
     }
 
+    private HomePage homePage;
+
     public HomePage getHomePage() {
-        return new HomePage(webDriver);
+        if (homePage == null) {
+            homePage = new HomePage(webDriver);
+        }
+        return homePage;
     }
 
     public MyProfilePage getMyProfilePage() {

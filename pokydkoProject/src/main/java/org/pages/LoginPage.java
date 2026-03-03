@@ -1,21 +1,22 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
+import org.data.User;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testdata.RegistrationValidationMessages;
 import org.utils.Utils_Custom;
 
 import java.util.List;
 
-import static org.testdata.RegistrationValidationMessages.SEMICOLON;
-import static org.testdata.TestData.VALID_LOGIN_UI;
-import static org.testdata.TestData.VALID_PASSWORD_UI;
+import static org.data.RegistrationValidationMessages.SEMICOLON;
+import static org.data.TestData.VALID_LOGIN_UI;
+import static org.data.TestData.VALID_PASSWORD_UI;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -38,6 +39,9 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
 
+    @FindBy(xpath = ".//button[@type='submit']")
+    private WebElement buttonSignUp;
+
     final static String listOfActualMessagesLocator
             = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfActualMessagesLocator)
@@ -52,12 +56,14 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened with url " + baseUrl);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoInputLogin(String text) {
 //        WebElement inputLogin = webDriver.findElement(
 //                By.xpath("//input[@placeholder='Username']"));
@@ -68,11 +74,13 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoInputPassword(String text) {
         clearAndEnterTextIntoElement(inputPassword, text);
         return this;
     }
 
+    @Step
     public void clickOnButtonSignIn() {
 //        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
 //        buttonSignIn.click();
@@ -80,6 +88,7 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         enterTextIntoInputLogin(VALID_LOGIN_UI);
@@ -89,20 +98,25 @@ public class LoginPage extends ParentPage {
 
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextIntoElement(inputEmailInRegistrationForm, email);
         return this;
     }
+
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextIntoElement(inputPasswordInRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorsMessages(String expectedMessages) {
         // error1;error2;error3 -> [error1, error2, error3]
         String[] expectedErrorsArray = expectedMessages.split(SEMICOLON);
@@ -125,5 +139,22 @@ public class LoginPage extends ParentPage {
 
         softAssertions.assertAll(); // to collect all assertion results - MUST HAVE
         return this;
+    }
+
+    public LoginPage enterRegistrationDataIfNotNull(User userData) {
+        if (userData.getUsername() != null) {
+            enterTextIntoRegistrationUserNameField(userData.getUsername());
+        }
+        if (userData.getEmail() != null) {
+            enterTextIntoRegistrationEmailField(userData.getEmail());
+        }
+        if (userData.getPassword() != null) {
+            enterTextIntoRegistrationPasswordField(userData.getPassword());
+        }
+            return this;
+    }
+
+    public void clickOnSignUpButton() {
+        clickOnElement(buttonSignUp);
     }
 }

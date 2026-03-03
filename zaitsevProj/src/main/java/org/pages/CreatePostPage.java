@@ -51,6 +51,10 @@ public class CreatePostPage extends ParentPage{
         selectTextInDropDown(dropdownAccess, textForSelection);
         return this;
     }
+    public CreatePostPage selectTextInDropdownAccessByValue(String value) {
+        selectValueInDropDown(dropdownAccess, value);
+        return this;
+    }
 
     public CreatePostPage setUniquePostCheckBox(String state){
         setCheckBoxState(checkBoxIsThisPostUnique, state);

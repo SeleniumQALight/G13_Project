@@ -9,10 +9,10 @@ public class EditPostPage extends ParentPage {
     @FindBy(id = "post-title")
     private WebElement inputTitleEdit;
 
-   @FindBy(xpath = "//button[text() ='Save Updates']")
+    @FindBy(xpath = "//button[text() ='Save Updates']")
     private WebElement buttonSaveUpdates;
 
-   @FindBy(xpath = "//a[contains (text(),'Back to post permalink')]")
+    @FindBy(xpath = "//a[contains (text(),'Back to post permalink')]")
     private WebElement linkBackToPostPermalink;
 
     public EditPostPage(WebDriver webDriver) {
@@ -21,13 +21,12 @@ public class EditPostPage extends ParentPage {
 
     @Override
     protected String getRelativeURL() {
-        return "/edit";
+        return "/post/[a-zA-Z0-9]*/edit";
     }
 
 
     public EditPostPage checkIsRedirectToEditPostPage() {
-        //checkUrl();
-        //TODO url
+        checkUrlWithPattern();
         //TODO check some unique element on EditPostPage
         return this;
     }

@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.junit.Assert;
@@ -9,14 +10,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
-public class HomePage extends ParentPage{
+public class HomePage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
     @FindBy(xpath = "//a[text()='Create Post']")
     private WebElement createNewPostButton;
     private WebElement buttonSignOut;
 
     public HomePage(WebDriver webDriver) {
-        super(webDriver);}
+        super(webDriver);
+    }
 
     @Override
     protected String getRelativeURL() {
@@ -24,11 +26,12 @@ public class HomePage extends ParentPage{
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
-            return new HeaderForLoggedUserElement(webDriver);
+        return new HeaderForLoggedUserElement(webDriver);
 
     }
 
-    public void checkIsButtonSignOutVisible(){
+    @Step
+    public void checkIsButtonSignOutVisible() {
         Assert.assertTrue("Button SignOut is not visible", isButtonSignOutVisible());
         logger.info("Button SignOut is visible");
     }
@@ -72,7 +75,7 @@ public class HomePage extends ParentPage{
         loginPage.openLoginPage();
         if (isButtonSignOutVisible()) {
             logger.info("User is already logged in");
-        }else {
+        } else {
             loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN)
                     .enterTextIntoInputPassword(TestData.VALID_PASSWORD)
                     .clickOnButtonSignIn();

@@ -19,6 +19,11 @@ public class EditPostPage extends ParentPage{
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return null; //TODO need specify relative URL for EditPostPage
+    }
+
     public EditPostPage enterTextIntoInputTitle(String title) {
         clearAndEnterTextIntoElement(inputTitle, title);
         return this;

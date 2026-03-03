@@ -58,4 +58,9 @@ public class CreatePostPage extends ParentPage {
         selectTextInDropDown(dropdownAccess, textForSelection);
         return this;
     }
+
+    public CreatePostPage selectTextInDropDownViaValue(String textForSelection) {
+        selectValueInDropDown(dropdownAccess, textForSelection);
+        return this;
+    }
 }

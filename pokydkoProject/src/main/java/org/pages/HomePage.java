@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -7,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
-import org.testdata.TestData;
+import org.data.TestData;
 
 public class HomePage extends ParentPage {
 
@@ -29,6 +30,7 @@ public class HomePage extends ParentPage {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
+    @Step
     public void checkIsButtonSignOutVisible() {
         Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         logger.info("Button Sign Out is visible");

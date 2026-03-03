@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class CreatePostPage extends ParentPage {
 
+    @FindBy(xpath = ".//input[@type='checkbox']")
+    private WebElement checkbox;
+
     @FindBy(id = "post-title") // xpath= "//*[@id='post-title']"
     private WebElement inputTitle;
 
@@ -22,9 +25,14 @@ public class CreatePostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/create-post";
+    }
+
 
     public CreatePostPage checkIsRedirectToCreateNewPostPage() {
-        // TODO Check URL
+        checkUrl();
         // TODO check some unique element on CreateNewPostPage
         return new CreatePostPage(webDriver);
     }
@@ -49,6 +57,9 @@ public class CreatePostPage extends ParentPage {
         return this;
     }
 
-
+    public CreatePostPage setCheckBoxState(String state) {
+        setCheckBoxState(checkbox, state);
+        return this;
+    }
 }
 
