@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.RegistrationValidationMessages;
 import org.data.TestData;
+import org.data.User;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -43,6 +44,9 @@ public class LoginPage extends ParentPage {
             = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
+
+    @FindBy(xpath = ".//button[@type='submit']")
+    private WebElement buttonSignUp;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -133,5 +137,22 @@ public class LoginPage extends ParentPage {
 
         softAssertions.assertAll();
         return this;
+    }
+
+    public LoginPage enterRegistrationDataIfNotNull(User userData) {
+        if (userData.getUserName() != null) {
+            enterTextIntoRegistrationUserNameField(userData.getUserName());
+        }
+        if (userData.getEmail() != null) {
+            enterTextIntoRegistrationEmailField(userData.getEmail());
+        }
+        if (userData.getPassword() != null) {
+            enterTextIntoRegistrationPasswordField(userData.getPassword());
+        }
+        return this;
+    }
+
+    public void clickOnSignUpButton() {
+        clickOnElement(buttonSignUp);
     }
 }
