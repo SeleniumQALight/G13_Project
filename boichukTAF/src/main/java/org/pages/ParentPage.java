@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.pages.utils.ConfigProvider;
 
 abstract public class ParentPage extends CommonActionsWithElement {
-    String environment = System.getProperty("env", "aqa");
+    static String environment = System.getProperty("env", "aqa");
 
-   // protected String baseUrl = "https://"+environment+"-complexapp.onrender.com";
-    protected String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
+    // protected String baseUrl = "https://"+environment+"-complexapp.onrender.com";
+    public static String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
@@ -28,10 +28,10 @@ abstract public class ParentPage extends CommonActionsWithElement {
     // regex for 64d21e84903640003414c338
     // [a-zA-Z0-9]{24}
 
-    protected void checkUrlWithPattern(){
+    protected void checkUrlWithPattern() {
         Assert.assertTrue("URL is not expected \n" +
-                "Expected url:" + baseUrl + getRelativeURL() +
-                "\n Actual url:" + webDriver.getCurrentUrl(),
+                        "Expected url:" + baseUrl + getRelativeURL() +
+                        "\n Actual url:" + webDriver.getCurrentUrl(),
                 webDriver.getCurrentUrl().matches(baseUrl + getRelativeURL()));
     }
 }
