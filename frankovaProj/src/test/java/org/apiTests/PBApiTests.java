@@ -71,7 +71,7 @@ public class PBApiTests extends PBBaseTestApi {
     public void validateExchangeRatesAreGreaterThanZero() {
 
         PBBaseCurrency actualResult = PBApiHelper.getExchangeRatesByDate(date, HttpStatus.SC_OK)
-                .extract().body().as(PBBaseCurrency.class);
+                .extract().body().as(PBBaseCurrency.class);//зберегли в обєкт, щоб потім перевірити всі поля, які нас цікавлять
 
         for (PBExchangeRatesDto rate : actualResult.getExchangeRate()) {
             softAssertions.assertThat(rate.getSaleRateNB())
