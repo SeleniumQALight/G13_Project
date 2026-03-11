@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class MyProfilePage extends ParentPage{
     }
 
     public MyProfilePage checkIsRedirectToMyProfilePage(){
+        webDriverWait10.until(ExpectedConditions.urlMatches(baseUrl + getRelativeUrl()));
         checkUrlWithPattern();
         // TODO check URL and unique elements
         return this;
@@ -37,7 +39,7 @@ public class MyProfilePage extends ParentPage{
     }
 
     public MyProfilePage checkPostWithTitlePresent(String postTitle, int expectedNumberOfPosts) {
-        Assert.assertEquals("Number of posts with title '" + postTitle + "",
+        Assert.assertEquals("Number of posts with title '" + postTitle + " ",
                 expectedNumberOfPosts,
                 getPostElementByTitle(postTitle).size());
         logger.info("Number of posts with title" + postTitle + "' is as expected" + expectedNumberOfPosts);
