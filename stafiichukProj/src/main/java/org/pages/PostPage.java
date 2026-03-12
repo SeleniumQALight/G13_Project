@@ -16,6 +16,10 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//p[contains(text(), 'Is this post unique?')]")
     private WebElement uniquePostText;
 
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
+
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -29,14 +33,12 @@ public class PostPage extends ParentPage {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-
     public PostPage checkIsRedirectToPostPage() {
         checkUrlWithPattern();
         // TODO check some unique element on the page
         return this;
     }
 
-    // check success message that post was created
     public PostPage checkPostWasCreatedMessageIsDisplayed() {
         checkIsElementEnabled(messagePostWasCreatedSuccessfully);
         return this;
@@ -56,6 +58,11 @@ public class PostPage extends ParentPage {
         checkIsElementDisplayed(uniquePostText);
         checkTextInElement(uniquePostText, "Is this post unique? : " + expectedValue);
         return this;
+    }
+
+    public EditPostPage clickOnEditButton(){
+        clickOnElement(buttonEditPost);
+        return new EditPostPage(webDriver);
     }
 }
 

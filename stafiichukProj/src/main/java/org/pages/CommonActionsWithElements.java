@@ -14,7 +14,7 @@ import java.time.Duration;
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     protected WebDriverWait webDriverWait10, webDriverWait15;
-    private Logger logger = Logger.getLogger(getClass());
+    protected Logger logger = Logger.getLogger(getClass());
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -43,7 +43,6 @@ public class CommonActionsWithElements {
 
             }
         }
-
 
     protected void clickOnElement(WebElement webElement) {
         try {
@@ -76,7 +75,6 @@ public class CommonActionsWithElements {
         }
     }
 
-
     protected boolean isElementDisplayed(WebElement webElement) {
         try {
             boolean state = webElement.isDisplayed();
@@ -88,13 +86,11 @@ public class CommonActionsWithElements {
         }
     }
 
-    // check is element enabled
     protected void checkIsElementEnabled(WebElement webElement) {
         Assert.assertTrue("Element is not enabled ", isElementEnabled(webElement));
         logger.info("Element is enabled");
     }
 
-    // is element enabled
     protected boolean isElementEnabled(WebElement webElement){
         try {
             boolean state = webElement.isEnabled();
