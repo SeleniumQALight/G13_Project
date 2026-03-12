@@ -27,8 +27,8 @@ public class ApiTests extends BaseTestApi {
     public void getAllPostsByUser() {
 
         PostsDto[] actualResponse = given()
-                .contentType(ContentType.JSON)
-                .log().all()
+//                .contentType(ContentType.JSON)
+//                .log().all()
                 .when()
                 .get(EndPoints.POSTS_BY_USER, sharedUserName)
                 .then()
