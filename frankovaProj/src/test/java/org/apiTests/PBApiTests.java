@@ -94,7 +94,7 @@ public class PBApiTests extends PBBaseTestApi {
                         .isGreaterThan(0.0);
             }
 
-
+            softAssertions.assertAll();
         }
     }
 }
