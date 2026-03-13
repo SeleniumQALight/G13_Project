@@ -26,7 +26,7 @@ public class ApiTests extends BaseTestApi {
     @Test
     public void getAllPostsByUser() {
 
-        PostsDto[] actualResponse = given()
+        PostsDto[] actualResponse = given()//записуємо ріспонс у обєкт PostsDto[].class, тому що ріспонс - це масив обєктів
                 .contentType(ContentType.JSON)
                 .log().all()
                 .when()
@@ -34,11 +34,14 @@ public class ApiTests extends BaseTestApi {
                 .then()
                 .statusCode(200)
                 .log().all()
-                //method #1 RestAssured asserts
+
+                //method #1 RestAssured asserts - якщо перевірити деякі поля лише
                 .body("[0].title", equalTo("The second Default post"))
                 .body("author.username", everyItem(equalTo(sharedUserName)))
-                //method #2 DTO or POJO
-                .extract().body().as(PostsDto[].class);
+
+                //method #2 DTO or POJO - для перевірки всього ріспонса, якщо багато полів і складна структура.
+                // Потрібно створити класи, які відповідають структурі ріспонса
+                .extract().body().as(PostsDto[].class); //витягуємо ріспонс і записуємо його в масив обєктів PostsDto
 
 
         logger.info("Full response body = " + actualResponse[0].toString());
@@ -47,11 +50,13 @@ public class ApiTests extends BaseTestApi {
         logger.info("[0].UserName = " + actualResponse[0].getAuthor().getUsername());
 
         for (int i = 0; i < actualResponse.length; i++) {
-           /* Assert.assertEquals("UserName is not expected" =  i
+            Assert.assertEquals("UserName is not expected" + i
                     , sharedUserName
-                    , actualResponse[i].getAuthor().getUsername());*/
+                    , actualResponse[i].getAuthor().getUsername());
         }
 
+        //формуємо очікуваний результат - вказуємо тут поля, які точно є і будемо порівнювати з отриманим
+        // результатом - тра додати відповідний конструктор в клас PostsDto
         PostsDto[] expectedResult = {
                 new PostsDto("The second Default post",
                         "This post was created automatically after cleaning the database",
@@ -69,7 +74,7 @@ public class ApiTests extends BaseTestApi {
 
         softAssertions
                 .assertThat(actualResponse)
-                .usingRecursiveComparison()
+                .usingRecursiveComparison()//рекурсивно порівнює всі поля обєктів, які знаходяться всередині масиву
                 .ignoringFields("id", "createdDate", "author.avatar")
                 .isEqualTo(expectedResult);
 
@@ -78,7 +83,7 @@ public class ApiTests extends BaseTestApi {
     }
 
     @Test
-    public void getAllPostsByUserNegative(){
+    public void getAllPostsByUserNegative() {
         final String NOT_VALID_USER_NAME = "notValidUserName";
 
         String actualResult =
@@ -86,8 +91,8 @@ public class ApiTests extends BaseTestApi {
                         .extract().response().body().asString();
 
         Assert.assertEquals("Message in response"
-                ,"\"Sorry, invalid user requested. Wrong username - " + NOT_VALID_USER_NAME +" or there is no posts. Exception is undefined\""
+                , "\"Sorry, invalid user requested. Wrong username - " + NOT_VALID_USER_NAME + " or there is no posts. Exception is undefined\""
                 , actualResult
-                );
+        );
     }
 }
