@@ -31,7 +31,7 @@ public class ApiHelper {
             .build();
 
 
-
+//отримаємо усі пости юзера і зберігаємо через DTO в масив об'єктів, щоб потім з ними працювати в тесті, а не з сирим JSON рядком
     public PostsDto[] getAllPostsByUserInObject() {
         return getAllPostsByUserRequest(TestData.VALID_USERNAME_API, HttpStatus.SC_OK)
                 .extract().body()

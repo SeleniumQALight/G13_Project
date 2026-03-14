@@ -22,7 +22,7 @@ public class CreatePostByAPI extends BaseTestApi {
     Faker faker = new Faker();
 
     @Before
-    public void getTokenAndDeletePosts(){
+    public void getTokenAndDeletePosts() {
         actualToken = apiHelper.getToken();
         System.out.println("Token = " + actualToken);
     }
@@ -32,14 +32,15 @@ public class CreatePostByAPI extends BaseTestApi {
     public void createPostByAPI() {
         int initialNumberOfPosts = apiHelper.getAllPostsByUserInObject().length;
 
+        //для створення боді за допом ДТО, щоб не писати багато коду в тесті, а просто заповнити поля і передати цей об'єкт в запит
         CreateNewPostDto createNewPostBody =
                 CreateNewPostDto.builder()
                         .title("API post Frankova")
                         .body("Post body " + faker.animal().name())
                         .select1("One Person")
                         .uniquePost("yes")
-                        .token(actualToken)
-                .build();
+                        .token(actualToken) //токен потрібно передати в тілі запиту, бо так реалізована логіка бекенду,
+                        .build();
 
         String actualResponse =
                 given()
@@ -49,7 +50,7 @@ public class CreatePostByAPI extends BaseTestApi {
                         .post(EndPoints.CREATE_POST)
                         .then()
                         .spec(responseSpecification)
-                        .extract().response().asString();
+                        .extract().response().body().asString();
 
 
         Assert.assertEquals("Message in response ", "\"Congrats.\"", actualResponse);
@@ -61,16 +62,16 @@ public class CreatePostByAPI extends BaseTestApi {
                 , newNumberOfPosts);
 
         PostsDto expectedPost =
-               PostsDto.builder()
+                PostsDto.builder()
                         .title(createNewPostBody.getTitle())
-                       .body(createNewPostBody.getBody())
-                       .select(createNewPostBody.getSelect1())
-                       .uniquePost(createNewPostBody.getUniquePost())
-                       .isVisitorOwner(false)
-                       .author(AuthorDto.builder()
-                               .username(TestData.VALID_USERNAME_API)
-                               .build())//беремо автора з першого поста, бо він буде однаковий для всіх постів цього юзера
-                .build();
+                        .body(createNewPostBody.getBody())
+                        .select(createNewPostBody.getSelect1())
+                        .uniquePost(createNewPostBody.getUniquePost())
+                        .isVisitorOwner(false)
+                        .author(AuthorDto.builder()
+                                .username(TestData.VALID_USERNAME_API)
+                                .build())//беремо автора з першого поста, бо він буде однаковий для всіх постів цього юзера
+                        .build();
 
         SoftAssertions softAssertions = new SoftAssertions();
 
