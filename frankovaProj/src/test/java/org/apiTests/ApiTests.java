@@ -27,8 +27,8 @@ public class ApiTests extends BaseTestApi {
     public void getAllPostsByUser() {
 
         PostsDto[] actualResponse = given()//записуємо ріспонс у обєкт PostsDto[].class, тому що ріспонс - це масив обєктів
-                .contentType(ContentType.JSON)
-                .log().all()
+//                .contentType(ContentType.JSON)
+//                .log().all()
                 .when()
                 .get(EndPoints.POSTS_BY_USER, sharedUserName)
                 .then()
