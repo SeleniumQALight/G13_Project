@@ -1,5 +1,11 @@
 package org.api.dto.responseDto;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
+@AllArgsConstructor
+@Builder
 public class AuthorDto {
     private String username;
     private String avatar;
