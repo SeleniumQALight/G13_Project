@@ -16,6 +16,7 @@ import static io.restassured.RestAssured.given;
 import static org.api.ApiHelper.requestSpecification;
 import static org.api.ApiHelper.responseSpecification;
 
+
 public class CreatePostByApi extends BaseTestApi {
     ApiHelper apiHelper= new ApiHelper();
     String actualToken;
