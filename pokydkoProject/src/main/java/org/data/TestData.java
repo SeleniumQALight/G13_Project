@@ -7,4 +7,7 @@ public class TestData {
             ConfigProvider.configHiddenProperties.login());
     public final static String VALID_PASSWORD_UI = "123456qwerty";
 
+    public final static String VALID_USERNAME_API = "vlad".toLowerCase();
+    public final static String VALID_PASSWORD_API = "123456qwerty";
+
 }
