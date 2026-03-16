@@ -10,6 +10,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.requestSpecification;
 
 
+
 public class PrivatBankTests extends BaseTestApi {
 
     @Test
