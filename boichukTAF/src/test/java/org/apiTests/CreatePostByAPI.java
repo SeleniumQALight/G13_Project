@@ -74,8 +74,10 @@ public class CreatePostByAPI  extends BaseTestApi{
         softAssertions
                 .assertThat(apiHelper.getAllPostsByUserInObject()[0])
                 .usingRecursiveComparison()
-                .ignoringFields("id","author.avatar")
+                .ignoringFields("id","author.avatar","createdDate")
                 .isEqualTo(expectedPost);
+
+        softAssertions.assertAll();
 
     }
 }
