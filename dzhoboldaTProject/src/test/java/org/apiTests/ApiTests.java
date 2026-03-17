@@ -51,12 +51,28 @@ public class ApiTests extends  BaseTestApi{
         }
 
         PostsDto[] expectedResult = {
-                new PostsDto("The second Default post",
-                        "This post was created automatically after cleaning the database",
-                        "All Users", "no",new AuthorDto(sharedUserName),false),
-                new PostsDto("The first Default post",
-                        "This post was created automatically after cleaning the database",
-                        "All Users", "no",new AuthorDto(sharedUserName),false)
+                PostsDto.builder()
+                        .title("The second Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .select1("All Users")
+                        .uniquePost("no")
+                        .author(new  AuthorDto(sharedUserName) )
+                        .isVisitorOwner(false)
+                        .build(),
+                PostsDto.builder()
+                        .title("The first Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .select1("All Users")
+                        .uniquePost("no")
+                        .author(new  AuthorDto(sharedUserName) )
+                        .isVisitorOwner(false)
+                        .build()
+//                new PostsDto("The second Default post",
+//                        "This post was created automatically after cleaning the database",
+//                        "All Users", "no",new AuthorDto(sharedUserName),false),
+//                new PostsDto("The first Default post",
+//                        "This post was created automatically after cleaning the database",
+//                        "All Users", "no",new AuthorDto(sharedUserName),false)
         };
 
         SoftAssertions softAssertions = new SoftAssertions();

@@ -82,8 +82,8 @@ public class ApiHelper {
         PostsDto[]listOfPosts = this.getAllPostsByUserInObject(validUsernameApi,HttpStatus.SC_OK);
 
         for (int i = 0; i < listOfPosts.length; i++) {
-            deletePostById(actualToken,listOfPosts[i].get_id());
-            logger.info(String.format("Post with id %s and %s was deleted",listOfPosts[i].get_id(),listOfPosts[i].getTitle()));
+            deletePostById(actualToken,listOfPosts[i].getId());
+            logger.info(String.format("Post with id %s and %s was deleted",listOfPosts[i].getId(),listOfPosts[i].getTitle()));
 
 
         }
