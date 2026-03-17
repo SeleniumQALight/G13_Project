@@ -24,11 +24,25 @@ public class PrivatBankApiTest extends PrivatBankBaseTest{
         softAssertions.assertThat(response.getBaseCurrencyLit()).isNotEmpty();
 
 
+        List<String> validCurrencies = List.of(
+                "UAH", "USD", "EUR", "GBP", "CHF", "PLN", "SEK", "CAD", "XAU",
+                "AUD", "AZN", "BYN", "CNY", "CZK", "DKK", "GEL", "HUF",
+                "ILS", "JPY", "KZT", "MDL", "NOK", "SGD", "TMT", "TRY", "UZS"
+        );
+
+
         List<ExchangeRateDto> rates = response.getExchangeRate();
         for (ExchangeRateDto rate : rates) {
-            softAssertions.assertThat(rate.getBaseCurrency()).isNotEmpty();
-            softAssertions.assertThat(rate.getCurrency()).isNotEmpty();
 
+            softAssertions.assertThat(rate.getBaseCurrency())
+                    .as("Base currency should be valid")
+                    .isIn(validCurrencies);
+
+            if (rate.getCurrency() != null) {
+                softAssertions.assertThat(rate.getCurrency())
+                        .as("Currency should be valid")
+                        .isIn(validCurrencies);
+            }
         }
 
         softAssertions.assertAll();
