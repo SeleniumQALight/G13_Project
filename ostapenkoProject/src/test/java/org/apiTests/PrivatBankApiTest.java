@@ -48,8 +48,8 @@ public class PrivatBankApiTest {
             logger.info("Checking currency " + rate.getCurrency());
 
             softAssertions.assertThat(rate.getBaseCurrency()).isEqualTo("UAH");
-            softAssertions.assertThat(rate.getCurrency()).isNotNull();
-        }
+            softAssertions.assertThat(rate.getCurrency())
+                    .isIn("USD", "EUR", "GBP", "CHF", "PLN", "SEK", "XAU", "CAD");        }
         softAssertions.assertAll();
         logger.info("Test checkExchangeRatesFields finished successfully");
 

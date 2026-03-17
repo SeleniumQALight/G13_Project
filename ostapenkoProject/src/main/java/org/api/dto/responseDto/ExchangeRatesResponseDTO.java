@@ -7,7 +7,7 @@ public class ExchangeRatesResponseDTO {
 
     private String date;
     private String bank;
-    private int baseCurrency;
+    private Integer baseCurrency;
     private String baseCurrencyLit;
 
     private List<ExchangeRateDTO> exchangeRate;
