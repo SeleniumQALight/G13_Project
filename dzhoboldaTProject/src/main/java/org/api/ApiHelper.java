@@ -9,17 +9,20 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import netscape.javascript.JSObject;
 import org.apache.http.HttpStatus;
+import org.apache.log4j.Logger;
 import org.api.dto.responsDto.PostsDto;
 import org.data.TestData;
 import org.json.JSONObject;
 import org.openqa.selenium.json.Json;
 
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
-
-
+//import static sun.security.pkcs11.wrapper.Functions.getId;
 
 
 public class ApiHelper {
+    Logger logger = Logger.getLogger((getClass()));
 
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
@@ -65,8 +68,37 @@ public class ApiHelper {
 
     }
 
-    public PostsDto[] getAllPostsByUserInObject() {
-        return getAllPostsByUserRequest(TestData.VALID_USERNAME_API,HttpStatus.SC_OK)
+    public PostsDto[] getAllPostsByUserInObject(){
+        return getAllPostsByUserInObject(TestData.VALID_USERNAME_API,HttpStatus.SC_OK);
+
+    }
+
+    public PostsDto[] getAllPostsByUserInObject(String userName,int status ) {
+        return getAllPostsByUserRequest(userName,status)
                 .extract().body().as(PostsDto[].class);
+    }
+
+    public void deleteAllPostsTillPresent(String validUsernameApi, String actualToken) {
+        PostsDto[]listOfPosts = this.getAllPostsByUserInObject(validUsernameApi,HttpStatus.SC_OK);
+
+        for (int i = 0; i < listOfPosts.length; i++) {
+            deletePostById(actualToken,listOfPosts[i].get_id());
+            logger.info(String.format("Post with id %s and %s was deleted",listOfPosts[i].get_id(),listOfPosts[i].getTitle()));
+
+
+        }
+    }
+
+    private void deletePostById(String actualToken, String id) {
+        HashMap<String,String>bodyRequest = new HashMap<>();
+        bodyRequest.put("token",actualToken);
+
+        given()
+                .spec(requestSpecification)
+                .body(bodyRequest)
+                .when()
+                .delete(EndPoints.DELETE_POST, id)
+                .then()
+                .spec(responseSpecification);
     }
 }
