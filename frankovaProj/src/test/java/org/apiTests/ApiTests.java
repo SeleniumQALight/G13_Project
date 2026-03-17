@@ -1,6 +1,7 @@
 package org.apiTests;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.api.ApiHelper;
@@ -10,6 +11,9 @@ import org.api.dto.responseDto.PostsDto;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -42,6 +46,8 @@ public class ApiTests extends BaseTestApi {
                 //method #2 DTO or POJO - для перевірки всього ріспонса, якщо багато полів і складна структура.
                 // Потрібно створити класи, які відповідають структурі ріспонса
                 .extract().body().as(PostsDto[].class); //витягуємо ріспонс і записуємо його в масив обєктів PostsDto
+
+
 
 
         logger.info("Full response body = " + actualResponse[0].toString());
@@ -107,6 +113,7 @@ public class ApiTests extends BaseTestApi {
 
         String actualResult =
                 apiHelper.getAllPostsByUserRequest(NOT_VALID_USER_NAME, HttpStatus.SC_BAD_REQUEST)
+                        //method #3 respons as String
                         .extract().response().body().asString();
 
         Assert.assertEquals("Message in response"
@@ -114,4 +121,40 @@ public class ApiTests extends BaseTestApi {
                 , actualResult
         );
     }
+
+    @Test
+    public void getPostsByUserJsonPath(){
+        //method #4 json path
+        //коли потрібно достати частину джейсон а немаж ДТО
+        Response actualResponse =
+                apiHelper.getAllPostsByUserRequest(sharedUserName, HttpStatus.SC_OK)
+                .extract().response();
+
+        SoftAssertions softAssertions =  new SoftAssertions();
+
+        List<String> actualListOfTitle = actualResponse.jsonPath().getList("title", String.class);
+
+        for (int i = 0; i < actualListOfTitle.size(); i++) {
+
+            softAssertions.assertThat(actualListOfTitle.get(i))
+                    .as("Item number " + i)
+                    .contains("Default post");
+
+        }
+
+        List<Map> actualAuthorList = actualResponse.jsonPath().getList("author", Map.class);
+
+        for (Map actualAuthorObject: actualAuthorList) {
+            softAssertions
+                    .assertThat(actualAuthorObject.get("username"))
+                    .as("Field userName in Author")
+                    .isEqualTo(sharedUserName);
+        }
+
+        softAssertions.assertAll();
+
+    }
+
+
+
 }
