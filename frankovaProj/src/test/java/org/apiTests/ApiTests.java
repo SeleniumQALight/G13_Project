@@ -9,16 +9,20 @@ import org.api.EndPoints;
 import org.api.dto.responseDto.AuthorDto;
 import org.api.dto.responseDto.PostsDto;
 import org.assertj.core.api.SoftAssertions;
+import org.categories.SmokeTestsFilter;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.everyItem;
 
+@Category(SmokeTestsFilter.class)
 public class ApiTests extends BaseTestApi {
 
     String sharedUserName = "autoapi";
@@ -33,6 +37,7 @@ public class ApiTests extends BaseTestApi {
         PostsDto[] actualResponse = given()//записуємо ріспонс у обєкт PostsDto[].class, тому що ріспонс - це масив обєктів
 //                .contentType(ContentType.JSON)
 //                .log().all()
+                //.filter(new AllureRestAssuered())
                 .when()
                 .get(EndPoints.POSTS_BY_USER, sharedUserName)
                 .then()
@@ -153,6 +158,14 @@ public class ApiTests extends BaseTestApi {
 
         softAssertions.assertAll();
 
+    }
+
+
+
+    @Test
+    public void getAllPostsByUserSchemaValidation(){
+        apiHelper.getAllPostsByUserRequest(sharedUserName, HttpStatus.SC_OK)
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
     }
 
 
