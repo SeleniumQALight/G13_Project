@@ -1,5 +1,6 @@
 package org.apiTests;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.everyItem;
 
@@ -33,6 +35,7 @@ public class ApiTest extends BaseTestApi {
         PostsDto[] actualResponse = given()
                 .contentType(ContentType.JSON)
                 .log().all()
+                .filter(new AllureRestAssured())
                 .when()
                 .get(EndPoints.POSTS_BY_USER, sharedUserName)
                 .then()
@@ -140,6 +143,12 @@ public class ApiTest extends BaseTestApi {
             softAssertions.assertAll();
         }
 
+    }
+
+    @Test
+    public void getAllPostsByUserSchemaValidation(){
+        apiHelper.getAllPostsByUserRequest(sharedUserName,HttpStatus.SC_OK)
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
     }
 
 }
