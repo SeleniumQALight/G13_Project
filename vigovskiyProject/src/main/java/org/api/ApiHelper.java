@@ -1,5 +1,6 @@
 package org.api;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -11,23 +12,28 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import netscape.javascript.JSObject;
 import org.apache.http.HttpStatus;
+import org.apache.log4j.Logger;
 import org.api.dto.responseDto.PostsDto;
 import org.data.TestData;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
+    Logger logger = Logger.getLogger(getClass());
 
-   public static RequestSpecification requestSpecification=new RequestSpecBuilder()
+    public static RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
+            .addFilter(new AllureRestAssured())
             .build();
 
-   public static ResponseSpecification responseSpecification=new ResponseSpecBuilder()
-           .log(LogDetail.ALL)
-           .expectStatusCode(HttpStatus.SC_OK)
-           .build();
+    public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
+            .log(LogDetail.ALL)
+            .expectStatusCode(HttpStatus.SC_OK)
+            .build();
 
 
     public ValidatableResponse getAllPostsByUserRequest(String userName, int expectedStausCode) {
@@ -47,9 +53,9 @@ public class ApiHelper {
     }
 
     public String getToken(String userName, String password) {
-        JSONObject requestBody=new JSONObject();
-        requestBody.put("username",userName);
-        requestBody.put("password",password);
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("username", userName);
+        requestBody.put("password", password);
 
         return given()
                 .spec(requestSpecification)
@@ -60,12 +66,40 @@ public class ApiHelper {
 //                .statusCode(HttpStatus.SC_OK)
 //                .log().all();
                 .spec(responseSpecification)
-                .extract().body().asString().replace("\"","");
+                .extract().body().asString().replace("\"", "");
     }
 
     public PostsDto[] getAllPostsByUserInObject() {
-        return getAllPostsByUserRequest(TestData.VALID_USERNAME_API, HttpStatus.SC_OK)
+        return getAllPostsByUserInObject(TestData.VALID_USERNAME_API, HttpStatus.SC_OK);
+
+    }
+
+    public PostsDto[] getAllPostsByUserInObject(String userName, int status) {
+        return getAllPostsByUserRequest(userName, status)
                 .extract().body()
                 .as(PostsDto[].class);
+    }
+
+    public void deleteAllPostsTillPresent(String validUsernameApi, String token) {
+        PostsDto[] listOfPosts = this.getAllPostsByUserInObject(validUsernameApi, HttpStatus.SC_OK);
+
+        for (int i = 0; i < listOfPosts.length; i++) {
+            deletePostById(token, listOfPosts[i].getId());
+            logger.info(
+                    String.format("Post with id %s and title %s was deleted",listOfPosts[i].getId(),listOfPosts[i].getTitle()));
+        }
+    }
+
+    private void deletePostById(String token, String id) {
+        HashMap<String,String>bodyRequest=new HashMap<>();
+        bodyRequest.put("token",token);
+
+        given()
+                .spec(requestSpecification)
+                .body(bodyRequest)
+                .when()
+                .delete(EndPoints.DELETE_POST,id)
+                .then()
+                .spec(responseSpecification);
     }
 }
