@@ -26,7 +26,7 @@ public class CreatePostByApi extends BaseTestApi {
     @Before
     public void getTokenAndDeletePosts() {
         token = apiHelper.getToken();
-        System.out.println(token);
+        apiHelper.deleteAllPostsTillPresent(TestData.VALID_USERNAME_API,token);
     }
 
     @Test
@@ -69,13 +69,13 @@ public class CreatePostByApi extends BaseTestApi {
                         .build())
                 .build();
 
-        SoftAssertions softAssertions=new SoftAssertions();
+        SoftAssertions softAssertions = new SoftAssertions();
 
         softAssertions
                 .assertThat(apiHelper.getAllPostsByUserInObject()[0])
-                        .usingRecursiveComparison()
-                                .ignoringFields("id","createdDate","author.avatar")
-                                        .isEqualTo(expectedPost);
+                .usingRecursiveComparison()
+                .ignoringFields("id", "createdDate", "author.avatar")
+                .isEqualTo(expectedPost);
         softAssertions.assertAll();
     }
 
