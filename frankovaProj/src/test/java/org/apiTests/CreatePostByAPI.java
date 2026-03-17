@@ -24,7 +24,7 @@ public class CreatePostByAPI extends BaseTestApi {
     @Before
     public void getTokenAndDeletePosts() {
         actualToken = apiHelper.getToken();
-        System.out.println("Token = " + actualToken);
+        apiHelper.deleteAllPostsTillPresent(TestData.VALID_USERNAME_API, actualToken);
     }
 
 
