@@ -1,6 +1,7 @@
 package org.apiTests;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.api.ApiHelper;
@@ -11,6 +12,8 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+import java.util.Map;
 import java.util.logging.SocketHandler;
 
 import static io.restassured.RestAssured.given;
@@ -94,11 +97,39 @@ public class ApiTests extends BaseTestApi {
         String actualResult =
                 apiHelper
                         .getAllPostsByUserRequest(NOT_VALID_USER_NAME, HttpStatus.SC_BAD_REQUEST)
+                        // method #3: response as String
                         .extract().body().asString();
 
         Assert.assertEquals("Error message is not expected",
-                "\"Sorry, invalid user requested. Wrong username - " + NOT_VALID_USER_NAME + " or there is no posts. Exception is undefined\"", actualResult);
-
+                "\"Sorry, invalid user requested. Wrong username - " + NOT_VALID_USER_NAME
+                        + " or there is no posts. Exception is undefined\"", actualResult);
     }
 
+    @Test
+    public void getPostsByUserJsonPath() {
+        // method #4: JsonPath assertions
+        Response actualResponse = apiHelper
+                .getAllPostsByUserRequest(sharedUserName, HttpStatus.SC_OK)
+                .extract().response();
+
+        SoftAssertions softAssertions = new SoftAssertions();
+
+        List<String> actualListOfTitles = actualResponse.jsonPath().getList("title", String.class);
+        for (int i = 0; i < actualListOfTitles.size(); i++) {
+            softAssertions.assertThat(actualListOfTitles.get(i))
+                    .as("Title of post with index " + i)
+                    .contains("Default post");
+        }
+
+        List<Map> actualAuthorsList = actualResponse.jsonPath().getList("author", Map.class);
+        for (Map author : actualAuthorsList) {
+            softAssertions.assertThat(author.get("username"))
+                    .as("Field username in author object")
+                    .isEqualTo(sharedUserName);
+
+        }
+        softAssertions.assertAll();
+
+
+    }
 }
