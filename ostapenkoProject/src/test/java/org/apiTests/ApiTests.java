@@ -1,5 +1,6 @@
 package org.apiTests;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -9,17 +10,20 @@ import org.api.EndPoints;
 import org.api.dto.responseDto.AuthorDto;
 import org.api.dto.responseDto.PostsDto;
 import org.assertj.core.api.SoftAssertions;
+import org.categories.SmokeTestsFilter;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.List;
 import java.util.Map;
-import java.util.logging.SocketHandler;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.everyItem;
 
+@Category(SmokeTestsFilter.class)
 public class ApiTests extends BaseTestApi {
     String sharedUserName = "autoapi";
     Logger logger = Logger.getLogger(getClass());
@@ -31,6 +35,7 @@ public class ApiTests extends BaseTestApi {
                 given()
                         .contentType(ContentType.JSON)
                         .log().all()
+                        .filter(new AllureRestAssured())
                         .when()
                         .get(EndPoints.POSTS_BY_USER, sharedUserName) // TODO: add URL
                         .then()
@@ -129,7 +134,13 @@ public class ApiTests extends BaseTestApi {
 
         }
         softAssertions.assertAll();
+    }
 
+    @Test
+    public void getAllPostsByUserSchemaValidation() {
+        apiHelper.getAllPostsByUserRequest(sharedUserName, HttpStatus.SC_OK)
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("response.json"));
 
     }
 }
