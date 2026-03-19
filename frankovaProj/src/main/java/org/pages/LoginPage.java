@@ -3,7 +3,6 @@ package org.pages;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
-import org.data.RegistrationValidationMessages;
 import org.data.TestData;
 import org.data.User;
 import org.junit.Assert;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.Utils_Custom;
 
 import java.util.List;
@@ -50,6 +48,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement buttonSignUp;
+
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement warningMessageInCenter;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -203,5 +204,10 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignUp() {
         clickOnElement(buttonSignUp);
+    }
+
+    public LoginPage checkTextInAlertInCenter(String errorMessage) {
+        checkTextInElement(warningMessageInCenter, errorMessage);
+        return this;
     }
 }
