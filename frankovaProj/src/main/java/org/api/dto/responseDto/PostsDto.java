@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@NoArgsConstructor//default constructor
 public class PostsDto {
     @JsonProperty("_id")
     private String id;

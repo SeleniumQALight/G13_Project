@@ -3,6 +3,7 @@ package org.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -25,6 +26,7 @@ public class ApiHelper {
 
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
+            .addFilter(new AllureRestAssured())
             .log(LogDetail.ALL)
             .build();//створюємо об'єкт специфікації запиту, який можна використовувати в кожному тесті, щоб не повторювати однакові частини коду
 
@@ -106,6 +108,7 @@ public class ApiHelper {
     }
 
     private void deletePostById(String actualToken, String id) {
+        //формуємо ріквест боді для запиту, бо так передаємо токен
         HashMap<String,String> bodyRequest = new HashMap<>();
         bodyRequest.put("token", actualToken);
 

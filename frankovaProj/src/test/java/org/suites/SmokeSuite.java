@@ -13,9 +13,9 @@ import org.registrationTests.ValidationMessagesTest;
 @Categories.IncludeCategory(SmokeTestsFilter.class)
 
 @Suite.SuiteClasses({
-        //LoginTestWithPageObject.class,
-        //CreateNewPostTest.class,
-        //ValidationMessagesTest.class,
+        LoginTestWithPageObject.class,
+        CreateNewPostTest.class,
+        ValidationMessagesTest.class,
         ApiTests.class
 
 })

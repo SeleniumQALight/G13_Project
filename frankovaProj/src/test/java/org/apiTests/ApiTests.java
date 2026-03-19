@@ -1,5 +1,6 @@
 package org.apiTests;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -22,7 +23,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.everyItem;
 
-@Category(SmokeTestsFilter.class)
+@Category(SmokeTestsFilter.class) //додаємо у Смоук сьют для рану
 public class ApiTests extends BaseTestApi {
 
     String sharedUserName = "autoapi";
@@ -35,9 +36,9 @@ public class ApiTests extends BaseTestApi {
     public void getAllPostsByUser() {
 
         PostsDto[] actualResponse = given()//записуємо ріспонс у обєкт PostsDto[].class, тому що ріспонс - це масив обєктів
-//                .contentType(ContentType.JSON)
-//                .log().all()
-                //.filter(new AllureRestAssuered())
+                .contentType(ContentType.JSON)
+               .log().all()
+                .filter(new AllureRestAssured())//щоб у Алюр репорті були дані по запиту
                 .when()
                 .get(EndPoints.POSTS_BY_USER, sharedUserName)
                 .then()
@@ -68,6 +69,8 @@ public class ApiTests extends BaseTestApi {
 
         //формуємо очікуваний результат - вказуємо тут поля, які точно є і будемо порівнювати з отриманим
         // результатом - тра додати відповідний конструктор в клас PostsDto
+
+        // ДТО коли маємо lobmok
         PostsDto[] expectedResult = {
                 PostsDto.builder()
                         .title("The second Default post")
@@ -87,7 +90,7 @@ public class ApiTests extends BaseTestApi {
                         .isVisitorOwner(false)
                         .build()
 
-
+                        // Без lombok приклад створення ДТО
 //                new PostsDto("The second Default post",
 //                        "This post was created automatically after cleaning the database",
 //                        "All Users", "no", new AuthorDto(sharedUserName), false
@@ -118,7 +121,8 @@ public class ApiTests extends BaseTestApi {
 
         String actualResult =
                 apiHelper.getAllPostsByUserRequest(NOT_VALID_USER_NAME, HttpStatus.SC_BAD_REQUEST)
-                        //method #3 respons as String
+
+                        //method #3 response as String
                         .extract().response().body().asString();
 
         Assert.assertEquals("Message in response"
@@ -129,14 +133,17 @@ public class ApiTests extends BaseTestApi {
 
     @Test
     public void getPostsByUserJsonPath(){
-        //method #4 json path
-        //коли потрібно достати частину джейсон а немаж ДТО
+        //method #4 response using json path
+        //коли потрібно достати частину джейсон а немає ДТО
+
+        //Response використовуємо
         Response actualResponse =
                 apiHelper.getAllPostsByUserRequest(sharedUserName, HttpStatus.SC_OK)
                 .extract().response();
 
         SoftAssertions softAssertions =  new SoftAssertions();
 
+        //ріспонс нам вертає список постів, а ми хочемо витягнути лише їх татйтли і формуємо з них список
         List<String> actualListOfTitle = actualResponse.jsonPath().getList("title", String.class);
 
         for (int i = 0; i < actualListOfTitle.size(); i++) {
@@ -147,6 +154,7 @@ public class ApiTests extends BaseTestApi {
 
         }
 
+        //аналогічно витягуємо з ріспонса Автора - що є окремим об*єктом - тому викор Map
         List<Map> actualAuthorList = actualResponse.jsonPath().getList("author", Map.class);
 
         for (Map actualAuthorObject: actualAuthorList) {
@@ -161,11 +169,12 @@ public class ApiTests extends BaseTestApi {
     }
 
 
-
+//Тест на валідацію схеми
     @Test
     public void getAllPostsByUserSchemaValidation(){
         apiHelper.getAllPostsByUserRequest(sharedUserName, HttpStatus.SC_OK)
                 .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
+        //response.json файл у ресорсес додаємо - описана схема
     }
 
 

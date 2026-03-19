@@ -1,3 +1,5 @@
+//описані типи полів для ріспонса певного ендпоінта -
+//генеруємо через ШІ або на сайті https://jsonformatter.org/json-to-jsonschema
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "array",
