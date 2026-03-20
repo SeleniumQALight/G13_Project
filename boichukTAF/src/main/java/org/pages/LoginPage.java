@@ -54,6 +54,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement buttonSignUp;
 
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement worningMessageInCentre;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -187,9 +190,11 @@ public class LoginPage extends ParentPage {
     public LoginPage enterRegistrationDataNotNull(User userData) {
         if (userData.getUserName() != null) {
             enterTextIntoRegistrationUserNameField(userData.getUserName());
-        }if (userData.getEmail() != null) {
+        }
+        if (userData.getEmail() != null) {
             enterTextIntoRegistrationEmailField(userData.getEmail());
-        }if (userData.getPassword() != null) {
+        }
+        if (userData.getPassword() != null) {
             enterTextIntoRegistrationPasswordField(userData.getPassword());
         }
         return this;
@@ -197,5 +202,11 @@ public class LoginPage extends ParentPage {
 
     public void clickOnSignUpButton() {
         clickOnElement(buttonSignUp);
+    }
+
+    public LoginPage checkTextInAlertCenter(String errorMessage) {
+
+        checkTextInElement(worningMessageInCentre, errorMessage);
+        return this;
     }
 }
