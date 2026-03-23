@@ -5,7 +5,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
-import org.api.ApiHelper;
+import org.api.dto.helpers.ApiHelper;
 import org.api.EndPoints;
 import org.api.dto.responseDto.AuthorDto;
 import org.api.dto.responseDto.PostsDto;
