@@ -1,4 +1,4 @@
-package org.api;
+package org.api.dto.helpers;
 
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -10,6 +10,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.hc.core5.http.HttpStatus;
 import org.apache.log4j.Logger;
+import org.api.EndPoints;
 import org.api.dto.responseDto.PostsDto;
 import org.data.TestData;
 import org.json.JSONObject;
