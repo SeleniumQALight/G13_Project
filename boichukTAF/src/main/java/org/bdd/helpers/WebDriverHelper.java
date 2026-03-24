@@ -1,10 +1,8 @@
-package org.bdd.helptrs;
+package org.bdd.helpers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 
-import org.junit.Rule;
-import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
