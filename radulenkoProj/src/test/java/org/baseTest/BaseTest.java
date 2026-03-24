@@ -13,6 +13,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -58,8 +59,13 @@ public class BaseTest {
             logger.info("Browser from properties: " + browserFromProperty);
         }
         if ((browserFromProperty.equalsIgnoreCase("chrome"))) {
-            WebDriverManager.chromedriver().setup();
-            webDriver = new ChromeDriver();
+//            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--disable-extensions");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--dns-prefetch-disable");
+            options.addArguments("--no-sandbox");
+            webDriver = new ChromeDriver(options);
             logger.info("Browser is chrome");
         } else if (browserFromProperty.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
