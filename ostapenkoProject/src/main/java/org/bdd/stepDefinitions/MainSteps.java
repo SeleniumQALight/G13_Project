@@ -6,6 +6,7 @@ import org.pages.PageProvider;
 public class MainSteps {
     protected WebDriverHelper webDriverHelper;
     protected PageProvider pageProvider;
+    static final String DEFAULT = "default";
 
     public MainSteps(WebDriverHelper webDriverHelper) {
         this.webDriverHelper = webDriverHelper;
