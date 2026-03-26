@@ -2,6 +2,7 @@ package org.apiTests;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.api.dto.helpers.BookApiHelper;
 import org.api.dto.requesteDto.AddBookRequestDto;
 import org.api.dto.requesteDto.LoginRequestDto;
 import org.dto.IsbnDto;
@@ -14,92 +15,55 @@ import static org.hamcrest.Matchers.*;
 
 public class AddBookApiTest {
 
-    String baseUrl = "https://demoqa.com";
-
     @Test
     public void addBookToUserTest() {
 
-        RestAssured.baseURI = baseUrl;
+        RestAssured.baseURI = "https://demoqa.com";
+        BookApiHelper api = new BookApiHelper();
 
-        // LOGIN BODY
+        // LOGIN
         LoginRequestDto loginBody = LoginRequestDto.builder()
                 .userName("aostapenko")
                 .password("HelloJopp@90_")
                 .build();
 
-        // LOGIN REQUEST
-        Response loginResponse =
-                given()
-                        .log().all()
-                        .contentType("application/json")
-                        .body(loginBody)
-                        .when()
-                        .post("/Account/v1/Login")
-                        .then()
-                        .log().all()
-                        .statusCode(200)
-                        .extract()
-                        .response();
+        Response loginResponse = api.login(loginBody);
+        loginResponse.then().statusCode(200);
 
         String token = loginResponse.jsonPath().getString("token");
         String userId = loginResponse.jsonPath().getString("userId");
 
-        // DELETE ALL USER BOOKS
-        given()
-                .log().all()
-                .header("Authorization", "Bearer " + token)
-                .when()
-                .delete("/BookStore/v1/Books?UserId=" + userId)
+        // DELETE BOOKS
+        api.deleteAllBooks(token, userId)
                 .then()
                 .log().all()
                 .statusCode(anyOf(is(204), is(200)));
 
-        // GET ALL BOOKS
-        Response booksResponse =
-                given()
-                        .log().all()
-                        .when()
-                        .get("/BookStore/v1/Books")
-                        .then()
-                        .log().all()
-                        .statusCode(200)
-                        .extract()
-                        .response();
+        // GET ISBN
+        String isbn = api.getAllBooks()
+                .then()
+                .statusCode(200)
+                .extract()
+                .jsonPath()
+                .getString("books[0].isbn");
 
-        String isbn = booksResponse.jsonPath().getString("books[0].isbn");
-
-        // ADD BOOK BODY
+        // ADD BOOK
         AddBookRequestDto addBookBody = AddBookRequestDto.builder()
                 .userId(userId)
-                .collectionOfIsbns(
-                        List.of(
-                                IsbnDto.builder()
-                                        .isbn(isbn)
-                                        .build()
-                        )
-                )
+                .collectionOfIsbns(List.of(
+                        IsbnDto.builder()
+                                .isbn(isbn)
+                                .build()
+                ))
                 .build();
 
-        // ADD BOOK REQUEST
-        given()
-                .log().all()
-                .header("Authorization", "Bearer " + token)
-                .contentType("application/json")
-                .body(addBookBody)
-                .when()
-                .post("/BookStore/v1/Books")
+        api.addBook(token, addBookBody)
                 .then()
-                .log().all()
                 .statusCode(201);
 
-        // VERIFY BOOK ADDED
-        given()
-                .log().all()
-                .header("Authorization", "Bearer " + token)
-                .when()
-                .get("/Account/v1/User/" + userId)
+        // VERIFY
+        api.getUser(token, userId)
                 .then()
-                .log().all()
                 .statusCode(200)
                 .body("books.size()", equalTo(1))
                 .body("books[0].isbn", equalTo(isbn));

@@ -48,6 +48,8 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = ".//button[@type='submit']")
     private WebElement buttonSignUp;
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement warningMassageInCenter;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -196,5 +198,10 @@ public class LoginPage extends ParentPage {
 
     public void clickOnSignUpButton() {
         clickOnElement(buttonSignUp);
+    }
+
+    public LoginPage checkTextInAlertInCenter(String errorMessage) {
+        checkTextInElement(warningMassageInCenter, errorMessage);
+        return this;
     }
 }

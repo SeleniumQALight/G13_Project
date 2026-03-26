@@ -17,15 +17,16 @@ import static org.api.ApiHelper.requestSpecification;
 import static org.api.ApiHelper.responseSpecification;
 
 
-public class CreatePostByAPI  extends BaseTestApi{
+public class CreatePostByAPI extends BaseTestApi {
     ApiHelper apiHelper = new ApiHelper();
     String actualToken;
     Faker faker = new Faker();
 
     @Before
-    public void getTokenAndDeletePosts(){
-        actualToken =apiHelper.getToken();
+    public void getTokenAndDeletePosts() {
+        actualToken = apiHelper.getToken();
         System.out.println(actualToken);
+        apiHelper.deleteAllPostsTillPresent(TestData.VALID_USERNAME_API, actualToken);
     }
 
     @Test
@@ -66,15 +67,15 @@ public class CreatePostByAPI  extends BaseTestApi{
                         .uniquePost(createNewPostBody.getUniquePost())
                         .isVisitorOwner(false)
                         .author(AuthorDto.builder()
-                        .username(TestData.VALID_USERNAME_API).build())
-        .build();
+                                .username(TestData.VALID_USERNAME_API).build())
+                        .build();
 
         SoftAssertions softAssertions = new SoftAssertions();
 
         softAssertions
                 .assertThat(apiHelper.getAllPostsByUserInObject()[0])
                 .usingRecursiveComparison()
-                .ignoringFields("id","author.avatar","createdDate")
+                .ignoringFields("id", "author.avatar", "createdDate")
                 .isEqualTo(expectedPost);
 
         softAssertions.assertAll();

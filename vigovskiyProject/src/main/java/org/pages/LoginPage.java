@@ -14,6 +14,8 @@ public class LoginPage extends ParentPage {
     private WebElement inputPassword;
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement warningMessageInCenter;
 
 
     public LoginPage(WebDriver webDriver) {
@@ -58,5 +60,10 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkTextInAllertInCenter(String errorMessage) {
+        checkTextInElement(warningMessageInCenter,errorMessage);
+        return this;
     }
 }
