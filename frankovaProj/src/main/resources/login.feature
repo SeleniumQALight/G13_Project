@@ -12,10 +12,12 @@ Feature: Login feature
     And I click on button SignIn in Login page
     Then I see alert message with text 'Invalid username/password.'
 
+
     Examples:
       | login           | password           |
       | qaauto          | not_valid_password |
       | not_valid_login | 123456qwerty       |
+
 
   Scenario Outline: R003 Validation Registration Messages
     Given I open Login page
@@ -29,3 +31,5 @@ Feature: Login feature
       | tr       | tr3   | tr3          | Username must be at least 3 characters.;You must provide a valid email address.;Password must be at least 12 characters. |
       | taras    | tr1   | tr2          | You must provide a valid email address.;Password must be at least 12 characters.                                         |
       | taras    | tr1   | 123456qwerty | You must provide a valid email address.                                                                                  |
+
+
