@@ -13,11 +13,13 @@ import io.restassured.specification.ResponseSpecification;
 import netscape.javascript.JSObject;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
+import org.api.dto.requestDto.CreateNewPostDto;
 import org.api.dto.responseDto.PostsDto;
 import org.data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -86,20 +88,42 @@ public class ApiHelper {
         for (int i = 0; i < listOfPosts.length; i++) {
             deletePostById(token, listOfPosts[i].getId());
             logger.info(
-                    String.format("Post with id %s and title %s was deleted",listOfPosts[i].getId(),listOfPosts[i].getTitle()));
+                    String.format("Post with id %s and title %s was deleted", listOfPosts[i].getId(), listOfPosts[i].getTitle()));
         }
     }
 
     private void deletePostById(String token, String id) {
-        HashMap<String,String>bodyRequest=new HashMap<>();
-        bodyRequest.put("token",token);
+        HashMap<String, String> bodyRequest = new HashMap<>();
+        bodyRequest.put("token", token);
 
         given()
                 .spec(requestSpecification)
                 .body(bodyRequest)
                 .when()
-                .delete(EndPoints.DELETE_POST,id)
+                .delete(EndPoints.DELETE_POST, id)
                 .then()
                 .spec(responseSpecification);
+    }
+
+    public void createPosts(Integer numberOfPosts, String actualToken, Map<String, String> postsData) {
+        for (int i = 0; i < numberOfPosts; i++) {
+            CreateNewPostDto bodyForPostCreation =
+                    CreateNewPostDto.builder()
+                            .title(postsData.get("title") + " " + i)
+                            .body(postsData.get("body"))
+                            .select1(postsData.getOrDefault("select", "All Users"))
+                            .uniquePost(postsData.get("uniquePost") == null ? "no" : postsData.get("uniquePost"))
+                            .token(actualToken)
+                            .build();
+
+            given()
+                    .spec(requestSpecification)
+                    .body(bodyForPostCreation)
+                    .when()
+                    .post(EndPoints.CREATE_POST)
+                    .then()
+                    .spec(responseSpecification);
+
+        }
     }
 }
