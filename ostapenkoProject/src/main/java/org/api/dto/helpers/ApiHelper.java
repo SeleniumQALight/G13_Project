@@ -11,11 +11,13 @@ import io.restassured.specification.ResponseSpecification;
 import org.apache.hc.core5.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.api.EndPoints;
+import org.api.dto.requestDto.CreateNewPostDTO;
 import org.api.dto.responseDto.PostsDto;
 import org.data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -99,5 +101,23 @@ public class ApiHelper {
                 .spec(responseSpecification);
     }
 
+    public void createPosts(Integer numberOfPosts, String actualToken, Map<String, String> postsData) {
+        for (int i = 0; i < numberOfPosts; i++) {
+            CreateNewPostDTO bodyForPostCreation = CreateNewPostDTO.builder()
+                    .title(postsData.get("title") + " " + i)
+                    .body(postsData.get("body") + " " + i)
+                    .select1(postsData.getOrDefault("select", "All Users"))
+                    .uniquePost(postsData.get("uniquePost") == null ? "no" : postsData.get("uniquePost"))
+                    .token(actualToken)
+                    .build();
 
+            given()
+                    .spec(requestSpecification)
+                    .body(bodyForPostCreation)
+                    .when()
+                    .post(EndPoints.CREATE_POST)
+                    .then()
+                    .spec(responseSpecification);
+        }
+    }
 }
