@@ -3,7 +3,6 @@ package org.pages;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
-import org.data.RegistrationValidationMessages;
 import org.junit.Assert;
 import org.data.TestData;
 import org.openqa.selenium.By;
@@ -45,6 +44,9 @@ public class LoginPage extends ParentPage {
             = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
+
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement warningMessageInCenter;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -159,6 +161,11 @@ public class LoginPage extends ParentPage {
 
         softAssertions.assertAll();
 
+        return this;
+    }
+
+    public LoginPage checkTextInAlertInCenter(String errorMessage) {
+        checkTextInElement(warningMessageInCenter, errorMessage);
         return this;
     }
 }

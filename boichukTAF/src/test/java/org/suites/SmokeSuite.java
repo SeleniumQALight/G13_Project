@@ -1,5 +1,6 @@
 package org.suites;
 
+import org.apiTests.ApiTests;
 import org.categories.SmokeTestsFilter;
 import org.checkerframework.checker.units.qual.C;
 import org.junit.experimental.categories.Categories;
@@ -15,7 +16,8 @@ import org.registrationTests.ValidationMessagesTest;
 @Suite.SuiteClasses({
         LoginTestWithPageObject.class,
         CreateNewPostTest.class,
-        ValidationMessagesTest.class
+        ValidationMessagesTest.class,
+        ApiTests.class
 })
 public class SmokeSuite {
 }
