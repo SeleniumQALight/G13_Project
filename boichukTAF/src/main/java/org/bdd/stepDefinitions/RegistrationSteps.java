@@ -2,7 +2,7 @@ package org.bdd.stepDefinitions;
 
 import io.cucumber.java.en.*;
 import io.cucumber.java.Before;
-import org.bdd.helptrs.WebDriverHelper;
+import org.bdd.helpers.WebDriverHelper;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
