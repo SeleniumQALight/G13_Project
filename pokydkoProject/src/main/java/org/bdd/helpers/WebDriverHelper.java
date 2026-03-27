@@ -1,10 +1,7 @@
-package org.bdd.helptrs;
+package org.bdd.helpers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
-
-import org.junit.Rule;
-import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -34,10 +31,10 @@ public class WebDriverHelper {
     private WebDriver initDriver() {
         String browserFromProperty = System.getProperty("browser");
         if (browserFromProperty == null) {
-            logger.info("Browser is not set, defaulting to Chrome");
+            logger.info("Browser from property is null. Will be used Chrome browser by default");
             browserFromProperty = "chrome";
         } else {
-            logger.info("Browser from properties: " + browserFromProperty);
+            logger.info("Browser from property: " + browserFromProperty);
         }
         if ((browserFromProperty.equalsIgnoreCase("chrome"))) {
             WebDriverManager.chromedriver().setup();
