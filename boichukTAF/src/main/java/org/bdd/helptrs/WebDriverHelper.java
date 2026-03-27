@@ -3,8 +3,6 @@ package org.bdd.helptrs;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 
-import org.junit.Rule;
-import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -47,8 +45,8 @@ public class WebDriverHelper {
             WebDriverManager.firefoxdriver().setup();
             webDriver = new FirefoxDriver();
         } else if ("ie".equals(browserFromProperty.toLowerCase())) {
-            WebDriverManager.iedriver().setup(); //zoom 100%
-            webDriver = new InternetExplorerDriver(); //security level - Medium
+            WebDriverManager.iedriver().setup();
+            webDriver = new InternetExplorerDriver();
         } else if ("safari".equalsIgnoreCase(browserFromProperty)) {
             WebDriverManager.safaridriver().setup();
             webDriver = new SafariDriver();
@@ -57,5 +55,15 @@ public class WebDriverHelper {
             webDriver = new EdgeDriver();
         }
         return webDriver;
+    }
+
+    private static WebDriver driver;
+
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            driver = new ChromeDriver();
+            driver.manage().window().maximize();
+        }
+        return driver;
     }
 }

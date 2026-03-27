@@ -1,5 +1,6 @@
 package org.bdd.stepDefinitions;
 
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.bdd.helptrs.WebDriverHelper;
@@ -13,7 +14,7 @@ public class Hook {
 
     @Before
     public void setUp() {
-
+        webDriverHelper.getWebDriver();
     }
 
     @After
