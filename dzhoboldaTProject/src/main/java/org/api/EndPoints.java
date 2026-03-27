@@ -7,4 +7,7 @@ public interface EndPoints {
     String LOGIN = "login";
     String CREATE_POST = "create-post" ;
     String DELETE_POST = "post/{0}";
+
+    String CREATE_POST_BANK = "/api/post"; // HW-1
+    String PRIVAT_EXCHANGE_RATES = "https://api.privatbank.ua/p24api/exchange_rates";
 }
