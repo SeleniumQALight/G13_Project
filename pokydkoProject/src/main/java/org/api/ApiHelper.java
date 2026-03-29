@@ -15,6 +15,8 @@ import org.data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -94,5 +96,22 @@ public class ApiHelper {
                 .delete(EndPoints.DELETE_POST, id)
                 .then()
                 .spec(responseSpecification);
+    }
+
+    public Map<String, String> getCurrencyRate(String currency) {
+
+        List<Map<String, String>> rates = given()
+                .baseUri("https://api.privatbank.ua")
+                .when()
+                .get("/p24api/pubinfo?json&exchange&coursid=5")
+                .then()
+                .statusCode(200)
+                .extract()
+                .as(List.class);
+
+        return rates.stream()
+                .filter(r -> r.get("ccy").equals(currency))
+                .findFirst()
+                .orElseThrow();
     }
 }
