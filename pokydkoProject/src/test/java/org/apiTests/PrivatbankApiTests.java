@@ -69,7 +69,11 @@ public class PrivatbankApiTests {
 
         softAssertions.assertThat(actualCurrencies).usingRecursiveComparison()
                 .ignoringFields("saleRateNB", "purchaseRateNB", "saleRate", "purchaseRate")
-                .isEqualTo(expectedCurrencies);;
+                .isEqualTo(expectedCurrencies);
+
+        softAssertions.assertAll();
     }
+
+
 
 }
