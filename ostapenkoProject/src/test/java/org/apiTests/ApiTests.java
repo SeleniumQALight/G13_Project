@@ -1,22 +1,29 @@
 package org.apiTests;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
-import org.api.ApiHelper;
+import org.api.dto.helpers.ApiHelper;
 import org.api.EndPoints;
 import org.api.dto.responseDto.AuthorDto;
 import org.api.dto.responseDto.PostsDto;
 import org.assertj.core.api.SoftAssertions;
+import org.categories.SmokeTestsFilter;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-import java.util.logging.SocketHandler;
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.everyItem;
 
+@Category(SmokeTestsFilter.class)
 public class ApiTests extends BaseTestApi {
     String sharedUserName = "autoapi";
     Logger logger = Logger.getLogger(getClass());
@@ -28,6 +35,7 @@ public class ApiTests extends BaseTestApi {
                 given()
                         .contentType(ContentType.JSON)
                         .log().all()
+                        .filter(new AllureRestAssured())
                         .when()
                         .get(EndPoints.POSTS_BY_USER, sharedUserName) // TODO: add URL
                         .then()
@@ -49,13 +57,31 @@ public class ApiTests extends BaseTestApi {
         }
 
         PostsDto[] expectedResult = {
-                new PostsDto("The second Default post",
-                        "This post was created automatically after cleaning the database",
-                        "All Users", "no", new AuthorDto(sharedUserName), false),
+                PostsDto.builder()
+                        .title("The second Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .select("All Users")
+                        .uniquePost("no")
+                        .author(new AuthorDto(sharedUserName))
+                        .isVisitorOwner(false)
+                        .build(),
 
-                new PostsDto("The first Default post",
-                        "This post was created automatically after cleaning the database",
-                        "All Users", "no", new AuthorDto(sharedUserName), false),
+                PostsDto.builder()
+                        .title("The first Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .select("All Users")
+                        .uniquePost("no")
+                        .author(new AuthorDto(sharedUserName))
+                        .isVisitorOwner(false)
+                        .build(),
+
+//                new PostsDto("The second Default post",
+//                        "This post was created automatically after cleaning the database",
+//                        "All Users", "no", new AuthorDto(sharedUserName), false),
+//
+//                new PostsDto("The first Default post",
+//                        "This post was created automatically after cleaning the database",
+//                        "All Users", "no", new AuthorDto(sharedUserName), false),
         };
 
         SoftAssertions softAssertions = new SoftAssertions();
@@ -76,11 +102,45 @@ public class ApiTests extends BaseTestApi {
         String actualResult =
                 apiHelper
                         .getAllPostsByUserRequest(NOT_VALID_USER_NAME, HttpStatus.SC_BAD_REQUEST)
+                        // method #3: response as String
                         .extract().body().asString();
 
         Assert.assertEquals("Error message is not expected",
-                "\"Sorry, invalid user requested. Wrong username - " + NOT_VALID_USER_NAME + " or there is no posts. Exception is undefined\"", actualResult);
-
+                "\"Sorry, invalid user requested. Wrong username - " + NOT_VALID_USER_NAME
+                        + " or there is no posts. Exception is undefined\"", actualResult);
     }
 
+    @Test
+    public void getPostsByUserJsonPath() {
+        // method #4: JsonPath assertions
+        Response actualResponse = apiHelper
+                .getAllPostsByUserRequest(sharedUserName, HttpStatus.SC_OK)
+                .extract().response();
+
+        SoftAssertions softAssertions = new SoftAssertions();
+
+        List<String> actualListOfTitles = actualResponse.jsonPath().getList("title", String.class);
+        for (int i = 0; i < actualListOfTitles.size(); i++) {
+            softAssertions.assertThat(actualListOfTitles.get(i))
+                    .as("Title of post with index " + i)
+                    .contains("Default post");
+        }
+
+        List<Map> actualAuthorsList = actualResponse.jsonPath().getList("author", Map.class);
+        for (Map author : actualAuthorsList) {
+            softAssertions.assertThat(author.get("username"))
+                    .as("Field username in author object")
+                    .isEqualTo(sharedUserName);
+
+        }
+        softAssertions.assertAll();
+    }
+
+    @Test
+    public void getAllPostsByUserSchemaValidation() {
+        apiHelper.getAllPostsByUserRequest(sharedUserName, HttpStatus.SC_OK)
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("response.json"));
+
+    }
 }
