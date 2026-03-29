@@ -7,9 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class MyProfilePage extends ParentPage {
@@ -20,6 +18,9 @@ public class MyProfilePage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Search']")
     private WebElement buttonSearch;
+
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postsList;
 
     // 2. Шаблон для динамического локатора (выносим вверх)
 //    private final String postTitleLocator = ".//*[text()='%s']";
@@ -103,6 +104,9 @@ public class MyProfilePage extends ParentPage {
 
         clickOnElement(post, "Post with title: " + title);
         return new PostPage(webDriver);
+    }
+    public void checkNumberOfPosts(int numberOfPosts){
+        Assert.assertEquals("Number of posts ", numberOfPosts, postsList.size());
     }
 }
 
