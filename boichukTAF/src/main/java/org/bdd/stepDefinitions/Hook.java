@@ -1,5 +1,6 @@
 package org.bdd.stepDefinitions;
 
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.restassured.RestAssured;
@@ -21,6 +22,7 @@ public class Hook {
         RestAssured.baseURI = ParentPage.baseUrl + "/api/";
         apiHelper = new ApiHelper();
 
+        webDriverHelper.getWebDriver();
     }
 
     @After(order = 15)
