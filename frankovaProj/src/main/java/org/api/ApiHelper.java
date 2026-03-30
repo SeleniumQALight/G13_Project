@@ -3,6 +3,7 @@ package org.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -11,17 +12,23 @@ import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
+import org.apache.log4j.Logger;
+import org.api.dto.requestDto.CreateNewPostDto;
 import org.api.dto.responseDto.PostsDto;
 import org.data.TestData;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
 
 public class ApiHelper {
+    Logger logger = Logger.getLogger(getClass());
+
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
+            .addFilter(new AllureRestAssured())
             .log(LogDetail.ALL)
             .build();//створюємо об'єкт специфікації запиту, який можна використовувати в кожному тесті, щоб не повторювати однакові частини коду
 
@@ -31,9 +38,13 @@ public class ApiHelper {
             .build();
 
 
-//отримаємо усі пости юзера і зберігаємо через DTO в масив об'єктів, щоб потім з ними працювати в тесті, а не з сирим JSON рядком
+    //отримаємо усі пости юзера і зберігаємо через DTO в масив об'єктів, щоб потім з ними працювати в тесті, а не з сирим JSON рядком
     public PostsDto[] getAllPostsByUserInObject() {
-        return getAllPostsByUserRequest(TestData.VALID_USERNAME_API, HttpStatus.SC_OK)
+        return getAllPostsByUserInObject(TestData.VALID_USERNAME_API, HttpStatus.SC_OK);
+    }
+
+    public PostsDto[] getAllPostsByUserInObject(String userName, int status) {
+        return getAllPostsByUserRequest(userName, status)
                 .extract().body()
                 .as(PostsDto[].class);
     }
@@ -86,4 +97,59 @@ public class ApiHelper {
                 .extract().body().asString().replace("\"", "");
 
     }
+
+    public void deleteAllPostsTillPresent(String validUsernameApi, String actualToken) {
+        PostsDto[] listOfPosts = this.getAllPostsByUserInObject(validUsernameApi, HttpStatus.SC_OK);
+
+        for (int i = 0; i < listOfPosts.length; i++) {
+            deletePostById(actualToken, listOfPosts[i].getId());
+            logger.info(
+                    String.format("Post with id %s and title %s was deleted "
+                            , listOfPosts[i].getId(), listOfPosts[i].getTitle()));
+        }
+    }
+
+    private void deletePostById(String actualToken, String id) {
+        //формуємо ріквест боді для запиту, бо так передаємо токен
+        HashMap<String, String> bodyRequest = new HashMap<>();
+        bodyRequest.put("token", actualToken);
+
+        given()
+                .spec(requestSpecification)
+                .body(bodyRequest)
+                .when()
+                .delete(EndPoints.DELETE_POST, id)
+                .then()
+                .spec(responseSpecification);
+
+    }
+
+    public void createPosts(Integer numberOfPosts, String actualToken, Map<String, String> postsData) {
+
+        for (int i = 0; i < numberOfPosts; i++) {
+
+            //формуємо тіло запиту із дататейбл
+            CreateNewPostDto bodyForPostCreation =
+                    CreateNewPostDto.builder()
+                            .title(postsData.get("title") + " " + i)
+                            .body(postsData.get("body"))
+                            .select1(postsData.getOrDefault("select", "All Users"))
+                            .uniquePost(postsData.get("uniquePost") == null? "no" : postsData.get("uniquePost"))
+                            //if postsData.get("uniquePost") == null, якщо так то "no" , якщо ні - то postsData.get("uniquePost")
+                            .token(actualToken)
+                            .build();
+
+
+        //створюємо пост через АРІ
+        given()
+                .spec(requestSpecification)
+                .body(bodyForPostCreation)
+                .when()
+                .post(EndPoints.CREATE_POST)
+                .then()
+                .spec(responseSpecification);
+    }
+}
+
+
 }

@@ -1,7 +1,7 @@
 package org.apiTests;
 
 import com.github.javafaker.Faker;
-import org.api.ApiHelper;
+import org.api.dto.helpers.ApiHelper;
 import org.api.EndPoints;
 import org.api.dto.requestDto.CreateNewPostDTO;
 import org.api.dto.responseDto.AuthorDto;
@@ -13,8 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.api.ApiHelper.requestSpecification;
-import static org.api.ApiHelper.responseSpecification;
+import static org.api.dto.helpers.ApiHelper.requestSpecification;
+import static org.api.dto.helpers.ApiHelper.responseSpecification;
 
 public class CreatePostByApi extends BaseTestApi {
     ApiHelper apiHelper = new ApiHelper();
@@ -24,7 +24,8 @@ public class CreatePostByApi extends BaseTestApi {
     @Before
     public void getTokenAndDeletePosts() {
         actualToken = apiHelper.getToken();
-        System.out.println("Token: " + actualToken);
+//        System.out.println("Token: " + actualToken);
+        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, actualToken);
     }
 
     @Test
