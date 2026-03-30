@@ -5,8 +5,8 @@ import io.cucumber.java.en.Then;
 import org.bdd.helpers.WebDriverHelper;
 import org.data.TestData;
 
-public class HomePageStepDefinitions extends MainSteps {
-    public HomePageStepDefinitions(WebDriverHelper webDriverHelper) {
+public class HomePageDefenitions  extends  MainSteps{
+    public  HomePageDefenitions(WebDriverHelper webDriverHelper){
         super(webDriverHelper);
     }
 
@@ -17,20 +17,20 @@ public class HomePageStepDefinitions extends MainSteps {
         }
         if (MainSteps.DEFAULT.equalsIgnoreCase(password)) {
             password = TestData.VALID_PASSWORD_API;
+
         }
         pageProvider
-                .getLoginPage()
-                .openLoginPage()
+                .getLoginPage().openLoginPage()
                 .enterTextIntoInputLogin(userName)
                 .enterTextIntoInputPassword(password)
                 .clickOnButtonSignIn();
-        pageProvider.getHomePage().checkIsRedirectToHomePage();
-
+        pageProvider.getHomePage().checkRedirectToHomePage();
     }
 
     @Then("I see avatar on HomePage")
-    public void iSeeAvatarOnHomePage() {
+    public void i_see_avatar_on_home_page() {
         pageProvider.getHomePage().checkIsButtonSignOutVisible();
+        // Write code here that turns the phrase above into concrete actions
+
     }
 }
-

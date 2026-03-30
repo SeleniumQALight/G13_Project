@@ -1,4 +1,4 @@
-package org.bdd.stepDefenition;
+package org.bdd.stepDefinitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
