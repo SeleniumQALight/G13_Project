@@ -45,8 +45,8 @@ public class WebDriverHelper {
             WebDriverManager.firefoxdriver().setup();
             webDriver = new FirefoxDriver();
         } else if ("ie".equals(browserFromProperty.toLowerCase())) {
-            WebDriverManager.iedriver().setup(); //zoom 100%
-            webDriver = new InternetExplorerDriver(); //security level - Medium
+            WebDriverManager.iedriver().setup();
+            webDriver = new InternetExplorerDriver();
         } else if ("safari".equalsIgnoreCase(browserFromProperty)) {
             WebDriverManager.safaridriver().setup();
             webDriver = new SafariDriver();
@@ -55,5 +55,15 @@ public class WebDriverHelper {
             webDriver = new EdgeDriver();
         }
         return webDriver;
+    }
+
+    private static WebDriver driver;
+
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            driver = new ChromeDriver();
+            driver.manage().window().maximize();
+        }
+        return driver;
     }
 }
