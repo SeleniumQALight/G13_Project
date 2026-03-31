@@ -2,14 +2,18 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -19,8 +23,10 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // инициализирует элементи описанные через @FindBy
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(
+                ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(
+                ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text){
@@ -165,6 +171,41 @@ public class CommonActionsWithElements {
     protected void checkIsElementDisplayed(WebElement webElement) {
         Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
         logger.info("Element is displayed");
+    }
+
+    public CommonActionsWithElements openNewTabWithJS() {
+        // write code to open new tab with JS
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        js.executeScript("window.open();");
+        logger.info("New tab was opened with JS");
+        return this;
+    }
+
+    public CommonActionsWithElements switchToNewTab() {
+         List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+         webDriver.switchTo().window(tabs.get(1));
+         logger.info("Switched to new tab");
+         return this;
+    }
+
+    public HomePage switchToMainTab(){
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(0));
+        return new HomePage(webDriver);
+    }
+
+    public HomePage closeCurrentTabAndSwitchToMain() {
+        webDriver.close();
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(0));
+        logger.info("Closed current tab and switched to main tab");
+        return new HomePage(webDriver);
+    }
+
+    public CommonActionsWithElements refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page was refreshed");
+        return this;
     }
 }
 

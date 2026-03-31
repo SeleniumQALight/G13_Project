@@ -6,4 +6,5 @@ public class TestData {
 
     public static final String VALID_USERNAME_API="jenyaG13".toLowerCase();
     public static final String VALID_PASSWORD_API="123456qwerty";
+    public static String currentUser;
 }
