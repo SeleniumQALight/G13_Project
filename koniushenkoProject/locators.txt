@@ -1,0 +1,44 @@
+#LOGIN PAGE
+input.login = "//input[@placeholder='Username']"
+input.password = "//input[@placeholder='Password']"
+SingIn button = "//button[text()='Sign In']"
+TextError InvalidData = "//div[text()='Invalid username/password.']"
+
+input.register.username = "//input[@id='username-register']"
+input.register.email = "//input[@id='email-register']"
+input.register.password = "//input[@id='password-register']"
+SingUp button = "//button[text()='Sign up for OurApp']"
+
+
+
+#HOME PAGE
+SingOut button = "//button[text()='Sign Out']"
+span username = "//span[text()=' nelly']"
+Create post button = "//a[@href='/create-post']"
+
+
+#POST PAGE
+Save New Post button = "//button[text()='Save New Post']"
+input.title = "//input[@id='post-title']"
+textarea.content  = "//textarea[@id='post-body']"
+created post title = "//h2[text()='new post']"
+Info text SuccessPostCreated = "//div[text()='New post successfully created.']"
+
+#SEARCH
+search.button = "//a[@data-toggle='tooltip']"
+search.field = "//input[@id='live-search-field']"
+search.result = "//div[contains(@class,'list-group-item') and contains(@class,'active')]//strong[text()='Search Results']"
+search.result.link = "//a[contains(@class,'list-group-item') and contains(@class,'active')]//h4[text()='post_test1']"
+no.search.result = "//p[text()='Sorry, we could not find any results for that search.']"
+search.close = "//span[@class='close-live-search']"
+
+
+#CHAT
+span.chat = "//span[@data-original-title='Chat']"
+form.chat = "//form[@id='chatForm']"
+input.chat = "//input[@id='chatField']"
+close.button = "//span[@class='chat-title-bar-close']"
+
+
+
+
