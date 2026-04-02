@@ -51,6 +51,10 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//div[@class='alert alert-danger text-center' and text()='Invalid username/password.']")
     private WebElement invalidLoginError;
 
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement worningMessageCenter;
+
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -187,5 +191,9 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage checkTextInAlertinCenter(String errorMessage) {
+        checkTextInElement(worningMessageCenter,errorMessage);
+        return  this;
+    }
 }
 
