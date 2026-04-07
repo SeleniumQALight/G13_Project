@@ -10,4 +10,10 @@ public class TestData {
     public final static String VALID_USERNAME_API = "qaolegG13".toLowerCase();
     public final static String VALID_PASSWORD_API = "123456qwerty";
     public static String currentUser;
+
+    public static String currentCurrency;
+    public static Double apiBuyRate;
+    public static Double apiSaleRate;
+    public static Double uiBuyRate;
+    public static Double uiSaleRate;
 }
