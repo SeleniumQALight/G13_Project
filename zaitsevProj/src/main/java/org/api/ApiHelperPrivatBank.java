@@ -9,11 +9,24 @@ public class ApiHelperPrivatBank {
 
     public ValidatableResponse getExchangeRatesByDate(String date, int expectedStatusCode) {
         return given()
+                .baseUri("https://api.privatbank.ua")
                 .contentType(ContentType.JSON)
                 .queryParam("date", date)
                 .log().all()
                 .when()
                 .get(EndPointsPrivatBank.EXCHANGE_RATES)
+                .then()
+                .statusCode(expectedStatusCode)
+                .log().all();
+    }
+
+    public ValidatableResponse getCashExchangeRates(int expectedStatusCode) {
+        return given()
+                .baseUri("https://api.privatbank.ua")
+                .contentType(ContentType.JSON)
+                .log().all()
+                .when()
+                .get(EndPointsPrivatBank.PUBLIC_INFO_ENDPOINT)
                 .then()
                 .statusCode(expectedStatusCode)
                 .log().all();

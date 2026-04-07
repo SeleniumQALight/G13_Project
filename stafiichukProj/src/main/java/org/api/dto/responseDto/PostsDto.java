@@ -1,7 +1,11 @@
 package org.api.dto.responseDto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
+@AllArgsConstructor
+@Builder
 public class PostsDto {
     @JsonProperty("_id") // позволяет менять имя переменной.
     private String id;
