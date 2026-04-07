@@ -15,4 +15,14 @@ public class PBApiHelper {
                 .statusCode(expectedStatusCode)
                 .log().all();
     }
+
+    public static ValidatableResponse getExchangeRatesForToday (int expectedStatusCode){
+        return given()
+                .log().all()
+                .when()
+                .get(PBEndPoints.EXCHANGE_RATES_TODAY)
+                .then()
+                .statusCode(expectedStatusCode)
+                .log().all();
+    }
 }

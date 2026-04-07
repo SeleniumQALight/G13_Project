@@ -53,6 +53,9 @@ public class WebDriverHelper {
             WebDriverManager.edgedriver().setup();
             webDriver = new EdgeDriver();
         }
+
+        webDriver.manage().window().maximize();
+
         return webDriver;
     }
 }

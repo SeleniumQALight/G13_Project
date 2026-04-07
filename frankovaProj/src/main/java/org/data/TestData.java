@@ -14,4 +14,10 @@ public class TestData {
 
     public static final String USERNAME_DEMOQA ="yuliiafrankova";
     public static final String PASSWORD_DEMOQA = "Julialapa1996!";
+
+    public static Double buyRateAPI;
+    public static Double saleRateAPI;
+
+    public static Double buyRateUI;
+    public static Double saleRateUI;
 }

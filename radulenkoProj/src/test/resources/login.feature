@@ -15,4 +15,4 @@ Feature: Login feature
     Examples:
       | login           | password           |
       | qaauto          | not_valid_password |
-      | not_valid_login | 123456qwerty        |
+      | not_valid_login | 123456qwerty       |
