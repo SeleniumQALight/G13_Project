@@ -20,24 +20,14 @@ public class PrivatBankSteps {
         this.privatBankPage = new PrivatBankPage(driver);
     }
 
-
     @When("I get exchange rate for {string} from UI")
     public void getRateFromUI(String currency) {
 
         privatBankPage.openPage();
-
         privatBankPage.clickOnExchangeRates();
 
-        if (currency.equalsIgnoreCase("USD")) {
-            TestData.uiBuyRate = privatBankPage.getUsdBuy();
-            TestData.uiSaleRate = privatBankPage.getUsdSale();
-        } else if (currency.equalsIgnoreCase("EUR")) {
-            TestData.uiBuyRate = privatBankPage.getEurBuy();
-            TestData.uiSaleRate = privatBankPage.getEurSale();
-        } else if (currency.equalsIgnoreCase("PLN")) {
-            TestData.uiBuyRate = privatBankPage.getPlnBuy();
-            TestData.uiSaleRate = privatBankPage.getPlnSale();
-        }
+        TestData.uiBuyRate = privatBankPage.getBuyRate(currency);
+        TestData.uiSaleRate = privatBankPage.getSellRate(currency);
 
         System.out.println("UI BUY: " + TestData.uiBuyRate);
         System.out.println("UI SALE: " + TestData.uiSaleRate);
@@ -55,7 +45,6 @@ public class PrivatBankSteps {
                 normalize(TestData.apiSaleRate),
                 normalize(TestData.uiSaleRate)
         );
-
     }
 
     private String normalize(String rate) {
