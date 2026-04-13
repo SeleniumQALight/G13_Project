@@ -107,7 +107,7 @@ public class ApiTests extends BaseTestApi {
 
         softAssertions
                 .assertThat(actualResponse)
-                .usingRecursiveComparison()//рекурсивно порівнює всі поля обєктів, які знаходяться всередині масиву
+                .usingRecursiveComparison()//рекурсивно порівнює всі поля обєктів, які знаходяться всередині масиву, перевіряємо у джейсоні і вкладені масиви-елементи
                 .ignoringFields("id", "createdDate", "author.avatar")
                 .isEqualTo(expectedResult);
 

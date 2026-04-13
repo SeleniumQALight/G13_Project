@@ -1,6 +1,5 @@
 package org.bdd.stepDefinitions;
 
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -46,5 +45,25 @@ public class LoginPageStepDefinitions extends MainSteps{
     @Then("I see alert message with text {string}")
     public void iSeeAlertMessageWithText(String errorMessage) {
     pageProvider.getLoginPage().checkTextInAlertInCenter(errorMessage);
+    }
+
+    @When("I enter {string} into Registration UserName Field in Login page")
+    public void iEnterUsernameIntoRegistrationUserNameFieldInLoginPage(String username) {
+       pageProvider.getLoginPage().enterTextIntoRegistrationUserNameField(username);
+    }
+
+    @And("I enter {string} into Registration Email Field in Login page")
+    public void iEnterEmailIntoRegistrationEmailFieldInLoginPage(String email) {
+        pageProvider.getLoginPage().enterTextIntoRegistrationEmailField(email);
+    }
+
+    @And("I enter {string} into Registration Password Field in Login page")
+    public void iEnterPasswordIntoRegistrationPasswordFieldInLoginPage(String password) {
+        pageProvider.getLoginPage().enterTextIntoRegistrationPasswordField(password);
+    }
+
+    @Then("I see {string} Errors Messages")
+    public void iSeeExpectedMessagesErrorsMessages(String expectedMessages) {
+      pageProvider.getLoginPage().checkErrorsMessages(expectedMessages);
     }
 }
