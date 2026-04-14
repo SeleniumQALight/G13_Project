@@ -1,101 +1,103 @@
 package org.apiTests;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.Assert.assertNotNull;
 
 public class AddMultipleBookTest {
 
-    private String token;
+    private String baseUrl = "https://bookstore.toolsqa.com";
     private String userId;
-    private final String username = "Alyona";
-    private final String password = "Qwerty12345!";
+    private String token;
+    private String userName;
+    private String password = "Qwerty12345!";
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://demoqa.com";
+        RestAssured.baseURI = baseUrl;
 
-        Response loginResponse = given()
-                .contentType(ContentType.JSON)
-                .body("{\"userName\":\"" + username + "\", \"password\":\"" + password + "\"}")
-                .when()
-                .post("/Account/v1/Login")
-                .then()
-                .log().all()
-                .extract()
-                .response();
+        userName = "Alyona" + System.currentTimeMillis();
 
-        token = loginResponse.path("token");
-        userId = loginResponse.path("userId");
+        String createUserBody = "{\n" +
+                "  \"userName\": \"" + userName + "\",\n" +
+                "  \"password\": \"" + password + "\"\n" +
+                "}";
 
-        assertNotNull("Token should not be null", token);
-        assertNotNull("UserId should not be null", userId);
+        Response createUserResponse = given()
+                .contentType("application/json")
+                .body(createUserBody)
+                .post("/Account/v1/User");
 
+        createUserResponse.prettyPrint();
 
-        Response deleteResponse = given()
-                .header("Authorization", "Bearer " + token)
-                .queryParam("UserId", userId)
-                .when()
-                .delete("/BookStore/v1/Books")
-                .then()
-                .log().all()
-                .extract()
-                .response();
+        userId = createUserResponse.jsonPath().getString("userID");
 
-        int deleteStatus = deleteResponse.getStatusCode();
-        assert (deleteStatus == HttpStatus.SC_OK || deleteStatus == HttpStatus.SC_NO_CONTENT);
+        if (userId == null) {
+            throw new RuntimeException("User was not created!");
+        }
+
+        String tokenBody = "{\n" +
+                "  \"userName\": \"" + userName + "\",\n" +
+                "  \"password\": \"" + password + "\"\n" +
+                "}";
+
+        Response tokenResponse = given()
+                .contentType("application/json")
+                .body(tokenBody)
+                .post("/Account/v1/GenerateToken");
+
+        tokenResponse.prettyPrint();
+
+        token = tokenResponse.jsonPath().getString("token");
+
+        if (token == null) {
+            throw new RuntimeException("Token was not generated!");
+        }
     }
 
     @Test
     public void addBookToUserAndVerify() {
+
         SoftAssertions softAssertions = new SoftAssertions();
 
-        Response allBooksResponse = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .get("/BookStore/v1/Books")
-                .then()
-                .log().all()
-                .statusCode(HttpStatus.SC_OK)
-                .extract()
-                .response();
+        String addBookBody = "{\n" +
+                "  \"userId\": \"" + userId + "\",\n" +
+                "  \"collectionOfIsbns\": [\n" +
+                "    { \"isbn\": \"9781449325862\" }\n" +
+                "  ]\n" +
+                "}";
 
-        String isbn = allBooksResponse.jsonPath().getString("books[0].isbn");
+        System.out.println("REQUEST BODY:\n" + addBookBody);
 
         Response addBookResponse = given()
-                .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .body("{\"userId\":\"" + userId + "\", \"collectionOfIsbns\":[{\"isbn\":\"" + isbn + "\"}]}")
-                .when()
-                .post("/BookStore/v1/Books")
-                .then()
-                .log().all()
-                .extract()
-                .response();
+                .contentType("application/json")
+                .body(addBookBody)
+                .post("/BookStore/v1/Books");
 
-        softAssertions.assertThat(addBookResponse.getStatusCode())
-                .isIn(HttpStatus.SC_OK, HttpStatus.SC_CREATED);
+        addBookResponse.prettyPrint();
 
-        Response userBooksResponse = given()
+        int statusCode = addBookResponse.getStatusCode();
+        softAssertions.assertThat(statusCode)
+                .as("Status code check")
+                .isIn(200, 201);
+
+        Response getUserResponse = given()
                 .header("Authorization", "Bearer " + token)
-                .when()
-                .get("/Account/v1/User/" + userId)
-                .then()
-                .log().all()
-                .statusCode(HttpStatus.SC_OK)
-                .extract()
-                .response();
+                .get("/Account/v1/User/" + userId);
 
-        String addedIsbn = userBooksResponse.jsonPath().getString("books[0].isbn");
-        softAssertions.assertThat(addedIsbn).isEqualTo(isbn);
+        getUserResponse.prettyPrint();
 
+        String returnedIsbn = getUserResponse.jsonPath()
+                .getString("books[0].isbn");
+
+        softAssertions.assertThat(returnedIsbn)
+                .as("ISBN check")
+                .isEqualTo("9781449325862");
 
         softAssertions.assertAll();
     }
