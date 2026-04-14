@@ -13,17 +13,23 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.pages.PageProvider;
 import org.utils.ConfigProvider;
 import org.utils.ScreenShot;
 
 import java.io.ByteArrayInputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BaseTest {
     private WebDriver webDriver;
@@ -32,7 +38,7 @@ public class BaseTest {
     protected ArrayList<ScreenShot> listOfScreenShots = new ArrayList<>();
 
     @Before
-    public void setup() {
+    public void setup() throws MalformedURLException {
         logger.info("-----" + testName.getMethodName() + " was started -----");
         //оновлюємо версію браузера
 //        WebDriverManager.chromedriver().setup();
@@ -52,7 +58,7 @@ public class BaseTest {
     @Rule
     public TestName testName = new TestName();
 
-    private WebDriver initDriver() {
+    private WebDriver initDriver() throws MalformedURLException {
         String browserFromProperty = System.getProperty("browser");
         if (browserFromProperty == null) {
             logger.info("Browser from property is null. Will be used Chrome browser by default");
@@ -76,6 +82,40 @@ public class BaseTest {
         } else if ("edge".equalsIgnoreCase(browserFromProperty)) {
             WebDriverManager.edgedriver().setup();
             webDriver = new EdgeDriver();
+        }
+        else if ("remote".equals(browserFromProperty)) {
+            logger.info("Remote browser");
+            // WebDriverManager.chromedriver().setup();
+            DesiredCapabilities cap = new DesiredCapabilities();
+            cap.setBrowserName("chrome");
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.merge(cap);
+            try {
+                webDriver = new RemoteWebDriver(
+                        new URL("http://localhost:4444/wd/hub"),
+                        chromeOptions);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }else if ("remote-sauce".equals(browserFromProperty)) {
+            logger.info("Remote browser");
+            ChromeOptions browserOptions = new ChromeOptions();
+            browserOptions.setPlatformName("Windows 11");
+            browserOptions.setBrowserVersion("latest");
+            HashMap<String, Object> sauceOptions = new HashMap<>();
+            sauceOptions.put("username", "oauth-radulenko-58d1e");
+            //  sauceOptions.put("accessKey", ConfigProvider.configHiddenProperties.saucelabs_pass());
+            sauceOptions.put("build", "Taras-build1");
+            sauceOptions.put("name", testName.getMethodName());
+            browserOptions.setCapability("sauce:options", sauceOptions);
+
+            // start the session
+            URL url = new URL("https://ondemand.us-west-1.saucelabs.com:443/wd/hub");
+            webDriver = new RemoteWebDriver(url, browserOptions);
+        }
+
+        else {
+            throw new IllegalArgumentException("Browser " + browserFromProperty + " is not supported");
         }
         return webDriver;
     }
