@@ -160,6 +160,11 @@
             <artifactId>cucumber-picocontainer</artifactId>
             <version>7.13.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>7.16.0</version>
+        </dependency>
     </dependencies>
 
     <profiles>
