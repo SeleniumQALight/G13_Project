@@ -5,12 +5,10 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.internal.ResponseSpecificationImpl;
 import io.restassured.response.ValidatableResponse;
 
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import netscape.javascript.JSObject;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.api.dto.requestDto.CreateNewPostDto;
@@ -20,6 +18,12 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import io.restassured.RestAssured;
+import org.api.dto.responseDto.CurrencyRate;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -125,5 +129,20 @@ public class ApiHelper {
                     .spec(responseSpecification);
 
         }
+    }
+
+    public List<CurrencyRate> getPrivatBankRates() {
+
+        CurrencyRate[] response =
+                given()
+                        .spec(requestSpecification)
+                        .when()
+                        .get(PrivatBankEndPoints.PRIVAT_API_EXCHANGE_COURSE)
+                        .then()
+                        .spec(responseSpecification)
+                        .extract()
+                        .as(CurrencyRate[].class);
+
+        return Arrays.asList(response);
     }
 }

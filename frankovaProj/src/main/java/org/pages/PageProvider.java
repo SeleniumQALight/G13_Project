@@ -25,4 +25,8 @@ public class PageProvider {
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement(){
         return new HeaderForLoggedUserElement(webDriver);}
 
+    public PBHomePage getpbHomePage() {
+        return new PBHomePage(webDriver);
+    }
+
     }
