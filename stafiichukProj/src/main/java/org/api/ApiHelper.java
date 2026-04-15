@@ -7,6 +7,8 @@ import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
+import org.api.dto.PrivatBankEndPoints;
+import org.api.dto.responseDto.ExchangeRatesResponseDto;
 import org.api.dto.responseDto.PostsDto;
 import org.data.TestData;
 import org.json.JSONObject;
@@ -66,6 +68,17 @@ public class ApiHelper {
         return getAllPostsByUserRequest(TestData.VALID_USERNAME_API, HttpStatus.SC_OK)
                 .extract().body()
                 .as(PostsDto[].class);
+    }
 
+    public ExchangeRatesResponseDto getExchangeRates(String date){
+        return given()
+                .spec(requestSpecification)
+                .queryParam("date", date)
+                .when()
+                .get(PrivatBankEndPoints.EXCHANGE_RATES)
+                .then()
+                .spec(responseSpecification)
+                .extract().body()
+                .as(ExchangeRatesResponseDto.class);
     }
 }
