@@ -12,6 +12,9 @@ public class TestData {
     public final static String VALID_PASSWORD_API = "Julialapa1996!";
     public static String currentUser;
 
+    public static final String USERNAME_DEMOQA ="yuliiafrankova";
+    public static final String PASSWORD_DEMOQA = "Julialapa1996!";
+
     public static Double buyRateAPI;
     public static Double saleRateAPI;
 
