@@ -10,12 +10,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.data.TestData.currency;
+
 public class PrivatBankHomePage {
 
     private WebDriver webDriver;
 
     @FindBy(xpath = "//button[contains(@class,'exchange-rate')]")
     private WebElement exchangeRatesButton;
+
+    @FindBy(xpath = "//td[@id='EUR_buy']")
+    private WebElement buyRateEUR;
 
     public PrivatBankHomePage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -33,8 +38,7 @@ public class PrivatBankHomePage {
 
     public double getBuyRate(String currency) {
         return Double.parseDouble(
-                webDriver.findElement(By.xpath("//td[@id='" + currency + "_buy']"))
-                        .getText()
+                buyRateEUR.getText()
                         .replace(",", ".")
         );
     }

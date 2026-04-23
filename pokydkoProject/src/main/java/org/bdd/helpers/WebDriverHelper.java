@@ -26,7 +26,6 @@ public class WebDriverHelper {
 
     public void quitDriver() {
         webDriver.quit();
-        webDriver = null;
         logger.info("Browser was closed");
     }
 

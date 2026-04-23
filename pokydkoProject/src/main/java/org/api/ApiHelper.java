@@ -100,22 +100,7 @@ public class ApiHelper {
                 .spec(responseSpecification);
     }
 
-    public Map<String, String> getCurrencyRate(String currency) {
 
-        List<Map<String, String>> rates = given()
-                .baseUri("https://api.privatbank.ua")
-                .when()
-                .get("/p24api/pubinfo?json&exchange&coursid=5")
-                .then()
-                .statusCode(200)
-                .extract()
-                .as(List.class);
-
-        return rates.stream()
-                .filter(r -> r.get("ccy").equals(currency))
-                .findFirst()
-                .orElseThrow();
-    }
 
     public void createPosts(Integer numberOfPosts, String actualToken, Map<String, String> postsData) {
         for (int i = 0; i < numberOfPosts; i++) {

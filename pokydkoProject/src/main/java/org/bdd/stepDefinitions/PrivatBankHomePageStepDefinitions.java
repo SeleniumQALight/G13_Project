@@ -3,6 +3,7 @@ package org.bdd.stepDefinitions;
 import io.cucumber.java.en.*;
 import org.apache.log4j.Logger;
 import org.api.ApiHelper;
+import org.api.ApiHelperPrivatbank;
 import org.data.TestData;
 import org.pages.HomePage;
 import org.bdd.helpers.WebDriverHelper;
@@ -17,13 +18,14 @@ public class PrivatBankHomePageStepDefinitions {
     Logger logger = Logger.getLogger(getClass());
     PrivatBankHomePage privatBankPage =
             new PrivatBankHomePage(WebDriverHelper.getWebDriver());
+    private ApiHelperPrivatbank apiHelperPrivatbank;
 
     @Given("I get rates for {string} from API")
     public void getRatesFromApi(String currency) {
 
         TestData.currency = currency;
 
-        Map<String, String> rate = apiHelper.getCurrencyRate(currency);
+        Map<String, String> rate = apiHelperPrivatbank.getCurrencyRate(currency);
 
         TestData.apiBuy = Double.parseDouble(rate.get("buy"));
         TestData.apiSale = Double.parseDouble(rate.get("sale"));
