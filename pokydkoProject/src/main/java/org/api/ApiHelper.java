@@ -17,6 +17,7 @@ import org.data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -98,6 +99,8 @@ public class ApiHelper {
                 .then()
                 .spec(responseSpecification);
     }
+
+
 
     public void createPosts(Integer numberOfPosts, String actualToken, Map<String, String> postsData) {
         for (int i = 0; i < numberOfPosts; i++) {
