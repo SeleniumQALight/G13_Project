@@ -21,7 +21,9 @@ public class TestData {
     public static double uiSale;
 
     public static String currency;
+    public static String currentUser;
 
     public static Map<String, Double> apiRates = new HashMap<>();
     public static Map<String, Double> uiRates = new HashMap<>();
+
 }

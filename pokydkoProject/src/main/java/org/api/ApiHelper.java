@@ -6,10 +6,12 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
+import org.api.dto.responseDto.LoginResponse;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
+import org.api.dto.requestDto.CreateNewPostDto;
 import org.api.dto.responseDto.PostsDto;
 import org.data.TestData;
 import org.json.JSONObject;
@@ -113,5 +115,26 @@ public class ApiHelper {
                 .filter(r -> r.get("ccy").equals(currency))
                 .findFirst()
                 .orElseThrow();
+    }
+
+    public void createPosts(Integer numberOfPosts, String actualToken, Map<String, String> postsData) {
+        for (int i = 0; i < numberOfPosts; i++) {
+            CreateNewPostDto bodyForPostCreation =
+                    CreateNewPostDto.builder()
+                            .title(postsData.get("title") + " " + i)
+                            .body(postsData.get("body") + " " + i)
+                            .select1(postsData.getOrDefault("select", "All Users"))
+                            .uniquePost(postsData.get("uniquePost") == null ? "no" : postsData.get("uniquePost"))
+                            .token(actualToken)
+                            .build();
+
+            given()
+                    .spec(requestSpecification)
+                    .body(bodyForPostCreation)
+                    .when()
+                    .post(EndPoints.CREATE_POST)
+                    .then()
+                    .spec(responseSpecification);
+        }
     }
 }
